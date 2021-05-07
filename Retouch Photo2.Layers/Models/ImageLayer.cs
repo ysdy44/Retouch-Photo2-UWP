@@ -62,11 +62,15 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a image-layer.
         /// </summary>
-        /// <param name="transformer"> The transformer. </param>
-        /// <param name="photocopier"> The fill photocopier. </param>
-        public ImageLayer(Transformer transformer, Photocopier photocopier)
+        /// <param name="photo"> The fill photo. </param>
+        public ImageLayer(Photo photo)
         {
+            Photocopier photocopier = photo.ToPhotocopier();
             this.Photocopier = photocopier;
+
+            //Transformer
+            Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
+            base.Transform = new Transform(transformerSource);
         }
 
 
@@ -124,7 +128,7 @@ namespace Retouch_Photo2.Layers.Models
                                 Transformer transformer = base.Transform.Transformer;
                                 CanvasGeometry geometryCrop = transformer.ToRectangle(resourceCreator);
                                 ICanvasBrush canvasBrush = this.Style.Transparency.GetICanvasBrush(resourceCreator);
-                                
+
                                 using (drawingSession.CreateLayer(canvasBrush, geometryCrop))
                                 {
                                     drawingSession.DrawImage(effect);
@@ -184,7 +188,7 @@ namespace Retouch_Photo2.Layers.Models
 
             return transformer.ToRectangle(resourceCreator, matrix);
         }
-        
+
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
         {

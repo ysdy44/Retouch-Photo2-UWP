@@ -37,7 +37,7 @@ namespace Retouch_Photo2
             {
                 this.GalleryTaskSource.TrySetResult(photo);
             }
-            
+
             this.GalleryDialog.Hide();
         }
 
@@ -53,54 +53,44 @@ namespace Retouch_Photo2
             {
                 //Files
                 IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);
-                await this.CopyMultipleImageFilesAsync(files);
+                if (files == null) return;
+
+                foreach (StorageFile file in files)
+                {
+                    StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(file);
+                    if (copyFile == null) return;
+                    Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
+                    Photo.DuplicateChecking(photo);
+                }
+            };
+
+
+            this.GalleryDialog.AllowDrop = true;
+            this.GalleryDialog.Drop += async (s, e) =>
+            {
+                if (e.DataView.Contains(StandardDataFormats.StorageItems))
+                {
+                    IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
+
+                    if (items == null) return;
+
+                    foreach (IStorageItem item in items)
+                    {
+                        //Photo
+                        StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
+                        if (copyFile == null) return;
+                        Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
+                        Photo.DuplicateChecking(photo);
+                    }
+                }
+            };
+            this.GalleryDialog.DragOver += (s, e) =>
+            {
+                e.AcceptedOperation = DataPackageOperation.Copy;
+                //e.DragUIOverride.Caption = App.resourceLoader.GetString("DropAcceptable_");
+                e.DragUIOverride.IsCaptionVisible = e.DragUIOverride.IsContentVisible = e.DragUIOverride.IsGlyphVisible = true;
             };
         }
-
-
-        private async void ShowGalleryDialog()
-        {
-            Photo photo = await this.ShowGalleryDialogTask();
-            if (photo == null) return;
-
-            //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
-            this.ViewModel.HistoryPush(history);
-
-            //Transformer
-            Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
-
-            //Layer
-            Photocopier photocopier = photo.ToPhotocopier();
-            Layerage imageLayerage = Layerage.CreateByGuid();
-            ImageLayer imageLayer = new ImageLayer
-            {
-                Id = imageLayerage.Id,
-                Photocopier = photocopier,
-                IsSelected = true,
-                Transform = new Transform(transformerSource)
-            };
-            LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                layer.IsSelected = false;
-            });
-
-            //Mezzanine
-            LayerManager.Mezzanine(imageLayerage);
-
-            this.SelectionViewModel.SetMode();//Selection
-            LayerManager.ArrangeLayers();
-            LayerManager.ArrangeLayersBackground();
-            this.ViewModel.Invalidate();//Invalidate     
-        }
-
-
-        //////////////////////////
 
 
         //DragAndDrop
@@ -112,7 +102,7 @@ namespace Retouch_Photo2
                 if (e.DataView.Contains(StandardDataFormats.StorageItems))
                 {
                     IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
-                    await this.CopyMultipleImageFilesAsync(items);
+                    await this.CopyMultipleImageFilesAndCreateImageLayersAsync(items);
                 }
             };
             this.DragOver += (s, e) =>
@@ -124,22 +114,44 @@ namespace Retouch_Photo2
         }
 
 
-        private async Task CopyMultipleImageFilesAsync(IReadOnlyList<StorageFile> files)
-        {
-            if (files == null) return;
+        //////////////////////////
 
-            foreach (StorageFile file in files)
+
+        private async void ShowGalleryDialog()
+        {
+            Photo photo = await this.ShowGalleryDialogTask();
+            if (photo == null) return;
+
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
+            this.ViewModel.HistoryPush(history);
+
+            //Layer
+            Layerage imageLayerage = Layerage.CreateByGuid();
+            ImageLayer imageLayer = new ImageLayer(photo)
             {
-                StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(file);
-                if (copyFile == null) return;
-                Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
-                Photo.DuplicateChecking(photo);
-            }
+                Id = imageLayerage.Id,
+                IsSelected = true,
+            };
+            LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
+
+            //Mezzanine
+            LayerManager.Mezzanine(imageLayerage);
+
+            this.SelectionViewModel.SetMode();//Selection
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
+            this.ViewModel.Invalidate();//Invalidate     
         }
-        private async Task CopyMultipleImageFilesAsync(IReadOnlyList<IStorageItem> items)
+        private async Task CopyMultipleImageFilesAndCreateImageLayersAsync(IReadOnlyList<IStorageItem> items)
         {
             if (items == null) return;
 
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
+            this.ViewModel.HistoryPush(history);
+
+            IList<Layerage> imageLayerages = new List<Layerage>();
             foreach (IStorageItem item in items)
             {
                 //Photo
@@ -147,7 +159,27 @@ namespace Retouch_Photo2
                 if (copyFile == null) return;
                 Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
                 Photo.DuplicateChecking(photo);
+
+                if (photo == null) continue;
+
+                //Layer
+                Layerage imageLayerage = Layerage.CreateByGuid();
+                ImageLayer imageLayer = new ImageLayer(photo)
+                {
+                    Id = imageLayerage.Id,
+                    IsSelected = true,
+                };
+                LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
+                imageLayerages.Add(imageLayerage);
             }
+
+            //Mezzanine
+            LayerManager.MezzanineRange(imageLayerages);
+
+            this.SelectionViewModel.SetMode();//Selection
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
+            this.ViewModel.Invalidate();//Invalidate     
         }
 
     }
