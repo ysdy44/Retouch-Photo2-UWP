@@ -12,286 +12,117 @@ namespace Retouch_Photo2.Elements
     public static class CoreCursorExtension
     {
 
-        //Content
-        public static PointerDeviceType PointerDeviceType { get; set; } = PointerDeviceType.Touch;
+        public static PointerDeviceType PointerDeviceType { private get; set; } = PointerDeviceType.Touch;
+        public static bool IsPointerEntered { private get; set; } = false;
+        public static bool IsManipulationStarted { private get; set; } = false;
 
-        public static double Pointer_Angle { get; set; } = 0.0d;
 
-        private static bool hand_Is = false;
-        public static bool Hand_Is
+
+        public static void None()
         {
-            set
+            if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
             {
-                CoreCursorExtension.hand_Is = value;
-                CoreCursorExtension.UpdateCoreCursor();
-            }
-        }
-
-
-        private static bool tool_IsPointerEntered = false;
-        private static bool tool_IsManipulationStarted = false;
-
-        private static bool move_IsPointerEntered = false;
-        private static bool move_IsManipulationStarted = false;
-
-        private static bool rotate_IsPointerEntered = false;
-        private static bool rotate_IsManipulationStarted = false;
-
-        private static bool skew_IsPointerEntered = false;
-        private static bool skew_IsManipulationStarted = false;
-
-        private static bool scale_IsPointerEntered = false;
-        private static bool scale_IsManipulationStarted = false;
-
-
-        public static bool IsManipulationStarted()
-        {
-            if (CoreCursorExtension.tool_IsManipulationStarted) return true;
-            if (CoreCursorExtension.move_IsManipulationStarted) return true;
-            if (CoreCursorExtension.skew_IsManipulationStarted) return true;
-            if (CoreCursorExtension.scale_IsManipulationStarted) return true;
-            return false;
-        }
-
-
-        //Update
-        private static void UpdateCoreCursor()
-        {
-            CoreCursorType value = CoreCursorExtension.GetCoreCursorType();
-            if (Window.Current.CoreWindow.PointerCursor?.Type == value) return;
-            Window.Current.CoreWindow.PointerCursor = new CoreCursor(value, 0);
-        }
-        private static CoreCursorType GetCoreCursorType()
-        {
-            //Hand
-            if (CoreCursorExtension.hand_Is)
-            {
-                if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
+                if (CoreCursorExtension.IsPointerEntered || CoreCursorExtension.IsManipulationStarted)
                 {
-                    return CoreCursorType.Hand;
+                    return;
                 }
             }
 
-            //Tool
-            if (CoreCursorExtension.tool_IsPointerEntered || CoreCursorExtension.tool_IsManipulationStarted)
+            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.Arrow, 0);
+        }
+
+        public static void Cross()
+        {
+            if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
             {
-                if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
+                if (CoreCursorExtension.IsPointerEntered || CoreCursorExtension.IsManipulationStarted)
                 {
-                    return CoreCursorType.Cross;
+                    Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.Cross, 0);
+                    return;
                 }
             }
 
-            //Rotate
-            if (CoreCursorExtension.rotate_IsPointerEntered || CoreCursorExtension.rotate_IsManipulationStarted)
+            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.Arrow, 0);
+        }
+
+        public static void SizeAll()
+        {
+            if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
             {
-                if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
+                if (CoreCursorExtension.IsPointerEntered || CoreCursorExtension.IsManipulationStarted)
                 {
-                    return CoreCursorExtension.SnapRotateCoreCursorType(CoreCursorExtension.Pointer_Angle);
+                    Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.SizeAll, 0);
+                    return;
                 }
             }
 
-            //Skew
-            if (CoreCursorExtension.skew_IsPointerEntered || CoreCursorExtension.skew_IsManipulationStarted)
+            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.Arrow, 0);
+        }
+
+        public static void SizeTranfrom(TransformerMode mode, float angle)
+        {
+            if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
             {
-                if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
+                if (CoreCursorExtension.IsPointerEntered || CoreCursorExtension.IsManipulationStarted)
                 {
-                    return CoreCursorExtension.SnapRotateCoreCursorType(CoreCursorExtension.Pointer_Angle);
+                    switch (mode)
+                    {
+                        case TransformerMode.None:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.Arrow, 0);
+                            break;
+
+                        case TransformerMode.Rotation:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapRotateCoreCursorType(angle), 0);
+                            break;
+
+                        case TransformerMode.SkewLeft:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapRotateCoreCursorType(-90 + angle), 0);
+                            break;
+                        case TransformerMode.SkewTop:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapRotateCoreCursorType(angle), 0);
+                            break;
+                        case TransformerMode.SkewRight:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapRotateCoreCursorType(90 + angle), 0);
+                            break;
+                        case TransformerMode.SkewBottom:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapRotateCoreCursorType(180 + angle), 0);
+                            break;
+
+                        case TransformerMode.ScaleLeft:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(-90 + angle), 0);
+                            break;
+                        case TransformerMode.ScaleTop:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(angle), 0);
+                            break;
+                        case TransformerMode.ScaleRight:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(90 + angle), 0);
+                            break;
+                        case TransformerMode.ScaleBottom:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(180 + angle), 0);
+                            break;
+
+                        case TransformerMode.ScaleLeftTop:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(-45 + angle), 0);
+                            break;
+                        case TransformerMode.ScaleRightTop:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(45 + angle), 0);
+                            break;
+                        case TransformerMode.ScaleRightBottom:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(135 + angle), 0);
+                            break;
+                        case TransformerMode.ScaleLeftBottom:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorExtension.SnapScaleCoreCursorType(225 + angle), 0);
+                            break;
+
+                        default:
+                            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.Arrow, 0);
+                            break;
+                    }
+                    return;
                 }
             }
 
-            //Scale
-            if (CoreCursorExtension.scale_IsPointerEntered || CoreCursorExtension.scale_IsManipulationStarted)
-            {
-                if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
-                {
-                    return CoreCursorExtension.SnapScaleCoreCursorType(CoreCursorExtension.Pointer_Angle);
-                }
-            }
-
-            //Move
-            if (CoreCursorExtension.move_IsPointerEntered || CoreCursorExtension.move_IsManipulationStarted)
-            {
-                if (CoreCursorExtension.PointerDeviceType == PointerDeviceType.Mouse || CoreCursorExtension.PointerDeviceType == PointerDeviceType.Pen)
-                {
-                    return CoreCursorType.SizeAll;
-                }
-            }
-
-            return CoreCursorType.Arrow;
-        }
-
-
-        //Methon
-        public static void None_PointerEntered()
-        {
-            CoreCursorExtension.tool_IsPointerEntered = false;
-            CoreCursorExtension.move_IsPointerEntered = false;
-            CoreCursorExtension.rotate_IsPointerEntered = false;
-            CoreCursorExtension.skew_IsPointerEntered = false;
-            CoreCursorExtension.scale_IsPointerEntered = false;
-            CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-        }
-        public static void Tool_PointerEntered()
-        {
-            CoreCursorExtension.tool_IsPointerEntered = true;
-            CoreCursorExtension.move_IsPointerEntered = false;
-            CoreCursorExtension.rotate_IsPointerEntered = false;
-            CoreCursorExtension.skew_IsPointerEntered = false;
-            CoreCursorExtension.scale_IsPointerEntered = false;
-            CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-        }
-        public static void Move_PointerEntered()
-        {
-            CoreCursorExtension.tool_IsPointerEntered = false;
-            CoreCursorExtension.move_IsPointerEntered = true;
-            CoreCursorExtension.rotate_IsPointerEntered = false;
-            CoreCursorExtension.skew_IsPointerEntered = false;
-            CoreCursorExtension.scale_IsPointerEntered = false;
-            CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-        }
-        public static void RotateSkewScale_PointerEntered(TransformerMode mode)
-        {
-            switch (mode)
-            {
-                case TransformerMode.None:
-                    CoreCursorExtension.None_PointerEntered();
-                    break;
-
-                case TransformerMode.Rotation:
-                    CoreCursorExtension.tool_IsPointerEntered = false;
-                    CoreCursorExtension.move_IsPointerEntered = false;
-                    CoreCursorExtension.rotate_IsPointerEntered = true;
-                    CoreCursorExtension.skew_IsPointerEntered = false;
-                    CoreCursorExtension.scale_IsPointerEntered = false;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                case TransformerMode.SkewLeft:
-                case TransformerMode.SkewTop:
-                case TransformerMode.SkewRight:
-                case TransformerMode.SkewBottom:
-                    CoreCursorExtension.tool_IsPointerEntered = false;
-                    CoreCursorExtension.move_IsPointerEntered = false;
-                    CoreCursorExtension.skew_IsPointerEntered = true;
-                    CoreCursorExtension.scale_IsPointerEntered = false;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                case TransformerMode.ScaleLeft:
-                case TransformerMode.ScaleTop:
-                case TransformerMode.ScaleRight:
-                case TransformerMode.ScaleBottom:
-                    CoreCursorExtension.tool_IsPointerEntered = false;
-                    CoreCursorExtension.move_IsPointerEntered = false;
-                    CoreCursorExtension.rotate_IsPointerEntered = false;
-                    CoreCursorExtension.skew_IsPointerEntered = false;
-                    CoreCursorExtension.scale_IsPointerEntered = true;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                case TransformerMode.ScaleLeftTop:
-                case TransformerMode.ScaleRightTop:
-                case TransformerMode.ScaleRightBottom:
-                case TransformerMode.ScaleLeftBottom:
-                    CoreCursorExtension.tool_IsPointerEntered = false;
-                    CoreCursorExtension.move_IsPointerEntered = false;
-                    CoreCursorExtension.rotate_IsPointerEntered = false;
-                    CoreCursorExtension.skew_IsPointerEntered = false;
-                    CoreCursorExtension.scale_IsPointerEntered = true;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                default:
-                    CoreCursorExtension.None_PointerEntered();
-                    break;
-            }
-        }
-
-
-
-        public static void None_ManipulationStarted()
-        {
-            CoreCursorExtension.tool_IsManipulationStarted = false;
-            CoreCursorExtension.move_IsManipulationStarted = false;
-            CoreCursorExtension.rotate_IsManipulationStarted = false;
-            CoreCursorExtension.skew_IsManipulationStarted = false;
-            CoreCursorExtension.scale_IsManipulationStarted = false;
-            CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-        }
-        public static void Tool_ManipulationStarted()
-        {
-            CoreCursorExtension.tool_IsManipulationStarted = true;
-            CoreCursorExtension.move_IsManipulationStarted = false;
-            CoreCursorExtension.rotate_IsManipulationStarted = false;
-            CoreCursorExtension.skew_IsManipulationStarted = false;
-            CoreCursorExtension.scale_IsManipulationStarted = false;
-            CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-        }
-        public static void Move_ManipulationStarted()
-        {
-            CoreCursorExtension.tool_IsManipulationStarted = false;
-            CoreCursorExtension.move_IsManipulationStarted = true;
-            CoreCursorExtension.rotate_IsManipulationStarted = false;
-            CoreCursorExtension.skew_IsManipulationStarted = false;
-            CoreCursorExtension.scale_IsManipulationStarted = false;
-            CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-        }
-        public static void RotateSkewScale_ManipulationStarted(TransformerMode mode)
-        {
-            switch (mode)
-            {
-                case TransformerMode.None:
-                    CoreCursorExtension.None_ManipulationStarted();
-                    break;
-
-                case TransformerMode.Rotation:
-                    CoreCursorExtension.tool_IsManipulationStarted = false;
-                    CoreCursorExtension.move_IsManipulationStarted = false;
-                    CoreCursorExtension.rotate_IsManipulationStarted = true;
-                    CoreCursorExtension.skew_IsManipulationStarted = false;
-                    CoreCursorExtension.scale_IsManipulationStarted = false;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                case TransformerMode.SkewLeft:
-                case TransformerMode.SkewTop:
-                case TransformerMode.SkewRight:
-                case TransformerMode.SkewBottom:
-                    CoreCursorExtension.tool_IsManipulationStarted = false;
-                    CoreCursorExtension.move_IsManipulationStarted = false;
-                    CoreCursorExtension.skew_IsManipulationStarted = true;
-                    CoreCursorExtension.scale_IsManipulationStarted = false;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                case TransformerMode.ScaleLeft:
-                case TransformerMode.ScaleTop:
-                case TransformerMode.ScaleRight:
-                case TransformerMode.ScaleBottom:
-                    CoreCursorExtension.tool_IsManipulationStarted = false;
-                    CoreCursorExtension.move_IsManipulationStarted = false;
-                    CoreCursorExtension.rotate_IsManipulationStarted = false;
-                    CoreCursorExtension.skew_IsManipulationStarted = false;
-                    CoreCursorExtension.scale_IsManipulationStarted = true;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                case TransformerMode.ScaleLeftTop:
-                case TransformerMode.ScaleRightTop:
-                case TransformerMode.ScaleRightBottom:
-                case TransformerMode.ScaleLeftBottom:
-                    CoreCursorExtension.tool_IsManipulationStarted = false;
-                    CoreCursorExtension.move_IsManipulationStarted = false;
-                    CoreCursorExtension.rotate_IsManipulationStarted = false;
-                    CoreCursorExtension.skew_IsManipulationStarted = false;
-                    CoreCursorExtension.scale_IsManipulationStarted = true;
-                    CoreCursorExtension.UpdateCoreCursor();//CoreCursorType
-                    break;
-
-                default:
-                    CoreCursorExtension.None_ManipulationStarted();
-                    break;
-            }
+            Window.Current.CoreWindow.PointerCursor = new CoreCursor(CoreCursorType.Arrow, 0);
         }
 
 
