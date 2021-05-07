@@ -143,7 +143,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
-        public void Cursor(Vector2 point) => this.ViewModel.ClickeTool.Cursor(point);
+        public void Cursor(Vector2 point) => this.ViewModel.CreateTool.Cursor(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

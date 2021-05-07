@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.ViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
-        public void Cursor(Vector2 point) => this.ViewModel.ClickeTool.Cursor(point);
+        public void Cursor(Vector2 point) => this.ViewModel.CreateTool.Cursor(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.ViewModel.CreateTool.Draw(drawingSession);
 

@@ -45,6 +45,11 @@ namespace Retouch_Photo2.Tools
         void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance);
 
         /// <summary>
+        /// Occurs when the cursor pointer is moved.
+        /// </summary>
+        void Cursor(Vector2 point);
+
+        /// <summary>
         /// Occurs when the canvas is drawn.
         /// </summary>
         /// <param name="drawingSession"> The drawing-session. </param>
