@@ -42,7 +42,7 @@
 
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="filters:Filter">
-                <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
+                <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTextBlockStyle}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
 

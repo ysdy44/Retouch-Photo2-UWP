@@ -15,7 +15,25 @@
         <!--Flyout-->
         <Flyout x:Name="StyleCategoryNamesFlyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single"
-                       ItemsSource="{x:Bind StyleCategoryNames}"/>
+                       ItemsSource="{x:Bind StyleCategoryCollection}">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="styles:StyleCategory">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
         </Flyout>
         <Flyout x:Name="MoreFlyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
@@ -84,7 +102,7 @@
 
 
     <GridView x:Name="GridView" SelectionMode="None" IsItemClickEnabled="True"
-              ItemsSource="{x:Bind Styles}">
+              ItemsSource="{x:Bind StyleCollection}">
 
 
         <!--VisualState-->
@@ -147,8 +165,7 @@
                     </Grid.ColumnDefinitions>
 
                     <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-                        <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
-                          Content="{x:Bind ListView.SelectedItem, Mode=OneWay}">
+                        <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                           MirroredWhenRightToLeft="True"/>
