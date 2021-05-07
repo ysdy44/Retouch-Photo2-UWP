@@ -72,7 +72,7 @@
                     <ListViewItem x:Name="DeleteStyleCategoryButton">
                         <ContentControl x:Name="DeleteStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
-                                <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Foreground="Red" Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>

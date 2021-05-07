@@ -231,15 +231,15 @@ namespace Retouch_Photo2.Menus
 
             this.Untitled = resource.GetString("$Untitled");
 
-            this.StyleGroupHeader.Content = "Style";
-            this.AddStyleControl.Content = "Add style";
-            this.RenameStyleControl.Content = "Rename style";
-            this.DeleteStyleControl.Content = "Delete style";
+            this.StyleGroupHeader.Content = resource.GetString("Menus_Style");
+            this.AddStyleControl.Content = resource.GetString("Menus_AddStyle");
+            this.RenameStyleControl.Content = resource.GetString("Menus_RenameStyle"); 
+            this.DeleteStyleControl.Content = resource.GetString("Menus_DeleteStyle"); 
 
-            this.StyleCategoryGroupHeader.Content = "Style category";
-            this.AddStyleCategoryControl.Content = "Add style category";
-            this.RenameStyleCategoryControl.Content = "Rename style category";
-            this.DeleteStyleCategoryControl.Content = "Delete style category";
+            this.StyleCategoryGroupHeader.Content = resource.GetString("Menus_StyleCategory"); 
+            this.AddStyleCategoryControl.Content = resource.GetString("Menus_AddStyleCategory"); 
+            this.RenameStyleCategoryControl.Content = resource.GetString("Menus_RenameStyleCategory"); 
+            this.DeleteStyleCategoryControl.Content = resource.GetString("Menus_DeleteStyleCategory"); 
 
             this.MoreToolTip.Content = resource.GetString("Menus_More");
         }
@@ -299,8 +299,11 @@ namespace Retouch_Photo2.Menus
 
             IStyle style2 = style.Clone();
             string placeholderText = string.IsNullOrEmpty(style.Name) ? this.Untitled : style.Name;
-            style2.Name = await Retouch_Photo2.DrawPage.ShowRenameFunc(placeholderText);
 
+            string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(this.Untitled);
+            if (string.IsNullOrEmpty(rename)) return;
+
+            style2.Name = rename;
             if (styleCategory.Styles.Contains(style))
             {
                 int index = styleCategory.Styles.IndexOf(style);
