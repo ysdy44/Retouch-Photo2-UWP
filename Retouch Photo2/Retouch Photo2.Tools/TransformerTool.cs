@@ -41,13 +41,30 @@ namespace Retouch_Photo2.Tools
 
         public bool Started(Vector2 startingPoint, Vector2 point)
         {
-            if (this.Mode == ListViewSelectionMode.None) return false;
+            if (this.Mode == ListViewSelectionMode.None)
+            {
+                //Cursor
+                CoreCursorExtension.IsManipulationStarted = false;
+                CoreCursorExtension.SizeTranfrom(TransformerMode.None, 0);
+                return false;
+            }
 
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, this.Transformer, matrix);
+
+            if (this.TransformerMode == TransformerMode.None)
+            {
+                //Cursor
+                CoreCursorExtension.IsManipulationStarted = false;
+                CoreCursorExtension.SizeTranfrom(TransformerMode.None, 0);
+                return false;
+            }
+
             //Cursor
-            CoreCursorExtension.RotateSkewScale_ManipulationStarted(this.TransformerMode);
-            if (this.TransformerMode == TransformerMode.None) return false;
+            Vector2 horizontal = this.Transformer.Horizontal;
+            float angle = Transformer.GetRadians(horizontal);
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.SizeTranfrom(this.TransformerMode, angle);
 
             //Snap
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
@@ -60,6 +77,15 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None) return false;
             if (this.TransformerMode == TransformerMode.None) return false;
+
+            if (this.TransformerMode == TransformerMode.Rotation)
+            {
+                //Cursor
+                Vector2 horizontal = this.Transformer.Horizontal;
+                float angle = Transformer.GetRadians(horizontal);
+                CoreCursorExtension.IsManipulationStarted = true;
+                CoreCursorExtension.SizeTranfrom(this.TransformerMode, angle);
+            }
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
@@ -79,10 +105,14 @@ namespace Retouch_Photo2.Tools
         }
         public bool Complete(Vector2 startingPoint, Vector2 point)
         {
+            //Cursor
+            Vector2 horizontal = this.Transformer.Horizontal;
+            float angle = Transformer.GetRadians(horizontal);
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.SizeTranfrom(this.TransformerMode, angle);
+
             if (this.Mode == ListViewSelectionMode.None) return false;
             if (this.TransformerMode == TransformerMode.None) return false;
-            //Cursor
-            CoreCursorExtension.None_ManipulationStarted();
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);

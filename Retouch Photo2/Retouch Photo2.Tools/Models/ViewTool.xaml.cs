@@ -137,7 +137,9 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
-            CoreCursorExtension.Hand_Is = true;//CoreCursorType
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.SizeAll();
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -155,7 +157,9 @@ namespace Retouch_Photo2.Tools.Models
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
-            CoreCursorExtension.Hand_Is = false;//CoreCursorType
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.SizeAll();
         }
         public void Clicke(Vector2 point) { }
 

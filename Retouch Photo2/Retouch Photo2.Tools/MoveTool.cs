@@ -44,7 +44,8 @@ namespace Retouch_Photo2.Tools
             if (this.IsMove == false) return false;
 
             //Cursor
-            CoreCursorExtension.Move_ManipulationStarted();
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.SizeAll();
 
             //Snap
             if (this.IsSnap) this.ViewModel.BorderBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
@@ -79,7 +80,8 @@ namespace Retouch_Photo2.Tools
             if (this.Mode == ListViewSelectionMode.None) return false;
 
             //Cursor
-            CoreCursorExtension.None_ManipulationStarted();
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.SizeAll();
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);

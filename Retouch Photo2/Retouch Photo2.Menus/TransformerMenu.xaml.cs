@@ -196,9 +196,9 @@ namespace Retouch_Photo2.Menus
                             Vector2 vertical = transformer.Vertical;
 
                             //Radians Skew
-                            float radians = Transformer.GetRadians(horizontal);
-                            float skew = Transformer.GetSkew(vertical, radians);
-                            this.RotateTextBox.Text = this.Round2Converter(radians) + " º";
+                            float angle = Transformer.GetRadians(horizontal);
+                            float skew = Transformer.GetSkew(vertical, angle);
+                            this.RotateTextBox.Text = this.Round2Converter(angle) + " º";
                             this.SkewTextBox.Text = this.Round2Converter(skew) + " º";
 
                             //@Release: case Debug
@@ -221,7 +221,7 @@ namespace Retouch_Photo2.Menus
                             this.YTextBox.Text = this.Round2Converter(vector.Y);
 
                             //Indicator
-                            this.IndicatorControl.Radians = radians;
+                            this.IndicatorControl.Radians = angle;
                         }
                         //IsEnabled
                         {

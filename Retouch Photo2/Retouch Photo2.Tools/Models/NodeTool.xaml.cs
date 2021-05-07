@@ -101,7 +101,11 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                 this.NodeCollectionMode = NodeCollectionMode.RectChoose;
-                CoreCursorExtension.Tool_ManipulationStarted();
+
+                //Cursor
+                CoreCursorExtension.IsManipulationStarted = true;
+                CoreCursorExtension.Cross();
+
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
                 return;
             }
@@ -110,20 +114,28 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case NodeCollectionMode.Move:
                     this.MoveStarted();
-                    CoreCursorExtension.Tool_ManipulationStarted();
+                    //Cursor
+                    CoreCursorExtension.IsManipulationStarted = true;
+                    CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                     this.MoveSingleNodePointStarted(startingPoint, matrix);
-                    CoreCursorExtension.Tool_ManipulationStarted();
+                    //Cursor
+                    CoreCursorExtension.IsManipulationStarted = true;
+                    CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
                     this.MoveSingleNodeControlPointStarted();
-                    CoreCursorExtension.Tool_ManipulationStarted();
+                    //Cursor
+                    CoreCursorExtension.IsManipulationStarted = true;
+                    CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.RectChoose:
                     this.RectChooseStarted(startingPoint, point);
-                    CoreCursorExtension.Tool_ManipulationStarted();
+                    //Cursor
+                    CoreCursorExtension.IsManipulationStarted = true;
+                    CoreCursorExtension.Cross();
                     break;
             }
 
@@ -169,7 +181,9 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            CoreCursorExtension.None_ManipulationStarted();
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.Cross();
 
             if (this.Layerage == null)
             {
@@ -247,25 +261,30 @@ namespace Retouch_Photo2.Tools.Models
             switch (mode)
             {
                 case NodeCollectionMode.None:
-                    CoreCursorExtension.None_PointerEntered();
+                    CoreCursorExtension.IsPointerEntered = false;
+                    CoreCursorExtension.None();
                     break;
                 case NodeCollectionMode.Preview:
                     break;
                 case NodeCollectionMode.Add:
                     break;
                 case NodeCollectionMode.Move:
-                    CoreCursorExtension.Tool_PointerEntered();
+                    CoreCursorExtension.IsPointerEntered = true;
+                    CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                    CoreCursorExtension.Tool_PointerEntered();
+                    CoreCursorExtension.IsPointerEntered = true;
+                    CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.RectChoose:
-                    CoreCursorExtension.None_PointerEntered();
+                    CoreCursorExtension.IsPointerEntered = false;
+                    CoreCursorExtension.None();
                     break;
                 default:
-                    CoreCursorExtension.None_PointerEntered();
+                    CoreCursorExtension.IsPointerEntered = false;
+                    CoreCursorExtension.None();
                     break;
             }
         }

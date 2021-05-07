@@ -5,7 +5,6 @@ using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Photos;
-using Retouch_Photo2.Tools.Elements;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -46,6 +45,18 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
+            //Cursor
+            switch (this.HandleMode)
+            {
+                case BrushHandleMode.Center:
+                case BrushHandleMode.XPoint:
+                case BrushHandleMode.YPoint:
+                case BrushHandleMode.ToInitializeController:
+                    //Cursor
+                    CoreCursorExtension.IsManipulationStarted = true;
+                    CoreCursorExtension.Cross();
+                    break;
+            }
 
             this.Fill.CacheTransform();
             this.MethodViewModel.StyleChangeStarted(cache: (style) =>
@@ -81,6 +92,11 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             if (this.Fill == null) return;
             this.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
+            this.HandleMode = BrushHandleMode.None;
+
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.Cross();
 
             this.MethodViewModel.StyleChangeCompleted
             (
@@ -89,6 +105,33 @@ namespace Retouch_Photo2.Tools.Models
                 getUndo: (style) => style.StartingFill,
                 setUndo: (style, previous) => style.Fill = previous.Clone()
             );
+        }
+
+        private void FillCursor(Vector2 point)
+        {
+            if (this.Fill == null) return;
+
+            //Contains Operate Mode
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+            BrushHandleMode handleMode = this.Fill.ContainsHandleMode(point, matrix);
+
+            //Cursor
+            switch (handleMode)
+            {
+                case BrushHandleMode.Center:
+                case BrushHandleMode.XPoint:
+                case BrushHandleMode.YPoint:
+                case BrushHandleMode.ToInitializeController:
+                    //Cursor
+                    CoreCursorExtension.IsPointerEntered = true;
+                    CoreCursorExtension.Cross();
+                    break;
+                default:
+                    //Cursor
+                    CoreCursorExtension.IsPointerEntered = false;
+                    CoreCursorExtension.Cross();
+                    break;
+            }
         }
 
     }

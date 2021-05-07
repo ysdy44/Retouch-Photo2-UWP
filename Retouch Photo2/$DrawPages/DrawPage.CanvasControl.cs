@@ -96,8 +96,8 @@ namespace Retouch_Photo2
 
         private void ConstructCanvasOperator()
         {
-            this.ToolDrawCanvasControl.PointerEntered += (s, e) => CoreCursorExtension.None_PointerEntered();
-            this.ToolDrawCanvasControl.PointerExited += (s, e) => CoreCursorExtension.None_PointerEntered();
+            this.ToolDrawCanvasControl.PointerEntered += (s, e) => CoreCursorExtension.None();
+            this.ToolDrawCanvasControl.PointerExited += (s, e) => CoreCursorExtension.None();
             this.ToolDrawCanvasControl.PointerMoved += (s, e) =>
             {
                 CoreCursorExtension.PointerDeviceType = e.Pointer.PointerDeviceType;
@@ -173,7 +173,10 @@ namespace Retouch_Photo2
 
                 this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = false;//IsHitTestVisible
 
-                CoreCursorExtension.Hand_Is = true;//CoreCursorType
+                //Cursor
+                CoreCursorExtension.IsPointerEntered = true;
+                CoreCursorExtension.IsManipulationStarted = true;
+                CoreCursorExtension.SizeAll();
             };
             canvasOperator.Right_Delta += (point) =>
             {
@@ -189,7 +192,10 @@ namespace Retouch_Photo2
 
                 this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true;//IsHitTestVisible
 
-                CoreCursorExtension.Hand_Is = false;//CoreCursorType
+                //Cursor
+                CoreCursorExtension.IsPointerEntered = false;
+                CoreCursorExtension.IsManipulationStarted = false;
+                CoreCursorExtension.SizeAll();
             };
 
 

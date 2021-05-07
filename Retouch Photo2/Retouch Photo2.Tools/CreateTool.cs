@@ -77,10 +77,12 @@ namespace Retouch_Photo2.Tools
             //Selection
             this.Transformer = transformer;
             this.SelectionViewModel.SetModeExtended();
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
             //Cursor
-            CoreCursorExtension.Tool_ManipulationStarted();
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.Cross();
+
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -107,6 +109,7 @@ namespace Retouch_Photo2.Tools
 
                 this.ViewModel.SetTipTextWidthHeight(transformer);//Tip
                 this.ViewModel.Invalidate();//Invalidate
+                return;
             }
 
             if (this.ViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
@@ -158,15 +161,22 @@ namespace Retouch_Photo2.Tools
                 this.MezzanineLayerage = null;
                 this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Tip
 
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-
                 //Cursor
-                CoreCursorExtension.None_ManipulationStarted();
+                CoreCursorExtension.IsManipulationStarted = false;
+                CoreCursorExtension.Cross();
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 
             if (this.ViewModel.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
         }
 
+        public void Cursor(Vector2 point)
+        {
+            if (this.Mode == ListViewSelectionMode.Extended) return;
+
+            this.ViewModel.ClickeTool.Cursor(point);//TransformerTool
+        }
 
         public void Draw(CanvasDrawingSession drawingSession)
         {

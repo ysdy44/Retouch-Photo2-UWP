@@ -59,20 +59,27 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None)
             {
-                CoreCursorExtension.None_PointerEntered();
+                //Cursor
+                CoreCursorExtension.IsPointerEntered = false;
+                CoreCursorExtension.None();
                 return;
             }
-            if (CoreCursorExtension.IsManipulationStarted()) return;
-
 
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             TransformerMode mode = Transformer.ContainsNodeMode(point, this.Transformer, matrix);
+            if (mode == TransformerMode.None)
+            {
+                //Cursor
+                CoreCursorExtension.IsPointerEntered = false;
+                CoreCursorExtension.None();
+                return;
+            }
 
-
-            float radians = 90 + Transformer.GetRadians(point - Vector2.Transform(this.Transformer.Center, matrix));
-            CoreCursorExtension.Pointer_Angle = radians;
-
-            CoreCursorExtension.RotateSkewScale_PointerEntered(mode);
+            //Cursor
+            Vector2 horizontal = this.Transformer.Horizontal;
+            float angle = Transformer.GetRadians(horizontal);
+            CoreCursorExtension.IsPointerEntered = true;
+            CoreCursorExtension.SizeTranfrom(mode, angle);
         }
 
     }

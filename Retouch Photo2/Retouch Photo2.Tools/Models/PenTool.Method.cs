@@ -29,7 +29,10 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint == false) this._previewLeft = canvasPoint;
             this._previewRight = canvasPoint;
 
-            CoreCursorExtension.Tool_ManipulationStarted();
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.Cross();
+
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         private void PreviewDelta(Vector2 canvasPoint)
@@ -54,7 +57,10 @@ namespace Retouch_Photo2.Tools.Models
             {
                 this._hasPreviewTempLeftPoint = true;
 
-                CoreCursorExtension.None_ManipulationStarted();
+                //Cursor
+                CoreCursorExtension.IsManipulationStarted = false;
+                CoreCursorExtension.Cross();
+
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
         }
@@ -94,7 +100,10 @@ namespace Retouch_Photo2.Tools.Models
             this._addEndNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
             this._addLastNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
 
-            CoreCursorExtension.Tool_ManipulationStarted();
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.Cross();
+
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         private void AddDelta(Vector2 canvasPoint)
@@ -165,7 +174,10 @@ namespace Retouch_Photo2.Tools.Models
             layerage.RefactoringParentsRender();
             layerage.RefactoringParentsIconRender();
 
-            CoreCursorExtension.None_ManipulationStarted();
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.Cross();
+
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 

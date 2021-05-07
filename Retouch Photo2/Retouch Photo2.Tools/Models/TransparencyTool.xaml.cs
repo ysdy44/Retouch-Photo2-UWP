@@ -86,7 +86,9 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TransparencyStarted(startingPoint, point);
 
-            CoreCursorExtension.Tool_ManipulationStarted();
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.Cross();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
@@ -109,6 +111,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
+            this.HandleMode = BrushHandleMode.None;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
@@ -123,8 +126,10 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TransparencyComplete(canvasStartingPoint, canvasPoint);
 
-            this.HandleMode = BrushHandleMode.None;
-            CoreCursorExtension.None_ManipulationStarted();
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.Cross();
+
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);

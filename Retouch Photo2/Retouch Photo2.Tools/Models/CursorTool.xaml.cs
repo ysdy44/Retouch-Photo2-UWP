@@ -92,19 +92,26 @@ namespace Retouch_Photo2.Tools.Models
 
             if (this.ViewModel.TransformerTool.Started(startingPoint, point))//TransformerTool
             {
+                //Cursor
+                CoreCursorExtension.IsManipulationStarted = false;
+                CoreCursorExtension.None();
                 this.CursorMode = CursorMode.Transformer;
                 return;
             }
 
             if (this.ViewModel.MoveTool.Started(startingPoint, point))//MoveTool
             {
+                //Cursor
+                CoreCursorExtension.IsManipulationStarted = false;
+                CoreCursorExtension.None();
                 this.CursorMode = CursorMode.Move;
                 return;
             }
 
-            //Box
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = true;
+            CoreCursorExtension.Cross();
             this.CursorMode = CursorMode.BoxChoose;
-            CoreCursorExtension.Tool_ManipulationStarted();
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canavsStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
@@ -139,7 +146,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             CursorMode cursorMode = this.CursorMode;
             this.CursorMode = CursorMode.None;
-            CoreCursorExtension.None_ManipulationStarted();
+
+            //Cursor
+            CoreCursorExtension.IsManipulationStarted = false;
+            CoreCursorExtension.None();
 
             switch (cursorMode)
             {
@@ -170,7 +180,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
-        public void Cursor(Vector2 point) => this.ViewModel.ClickeTool.Cursor(point);
+        public void Cursor(Vector2 point) => this.ViewModel.CreateTool.Cursor(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

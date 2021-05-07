@@ -134,7 +134,6 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
 
-            CoreCursorExtension.Tool_ManipulationStarted();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
@@ -188,12 +187,22 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             this.HandleMode = BrushHandleMode.None;
-            CoreCursorExtension.None_ManipulationStarted();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
-        public void Cursor(Vector2 point) { }
+        public void Cursor(Vector2 point)
+        {
+            switch (this.FillOrStroke)
+            {
+                case FillOrStroke.Fill:
+                    this.FillCursor(point);
+                    break;
+                case FillOrStroke.Stroke:
+                    this.StrokeCursor(point);
+                    break;
+            }
+        }
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
