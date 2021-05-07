@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★★★
 using FanKit.Transformers;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Styles;
@@ -12,10 +13,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.ApplicationModel.Resources;
-using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.Menus
 {
@@ -28,75 +28,79 @@ namespace Retouch_Photo2.Menus
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        IEnumerable<IStyle> SelectedStyles => from i in this.GridView.SelectedItems where (i is IStyle) select (i as IStyle);
-        StyleCategory SelectedStyleCategory
+        IEnumerable<IStyle> SelecteItems => from i in this.GridView.SelectedItems where (i is IStyle) select (i as IStyle);
+
+        private StyleCategory selectedItemCollection;
+        public StyleCategory SelectedItemCollection
         {
+            get => this.selectedItemCollection;
             set
             {
                 if (value == null)
                 {
-                    this.StyleCollection.Clear();
+                    this.Items.Clear();
                     this.ListView.SelectedItem = null;
 
                     this.Control.Content = null;
                     this.Button.IsEnabled = false;
+
+                    this.selectedItemCollection = value;
                 }
                 else
                 {
-                    this.StyleCollection.Clear();
+                    this.Items.Clear();
                     foreach (IStyle style in value.Styles)
                     {
-                        this.StyleCollection.Add(style);
+                        this.Items.Add(style);
                     }
                     this.ListView.SelectedItem = value;
 
                     this.Control.Content = value.Name;
                     this.Button.IsEnabled = true;
-                }
-            }
-            get
-            {
-                if (this.ListView.SelectedItem is StyleCategory styleCategory)
-                {
-                    return styleCategory;
-                }
-                else
-                {
-                    return null;
+
+                    this.selectedItemCollection = value;
                 }
             }
         }
 
-        IList<StyleCategory> StyleCategorys;
-        readonly ObservableCollection<StyleCategory> StyleCategoryCollection = new ObservableCollection<StyleCategory>();
-        readonly ObservableCollection<IStyle> StyleCollection = new ObservableCollection<IStyle>();
+
+        IList<StyleCategory> Source;
+        readonly ObservableCollection<StyleCategory> ItemCollections = new ObservableCollection<StyleCategory>();
+        readonly ObservableCollection<IStyle> Items = new ObservableCollection<IStyle>();
 
 
         private string Untitled = "Untitled";
 
 
-        MainPageState State
+        //@VisualState
+        MainPageState _vsState = MainPageState.None;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState VisualState
         {
-            get => this.state;
+            get
+            {
+                switch (this._vsState)
+                {
+                    case MainPageState.None: return this.Normal;
+                    case MainPageState.Rename: return this.RenameState;
+                    case MainPageState.Delete: return this.DeleteState;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, true);
+        }
+        /// <summary> Gets or set the state. </summary>
+        public MainPageState State
+        {
+            get => this._vsState;
             set
             {
-                switch (value)
-                {
-                    case MainPageState.Rename:
-                        VisualStateManager.GoToState(this, this.Rename.Name, false);
-                        break;
-                    case MainPageState.Delete:
-                        VisualStateManager.GoToState(this, this.Delete.Name, false);
-                        break;
-                    default:
-                        VisualStateManager.GoToState(this, this.Normal.Name, false);
-                        break;
-                }
-
-                this.state = value;
+                this._vsState = value;
+                this.VisualState = this.VisualState;//VisualState
             }
         }
-        MainPageState state = MainPageState.Main;
 
 
         //@Construct
@@ -111,40 +115,40 @@ namespace Retouch_Photo2.Menus
 
             this.Loaded += async (s, e) =>
             {
-                if (this.StyleCategorys == null)
+                if (this.Source == null)
                 {
                     IEnumerable<StyleCategory> styleCategorys = await Retouch_Photo2.XML.ConstructStylesFile();
                     if (styleCategorys == null) return;
 
-                    this.StyleCategorys = styleCategorys.ToList();
-                    foreach (StyleCategory styleCategory in this.StyleCategorys)
+                    this.Source = styleCategorys.ToList();
+                    foreach (StyleCategory styleCategory in this.Source)
                     {
-                        this.StyleCategoryCollection.Add(styleCategory);
+                        this.ItemCollections.Add(styleCategory);
                     }
 
-                    this.SelectedStyleCategory = styleCategorys.FirstOrDefault();
+                    this.SelectedItemCollection = styleCategorys.FirstOrDefault();
                 }
             };
 
 
-            this.Button.Tapped += (s, e) => this.StyleCategoryNamesFlyout.ShowAt(this.Button);
+            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this.Button);
             this.ListView.ItemClick += (s, e) =>
             {
-                this.StyleCategoryNamesFlyout.Hide();
+                this.Flyout.Hide();
                 if (e.ClickedItem is StyleCategory styleCategory)
                 {
-                    this.SelectedStyleCategory = styleCategory;
+                    this.SelectedItemCollection = styleCategory;
                 }
             };
             this.GridView.ItemClick += async (s, e) =>
              {
                  switch (this.State)
                  {
-                     case MainPageState.Main:
+                     case MainPageState.None:
                          {
                              if (e.ClickedItem is IStyle style)
                              {
-                                 this.SetStyle(style);
+                                 this.Set(style);
                              }
                          }
                          break;
@@ -152,8 +156,8 @@ namespace Retouch_Photo2.Menus
                          {
                              if (e.ClickedItem is IStyle style)
                              {
-                                 bool result = await this.RenameStyle(style, this.SelectedStyleCategory);
-                                 if (result) this.State = MainPageState.Main;
+                                 bool result = await this.Rename(style, this.SelectedItemCollection);
+                                 if (result) this.State = MainPageState.None;
                              }
                          }
                          break;
@@ -163,7 +167,7 @@ namespace Retouch_Photo2.Menus
              };
 
 
-            this.AddStyleButton.Tapped += async (s, e) =>
+            this.AddButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -172,51 +176,51 @@ namespace Retouch_Photo2.Menus
 
                     IStyle style = layer.Style;
                     Transformer transformer = layer.Transform.Transformer;
-                    await this.AddStyle(style, transformer, this.SelectedStyleCategory);
+                    await this.Add(style, transformer, this.SelectedItemCollection);
                 }
             };
 
-            this.RenameStyleButton.Tapped += (s, e) =>
+            this.RenameButton.Tapped += (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 this.State = MainPageState.Rename;
             };
-            this.RenameStyleCancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
+            this.RenameCancelButton.Tapped += (s, e) => this.State = MainPageState.None;
 
-            this.DeleteStyleButton.Tapped += (s, e) =>
+            this.DeleteButton.Tapped += (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 this.State = MainPageState.Delete;
             };
-            this.DeleteStyleOKButton.Tapped += async (s, e) =>
+            this.DeleteOKButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.DeleteStyle(this.SelectedStyles.ToArray(), this.SelectedStyleCategory);
-                this.State = MainPageState.Main;
+                await this.Delete(this.SelecteItems.ToArray(), this.SelectedItemCollection);
+                this.State = MainPageState.None;
             };
-            this.DeleteStyleCancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
+            this.DeleteCancelButton.Tapped += (s, e) => this.State = MainPageState.None;
 
 
-            this.AddStyleCategoryButton.Tapped += async (s, e) =>
+            this.AddCollectionButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.AddStyleCategory();
+                await this.AddCollection();
             };
-            this.RenameStyleCategoryButton.Tapped += async (s, e) =>
+            this.RenameCollectionButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.RenameStyleCategory(this.SelectedStyleCategory);
+                await this.RenameCollection(this.SelectedItemCollection);
             };
-            this.DeleteStyleCategoryButton.Tapped += async (s, e) =>
+            this.DeleteCollectionButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.DeleteStyleCategory(this.SelectedStyleCategory);
+                await this.DeleteCollection(this.SelectedItemCollection);
             };
         }
 
         private async Task Save()
         {
-            await XML.SaveStylesFile(this.StyleCategorys);
+            await XML.SaveStylesFile(this.Source);
         }
 
     }
@@ -231,22 +235,22 @@ namespace Retouch_Photo2.Menus
 
             this.Untitled = resource.GetString("$Untitled");
 
-            this.StyleGroupHeader.Content = resource.GetString("Menus_Style");
-            this.AddStyleControl.Content = resource.GetString("Menus_AddStyle");
-            this.RenameStyleControl.Content = resource.GetString("Menus_RenameStyle");
-            this.DeleteStyleControl.Content = resource.GetString("Menus_DeleteStyle");
+            this.GroupHeader.Content = resource.GetString("Menus_Style");
+            this.AddControl.Content = resource.GetString("Menus_AddStyle");
+            this.RenameControl.Content = resource.GetString("Menus_RenameStyle");
+            this.DeleteControl.Content = resource.GetString("Menus_DeleteStyle");
 
-            this.StyleCategoryGroupHeader.Content = resource.GetString("Menus_StyleCategory");
-            this.AddStyleCategoryControl.Content = resource.GetString("Menus_AddStyleCategory");
-            this.RenameStyleCategoryControl.Content = resource.GetString("Menus_RenameStyleCategory");
-            this.DeleteStyleCategoryControl.Content = resource.GetString("Menus_DeleteStyleCategory");
+            this.CollectionGroupHeader.Content = resource.GetString("Menus_StyleCategory");
+            this.AddCollectionControl.Content = resource.GetString("Menus_AddStyleCategory");
+            this.RenameCollectionControl.Content = resource.GetString("Menus_RenameStyleCategory");
+            this.DeleteCollectionControl.Content = resource.GetString("Menus_DeleteStyleCategory");
 
             this.MoreToolTip.Content = resource.GetString("Menus_More");
         }
 
 
 
-        private void SetStyle(IStyle style)
+        private void Set(IStyle style)
         {
             Transformer transformer = this.SelectionViewModel.Transformer;
 
@@ -275,7 +279,7 @@ namespace Retouch_Photo2.Menus
             this.SelectionViewModel.SetStyle(style3);
         }
 
-        private async Task AddStyle(IStyle style, Transformer transformer, StyleCategory styleCategory)
+        private async Task Add(IStyle style, Transformer transformer, StyleCategory styleCategory)
         {
             string rename = this.Untitled;
             if (string.IsNullOrEmpty(rename)) return;
@@ -295,22 +299,22 @@ namespace Retouch_Photo2.Menus
                         style2
                     }
                 };
-                this.StyleCategorys.Add(styleCategory2);
-                this.StyleCategoryCollection.Add(styleCategory2);
+                this.Source.Add(styleCategory2);
+                this.ItemCollections.Add(styleCategory2);
 
-                this.SelectedStyleCategory = styleCategory2;
+                this.SelectedItemCollection = styleCategory2;
             }
             else
             {
                 styleCategory.Styles.Add(style2);
 
-                this.StyleCollection.Add(style2);
+                this.Items.Add(style2);
             }
 
             await this.Save();
         }
 
-        private async Task<bool> RenameStyle(IStyle style, StyleCategory styleCategory)
+        private async Task<bool> Rename(IStyle style, StyleCategory styleCategory)
         {
             if (styleCategory == null) return false;
 
@@ -326,17 +330,17 @@ namespace Retouch_Photo2.Menus
                 int index = styleCategory.Styles.IndexOf(style);
                 styleCategory.Styles[index] = style2;
             }
-            if (this.StyleCollection.Contains(style))
+            if (this.Items.Contains(style))
             {
-                int index = this.StyleCollection.IndexOf(style);
-                this.StyleCollection[index] = style2;
+                int index = this.Items.IndexOf(style);
+                this.Items[index] = style2;
             }
 
             await this.Save();
             return true;
         }
 
-        public async Task DeleteStyle(IStyle[] styles, StyleCategory styleCategory)// You can not remove an item by an IEnumerable
+        public async Task Delete(IStyle[] styles, StyleCategory styleCategory)// You can not remove an item by an IEnumerable
         {
             if (styleCategory == null) return;
 
@@ -346,9 +350,9 @@ namespace Retouch_Photo2.Menus
                 {
                     styleCategory.Styles.Remove(style);
                 }
-                if (this.StyleCollection.Contains(style))
+                if (this.Items.Contains(style))
                 {
-                    this.StyleCollection.Remove(style);
+                    this.Items.Remove(style);
                 }
             }
 
@@ -357,7 +361,7 @@ namespace Retouch_Photo2.Menus
 
 
 
-        private async Task AddStyleCategory()
+        private async Task AddCollection()
         {
             string rename = this.Untitled;
             if (string.IsNullOrEmpty(rename)) return;
@@ -366,14 +370,14 @@ namespace Retouch_Photo2.Menus
             {
                 Name = rename
             };
-            this.StyleCategorys.Add(styleCategory);
-            this.StyleCategoryCollection.Add(styleCategory);
+            this.Source.Add(styleCategory);
+            this.ItemCollections.Add(styleCategory);
 
             await this.Save();
-            this.SelectedStyleCategory = styleCategory;
+            this.SelectedItemCollection = styleCategory;
         }
 
-        private async Task RenameStyleCategory(StyleCategory styleCategory)
+        private async Task RenameCollection(StyleCategory styleCategory)
         {
             if (styleCategory == null) return;
 
@@ -382,25 +386,25 @@ namespace Retouch_Photo2.Menus
 
             styleCategory.Name = rename;
 
-            this.StyleCategoryCollection.Clear();
-            foreach (StyleCategory styleCategory2 in this.StyleCategorys)
+            this.ItemCollections.Clear();
+            foreach (StyleCategory styleCategory2 in this.Source)
             {
-                this.StyleCategoryCollection.Add(styleCategory2);
+                this.ItemCollections.Add(styleCategory2);
             }
 
             await this.Save();
-            this.SelectedStyleCategory = styleCategory;
+            this.SelectedItemCollection = styleCategory;
         }
 
-        private async Task DeleteStyleCategory(StyleCategory styleCategory)
+        private async Task DeleteCollection(StyleCategory styleCategory)
         {
             if (styleCategory == null) return;
 
-            this.StyleCategorys.Remove(styleCategory);
-            this.StyleCategoryCollection.Remove(styleCategory);
+            this.Source.Remove(styleCategory);
+            this.ItemCollections.Remove(styleCategory);
 
             await this.Save();
-            this.SelectedStyleCategory = this.StyleCategorys.FirstOrDefault();
+            this.SelectedItemCollection = this.Source.FirstOrDefault();
         }
 
     }
