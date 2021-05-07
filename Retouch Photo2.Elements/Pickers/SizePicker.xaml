@@ -23,6 +23,9 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
+        <!--Grab the focus for TextBox-->
+        <ContentControl IsTabStop="True" IsTapEnabled="True"/>
+
         <TextBlock x:Name="WidthTextBlock" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}">
             Width
         </TextBlock>

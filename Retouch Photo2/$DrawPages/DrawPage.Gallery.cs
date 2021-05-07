@@ -58,7 +58,7 @@ namespace Retouch_Photo2
                 foreach (StorageFile file in files)
                 {
                     StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(file);
-                    if (copyFile == null) return;
+                    if (copyFile == null) continue;
                     Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
                     Photo.DuplicateChecking(photo);
                 }
@@ -78,7 +78,7 @@ namespace Retouch_Photo2
                     {
                         //Photo
                         StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
-                        if (copyFile == null) return;
+                        if (copyFile == null) continue;
                         Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
                         Photo.DuplicateChecking(photo);
                     }
@@ -156,7 +156,7 @@ namespace Retouch_Photo2
             {
                 //Photo
                 StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
-                if (copyFile == null) return;
+                if (copyFile == null) continue;
                 Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
                 Photo.DuplicateChecking(photo);
 

@@ -13,25 +13,25 @@ namespace Retouch_Photo2.Layers
         /// Mezzanine a layerage.
         /// </summary>
         /// <param name="mezzanineLayerage"> The mezzanine layerage. </param>
-        public static void Mezzanine( Layerage mezzanineLayerage) => LayerManager.MezzanineCore( mezzanineLayerage, null);
+        public static void Mezzanine(Layerage mezzanineLayerage) => LayerManager.MezzanineCore(mezzanineLayerage, null);
 
         /// <summary>
         /// Mezzanine layers.
         /// </summary>
         /// <param name="mezzanineLayerages"> The mezzanine layers. </param>
-        public static void MezzanineRange( IEnumerable<Layerage> mezzanineLayerages) => LayerManager.MezzanineCore( null, mezzanineLayerages);
+        public static void MezzanineRange(IEnumerable<Layerage> mezzanineLayerages) => LayerManager.MezzanineCore(null, mezzanineLayerages);
 
-        private static void MezzanineCore( Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
+        private static void MezzanineCore(Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
             //if (outermost == null) return; // If count = 0, it will be useless.
-            Layerage parents  = LayerManager.GetParentsChildren(outermost);
+            Layerage parents = LayerManager.GetParentsChildren(outermost);
             int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
 
-            if (mezzanineLayer!=null)
+            if (mezzanineLayer != null)
             {
                 mezzanineLayer.Self.IsSelected = true;
                 parents.Children.Insert(index, mezzanineLayer);//Insert
@@ -51,7 +51,7 @@ namespace Retouch_Photo2.Layers
         /// Remove the mezzanine layerage.
         /// </summary>
         /// <param name="mezzanineLayerage"> The mezzanine-layerage. </param>
-        public static void RemoveMezzanine( Layerage mezzanineLayerage)
+        public static void RemoveMezzanine(Layerage mezzanineLayerage)
         {
             if (mezzanineLayerage == null) return;
 
