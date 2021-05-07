@@ -80,6 +80,7 @@ namespace Retouch_Photo2.Elements
             this.DPI144Button.Tapped += (s, e) => this.DPI = DPI.DPI144;
             this.DPI192Button.Tapped += (s, e) => this.DPI = DPI.DPI192;
             this.DPI300Button.Tapped += (s, e) => this.DPI = DPI.DPI300;
+            this.DPI400Button.Tapped += (s, e) => this.DPI = DPI.DPI400;
         }
 
     }
