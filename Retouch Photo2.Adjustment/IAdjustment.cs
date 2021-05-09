@@ -39,9 +39,9 @@ namespace Retouch_Photo2.Adjustments
         /// </summary>
         /// <param name="element"> The source XElement. </param>
         void Load(XElement element);
-       
+
         /// <summary>
-        /// Gets a specific rended-image.
+        /// Gets a specific rended-adjustment.
         /// </summary>
         /// <param name="image"> previousImage </param>
         /// <returns> The rendered adjustment. </returns>

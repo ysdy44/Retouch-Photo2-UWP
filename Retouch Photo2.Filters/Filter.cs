@@ -44,11 +44,11 @@ namespace Retouch_Photo2.Filters
 
         //@Static
         /// <summary>
-        /// Gets a specific rended-layer.
+        /// Gets a specific rended-adjustments.
         /// </summary>
         /// <param name="filter"> The filter. </param>
         /// <param name="image"> The source image. </param>
-        /// <returns> The rendered image. </returns>
+        /// <returns> The rendered adjustments. </returns>
         public static ICanvasImage Render(Filter filter, ICanvasImage image)
         {
             if (filter.Adjustments.Count == 0) return image;
