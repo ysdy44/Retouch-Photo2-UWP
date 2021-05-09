@@ -99,6 +99,8 @@ namespace Retouch_Photo2
             this.AllowDrop = true;
             this.Drop += async (s, e) =>
             {
+                if (this.GalleryDialog.AllowDrop) return;
+
                 if (e.DataView.Contains(StandardDataFormats.StorageItems))
                 {
                     IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
@@ -107,6 +109,8 @@ namespace Retouch_Photo2
             };
             this.DragOver += (s, e) =>
             {
+                if (this.GalleryDialog.AllowDrop) return;
+
                 e.AcceptedOperation = DataPackageOperation.Copy;
                 //e.DragUIOverride.Caption = App.resourceLoader.GetString("DropAcceptable_");
                 e.DragUIOverride.IsCaptionVisible = e.DragUIOverride.IsContentVisible = e.DragUIOverride.IsGlyphVisible = true;
