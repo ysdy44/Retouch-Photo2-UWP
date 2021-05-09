@@ -12,7 +12,7 @@ using Windows.UI;
 namespace Retouch_Photo2.Effects
 {
     /// <summary>
-    /// Represents a special effect that adds effects to layers
+    /// Represents a special effect that adds effects to layers.
     /// </summary>
     public class Effect
     {
