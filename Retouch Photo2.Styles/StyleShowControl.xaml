@@ -5,14 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Width="74"
+    Height="74"
     d:DesignWidth="50"
     d:DesignHeight="50"
     >
-
-    <Polygon x:Name="Shape">
+    
+    <Polygon x:Name="Shape" Margin="10">
         <Polygon.Points>
             24,0 29.8,18 48,18 33.2,29.6 39.2,48 24,36.4 9.4,48 14.8,29.4 0,18 18,18
         </Polygon.Points>
     </Polygon>
-
+    
 </UserControl>
