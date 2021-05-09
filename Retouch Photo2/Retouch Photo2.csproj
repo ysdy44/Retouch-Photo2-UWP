@@ -345,6 +345,7 @@
     <Content Include="Icons\AppRender.png" />
     <Content Include="Icons\Circle.jpg" />
     <Content Include="Icons\GrayAndWhite.jpg" />
+    <Content Include="Icons\Lenna.jpg" />
     <Content Include="Icons\LoadFaill.jpg" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="XMLs\Styles.xml" />
