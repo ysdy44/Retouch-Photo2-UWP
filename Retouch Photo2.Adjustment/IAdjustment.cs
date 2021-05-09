@@ -11,7 +11,7 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.Adjustments
 {
     /// <summary> 
-    /// Provides icon and data for adjustments.
+    /// Represents a special adjustment that adds adjustments to layers.
     /// </summary>
     public interface IAdjustment
     {

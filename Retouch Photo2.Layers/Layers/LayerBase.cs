@@ -182,8 +182,8 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Copy with self.
         /// </summary>
-        /// <param name="destination"> The destination <see cref="ILayer"/>. </param>
         /// <param name="source"> The source <see cref="ILayer"/>. </param>
+        /// <param name="destination"> The destination <see cref="ILayer"/>. </param>
         public static ILayer CopyWith(ILayer source, ILayer destination)
         {
             destination.Id = source.Id;
