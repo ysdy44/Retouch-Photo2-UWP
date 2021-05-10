@@ -40,8 +40,11 @@ namespace Retouch_Photo2.Styles
                 control.Shape.StrokeThickness = strokeWidth;
 
                 control.Shape.SetStrokeStyle(value.StrokeStyle);
+                control.TextBlock.Text = value.Name;
             }
         }));
+
+        public void Rename() => this.TextBlock.Text = this.Style2.Name;
 
         #endregion
 

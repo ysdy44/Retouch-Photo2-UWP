@@ -18,6 +18,6 @@ namespace Retouch_Photo2.Styles
         /// <summary>
         /// The source data.
         /// </summary>
-        public IList<IStyle> Styles { get; set; } = new List<IStyle>();
+        public IEnumerable<IStyle> Styles { get; set; }
     }
 }
