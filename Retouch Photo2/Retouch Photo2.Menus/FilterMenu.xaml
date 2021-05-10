@@ -49,24 +49,24 @@
                     <!--Group-->
                     <ListViewItem x:Name="FilterGroupHeader" Style="{ThemeResource AppGroupHeaderListViewItemStyle}" />
                     <!--AddFilter-->
-                    <ListViewItem x:Name="AddItemButton">
-                        <ContentControl x:Name="AddItemControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <ListViewItem x:Name="AddFilterButton">
+                        <ContentControl x:Name="AddFilterControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <SymbolIcon Symbol="Add"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
                     <!--RenameFilter-->
-                    <ListViewItem x:Name="RenameItemButton">
-                        <ContentControl x:Name="RenameItemControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <ListViewItem x:Name="RenameFilterButton">
+                        <ContentControl x:Name="RenameFilterControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
                     <!--DeleteFilter-->
-                    <ListViewItem x:Name="DeleteItemButton">
-                        <ContentControl x:Name="DeleteItemControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <ListViewItem x:Name="DeleteFilterButton">
+                        <ContentControl x:Name="DeleteFilterControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
@@ -194,7 +194,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <ListViewItem x:Name="RenameItemCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
+                    <ListViewItem x:Name="RenameFilterCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
                         <SymbolIcon Symbol="Cancel"/>
                     </ListViewItem>
                 </Grid>
@@ -205,7 +205,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <ListViewItem x:Name="DeleteItemOKButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource AppListViewItemStyle}">
+                    <ListViewItem x:Name="DeleteFilterOKButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource AppListViewItemStyle}">
                         <SymbolIcon Symbol="Accept" Foreground="Red"/>
                     </ListViewItem>
                     <ListViewItem x:Name="DeleteCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">

@@ -175,7 +175,7 @@ namespace Retouch_Photo2.Menus
             this.GridView.DragItemsCompleted += async (s, e) => await this.Save();
 
 
-            this.AddItemButton.Tapped += async (s, e) =>
+            this.AddFilterButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -188,19 +188,19 @@ namespace Retouch_Photo2.Menus
                 }
             };
 
-            this.RenameItemButton.Tapped += (s, e) =>
+            this.RenameFilterButton.Tapped += (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 this.State = MainPageState.Rename;
             };
-            this.RenameItemCancelButton.Tapped += (s, e) => this.State = MainPageState.None;
+            this.RenameFilterCancelButton.Tapped += (s, e) => this.State = MainPageState.None;
 
-            this.DeleteItemButton.Tapped += (s, e) =>
+            this.DeleteFilterButton.Tapped += (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 this.State = MainPageState.Delete;
             };
-            this.DeleteItemOKButton.Tapped += async (s, e) =>
+            this.DeleteFilterOKButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 this.DeleteControls(this.SelectedControls.ToArray());
@@ -248,9 +248,9 @@ namespace Retouch_Photo2.Menus
             this.Untitled = resource.GetString("$Untitled");
 
             this.FilterGroupHeader.Content = resource.GetString("Menus_Filter");
-            this.AddItemControl.Content = resource.GetString("Menus_AddFilter");
-            this.RenameItemControl.Content = resource.GetString("Menus_RenameFilter");
-            this.DeleteItemControl.Content = resource.GetString("Menus_DeleteFilter");
+            this.AddFilterControl.Content = resource.GetString("Menus_AddFilter");
+            this.RenameFilterControl.Content = resource.GetString("Menus_RenameFilter");
+            this.DeleteFilterControl.Content = resource.GetString("Menus_DeleteFilter");
 
             this.FilterCategoryGroupHeader.Content = resource.GetString("Menus_FilterCategory");
             this.AddFilterCategoryControl.Content = resource.GetString("Menus_AddFilterCategory");
