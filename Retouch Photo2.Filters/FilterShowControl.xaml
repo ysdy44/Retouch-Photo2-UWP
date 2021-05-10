@@ -6,12 +6,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
-    Width="74"
-    Height="74"
+    Width="72"
+    Height="72"
     d:DesignWidth="50"
     d:DesignHeight="50"
     >
 
-    <canvas:CanvasControl x:Name="CanvasControl"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="18"/>
+        </Grid.RowDefinitions>
+        <canvas:CanvasControl x:Name="CanvasControl" Grid.RowSpan="2"/>
+        <Border Grid.Row="1">
+            <Border.Background>
+                <SolidColorBrush Opacity="0.8" Color="{ThemeResource AppBackgroundColorLight}"/>
+            </Border.Background>
+            <TextBlock x:Name="TextBlock" Style="{StaticResource AppTabTextBlockStyle}"/>
+        </Border>
+    </Grid>
 
 </UserControl>

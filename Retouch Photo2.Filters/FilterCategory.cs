@@ -18,6 +18,6 @@ namespace Retouch_Photo2.Filters
         /// <summary>
         /// The source data.
         /// </summary>
-        public IList<Filter> Filters { get; set; } = new List<Filter>();
+        public IEnumerable<Filter> Filters { get; set; }
     }
 }

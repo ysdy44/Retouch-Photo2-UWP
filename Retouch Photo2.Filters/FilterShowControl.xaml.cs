@@ -53,8 +53,11 @@ namespace Retouch_Photo2.Filters
             if (e.NewValue is Filter value)
             {
                 control.CanvasControl.Invalidate();//Invalidate
+                control.TextBlock.Text = value.Name;
             }
         }));
+
+        public void Rename() => this.TextBlock.Text = this.Filter.Name;
 
         #endregion
 
