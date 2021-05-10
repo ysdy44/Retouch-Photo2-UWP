@@ -310,14 +310,14 @@ namespace Retouch_Photo2.Menus
         {
             if (string.IsNullOrEmpty(rename)) return;
 
-            Filter item2 = filter.Clone();
-            item2.Name = rename;
+            Filter filter2 = filter.Clone();
+            filter2.Name = rename;
 
             if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
             {
                 controlCategory.Add(new FilterShowControl 
                 {
-                    Filter = item2 
+                    Filter = filter2 
                 });
             }
             else
@@ -328,7 +328,7 @@ namespace Retouch_Photo2.Menus
                 };
                 controlCategory2.Add(new FilterShowControl
                 {
-                    Filter = filter
+                    Filter = filter2
                 });
                 this.ControlCategorys.Add(controlCategory2);
 
