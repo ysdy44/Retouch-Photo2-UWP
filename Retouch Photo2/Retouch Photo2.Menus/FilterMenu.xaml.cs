@@ -3,7 +3,7 @@
 // Difficult:         ★★★★★
 // Only:              
 // Complete:      ★★★★★
-using FanKit.Transformers;
+using System.ComponentModel;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Filters;
 using Retouch_Photo2.Historys;
@@ -16,10 +16,25 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System;
 
 namespace Retouch_Photo2.Menus
 {
+    internal class FilterShowControlCategory : ObservableCollection<FilterShowControl>
+    {
+        public string Name
+        {
+            get => this.name;
+            set
+            {
+                if (this.name == value) return;
+
+                this.name = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Name)));//Notify  
+            }
+        }
+        private string name = string.Empty;
+    }
+
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Filters"/>.
     /// </summary>
@@ -29,48 +44,27 @@ namespace Retouch_Photo2.Menus
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        IEnumerable<Filter> SelecteItems => from i in this.GridView.SelectedItems where (i is Filter) select (i as Filter);
-
-        private FilterCategory selectedItemCollection;
-        public FilterCategory SelectedItemCollection
-        {
-            get => this.selectedItemCollection;
-            set
-            {
-                if (value == null)
-                {
-                    this.Items.Clear();
-                    this.ListView.SelectedItem = null;
-
-                    this.Control.Content = null;
-                    this.Button.IsEnabled = false;
-
-                    this.selectedItemCollection = value;
-                }
-                else
-                {
-                    this.Items.Clear();
-                    foreach (Filter filter in value.Filters)
-                    {
-                        this.Items.Add(filter);
-                    }
-                    this.ListView.SelectedItem = value;
-
-                    this.Control.Content = value.Name;
-                    this.Button.IsEnabled = true;
-
-                    this.selectedItemCollection = value;
-                }
-            }
-        }
-
-
-        IList<FilterCategory> Source;
-        readonly ObservableCollection<FilterCategory> ItemCollections = new ObservableCollection<FilterCategory>();
-        readonly ObservableCollection<Filter> Items = new ObservableCollection<Filter>();
+        IEnumerable<FilterShowControl> SelectedControls => from i in this.GridView.SelectedItems where (i is FilterShowControl) select (i as FilterShowControl);
 
 
         private string Untitled = "Untitled";
+        private ObservableCollection<FilterShowControlCategory> ControlCategorys { get; set; } = new ObservableCollection<FilterShowControlCategory>();
+
+
+        internal FilterShowControlCategory SelectedControlCategory
+        {
+            get => this.selectedControlCategory;
+            set
+            {
+                if (this.selectedControlCategory == value) return;
+
+                this.selectedControlCategory = value;
+                this.Button.IsEnabled = value != null;
+                this.Control.Content = value?.Name;
+                this.GridView.ItemsSource = value;
+            }
+        }
+        private FilterShowControlCategory selectedControlCategory;
 
 
         //@VisualState
@@ -116,18 +110,12 @@ namespace Retouch_Photo2.Menus
 
             this.Loaded += async (s, e) =>
             {
-                if (this.Source == null)
+                if (this.SelectedControlCategory == null)
                 {
                     IEnumerable<FilterCategory> filterCategorys = await Retouch_Photo2.XML.ConstructFiltersFile();
                     if (filterCategorys == null) return;
 
-                    this.Source = filterCategorys.ToList();
-                    foreach (FilterCategory filterCategory in this.Source)
-                    {
-                        this.ItemCollections.Add(filterCategory);
-                    }
-
-                    this.SelectedItemCollection = filterCategorys.FirstOrDefault();
+                    this.AddFilterCategorys(filterCategorys);
                 }
             };
 
@@ -136,29 +124,47 @@ namespace Retouch_Photo2.Menus
             this.ListView.ItemClick += (s, e) =>
             {
                 this.Flyout.Hide();
-                if (e.ClickedItem is FilterCategory filterCategory)
+                if (e.ClickedItem is FilterShowControlCategory controlCategory)
                 {
-                    this.SelectedItemCollection = filterCategory;
+                    this.SelectedControlCategory = controlCategory;
                 }
             };
+            this.ListView.DragItemsCompleted += async (s, e) => await this.Save();
             this.GridView.ItemClick += async (s, e) =>
             {
                 switch (this.State)
                 {
                     case MainPageState.None:
                         {
-                            if (e.ClickedItem is Filter filter)
+                            if (e.ClickedItem is FilterShowControl control)
                             {
-                                this.Set(filter);
+                                Filter filter = control.Filter;
+                                this.MethodViewModel.ILayerChanged<Filter>
+                                (
+                                    set: (layer) => layer.Filter = filter.Clone(),
+
+                                    type: HistoryType.LayersProperty_SetFilter,
+                                    getUndo: (layer) => layer.Filter.Clone(),
+                                    setUndo: (layer, previous) => layer.Filter = previous.Clone()
+                                );
+
+                                Filter filter3 = filter.Clone();
+                                this.SelectionViewModel.SetFilter(filter3);
                             }
                         }
                         break;
                     case MainPageState.Rename:
                         {
-                            if (e.ClickedItem is Filter filter)
+                            if (e.ClickedItem is FilterShowControl control)
                             {
-                                bool result = await this.Rename(filter, this.SelectedItemCollection);
-                                if (result) this.State = MainPageState.None;
+                                string name = control.Filter.Name;
+                                string placeholderText = string.IsNullOrEmpty(name) ? this.Untitled : name;
+                                string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(placeholderText);
+                                if (string.IsNullOrEmpty(rename)) return;
+
+                                control.Filter.Name = rename;
+                                control.Rename();
+                                this.State = MainPageState.None;
                             }
                         }
                         break;
@@ -166,9 +172,10 @@ namespace Retouch_Photo2.Menus
                         break;
                 }
             };
+            this.GridView.DragItemsCompleted += async (s, e) => await this.Save();
 
 
-            this.AddButton.Tapped += async (s, e) =>
+            this.AddItemButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -176,52 +183,56 @@ namespace Retouch_Photo2.Menus
                     ILayer layer = layerage.Self;
 
                     Filter filter = layer.Filter;
-                    Transformer transformer = layer.Transform.Transformer;
-                    await this.Add(filter, transformer, this.SelectedItemCollection);
+                    this.AddControl(filter, this.Untitled);
+                    await this.Save();
                 }
             };
 
-            this.RenameButton.Tapped += (s, e) =>
+            this.RenameItemButton.Tapped += (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 this.State = MainPageState.Rename;
             };
-            this.RenameCancelButton.Tapped += (s, e) => this.State = MainPageState.None;
+            this.RenameItemCancelButton.Tapped += (s, e) => this.State = MainPageState.None;
 
-            this.DeleteButton.Tapped += (s, e) =>
+            this.DeleteItemButton.Tapped += (s, e) =>
             {
                 this.MoreFlyout.Hide();
                 this.State = MainPageState.Delete;
             };
-            this.DeleteOKButton.Tapped += async (s, e) =>
+            this.DeleteItemOKButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.Delete(this.SelecteItems.ToArray(), this.SelectedItemCollection);
+                this.DeleteControls(this.SelectedControls.ToArray());
+                await this.Save();
                 this.State = MainPageState.None;
             };
             this.DeleteCancelButton.Tapped += (s, e) => this.State = MainPageState.None;
 
 
-            this.AddCollectionButton.Tapped += async (s, e) =>
+            this.AddFilterCategoryButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.AddCollection();
+                this.AddFilterShowControlCategory(this.Untitled);
+                await this.Save();
             };
-            this.RenameCollectionButton.Tapped += async (s, e) =>
+            this.RenameFilterCategoryButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.RenameCollection(this.SelectedItemCollection);
+                this.RenameSelectedControlCategory();
+                await this.Save();
             };
-            this.DeleteCollectionButton.Tapped += async (s, e) =>
+            this.DeleteFilterCategoryButton.Tapped += async (s, e) =>
             {
                 this.MoreFlyout.Hide();
-                await this.DeleteCollection(this.SelectedItemCollection);
+                this.RemoveSelectedControlCategory();
+                await this.Save();
             };
         }
 
         private async Task Save()
         {
-            await XML.SaveFiltersFile(this.Source);
+            await XML.SaveFiltersFile(this.ToFilterCategorys());
         }
 
     }
@@ -236,166 +247,137 @@ namespace Retouch_Photo2.Menus
 
             this.Untitled = resource.GetString("$Untitled");
 
-            this.GroupHeader.Content = resource.GetString("Menus_Filter");
-            this.AddControl.Content = resource.GetString("Menus_AddFilter");
-            this.RenameControl.Content = resource.GetString("Menus_RenameFilter");
-            this.DeleteControl.Content = resource.GetString("Menus_DeleteFilter");
+            this.FilterGroupHeader.Content = resource.GetString("Menus_Filter");
+            this.AddItemControl.Content = resource.GetString("Menus_AddFilter");
+            this.RenameItemControl.Content = resource.GetString("Menus_RenameFilter");
+            this.DeleteItemControl.Content = resource.GetString("Menus_DeleteFilter");
 
-            this.CollectionGroupHeader.Content = resource.GetString("Menus_FilterCategory");
-            this.AddCollectionControl.Content = resource.GetString("Menus_AddFilterCategory");
-            this.RenameCollectionControl.Content = resource.GetString("Menus_RenameFilterCategory");
-            this.DeleteCollectionControl.Content = resource.GetString("Menus_DeleteFilterCategory");
+            this.FilterCategoryGroupHeader.Content = resource.GetString("Menus_FilterCategory");
+            this.AddFilterCategoryControl.Content = resource.GetString("Menus_AddFilterCategory");
+            this.RenameFilterCategoryControl.Content = resource.GetString("Menus_RenameFilterCategory");
+            this.DeleteFilterCategoryControl.Content = resource.GetString("Menus_DeleteFilterCategory");
 
             this.MoreToolTip.Content = resource.GetString("Menus_More");
         }
 
 
-
-        private void Set(Filter filter)
+        public void AddFilterCategorys(IEnumerable<FilterCategory> filterCategorys)
         {
-            this.MethodViewModel.ILayerChanged<Filter>
-            (
-                set: (layer) =>
+            foreach (FilterCategory filterCategory in filterCategorys)
+            {
+                FilterShowControlCategory controlategory = new FilterShowControlCategory
                 {
-                    Transformer transformer2 = layer.Transform.Transformer;
-                    Filter filter2 = filter.Clone();
-                    layer.Filter = filter2;
-                },
+                    Name = filterCategory.Name
+                };
+                foreach (Filter filter in filterCategory.Filters)
+                {
+                    controlategory.Add(new FilterShowControl
+                    {
+                        Filter = filter
+                    });
+                }
+                this.ControlCategorys.Add(controlategory);
+            }
 
-                type: HistoryType.LayersProperty_SetFilter,
-                getUndo: (layer) => layer.Filter,
-                setUndo: (layer, previous) => layer.Filter = previous.Clone()
-            );
-
-            Filter filter3 = filter.Clone();
-            this.SelectionViewModel.SetFilter(filter3);
+            this.SelectedControlCategory = this.ControlCategorys.FirstOrDefault();
         }
 
-        private async Task Add(Filter filter, Transformer transformer, FilterCategory filterCategory)
+        public IEnumerable<FilterCategory> ToFilterCategorys()
         {
-            string rename = this.Untitled;
+            return
+            (
+                from controlCategory
+                in this.ControlCategorys
+                select new FilterCategory
+                {
+                    Name = controlCategory.Name,
+                    Filters =
+                    (
+                        from control
+                        in controlCategory
+                        select control.Filter
+                    )
+                }
+            );
+        }
+
+    }
+
+    public sealed partial class FilterMenu : UserControl
+    {
+
+        public void AddControl(Filter filter, string rename)
+        {
             if (string.IsNullOrEmpty(rename)) return;
 
-            Filter filter2 = filter.Clone();
-            filter2.Name = rename;
+            Filter item2 = filter.Clone();
+            item2.Name = rename;
 
-            if (filterCategory == null)
+            if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
             {
-                FilterCategory filterCategory2 = new FilterCategory
+                controlCategory.Add(new FilterShowControl 
                 {
-                    Name = rename,
-                    Filters =
-                    {
-                        filter2
-                    }
-                };
-                this.Source.Add(filterCategory2);
-                this.ItemCollections.Add(filterCategory2);
-
-                this.SelectedItemCollection = filterCategory2;
+                    Filter = item2 
+                });
             }
             else
             {
-                filterCategory.Filters.Add(filter2);
+                FilterShowControlCategory controlCategory2 = new FilterShowControlCategory
+                {
+                    Name = rename
+                };
+                controlCategory2.Add(new FilterShowControl
+                {
+                    Filter = filter
+                });
+                this.ControlCategorys.Add(controlCategory2);
 
-                this.Items.Add(filter2);
+                this.SelectedControlCategory = this.ControlCategorys.LastOrDefault();
             }
-
-            await this.Save();
         }
 
-        private async Task<bool> Rename(Filter filter, FilterCategory filterCategory)
+        public void DeleteControls(FilterShowControl[] controls)// You can not remove an FilterShowControl by an IEnumerable
         {
-            if (filterCategory == null) return false;
-
-            Filter filter2 = filter.Clone();
-            string placeholderText = string.IsNullOrEmpty(filter.Name) ? this.Untitled : filter.Name;
-
-            string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(this.Untitled);
-            if (string.IsNullOrEmpty(rename)) return false;
-
-            filter2.Name = rename;
-            if (filterCategory.Filters.Contains(filter))
+            if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
             {
-                int index = filterCategory.Filters.IndexOf(filter);
-                filterCategory.Filters[index] = filter2;
-            }
-            if (this.Items.Contains(filter))
-            {
-                int index = this.Items.IndexOf(filter);
-                this.Items[index] = filter2;
-            }
-
-            await this.Save();
-            return true;
-        }
-
-        public async Task Delete(Filter[] filters, FilterCategory filterCategory)// You can not remove an item by an IEnumerable
-        {
-            if (filterCategory == null) return;
-
-            foreach (Filter filter in filters)
-            {
-                if (filterCategory.Filters.Contains(filter))
+                foreach (FilterShowControl control in controls)
                 {
-                    filterCategory.Filters.Remove(filter);
-                }
-                if (this.Items.Contains(filter))
-                {
-                    this.Items.Remove(filter);
+                    if (controlCategory.Contains(control))
+                    {
+                        controlCategory.Remove(control);
+                    }
                 }
             }
-
-            await this.Save();
         }
 
 
-
-        private async Task AddCollection()
+        public void AddFilterShowControlCategory(string rename)
         {
-            string rename = this.Untitled;
             if (string.IsNullOrEmpty(rename)) return;
 
-            FilterCategory filterCategory = new FilterCategory
-            {
-                Name = rename
-            };
-            this.Source.Add(filterCategory);
-            this.ItemCollections.Add(filterCategory);
-
-            await this.Save();
-            this.SelectedItemCollection = filterCategory;
+            FilterShowControlCategory controlCategory = new FilterShowControlCategory { Name = rename };
+            this.ControlCategorys.Add(controlCategory);
+            this.SelectedControlCategory = controlCategory;
         }
 
-        private async Task RenameCollection(FilterCategory filterCategory)
+        public async void RenameSelectedControlCategory()
         {
-            if (filterCategory == null) return;
-
-            string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(this.Untitled);
-            if (string.IsNullOrEmpty(rename)) return;
-
-            filterCategory.Name = rename;
-
-            this.ItemCollections.Clear();
-            foreach (FilterCategory filterCategory2 in this.Source)
+            if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
             {
-                this.ItemCollections.Add(filterCategory2);
+                string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(controlCategory.Name);
+                if (string.IsNullOrEmpty(rename)) return;
+
+                controlCategory.Name = rename;
             }
-
-            await this.Save();
-            this.SelectedItemCollection = filterCategory;
         }
 
-        private async Task DeleteCollection(FilterCategory filterCategory)
+        public void RemoveSelectedControlCategory()
         {
-            if (filterCategory == null) return;
-
-            this.Source.Remove(filterCategory);
-            this.ItemCollections.Remove(filterCategory);
-
-            await this.Save();
-            this.SelectedItemCollection = this.Source.FirstOrDefault();
+            if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
+            {
+                this.ControlCategorys.Remove(controlCategory);
+            }
+            this.SelectedControlCategory = this.ControlCategorys.FirstOrDefault();
         }
-
     }
 }
