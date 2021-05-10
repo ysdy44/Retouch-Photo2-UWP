@@ -56,8 +56,6 @@ namespace Retouch_Photo2.Menus
             get => this.selectedControlCategory;
             set
             {
-                if (this.selectedControlCategory == value) return;
-
                 this.selectedControlCategory = value;
                 this.Button.IsEnabled = value != null;
                 this.Control.Content = value?.Name;

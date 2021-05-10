@@ -175,8 +175,7 @@
                     <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
                         <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
                             <ContentControl.Tag>
-                                <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                          MirroredWhenRightToLeft="True"/>
+                                <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
