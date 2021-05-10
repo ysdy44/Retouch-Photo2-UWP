@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:styles="using:Retouch_Photo2.Styles"
+    xmlns:local="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"              
     MinHeight="165"
     d:DesignWidth="200"
@@ -14,8 +14,15 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single"
-                       ItemsSource="{x:Bind ItemCollections}">
+            <ListView x:Name="ListView"
+                      IsItemClickEnabled="True" 
+                      SelectionMode="Single"
+                      ReorderMode="Enabled"
+                      CanReorderItems="True"
+                      CanDragItems="True"
+                      AllowDrop="True"
+                      ItemsSource="{x:Bind ControlCategorys, Mode=OneWay}"
+                      >
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -26,13 +33,13 @@
                         <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
                     </Style>
                 </ListView.ItemContainerStyle>
-                
+
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="styles:StyleCategory">
-                        <TextBlock Text="{x:Bind Name}"/>
+                    <DataTemplate x:DataType="local:StyleShowControlCategory">
+                        <TextBlock Text="{x:Bind Name, Mode=OneWay}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                
+
             </ListView>
         </Flyout>
         <Flyout x:Name="MoreFlyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
@@ -40,26 +47,26 @@
                 <StackPanel>
 
                     <!--Group-->
-                    <ListViewItem x:Name="GroupHeader" Style="{ThemeResource AppGroupHeaderListViewItemStyle}" />
-                    <!--Add-->
-                    <ListViewItem x:Name="AddButton">
-                        <ContentControl x:Name="AddControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <ListViewItem x:Name="StyleGroupHeader" Style="{ThemeResource AppGroupHeaderListViewItemStyle}" />
+                    <!--AddStyle-->
+                    <ListViewItem x:Name="AddStyleButton">
+                        <ContentControl x:Name="AddStyleControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <SymbolIcon Symbol="Add"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <!--Rename-->
-                    <ListViewItem x:Name="RenameButton">
-                        <ContentControl x:Name="RenameControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <!--RenameStyle-->
+                    <ListViewItem x:Name="RenameStyleButton">
+                        <ContentControl x:Name="RenameStyleControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <!--Delete-->
-                    <ListViewItem x:Name="DeleteButton">
-                        <ContentControl x:Name="DeleteControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <!--DeleteStyle-->
+                    <ListViewItem x:Name="DeleteStyleButton">
+                        <ContentControl x:Name="DeleteStyleControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
@@ -69,26 +76,26 @@
                     <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
 
                     <!--Group-->
-                    <ListViewItem x:Name="CollectionGroupHeader" Style="{ThemeResource AppGroupHeaderListViewItemStyle}" />
-                    <!--AddCollection-->
-                    <ListViewItem x:Name="AddCollectionButton">
-                        <ContentControl x:Name="AddCollectionControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <ListViewItem x:Name="StyleCategoryGroupHeader" Style="{ThemeResource AppGroupHeaderListViewItemStyle}" />
+                    <!--AddStyleCategory-->
+                    <ListViewItem x:Name="AddStyleCategoryButton">
+                        <ContentControl x:Name="AddStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <SymbolIcon Symbol="Add"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <!--RenameCollection-->
-                    <ListViewItem x:Name="RenameCollectionButton">
-                        <ContentControl x:Name="RenameCollectionControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <!--RenameStyleCategory-->
+                    <ListViewItem x:Name="RenameStyleCategoryButton">
+                        <ContentControl x:Name="RenameStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <!--DeleteCollection-->
-                    <ListViewItem x:Name="DeleteCollectionButton">
-                        <ContentControl x:Name="DeleteCollectionControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <!--DeleteStyleCategory-->
+                    <ListViewItem x:Name="DeleteStyleCategoryButton">
+                        <ContentControl x:Name="DeleteStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Foreground="Red" Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
@@ -101,8 +108,14 @@
     </UserControl.Resources>
 
 
-    <GridView x:Name="GridView" SelectionMode="None" IsItemClickEnabled="True"
-              ItemsSource="{x:Bind Items}">
+    <GridView x:Name="GridView"
+              SelectionMode="None" 
+              IsItemClickEnabled="True"
+              ReorderMode="Enabled"
+              CanReorderItems="True"
+              CanDragItems="True"
+              AllowDrop="True"
+              >
 
 
         <!--VisualState-->
@@ -131,7 +144,7 @@
                         <Setter Target = "MainGrid.Visibility" Value="Collapsed"/>
                         <Setter Target = "DeleteGrid.Visibility" Value="Visible"/>
                     </VisualState.Setters>
-                </VisualState> 
+                </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
@@ -139,24 +152,17 @@
 
         <GridView.ItemContainerStyle>
             <Style TargetType="GridViewItem">
-                <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Width" Value="74"/>
-                <Setter Property="Height" Value="100"/>
+                <Setter Property="Height" Value="74"/>
+                <Setter Property="Margin" Value="4,6,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                <Setter Property="Margin" Value="4,4,0,0"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource AppBackgroundLight}"/>
+                <Setter Property="Background" Value="Transparent"/>
             </Style>
         </GridView.ItemContainerStyle>
-
-        <GridView.ItemTemplate>
-            <DataTemplate x:DataType="styles:Style">
-                <StackPanel>
-                    <styles:StyleShowControl Style2="{x:Bind}"/>
-                    <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTextBlockStyle}"/>
-                </StackPanel>
-            </DataTemplate>
-        </GridView.ItemTemplate>
 
         <GridView.Header>
             <Grid>
@@ -182,24 +188,24 @@
                         <SymbolIcon Symbol="ShowBcc"/>
                     </ListViewItem>
                 </Grid>
-                
+
                 <Grid x:Name="RenameGrid" Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <ListViewItem x:Name="RenameCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
+                    <ListViewItem x:Name="RenameStyleCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
                         <SymbolIcon Symbol="Cancel"/>
                     </ListViewItem>
                 </Grid>
-                
+
                 <Grid x:Name="DeleteGrid" Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <ListViewItem x:Name="DeleteOKButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource AppListViewItemStyle}">
+                    <ListViewItem x:Name="DeleteStyleOKButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource AppListViewItemStyle}">
                         <SymbolIcon Symbol="Accept" Foreground="Red"/>
                     </ListViewItem>
                     <ListViewItem x:Name="DeleteCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
