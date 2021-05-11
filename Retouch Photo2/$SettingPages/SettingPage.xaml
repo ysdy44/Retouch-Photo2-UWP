@@ -324,7 +324,7 @@
 
                         <!--Theme-->
                         <TextBlock x:Name="ThemeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppBackgroundMediumLight}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
@@ -352,7 +352,7 @@
 
                         <!--DeviceLayout-->
                         <TextBlock x:Name="DeviceLayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppBackgroundMediumLight}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="PhoneButton" GroupName="DeviceLayoutT" Style="{StaticResource AppIconRadioButtonStyle}">
@@ -390,7 +390,7 @@
                             <Run FontSize="16" Foreground="{ThemeResource AppForeground}"
                                  Text="{x:Bind DoubleConverter(SettingViewModel.WindowWidth), Mode=OneWay}"/>
                         </TextBlock>
-                        <elements:AdaptiveWidthGrid x:Name="AdaptiveWidthGrid" Background="{ThemeResource AppButtonBrush}" IsEnabled="{x:Bind BoolConverter(AdaptiveButton.IsChecked), Mode=OneWay}"/>
+                        <elements:AdaptiveWidthGrid x:Name="AdaptiveWidthGrid" Background="{ThemeResource AppBackgroundMediumLight}" IsEnabled="{x:Bind BoolConverter(AdaptiveButton.IsChecked), Mode=OneWay}"/>
                         <HyperlinkButton x:Name="ResetAdaptiveWidthButton" IsEnabled="{x:Bind BoolConverter(AdaptiveButton.IsChecked), Mode=OneWay}"/>
 
 
@@ -399,7 +399,7 @@
 
                         <!--CanvasBackground-->
                         <TextBlock x:Name="CanvasBackgroundTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppBackgroundMediumLight}" Style="{StaticResource AppRoundedBorderStyle}">
                             <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
                                 <StackPanel x:Name="CanvasBackgroundStackPanel" Orientation="Horizontal">
                                 </StackPanel>
@@ -411,7 +411,7 @@
 
                         <!--LayersHeight-->
                         <TextBlock x:Name="LayersHeightTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Stretch" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppBackgroundMediumLight}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="LayersHeightStackPanel" Orientation="Vertical">
                             </StackPanel>
                         </Border>
