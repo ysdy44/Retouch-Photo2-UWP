@@ -401,7 +401,7 @@
 
                     <!--Right-->
                     <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
-                        <StackPanel x:Name="MenuButtonsStackPanel" Orientation="Horizontal">
+                        <StackPanel x:Name="MenuButtonsStackPanel" Orientation="Horizontal" Padding="8,0">
 
                             <ListViewItem x:Name="Edit" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>

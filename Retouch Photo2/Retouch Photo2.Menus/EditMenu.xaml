@@ -62,9 +62,9 @@
                         </ContentControl.Tag>
                     </ContentControl>
                 </ListViewItem>
-                
+
                 <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
-         
+
                 <ListViewItem x:Name="Edit_ClearItem" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}">
                     <ContentControl x:Name="Edit_Clear" Style="{StaticResource AppIconContentControlStyle}">
                         <ContentControl.Resources>
@@ -76,7 +76,7 @@
                     </ContentControl>
                 </ListViewItem>
 
-                <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
+                <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" /> 
 
                 <!--Group-->
                 <ListViewItem x:Name="Group" Style="{StaticResource AppGroupHeaderListViewItemStyle}"/>
