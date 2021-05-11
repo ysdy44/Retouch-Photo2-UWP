@@ -275,7 +275,7 @@
                             </ToolTipService.ToolTip>
                             <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
-                        <Button x:Name="UndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Background="{ThemeResource AppTitleButtonBrush}" Style="{StaticResource AppCircleButtonStyle}">
+                        <Button x:Name="UndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppCircleButtonStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="UndoToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
@@ -287,13 +287,13 @@
                             </ToolTipService.ToolTip>
                         <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>-->
-                        <Button x:Name="SetupButton" Background="{ThemeResource AppTitleButtonBrush}" Style="{StaticResource AppCircleButtonStyle}">
+                        <Button x:Name="SetupButton" Style="{StaticResource AppCircleButtonStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
-                        <ToggleButton x:Name="SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Background="{ThemeResource AppTitleButtonBrush}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                        <ToggleButton x:Name="SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                             <ToggleButton.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
                             </ToggleButton.Resources>
@@ -302,19 +302,19 @@
                             </ToolTipService.ToolTip>
                             <ContentControl Template="{StaticResource SnapIcon}"/>
                         </ToggleButton>
-                        <ToggleButton x:Name="RulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Background="{ThemeResource AppTitleButtonBrush}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                        <ToggleButton x:Name="RulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </ToggleButton>
-                        <Button x:Name="FullScreenButton" Background="{ThemeResource AppTitleButtonBrush}" Style="{StaticResource AppCircleButtonStyle}">
+                        <Button x:Name="FullScreenButton" Style="{StaticResource AppCircleButtonStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
-                        <ToggleButton x:Name="TipButton" IsChecked="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Background="{ThemeResource AppTitleButtonBrush}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                        <ToggleButton x:Name="TipButton" IsChecked="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                             <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </ToggleButton>
                     </StackPanel>

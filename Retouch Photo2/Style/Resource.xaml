@@ -57,7 +57,7 @@
     <Style x:Key="BorderBase" TargetType="Border">
         <Setter Property="Height" Value="{StaticResource AppCircleHeight}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-        <Setter Property="Background" Value="{ThemeResource AppBackgroundDark}"/>
+        <Setter Property="Background" Value="{ThemeResource AppButtonBrush}"/>
     </Style>
 
 
@@ -102,7 +102,7 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="BorderThickness" Value="{StaticResource AppThickness}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+        <Setter Property="Background" Value="{ThemeResource AppButtonBrush}"/>
         <Setter Property="Padding" Value="0" />
         <Setter Property="Width" Value="{StaticResource AppCircleHeight}" />
         <Setter Property="Height" Value="{StaticResource AppCircleHeight}" />
@@ -120,7 +120,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+        <Setter Property="Background" Value="{ThemeResource AppButtonBrush}"/>
     </Style>
 
 

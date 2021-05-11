@@ -22,7 +22,7 @@
                     <Color x:Key="AppStrokeColor" >#66817F91</Color>
                     <Color x:Key="AppForegroundColor" >#AA000000</Color>
 
-                    <SolidColorBrush x:Key="AppTitleButtonBrush" Color="{ThemeResource AppBackgroundColorLight}"/>
+                    <SolidColorBrush x:Key="AppButtonBrush" Color="{ThemeResource AppBackgroundColorLight}"/>
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#22000000" Offset="0"/>
                         <GradientStop Color="#09000000" Offset="0.2"/>
@@ -52,7 +52,7 @@
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
                     <Color x:Key="AppForegroundColor" >#BBFFFFFF</Color>
 
-                    <SolidColorBrush x:Key="AppTitleButtonBrush" Color="{ThemeResource AppBackgroundColorDark}"/>
+                    <SolidColorBrush x:Key="AppButtonBrush" Color="{ThemeResource AppBackgroundColorDark}"/>
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#66000000" Offset="0"/>
                         <GradientStop Color="#44000000" Offset="0.2"/>
