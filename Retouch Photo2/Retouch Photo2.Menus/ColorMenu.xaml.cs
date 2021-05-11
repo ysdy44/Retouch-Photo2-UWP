@@ -5,6 +5,8 @@
 // Complete:      ★★★★★
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.ViewModels;
+using Windows.System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
@@ -37,6 +39,7 @@ namespace Retouch_Photo2.Menus
         private void ConstructColor1()
         {
             //@Focus
+            this.ColorPicker.HexPicker.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.ColorPicker.Focus(FocusState.Programmatic); };
             this.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             this.ColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();

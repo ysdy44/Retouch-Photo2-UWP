@@ -6,6 +6,7 @@
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -393,6 +394,7 @@ namespace Retouch_Photo2.Effects.Pages
             };
 
             //@Focus 
+            this.ColorPicker.HexPicker.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.ColorPicker.Focus(FocusState.Programmatic); };
             this.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             this.ColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();

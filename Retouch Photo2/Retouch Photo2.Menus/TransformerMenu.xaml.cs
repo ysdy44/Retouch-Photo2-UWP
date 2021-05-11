@@ -10,6 +10,7 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -385,6 +386,7 @@ namespace Retouch_Photo2.Menus
             //@Focus
             TextBoxExtensions.SetDefault(this.WidthTextBox, $"{1}");
             this.WidthTextBox.Text = $"{1}";
+            this.WidthTextBox.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.Focus(FocusState.Programmatic); };
             this.WidthTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.WidthTextBox.LostFocus += (s, e) =>
             {
@@ -407,6 +409,7 @@ namespace Retouch_Photo2.Menus
             //@Focus
             TextBoxExtensions.SetDefault(this.HeightTextBox, $"{1}");
             this.HeightTextBox.Text = $"{1}";
+            this.HeightTextBox.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.Focus(FocusState.Programmatic); };
             this.HeightTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.HeightTextBox.LostFocus += (s, e) =>
             {
@@ -434,6 +437,7 @@ namespace Retouch_Photo2.Menus
             //@Focus
             TextBoxExtensions.SetDefault(this.RotateTextBox, $"{0} º");
             this.RotateTextBox.Text = $"{0} º";
+            this.RotateTextBox.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.Focus(FocusState.Programmatic); };
             this.RotateTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.RotateTextBox.LostFocus += (s, e) =>
             {
@@ -459,6 +463,7 @@ namespace Retouch_Photo2.Menus
             //@Focus
             TextBoxExtensions.SetDefault(this.SkewTextBox, $"{0} º");
             this.SkewTextBox.Text = $"{0} º";
+            this.SkewTextBox.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.Focus(FocusState.Programmatic); };
             this.SkewTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.SkewTextBox.LostFocus += (s, e) =>
             {
@@ -488,6 +493,7 @@ namespace Retouch_Photo2.Menus
             //@Focus
             TextBoxExtensions.SetDefault(this.XTextBox, $"{0}");
             this.XTextBox.Text = $"{0}";
+            this.XTextBox.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.Focus(FocusState.Programmatic); };
             this.XTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.XTextBox.LostFocus += (s, e) =>
             {
@@ -509,7 +515,8 @@ namespace Retouch_Photo2.Menus
             //@Focus
             TextBoxExtensions.SetDefault(this.YTextBox, $"{0}");
             this.YTextBox.Text = $"{0}";
-            this.XTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
+            this.YTextBox.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.Focus(FocusState.Programmatic); };
+            this.YTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.YTextBox.LostFocus += (s, e) =>
             {
                 this.SettingViewModel.RegisteKey();

@@ -11,6 +11,7 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -205,6 +206,7 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStopsPicker()
         {
             //@Focus
+            this.StopsPicker.ColorPicker.HexPicker.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.StopsPicker.ColorPicker.Focus(FocusState.Programmatic); };
             this.StopsPicker.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StopsPicker.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             this.StopsPicker.ColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();

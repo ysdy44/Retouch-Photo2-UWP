@@ -7,6 +7,7 @@ using Retouch_Photo2.Layers;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -250,6 +251,7 @@ namespace Retouch_Photo2
         private void ConstructFillColorFlyout()
         {
             //@Focus
+            this.FilColorPicker.HexPicker.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.FilColorPicker.Focus(FocusState.Programmatic); };
             this.FilColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.FilColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             this.FilColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();
@@ -285,6 +287,7 @@ namespace Retouch_Photo2
         private void ConstructStrokeColorFlyout()
         {
             //@Focus
+            this.StrokeColorPicker.HexPicker.KeyDown += (s, e) => { if (e.Key == VirtualKey.Enter) this.StrokeColorPicker.Focus(FocusState.Programmatic); };
             this.StrokeColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StrokeColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             this.StrokeColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();
