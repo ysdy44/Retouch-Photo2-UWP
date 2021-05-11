@@ -206,8 +206,22 @@
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>Bitte wählen Sie eine Ebene</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>Layer FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>Text</value></data>
-<data name='Menus_Filter' xml:space='preserve'><value>Filter</value></data>
-<data name='Menus_Style' xml:space='preserve'><value>Stile</value></data>
+<data name='Menus_Filter' xml:space='preserve'><value>Filtrar</value></data>
+<data name='Menus_AddFilter' xml:space='preserve'><value>Agregar filtro (de la capa actual)</value></data>
+<data name='Menus_RenameFilter' xml:space='preserve'><value>Cambiar el nombre del filtro</value></data>
+<data name='Menus_DeleteFilter' xml:space='preserve'><value>Quitar filtro</value></data>
+<data name='Menus_FilterCategory' xml:space='preserve'><value>Categoría de filtro</value></data>
+<data name='Menus_AddFilterCategory' xml:space='preserve'><value>Agregar categoría de filtro</value></data>
+<data name='Menus_RenameFilterCategory' xml:space='preserve'><value>Cambiar el nombre de la categoría de filtro</value></data>
+<data name='Menus_DeleteFilterCategory' xml:space='preserve'><value>Eliminar categoría de filtro</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>estilo</value></data>
+<data name='Menus_AddStyle' xml:space='preserve'><value>Agregar estilo (de la capa actual)</value></data>
+<data name='Menus_RenameStyle' xml:space='preserve'><value>Cambiar el nombre del estilo</value></data>
+<data name='Menus_DeleteStyle' xml:space='preserve'><value>Eliminar estilo</value></data>
+<data name='Menus_StyleCategory' xml:space='preserve'><value>Categoría de estilo</value></data>
+<data name='Menus_AddStyleCategory' xml:space='preserve'><value>Agregar categoría de estilo</value></data>
+<data name='Menus_RenameStyleCategory' xml:space='preserve'><value>Cambiar el nombre de la categoría de estilo</value></data>
+<data name='Menus_DeleteStyleCategory' xml:space='preserve'><value>Eliminar categoría de estilo</value></data>
 <data name='Menus_History' xml:space='preserve'><value>Geschichte</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Drehen</value></data>
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>Schrägstellung</value></data>
@@ -215,14 +229,6 @@
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-Achse</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Fernbedienung positionieren</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anker</value></data>
-<data name='Menus_Color_Swatches' xml:space='preserve'><value>Farbfelder</value></data>
-<data name='Menus_Color_Wheel' xml:space='preserve'><value>Rad</value></data>
-<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
-<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
-<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>Palettenfarbton</value></data>
-<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Palettensättigung</value></data>
-<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Palettenwert</value></data>
-<data name='Menus_Color_Circle' xml:space='preserve'><value>Kreis</value></data>
 <data name='Menus_Layer' xml:space='preserve'><value>Schicht</value></data>
 <data name='Menus_Layer_Name' xml:space='preserve'><value>Name</value></data>
 <data name='Menus_Layer_BlendMode' xml:space='preserve'><value>Mischmodus</value></data>
@@ -661,14 +667,14 @@
 <data name='Menus_Edit' xml:space='preserve'><value>Bearbeiten</value></data>
 <data name='Menus_Operate' xml:space='preserve'><value>Arbeiten</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Streicheln</value></data>
-<data name='Menus_Close' xml:space='preserve'><value>Zurück</value></data>
-<data name='Menus_More' xml:space='preserve'><value>Mehr</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Transformator</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Breite</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Höhe</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>Farbe</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>Opazität</value></data>
 <data name='Menus_Layer_Rename' xml:space='preserve'><value>Geben Sie hier einen Namen ein.</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>Zurück</value></data>
+<data name='Menus_More' xml:space='preserve'><value>Mehr</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>Bearbeiten</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Duplikat</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>Kopieren</value></data>

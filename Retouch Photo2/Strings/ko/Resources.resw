@@ -207,7 +207,21 @@
 <data name='Menus_Effect' xml:space='preserve'><value>레이어 FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>본문</value></data>
 <data name='Menus_Filter' xml:space='preserve'><value>필터</value></data>
+<data name='Menus_AddFilter' xml:space='preserve'><value>필터 추가 (현재 레이어에서)</value></data>
+<data name='Menus_RenameFilter' xml:space='preserve'><value>필터 이름 변경</value></data>
+<data name='Menus_DeleteFilter' xml:space='preserve'><value>필터 제거</value></data>
+<data name='Menus_FilterCategory' xml:space='preserve'><value>카테고리 필터링</value></data>
+<data name='Menus_AddFilterCategory' xml:space='preserve'><value>필터 카테고리 추가</value></data>
+<data name='Menus_RenameFilterCategory' xml:space='preserve'><value>필터 카테고리 이름 변경</value></data>
+<data name='Menus_DeleteFilterCategory' xml:space='preserve'><value>필터 카테고리 삭제</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>스타일</value></data>
+<data name='Menus_AddStyle' xml:space='preserve'><value>스타일 추가 (현재 레이어에서)</value></data>
+<data name='Menus_RenameStyle' xml:space='preserve'><value>스타일 이름 변경</value></data>
+<data name='Menus_DeleteStyle' xml:space='preserve'><value>스타일 삭제</value></data>
+<data name='Menus_StyleCategory' xml:space='preserve'><value>스타일 카테고리</value></data>
+<data name='Menus_AddStyleCategory' xml:space='preserve'><value>스타일 카테고리 추가</value></data>
+<data name='Menus_RenameStyleCategory' xml:space='preserve'><value>스타일 카테고리 이름 바꾸기</value></data>
+<data name='Menus_DeleteStyleCategory' xml:space='preserve'><value>스타일 카테고리 삭제</value></data>
 <data name='Menus_History' xml:space='preserve'><value>역사</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>회전</value></data>
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>비스듬한</value></data>
@@ -215,14 +229,6 @@
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y 축</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>위치 원격 제어</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>닻</value></data>
-<data name='Menus_Color_Swatches' xml:space='preserve'><value>견본</value></data>
-<data name='Menus_Color_Wheel' xml:space='preserve'><value>바퀴</value></data>
-<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
-<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
-<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>팔레트-색조</value></data>
-<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>팔레트 채도</value></data>
-<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>팔레트 값</value></data>
-<data name='Menus_Color_Circle' xml:space='preserve'><value>원</value></data>
 <data name='Menus_Layer' xml:space='preserve'><value>층</value></data>
 <data name='Menus_Layer_Name' xml:space='preserve'><value>이름</value></data>
 <data name='Menus_Layer_BlendMode' xml:space='preserve'><value>혼합 모드</value></data>
@@ -661,14 +667,14 @@
 <data name='Menus_Edit' xml:space='preserve'><value>편집하다</value></data>
 <data name='Menus_Operate' xml:space='preserve'><value>작동</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
-<data name='Menus_Close' xml:space='preserve'><value>뒤</value></data>
-<data name='Menus_More' xml:space='preserve'><value>더</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>변신 로봇</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>폭</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>신장</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>색깔</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>불투명</value></data>
 <data name='Menus_Layer_Rename' xml:space='preserve'><value>여기에 이름을 입력하십시오.</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>뒤</value></data>
+<data name='Menus_More' xml:space='preserve'><value>더</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>편집하다</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>복제</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>부</value></data>

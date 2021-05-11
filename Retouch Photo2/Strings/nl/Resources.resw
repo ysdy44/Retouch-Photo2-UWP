@@ -207,7 +207,21 @@
 <data name='Menus_Effect' xml:space='preserve'><value>Laag FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>Tekst</value></data>
 <data name='Menus_Filter' xml:space='preserve'><value>Filter</value></data>
-<data name='Menus_Style' xml:space='preserve'><value>Stijlen</value></data>
+<data name='Menus_AddFilter' xml:space='preserve'><value>Filter toevoegen (van huidige laag)</value></data>
+<data name='Menus_RenameFilter' xml:space='preserve'><value>Hernoem filter</value></data>
+<data name='Menus_DeleteFilter' xml:space='preserve'><value>Filter verwijderen</value></data>
+<data name='Menus_FilterCategory' xml:space='preserve'><value>Filter categorie</value></data>
+<data name='Menus_AddFilterCategory' xml:space='preserve'><value>Filtercategorie toevoegen</value></data>
+<data name='Menus_RenameFilterCategory' xml:space='preserve'><value>Hernoem filtercategorie</value></data>
+<data name='Menus_DeleteFilterCategory' xml:space='preserve'><value>Verwijder filtercategorie</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>stijl</value></data>
+<data name='Menus_AddStyle' xml:space='preserve'><value>Stijl toevoegen (van huidige laag)</value></data>
+<data name='Menus_RenameStyle' xml:space='preserve'><value>Hernoem stijl</value></data>
+<data name='Menus_DeleteStyle' xml:space='preserve'><value>Stijl verwijderen</value></data>
+<data name='Menus_StyleCategory' xml:space='preserve'><value>Stijl categorie</value></data>
+<data name='Menus_AddStyleCategory' xml:space='preserve'><value>Stijlcategorie toevoegen</value></data>
+<data name='Menus_RenameStyleCategory' xml:space='preserve'><value>Hernoem stijlcategorie</value></data>
+<data name='Menus_DeleteStyleCategory' xml:space='preserve'><value>Stijlcategorie verwijderen</value></data>
 <data name='Menus_History' xml:space='preserve'><value>Geschiedenis</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Draaien</value></data>
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>Scheef</value></data>
@@ -215,14 +229,6 @@
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-as</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Plaats de afstandsbediening</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anker</value></data>
-<data name='Menus_Color_Swatches' xml:space='preserve'><value>Stalen</value></data>
-<data name='Menus_Color_Wheel' xml:space='preserve'><value>Wiel</value></data>
-<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
-<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
-<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>Palet-tint</value></data>
-<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Paletverzadiging</value></data>
-<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Paletwaarde</value></data>
-<data name='Menus_Color_Circle' xml:space='preserve'><value>Cirkel</value></data>
 <data name='Menus_Layer' xml:space='preserve'><value>Laag</value></data>
 <data name='Menus_Layer_Name' xml:space='preserve'><value>Naam</value></data>
 <data name='Menus_Layer_BlendMode' xml:space='preserve'><value>Mengmodus</value></data>
@@ -661,14 +667,14 @@
 <data name='Menus_Edit' xml:space='preserve'><value>Bewerk</value></data>
 <data name='Menus_Operate' xml:space='preserve'><value>Bedienen</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Beroerte</value></data>
-<data name='Menus_Close' xml:space='preserve'><value>Terug</value></data>
-<data name='Menus_More' xml:space='preserve'><value>Meer</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Transformator</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Breedte</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Hoogte</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>Kleur</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>Ondoorzichtigheid</value></data>
 <data name='Menus_Layer_Rename' xml:space='preserve'><value>Voer hier een naam in.</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>Terug</value></data>
+<data name='Menus_More' xml:space='preserve'><value>Meer</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>Bewerk</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Duplicaat</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>Kopiëren</value></data>

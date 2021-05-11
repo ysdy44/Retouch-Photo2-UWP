@@ -207,7 +207,21 @@
 <data name='Menus_Effect' xml:space='preserve'><value>طبقة FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>نص</value></data>
 <data name='Menus_Filter' xml:space='preserve'><value>منقي</value></data>
-<data name='Menus_Style' xml:space='preserve'><value>الأنماط</value></data>
+<data name='Menus_AddFilter' xml:space='preserve'><value>إضافة عامل تصفية (من الطبقة الحالية)</value></data>
+<data name='Menus_RenameFilter' xml:space='preserve'><value>إعادة تسمية المرشح</value></data>
+<data name='Menus_DeleteFilter' xml:space='preserve'><value>قم بإزالة الفلتر</value></data>
+<data name='Menus_FilterCategory' xml:space='preserve'><value>فئة التصفية</value></data>
+<data name='Menus_AddFilterCategory' xml:space='preserve'><value>إضافة فئة عامل التصفية</value></data>
+<data name='Menus_RenameFilterCategory' xml:space='preserve'><value>إعادة تسمية فئة عامل التصفية</value></data>
+<data name='Menus_DeleteFilterCategory' xml:space='preserve'><value>حذف فئة عامل التصفية</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>نمط</value></data>
+<data name='Menus_AddStyle' xml:space='preserve'><value>إضافة نمط (من الطبقة الحالية)</value></data>
+<data name='Menus_RenameStyle' xml:space='preserve'><value>إعادة تسمية النمط</value></data>
+<data name='Menus_DeleteStyle' xml:space='preserve'><value>حذف النمط</value></data>
+<data name='Menus_StyleCategory' xml:space='preserve'><value>فئة النمط</value></data>
+<data name='Menus_AddStyleCategory' xml:space='preserve'><value>أضف فئة النمط</value></data>
+<data name='Menus_RenameStyleCategory' xml:space='preserve'><value>إعادة تسمية فئة النمط</value></data>
+<data name='Menus_DeleteStyleCategory' xml:space='preserve'><value>حذف فئة النمط</value></data>
 <data name='Menus_History' xml:space='preserve'><value>تاريخ</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>استدارة</value></data>
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>انحراف</value></data>
@@ -215,14 +229,6 @@
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>المحور ص</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>التحكم عن بعد في الموقف</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>مرساة</value></data>
-<data name='Menus_Color_Swatches' xml:space='preserve'><value>حوامل</value></data>
-<data name='Menus_Color_Wheel' xml:space='preserve'><value>عجلة</value></data>
-<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
-<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
-<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>لوحة هيو</value></data>
-<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>تشبع لوح الألوان</value></data>
-<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>قيمة لوحة</value></data>
-<data name='Menus_Color_Circle' xml:space='preserve'><value>دائرة</value></data>
 <data name='Menus_Layer' xml:space='preserve'><value>طبقة</value></data>
 <data name='Menus_Layer_Name' xml:space='preserve'><value>اسم</value></data>
 <data name='Menus_Layer_BlendMode' xml:space='preserve'><value>وضع المزج</value></data>
@@ -661,14 +667,14 @@
 <data name='Menus_Edit' xml:space='preserve'><value>يحرر</value></data>
 <data name='Menus_Operate' xml:space='preserve'><value>العمل</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>ضربة</value></data>
-<data name='Menus_Close' xml:space='preserve'><value>خلف</value></data>
-<data name='Menus_More' xml:space='preserve'><value>أكثر</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>محول</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>عرض</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>ارتفاع</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>اللون</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>العتامة</value></data>
 <data name='Menus_Layer_Rename' xml:space='preserve'><value>أدخل اسمًا هنا.</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>خلف</value></data>
+<data name='Menus_More' xml:space='preserve'><value>أكثر</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>يحرر</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>ينسخ</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>ينسخ</value></data>

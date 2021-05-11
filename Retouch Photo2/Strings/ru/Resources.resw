@@ -207,7 +207,21 @@
 <data name='Menus_Effect' xml:space='preserve'><value>Слой FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>Текст</value></data>
 <data name='Menus_Filter' xml:space='preserve'><value>Фильтр</value></data>
-<data name='Menus_Style' xml:space='preserve'><value>Стили</value></data>
+<data name='Menus_AddFilter' xml:space='preserve'><value>Добавить фильтр (из текущего слоя)</value></data>
+<data name='Menus_RenameFilter' xml:space='preserve'><value>Переименовать фильтр</value></data>
+<data name='Menus_DeleteFilter' xml:space='preserve'><value>Удалить фильтр</value></data>
+<data name='Menus_FilterCategory' xml:space='preserve'><value>Категория фильтра</value></data>
+<data name='Menus_AddFilterCategory' xml:space='preserve'><value>Добавить категорию фильтра</value></data>
+<data name='Menus_RenameFilterCategory' xml:space='preserve'><value>Переименовать категорию фильтра</value></data>
+<data name='Menus_DeleteFilterCategory' xml:space='preserve'><value>Удалить категорию фильтра</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>стиль</value></data>
+<data name='Menus_AddStyle' xml:space='preserve'><value>Добавить стиль (из текущего слоя)</value></data>
+<data name='Menus_RenameStyle' xml:space='preserve'><value>Переименовать стиль</value></data>
+<data name='Menus_DeleteStyle' xml:space='preserve'><value>Удалить стиль</value></data>
+<data name='Menus_StyleCategory' xml:space='preserve'><value>Категория стиля</value></data>
+<data name='Menus_AddStyleCategory' xml:space='preserve'><value>Добавить категорию стиля</value></data>
+<data name='Menus_RenameStyleCategory' xml:space='preserve'><value>Переименовать категорию стиля</value></data>
+<data name='Menus_DeleteStyleCategory' xml:space='preserve'><value>Удалить категорию стиля</value></data>
 <data name='Menus_History' xml:space='preserve'><value>История</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Повернуть</value></data>
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>Перекос</value></data>
@@ -215,14 +229,6 @@
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Ось Y</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Позиционное дистанционное управление</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Якорь</value></data>
-<data name='Menus_Color_Swatches' xml:space='preserve'><value>Образцы</value></data>
-<data name='Menus_Color_Wheel' xml:space='preserve'><value>Колесо</value></data>
-<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
-<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
-<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>Палитра-оттенок</value></data>
-<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Палитра-насыщенность</value></data>
-<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Палитра-значение</value></data>
-<data name='Menus_Color_Circle' xml:space='preserve'><value>Круг</value></data>
 <data name='Menus_Layer' xml:space='preserve'><value>Слой</value></data>
 <data name='Menus_Layer_Name' xml:space='preserve'><value>Имя</value></data>
 <data name='Menus_Layer_BlendMode' xml:space='preserve'><value>Режим смешивания</value></data>
@@ -661,14 +667,14 @@
 <data name='Menus_Edit' xml:space='preserve'><value>Редактировать</value></data>
 <data name='Menus_Operate' xml:space='preserve'><value>Работать</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Гладить</value></data>
-<data name='Menus_Close' xml:space='preserve'><value>Назад</value></data>
-<data name='Menus_More' xml:space='preserve'><value>Более</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Трансформатор</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Ширина</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Высота</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>Цвет</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>Непрозрачность</value></data>
 <data name='Menus_Layer_Rename' xml:space='preserve'><value>Введите здесь имя.</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>Назад</value></data>
+<data name='Menus_More' xml:space='preserve'><value>Более</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>Редактировать</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Дубликат</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>Копировать</value></data>
