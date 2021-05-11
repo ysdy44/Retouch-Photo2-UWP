@@ -18,6 +18,8 @@ namespace Retouch_Photo2.Elements
             BackRequestedExtension.DialogIsShow = true;
             BackRequestedExtension.Current.BackRequested += this.BackRequested;
             Window.Current.CoreWindow.KeyDown += this.CoreWindow_KeyDown;
+
+            this.PrimaryButton.Focus(FocusState.Programmatic);
         }
         /// <summary> Hide the dialog. </summary>
         public void Hide()
@@ -44,9 +46,6 @@ namespace Retouch_Photo2.Elements
                 case VirtualKey.Escape:
                     //this.Hide();
                     this.CloseButtonTapped?.Invoke(this, null);//Delegate
-                    break;
-                case VirtualKey.Enter:
-                    this.PrimaryButtonClick?.Invoke(this, null);//Delegate
                     break;
             }
         }
