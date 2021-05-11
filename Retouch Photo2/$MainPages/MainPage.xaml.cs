@@ -118,7 +118,7 @@ namespace Retouch_Photo2
 
             this.ConstructRenameDialog();
             this.RenameCloseButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Main;
-            this.RenameButton.Tapped += async (s, e) => this.MainLayout.State = MainPageState.Rename;
+            this.RenameButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Rename;
 
             this.ConstructDeleteControl();
             this.DeleteButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Delete;

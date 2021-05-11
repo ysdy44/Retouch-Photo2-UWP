@@ -58,8 +58,8 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.SelectButton.Tapped += async (s, e) => this.Select();
-            this.ReplaceButton.Tapped += async (s, e) => this.Replace();
+            this.SelectButton.Tapped += async (s, e) => await this.Select();
+            this.ReplaceButton.Tapped += async (s, e) => await this.Replace();
             this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
         }
 
