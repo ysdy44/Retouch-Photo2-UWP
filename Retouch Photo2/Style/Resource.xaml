@@ -102,7 +102,7 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="BorderThickness" Value="{StaticResource AppThickness}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-        <Setter Property="Background" Value="{ThemeResource AppBackgroundMediumLight}"/>
+        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
         <Setter Property="Padding" Value="0" />
         <Setter Property="Width" Value="{StaticResource AppCircleHeight}" />
         <Setter Property="Height" Value="{StaticResource AppCircleHeight}" />

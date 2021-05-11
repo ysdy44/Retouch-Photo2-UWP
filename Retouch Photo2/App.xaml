@@ -14,14 +14,15 @@
 
                     <Color x:Key="AppBackgroundColorDark">#EBEBED</Color> 
                     <Color x:Key="AppBackgroundColorMediumDark">#F0F0F0</Color> 
-                    <Color x:Key="AppBackgroundColor">#F8F8F8</Color>
-                    <Color x:Key="AppBackgroundColorMediumLight">#FCFCFC</Color>
+                    <Color x:Key="AppBackgroundColor">#F2F2F2</Color>
+                    <Color x:Key="AppBackgroundColorMediumLight">#F8F8F8</Color>
                     <Color x:Key="AppBackgroundColorLight">#FFFFFF</Color>
 
                     <Color x:Key="AppBorderBrushColor" >#33888888</Color>
                     <Color x:Key="AppStrokeColor" >#66817F91</Color>
                     <Color x:Key="AppForegroundColor" >#AA000000</Color>
 
+                    <SolidColorBrush x:Key="AppTitleButtonBrush" Color="{ThemeResource AppBackgroundColorLight}"/>
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#22000000" Offset="0"/>
                         <GradientStop Color="#09000000" Offset="0.2"/>
@@ -49,8 +50,9 @@
 
                     <Color x:Key="AppBorderBrushColor" >#33888888</Color>
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
-                    <Color x:Key="AppForegroundColor" >#BBFFFFFF</Color>                   
+                    <Color x:Key="AppForegroundColor" >#BBFFFFFF</Color>
 
+                    <SolidColorBrush x:Key="AppTitleButtonBrush" Color="{ThemeResource AppBackgroundColorDark}"/>
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#66000000" Offset="0"/>
                         <GradientStop Color="#44000000" Offset="0.2"/>

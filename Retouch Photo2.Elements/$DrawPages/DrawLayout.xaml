@@ -1158,7 +1158,7 @@
         <Border x:Name="FootPanel" Grid.Column="1" Grid.Row="1" MinHeight="50" Padding="10,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                              BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppStroke}"
                              apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
-                             apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
+                             apiContractPresent5:Background="{ThemeResource AppAcrylicOverlayBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
                 <TranslateTransform x:Name="FootPanelTransform" Y="0"/>
