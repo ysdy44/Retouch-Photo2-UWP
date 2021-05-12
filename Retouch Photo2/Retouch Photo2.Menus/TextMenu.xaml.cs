@@ -132,7 +132,8 @@ namespace Retouch_Photo2.Menus
             this.FontWeightTextBlock.Text = resource.GetString("Texts_FontWeight");
 
             this.FontFamilyTextBlock.Text = resource.GetString("Texts_FontFamily");
-
+            this.FontFamilySettingButton.Content = resource.GetString("Texts_FontFamilySetting");
+            
             this.FontSizeTextBlock.Text = resource.GetString("Texts_FontSize");
 
             this.DirectionTextBlock.Text = resource.GetString("Texts_Direction");

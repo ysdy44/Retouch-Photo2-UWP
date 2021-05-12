@@ -75,7 +75,14 @@
 
 
             <!--FontFamily-->
-            <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <Grid>
+                <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <HyperlinkButton x:Name="FontFamilySettingButton" HorizontalAlignment="Right">
+                    <HyperlinkButton.NavigateUri>
+                        ms-settings:fonts
+                    </HyperlinkButton.NavigateUri>
+                </HyperlinkButton>
+            </Grid>
             <ListViewItem x:Name="FontFamilyButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
                 <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
                                         Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}">
@@ -106,9 +113,8 @@
                 </TextBox>
 
                 <ListViewItem x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppListViewItemStyle}">
-                    <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
-                          RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
-                          MirroredWhenRightToLeft="True"/>
+                    <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                          MirroredWhenRightToLeft="True"/>
                 </ListViewItem>
 
             </Grid>
