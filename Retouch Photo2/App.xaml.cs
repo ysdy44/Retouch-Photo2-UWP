@@ -69,7 +69,7 @@ namespace Retouch_Photo2
             {
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$SettingPage_Key_Move_Left"),
+                    Resource = "$SettingPage_Key_Move_Left",
                     Group = 1,
                     Key = VirtualKey.Left,
                     Invoked = () =>
@@ -81,7 +81,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$SettingPage_Key_Move_Top"),
+                    Resource = "$SettingPage_Key_Move_Top",
                     Group = 1,
                     Key = VirtualKey.Up,
                     Invoked = () =>
@@ -93,7 +93,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$SettingPage_Key_Move_Right"),
+                    Resource = "$SettingPage_Key_Move_Right",
                     Group = 1,
                     Key = VirtualKey.Right,
                     Invoked = () =>
@@ -105,7 +105,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$SettingPage_Key_Move_Bottom"),
+                    Resource = "$SettingPage_Key_Move_Bottom",
                     Group = 1,
                     Key = VirtualKey.Down,
                     Invoked = () =>
@@ -119,7 +119,7 @@ namespace Retouch_Photo2
 
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Edit_Cut"),
+                    Resource = "Edits_Edit_Cut",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.X,
@@ -127,7 +127,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Edit_Duplicate"),
+                    Resource = "Edits_Edit_Duplicate",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.J,
@@ -135,7 +135,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Edit_Copy"),
+                    Resource = "Edits_Edit_Copy",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.C,
@@ -143,7 +143,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Edit_Paste"),
+                    Resource = "Edits_Edit_Paste",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.V,
@@ -151,14 +151,14 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Edit_Clear"),
+                    Resource = "Edits_Edit_Clear",
                     Group = 2,
                     Key = VirtualKey.Delete,
                     Invoked = App.MethodViewModel.MethodEditClear,
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Select_All"),
+                    Resource = "Edits_Select_All",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.A,
@@ -166,7 +166,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Select_Deselect"),
+                    Resource = "Edits_Select_Deselect",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.D,
@@ -174,7 +174,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Select_Invert"),
+                    Resource = "Edits_Select_Invert",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.I,
@@ -182,7 +182,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Group_Group"),
+                    Resource = "Edits_Group_Group",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.G,
@@ -190,7 +190,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Group_Ungroup"),
+                    Resource = "Edits_Group_Ungroup",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.U,
@@ -198,7 +198,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("Edits_Group_Release"),
+                    Resource = "Edits_Group_Release",
                     Group = 2,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.R,
@@ -208,7 +208,7 @@ namespace Retouch_Photo2
 
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$DrawPage_Export"),
+                    Resource = "$DrawPage_Export",
                     Group = 3,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.E,
@@ -216,7 +216,7 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$DrawPage_Undo"),
+                    Resource = "$DrawPage_Undo",
                     Group = 3,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.Z,
@@ -224,14 +224,14 @@ namespace Retouch_Photo2
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$DrawPage_FullScreen"),
+                    Resource = "$DrawPage_FullScreen",
                     Group = 3,
                     Key = VirtualKey.Escape,
                     Invoked = () => Retouch_Photo2.DrawPage.FullScreen?.Invoke()
                 },
                 new KeyboardAccelerator2
                 {
-                    TitleResource = ("$DrawPage_Gallery"),
+                    Resource = "$DrawPage_Gallery",
                     Group = 3,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.P,
