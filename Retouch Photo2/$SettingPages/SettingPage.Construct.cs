@@ -368,9 +368,9 @@ namespace Retouch_Photo2
             {
                 switch (key.Group)
                 {
-                    case 1: this.Key01StackPanel.Children.Add(constructKeyContentControl(key.ToString(), key.TitleResource)); break;
-                    case 2: this.Key02StackPanel.Children.Add(constructKeyContentControl(key.ToString(), key.TitleResource)); break;
-                    case 3: this.Key03StackPanel.Children.Add(constructKeyContentControl(key.ToString(), key.TitleResource)); break;
+                    case 1: this.Key01StackPanel.Children.Add(constructKeyContentControl(key.ToString(), key.Resource)); break;
+                    case 2: this.Key02StackPanel.Children.Add(constructKeyContentControl(key.ToString(), key.Resource)); break;
+                    case 3: this.Key03StackPanel.Children.Add(constructKeyContentControl(key.ToString(), key.Resource)); break;
                 }
             }
 
