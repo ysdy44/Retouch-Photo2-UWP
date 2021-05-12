@@ -40,23 +40,30 @@ namespace Retouch_Photo2
         /// <retrun> The exists. </retrun>
         public static async Task<bool> MoveAllInZipFolderToTemporaryFolder(string name)
         {
-            StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
+            try
             {
-                bool isZipFolderPhotosFileExists = await FileUtil.IsFileExists($"Photos.xml", zipFolder);
-                if (isZipFolderPhotosFileExists == false) return false;
+                StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
+                {
+                    bool isZipFolderPhotosFileExists = await FileUtil.IsFileExists($"Photos.xml", zipFolder);
+                    if (isZipFolderPhotosFileExists == false) return false;
 
-                bool isZipFolderProjectFileExists = await FileUtil.IsFileExists($"Project.xml", zipFolder);
-                if (isZipFolderProjectFileExists == false) return false;
+                    bool isZipFolderProjectFileExists = await FileUtil.IsFileExists($"Project.xml", zipFolder);
+                    if (isZipFolderProjectFileExists == false) return false;
+                }
+
+
+                IReadOnlyList<StorageFile> files = await zipFolder.GetFilesAsync();
+                foreach (StorageFile item in files)
+                {
+                    //Move to temporary folder
+                    await item.CopyAsync(ApplicationData.Current.TemporaryFolder);
+                }
+                return true;
             }
-
-
-            IReadOnlyList<StorageFile> files = await zipFolder.GetFilesAsync();
-            foreach (StorageFile item in files)
+            catch (Exception)
             {
-                //Move to temporary folder
-                await item.CopyAsync(ApplicationData.Current.TemporaryFolder);
+                return false;
             }
-            return true;
         }
         
         /// <summary>
