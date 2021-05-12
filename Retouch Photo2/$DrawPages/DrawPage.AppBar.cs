@@ -92,12 +92,14 @@ namespace Retouch_Photo2
                 this.OverflowSnapItem.IsSelected = !this.OverflowSnapItem.IsSelected;
             };
 
+            /*
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
             this.OverflowRulerItem.Tapped += (s, e) =>
             {
                 this.OverflowRulerItem.IsSelected = !this.OverflowRulerItem.IsSelected;
                 this.ViewModel.Invalidate();//Invalidate
             };
+             */
 
             this.FullScreenButton.Click += (s, e) => this.DrawLayout.FullScreenChanged();
             this.OverflowFullScreenItem.Tapped += (s, e) =>

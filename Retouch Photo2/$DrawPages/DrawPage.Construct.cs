@@ -37,7 +37,7 @@ namespace Retouch_Photo2
                 //this.RedoToolTip.Content = this.OverflowRedoControl.Content = resource.GetString("$DrawPage_Redo");
                 this.SetupToolTip.Content = this.OverflowSetupControl.Content = resource.GetString("$DrawPage_Setup");
                 this.SnapToolTip.Content = this.OverflowSnapControl.Content = resource.GetString("$DrawPage_Snap");
-                this.RulerToolTip.Content = this.OverflowRulerControl.Content = resource.GetString("$DrawPage_Ruler");
+                //this.RulerToolTip.Content = this.OverflowRulerControl.Content = resource.GetString("$DrawPage_Ruler");
                 this.FullScreenToolTip.Content = this.OverflowFullScreenControl.Content = resource.GetString("$DrawPage_FullScreen");
                 this.OverflowTipControl.Content = resource.GetString("$DrawPage_Tip");
             }

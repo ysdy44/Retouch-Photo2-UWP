@@ -85,12 +85,13 @@ namespace Retouch_Photo2
                         }
                         break;
                 }
-
+                /*
                 //Ruler
                 if (this.SettingViewModel.IsRuler)
                 {
                     args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
                 }
+                 */
             };
         }
 

@@ -13,7 +13,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
-        
+
         /// <summary> Sets or Gets whether snaps a element to others's edge. </summary>
         public bool IsSnap
         {
@@ -26,6 +26,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool isSnap = true;
 
+        /*
         /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
         public bool IsRuler
         {
@@ -37,6 +38,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool isRuler;
+         */
 
         /// <summary> Scaling around the center. </summary>
         public bool IsCenter
@@ -77,7 +79,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Snap to tick when spinning. </summary>
         public bool IsSnapToTick
         {
-            get => this.isSnapToTick; 
+            get => this.isSnapToTick;
             set
             {
                 this.isSnapToTick = value;
@@ -105,7 +107,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 if (this.compositeMode == value) return;
-                this.compositeMode = value;              
+                this.compositeMode = value;
                 this.OnPropertyChanged(nameof(this.CompositeMode));//Notify 
             }
         }
@@ -114,7 +116,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Gets or sets the self control-point's mode </summary>
         public SelfControlPointMode ControlPointMode
         {
-            get => this.controlPointMode; 
+            get => this.controlPointMode;
             set
             {
                 if (this.controlPointMode == value) return;
@@ -123,7 +125,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private SelfControlPointMode controlPointMode;
-        
+
 
         //Notify 
         /// <summary> Multicast event for property change notifications. </summary>
