@@ -70,7 +70,7 @@ namespace Retouch_Photo2.ViewModels
             int width = (int)horizontal.Length();
             int height = (int)vertical.Length();
 
-            this.TipText = $"W: {width} px  H:{height} px";
+            this.TipText = $"{width} {height}";
         }
 
         public void SetTipTextPosition()
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
             int x = (int)this.CanvasTransformer.Position.X;
             int y = (int)this.CanvasTransformer.Position.X;
 
-            this.TipText = $"X: {x} px  Y:{y} px";
+            this.TipText = $"{x} {y}";
         }
 
         public void SetTipTextScale()
