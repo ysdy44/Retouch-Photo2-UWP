@@ -47,7 +47,8 @@
 
 
         <!--Canvas-->
-        <canvas:CanvasControl x:Name="CanvasControl" Grid.Row="0" ClearColor="Black"/>
+        <canvas:CanvasControl x:Name="CanvasControl" Grid.Row="0" ClearColor="Black"
+                              FlowDirection="LeftToRight"/>
 
 
         <ScrollViewer Grid.Row="1" Style="{StaticResource AppHorizontalScrollViewerStyle}">
