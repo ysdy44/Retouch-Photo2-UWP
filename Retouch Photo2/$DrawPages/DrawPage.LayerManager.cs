@@ -4,6 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Elements;
 using Windows.UI.Xaml.Input;
+using Retouch_Photo2.Menus;
 
 namespace Retouch_Photo2
 {
@@ -28,11 +29,11 @@ namespace Retouch_Photo2
 
         private void LayerRightTapped(ILayer layer)
         {
-            Expander.ShowAt("Layer", layer.Control);
+            Expander.ShowAt(MenuType.Layer, layer.Control);
         }
         private void LayersRightTapped()
         {
-            Expander.ShowAt("Layer", this.LayersScrollViewer);
+            Expander.ShowAt(MenuType.Layer, this.LayersScrollViewer);
         }
         private void LayerVisibilityChanged(ILayer layer2)
         {

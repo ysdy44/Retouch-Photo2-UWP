@@ -8,6 +8,7 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -88,7 +89,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStroke();
             this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
             this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
-            this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt("Stroke", this.StrokeShowControl);
+            this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt(MenuType.Stroke, this.StrokeShowControl);
 
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
             {

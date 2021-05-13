@@ -9,6 +9,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.OperateButton.Tapped += (s, e) => Expander.ShowAt("Operate", this.OperateButton);
+            this.OperateButton.Tapped += (s, e) => Expander.ShowAt(MenuType.Operate, this.OperateButton);
 
             this.MoreButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }

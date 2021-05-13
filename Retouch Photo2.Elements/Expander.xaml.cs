@@ -3,7 +3,9 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★★
-using System;
+using Retouch_Photo2.Menus;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,7 +18,7 @@ namespace Retouch_Photo2.Elements
     /// <summary> 
     /// Width state of <see cref="Expander"/>.
     /// </summary>
-    public enum ExpanderWidth
+    internal enum ExpanderWidth
     {
         Width250,
         Width300,
@@ -33,16 +35,18 @@ namespace Retouch_Photo2.Elements
     [TemplateVisualState(Name = nameof(Width300), GroupName = nameof(WidthStates))]
     [TemplateVisualState(Name = nameof(Width350), GroupName = nameof(WidthStates))]
     [ContentProperty(Name = nameof(Content))]
-    public sealed partial class Expander : ContentControl
+    public partial class Expander : ContentControl
     {
 
         //@Static
         /// <summary>
         /// Show a flyout with a specific name.
         /// </summary>
-        /// <param name="key"> The key is AA. </param>
-        /// <param name="expander"> The expander name is AAExpander. </param>
-        public static Action<string, FrameworkElement> ShowAt { get; set; }
+        public static void ShowAt(MenuType key, FrameworkElement placementTarget) => Expander.Dictionary.First(e => e.Type == key).ShowAt(placementTarget);
+        /// <summary>
+        /// Gets all Expanders.
+        /// </summary>
+        public static IList<Expander> Dictionary { get; } = new List<Expander>();
 
 
         //@VisualState
@@ -78,7 +82,7 @@ namespace Retouch_Photo2.Elements
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
         /// <summary> VisualState's ExpanderWidth. </summary>
-        public ExpanderWidth ExpanderWidth
+        internal ExpanderWidth ExpanderWidth
         {
             set
             {
@@ -100,6 +104,7 @@ namespace Retouch_Photo2.Elements
         /// <summary> Identifies the <see cref = "Expander.Title" /> dependency property. </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(Expander), new PropertyMetadata(string.Empty));
 
+        public MenuType Type { get; set; }
         public Flyout Flyout { get; set; }
         public Canvas OverlayCanvas { get; set; }
         public StackPanel PinStackPanel { get; set; }
@@ -140,9 +145,9 @@ namespace Retouch_Photo2.Elements
         {
             this.DefaultStyleKey = typeof(Expander);
 
-            Expander.ShowAt += this.Expander_ShowAt;
+            Expander.Dictionary.Add(this);
         }
-        ~Expander() => Expander.ShowAt -= this.Expander_ShowAt;
+        ~Expander() => Expander.Dictionary.Remove(this);
 
 
         /// <inheritdoc/>
@@ -265,25 +270,22 @@ namespace Retouch_Photo2.Elements
         private void CloseButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AsFlyout();
     }
 
-    public sealed partial class Expander : ContentControl
+    public partial class Expander : ContentControl
     {
-        private void Expander_ShowAt(string key, FrameworkElement placementTarget)
+        private void ShowAt(FrameworkElement placementTarget)
         {
-            if ($"{key}Expander" == base.Name)
-            {
-                this.left = Canvas.GetLeft(this);
-                this.top = Canvas.GetTop(this);
-                double left = this.GetBoundPostionX(this.left, base.ActualWidth, this.OverlayCanvas.ActualWidth);
-                double top = this.GetBoundPostionY(this.top, base.ActualHeight, this.OverlayCanvas.ActualHeight);
-                Canvas.SetLeft(this, left);
-                Canvas.SetTop(this, top);
+            this.left = Canvas.GetLeft(this);
+            this.top = Canvas.GetTop(this);
+            double left = this.GetBoundPostionX(this.left, base.ActualWidth, this.OverlayCanvas.ActualWidth);
+            double top = this.GetBoundPostionY(this.top, base.ActualHeight, this.OverlayCanvas.ActualHeight);
+            Canvas.SetLeft(this, left);
+            Canvas.SetTop(this, top);
 
-                if (this._vsIsOverlay) return;
-                if (this._vsIsPin) return;
+            if (this._vsIsOverlay) return;
+            if (this._vsIsPin) return;
 
-                this.AsFlyout();
-                this.Flyout.ShowAt(placementTarget);
-            }
+            this.AsFlyout();
+            this.Flyout.ShowAt(placementTarget);
         }
         private void AsFlyout()
         {

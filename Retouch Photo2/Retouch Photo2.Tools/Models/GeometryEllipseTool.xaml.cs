@@ -8,6 +8,7 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -68,7 +69,7 @@ namespace Retouch_Photo2.Tools.Models
             //Flyout
             this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
             this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
-            this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt("Stroke", this.StrokeShowControl);
+            this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt(MenuType.Stroke, this.StrokeShowControl);
 
             this.ConvertToCurvesButton.Tapped += (s, e) =>
             {

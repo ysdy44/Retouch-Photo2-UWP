@@ -9,6 +9,7 @@ using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -105,7 +106,7 @@ namespace Retouch_Photo2.Tools.Models
             this.FontSizeFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
 
-            this.TextButton.Tapped += (s, e) => Expander.ShowAt("Text", this.TextButton);
+            this.TextButton.Tapped += (s, e) => Expander.ShowAt(MenuType.Text, this.TextButton);
 
             //@Focus
             this.TextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
