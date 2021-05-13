@@ -1,7 +1,7 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.Menus;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,6 +28,7 @@ namespace Retouch_Photo2
         //Strings
         public IList<Action<ResourceLoader>> KeyStringsChanged = new List<Action<ResourceLoader>>();
         public IList<Action<ResourceLoader>> CanvasBackgroundChanged = new List<Action<ResourceLoader>>();
+        public IList<Action<ResourceLoader>> MenuTypeStringsChanged = new List<Action<ResourceLoader>>();
         public IList<Action<ResourceLoader>> LanguageStringsChanged = new List<Action<ResourceLoader>>();
         private void ConstructStrings()
         {
@@ -87,16 +88,7 @@ namespace Retouch_Photo2
             this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
 
             this.MenuTypeTextBlock.Text = resource.GetString("$SettingPage_MenuType");
-            {
-                foreach (UIElement child in this.MenusStackPanel.Children)
-                {
-                    if (child is Border border && border.Child is CheckBox check)
-                    {
-                        string type = check.Name;
-                        check.Content = resource.GetString($"Menus_{type}");
-                    }
-                }
-            }
+            foreach (var item in this.MenuTypeStringsChanged) item(resource);
             this.MenuTypeTipTextBlock.Text = resource.GetString("$SettingPage_MenuTypeTip");
 
             this.KeyTextBlock.Text = resource.GetString("$SettingPage_Key");
@@ -325,18 +317,36 @@ namespace Retouch_Photo2
         //MenuType
         private void ConstructMenuType()
         {
-            //UIElementCollection 
-            foreach (UIElement child in this.MenusStackPanel.Children)
-            {
-                if (child is Border border && border.Child is CheckBox check)
-                {
-                    string type = check.Name;
-                    bool isContains = this.SettingViewModel.Setting.MenuTypes.Contains(type);
+            //Style
+            int index = 0;
+            Style getStyle() => ((index++) % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
 
-                    check.IsChecked = isContains;
-                    check.Checked += async (s, e) => await this.AddMenu(type);
-                    check.Unchecked += async (s, e) => await this.RemoveMenu(type);
-                }
+            //UIElementCollection 
+            foreach (MenuType type in (MenuType[])Enum.GetValues(typeof(MenuType)))
+            {
+                if (type == MenuType.None) continue;
+
+                this.MenusStackPanel.Children.Add(new Border
+                {
+                    Style = getStyle(),
+                    Child = constructMenuTypeCheckBox(type)
+                });
+            }
+
+            //Construct
+            CheckBox constructMenuTypeCheckBox(MenuType type)
+            {
+                CheckBox check = new CheckBox
+                {
+                    IsChecked = this.SettingViewModel.Setting.MenuTypes.Contains(type)
+                };
+
+                check.Checked += async (s, e) => await this.AddMenu(type);
+                check.Unchecked += async (s, e) => await this.RemoveMenu(type);
+
+                //Strings
+                this.MenuTypeStringsChanged.Add((resource) => check.Content = resource.GetString($"Menus_{type}"));
+                return check;
             }
         }
 

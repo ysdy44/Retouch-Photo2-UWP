@@ -175,6 +175,7 @@
     <Compile Include="RadiusAnimas\RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\MenuType.cs" />
     <Compile Include="Toolkit\AlignmentGrid\AlignmentGrid.cs" />
     <Compile Include="Toolkit\Brushes\AlphaMode.cs" />
     <Compile Include="Toolkit\Brushes\CanvasBrushBase.cs" />

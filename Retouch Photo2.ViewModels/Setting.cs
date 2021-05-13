@@ -4,6 +4,7 @@
 // Only:              ★★★★★
 // Complete:      ★
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Menus;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 
@@ -27,25 +28,25 @@ namespace Retouch_Photo2.ViewModels
         public int LayersHeight = 40;
 
         /// <summary> Gets or sets the menu-types. </summary>
-        public IList<string> MenuTypes = new List<string>
+        public IList<MenuType> MenuTypes = new List<MenuType>
         {
-             //Debug,
+             //MenuType.None,
 
-             "Edit",
-             "Operate",
+             MenuType.Edit,
+             MenuType.Operate,
 
-             "Adjustment",
-             "Effect",
+             MenuType.Adjustment,
+             MenuType.Effect,
 
-             "Stroke",
-             //"Style",
+             MenuType.Stroke,
+             //MenuType.Style,
 
-             //"History",
-             "Transformer",
+             //MenuType.History,
+             MenuType.Transformer,
 
-             //"Layer",
-             "Color",
-         };
+             //MenuType.Layer
+             MenuType.Color
+        };
 
     }
 }

@@ -1,7 +1,10 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Menus;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using System.Linq;
 
 namespace Retouch_Photo2
 {
@@ -53,14 +56,17 @@ namespace Retouch_Photo2
             await this.Save();
         }
 
-        private async Task AddMenu(string type)
+        private async Task AddMenu(MenuType type)
         {
             //Setting
             this.SettingViewModel.Setting.MenuTypes.Add(type);
+
+            IOrderedEnumerable<MenuType> order = this.SettingViewModel.Setting.MenuTypes.OrderBy(t => (int)t);
+            this.SettingViewModel.Setting.MenuTypes = order.ToList();
             await this.Save();
         }
 
-        private async Task RemoveMenu(string type)
+        private async Task RemoveMenu(MenuType type)
         {
             //Setting
             do
@@ -68,6 +74,9 @@ namespace Retouch_Photo2
                 this.SettingViewModel.Setting.MenuTypes.Remove(type);
             }
             while (this.SettingViewModel.Setting.MenuTypes.Contains(type));
+
+            IOrderedEnumerable<MenuType> order = this.SettingViewModel.Setting.MenuTypes.OrderBy(t => (int)t);
+            this.SettingViewModel.Setting.MenuTypes = order.ToList();
             await this.Save();
         }
 

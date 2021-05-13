@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,12 +73,16 @@ namespace Retouch_Photo2.ViewModels
                 {
                     if (menuTypes.Elements("MenuType") is IEnumerable<XElement> menuTypes2)
                     {
-                        setting.MenuTypes =
-                        (
-                            from menuType
-                            in menuTypes2
-                            select menuType.Value
-                        ).ToList();
+                        try
+                        {
+                            setting.MenuTypes =
+                            (
+                                from menuType
+                                in menuTypes2
+                                select (MenuType)Enum.Parse(typeof(MenuType), menuType.Value)
+                            ).ToList();
+                        }
+                        catch (Exception) { }
                     }
                 }
 
