@@ -107,9 +107,15 @@
       <DependentUpon>DebugPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24DrawPages\DrawPage.AppBar.cs" />
+    <Compile Include="%24DrawPages\DrawPage.CanvasControl.cs" />
+    <Compile Include="%24DrawPages\DrawPage.Construct.cs" />
     <Compile Include="%24DrawPages\DrawPage.Gallery.cs" />
     <Compile Include="%24DrawPages\DrawPage.LayerManager.cs" />
-    <Compile Include="%24DrawPages\DrawPage.CanvasControl.cs" />
+    <Compile Include="%24DrawPages\DrawPage.Method.cs" />
+    <Compile Include="%24DrawPages\DrawPage.Transition.cs" />
+    <Compile Include="%24DrawPages\DrawPage.xaml.cs">
+      <DependentUpon>DrawPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="%24MainPages\IProjectViewItem.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
@@ -117,9 +123,6 @@
     <Compile Include="%24SettingPages\SettingPage.Save.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24DrawPages\DrawPage.xaml.cs">
-      <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileUtils\FileUtil.PickAndCopy.cs" />
     <Compile Include="FileUtils\FileUtil.Sample.cs" />
@@ -184,6 +187,9 @@
     <Compile Include="Retouch Photo2.Menus\AdjustmentMenu.xaml.cs">
       <DependentUpon>AdjustmentMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\ColorIcon.xaml.cs">
+      <DependentUpon>ColorIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Menus\ColorMenu.xaml.cs">
       <DependentUpon>ColorMenu.xaml</DependentUpon>
     </Compile>
@@ -198,6 +204,9 @@
     </Compile>
     <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
       <DependentUpon>HistoryMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\LayerMenu.xaml.cs">
       <DependentUpon>LayerMenu.xaml</DependentUpon>
@@ -270,9 +279,6 @@
     <Compile Include="%24SettingPages\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="%24DrawPages\DrawPage.Construct.cs" />
-    <Compile Include="%24DrawPages\DrawPage.Method.cs" />
-    <Compile Include="%24DrawPages\DrawPage.Transition.cs" />
     <Compile Include="FileUtils\FileUtil.cs" />
     <Compile Include="%24MainPages\MainPage.Construct.cs" />
     <Compile Include="%24MainPages\MainPage.NewAndOpen.cs" />
@@ -438,8 +444,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="%24DrawPages\DrawPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="%24MainPages\MainPage.xaml">
       <SubType>Designer</SubType>
@@ -525,6 +531,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Menus\ColorIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Retouch Photo2.Menus\ColorMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -542,6 +552,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\HistoryMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\Icon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

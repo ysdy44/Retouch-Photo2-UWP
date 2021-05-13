@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<elements:Expander 
     x:Class="Retouch_Photo2.Menus.LayerMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,9 +12,10 @@
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
+    Type="Layer"
     >
 
-    <UserControl.Resources>
+    <elements:Expander.Resources>
         <!--Converter -->
         <local:AdjustmentTitleConverter x:Key="AdjustmentTitleConverter"/>
         <local:AdjustmentIconConverter x:Key="AdjustmentIconConverter"/>
@@ -46,7 +47,7 @@
 
             </Grid>
         </DataTemplate>
-    </UserControl.Resources>
+    </elements:Expander.Resources>
 
 
     <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
@@ -179,4 +180,4 @@
         </StackPanel>
     </ScrollViewer>
 
-</UserControl>
+</elements:Expander>

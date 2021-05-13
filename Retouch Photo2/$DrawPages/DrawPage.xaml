@@ -9,20 +9,10 @@
     xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:menus="using:Retouch_Photo2.Menus"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
-    xmlns:edits="using:Retouch_Photo2.Edits"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:photos="using:Retouch_Photo2.Photos"
-    xmlns:operates="using:Retouch_Photo2.Operates"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
-    xmlns:effects="using:Retouch_Photo2.Effects"
-    xmlns:texts="using:Retouch_Photo2.Texts"
-    xmlns:strokes="using:Retouch_Photo2.Strokes"
-    xmlns:styles="using:Retouch_Photo2.Styles"
-    xmlns:filters="using:Retouch_Photo2.Filters"
-    xmlns:historys="using:Retouch_Photo2.Historys"
-    xmlns:transformers="using:FanKit.Transformers"
-    xmlns:layers="using:Retouch_Photo2.Layers" 
-    xmlns:brushs="using:Retouch_Photo2.Brushs"
+    xmlns:transformers="using:FanKit.Transformers" 
+    xmlns:local="using:Retouch_Photo2"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     Background="{ThemeResource AppBackgroundDark}"
@@ -37,7 +27,7 @@
 
 
     <Page.Resources>
-
+        
         <!--Color-->
         <SolidColorBrush x:Name="AccentColorBrush" Color="{ThemeResource SystemAccentColor}" />
         <SolidColorBrush x:Name="ShadowColorBrush" Color="{ThemeResource AppStrokeColor}" />
@@ -143,67 +133,49 @@
 
 
         <Flyout x:Name="EditFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="EditExpander" Flyout="{x:Bind EditFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:EditMenu/>
-            </elements:Expander>
+            <menus:EditMenu x:Name="EditMenu" Flyout="{x:Bind EditFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" />
         </Flyout>
         <Flyout x:Name="OperateFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:OperateMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
-            </elements:Expander>
+            <menus:OperateMenu x:Name="OperateMenu" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" 
+                               IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
         </Flyout>
         <Flyout x:Name="AdjustmentFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:AdjustmentMenu x:Name="AdjustmentMenu" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}"/>
-            </elements:Expander>
+            <menus:AdjustmentMenu x:Name="AdjustmentMenu" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"
+                               MenuIsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}"/>
         </Flyout>
         <Flyout x:Name="EffectFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="EffectExpander" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:EffectMenu x:Name="EffectMenu" Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}"/>
-            </elements:Expander>
+            <menus:EffectMenu x:Name="EffectMenu" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"
+                               Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}"/>
         </Flyout>
 
         <Flyout x:Name="TextFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:TextMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
-            </elements:Expander>
+            <menus:TextMenu x:Name="TextMenu" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"
+                               IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
         </Flyout>
         <Flyout x:Name="StrokeFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:StrokeMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
-            </elements:Expander>
+            <menus:StrokeMenu x:Name="StrokeMenu" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"
+                               IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
         </Flyout>
         <Flyout x:Name="StyleFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="StyleExpander" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:StyleMenu/>
-            </elements:Expander>
+            <menus:StyleMenu x:Name="StyleMenu" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"/>
         </Flyout>
         <Flyout x:Name="FilterFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="FilterExpander" Flyout="{x:Bind FilterFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:FilterMenu/>
-            </elements:Expander>
+            <menus:FilterMenu x:Name="FilterMenu" Flyout="{x:Bind FilterFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"/>
         </Flyout>
 
         <Flyout x:Name="HistoryFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="HistoryExpander" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:HistoryMenu/>
-            </elements:Expander>
+            <menus:HistoryMenu x:Name="HistoryMenu" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"/>
         </Flyout>
         <Flyout x:Name="TransformerFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:TransformerMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind ViewModel.ToolType, Mode=OneWay}"/>
-            </elements:Expander>
+            <menus:TransformerMenu x:Name="TransformerMenu" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"
+                            IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind ViewModel.ToolType, Mode=OneWay}"/>
         </Flyout>
         <Flyout x:Name="LayerFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="LayerExpander" Flyout="{x:Bind LayerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:LayerMenu/>
-            </elements:Expander>
+            <menus:LayerMenu x:Name="LayerMenu" Flyout="{x:Bind LayerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"/>
         </Flyout>
 
         <Flyout x:Name="ColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:Expander x:Name="ColorExpander" Flyout="{x:Bind ColorFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:ColorMenu/>
-            </elements:Expander>
+            <menus:ColorMenu x:Name="ColorMenu" Flyout="{x:Bind ColorFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}"/>
         </Flyout>
 
     </Page.Resources>
@@ -405,92 +377,37 @@
 
 
                     <!--Right-->
-                    <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
-                        <StackPanel x:Name="MenuButtonsStackPanel" Orientation="Horizontal" Padding="8,0">
+                    <ListView x:Name="MenuListView" 
+                              Grid.Column="3" HorizontalAlignment="Right"
+                              IsItemClickEnabled="True" SelectionMode="None"
+                              
+                              ScrollViewer.HorizontalScrollMode="Enabled"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                              ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                              
+                              ScrollViewer.VerticalScrollMode="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                              ScrollViewer.IsVerticalScrollChainingEnabled="False"
+                              >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Padding" Value="2"/>
+                                <Setter Property="MinWidth" Value="50"/>
+                                <Setter Property="Width" Value="54"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="{ThemeResource AppForeground}"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
 
-                            <ListViewItem x:Name="Edit" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <edits:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-                            <ListViewItem x:Name="Operate" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <operates:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="Adjustment" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <adjustments:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-                            <ListViewItem x:Name="Effect" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind EffectExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <effects:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="Text" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <texts:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-                            <ListViewItem x:Name="Stroke" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <strokes:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-                            <ListViewItem x:Name="Style" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <styles:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-                            <ListViewItem x:Name="Filter" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <filters:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="History" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <historys:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-                            <ListViewItem x:Name="Transformer" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <transformers:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-                            <ListViewItem x:Name="Layer" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <layers:Icon Foreground="{ThemeResource AppForeground}"/>
-                            </ListViewItem>
-
-                            <ListViewItem x:Name="Color" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <brushs:ColorEllipse Color="{x:Bind SelectionViewModel.Color, Mode=OneWay}"/>
-                            </ListViewItem>
-
-                        </StackPanel>
-                    </ScrollViewer>
-
-
-                    <!--Shadow-->
+                    <!--Shadow
                     <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Visibility="Collapsed" Width="32" Grid.Column="3" HorizontalAlignment="Left" Background="{ThemeResource AppHorizontalShadowBrush}"/>
+                    -->
 
 
                 </Grid>

@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Filters"/>.
     /// </summary>
-    public sealed partial class FilterMenu : UserControl
+    public sealed partial class FilterMenu : Expander
     {
 
         //@ViewModel
@@ -235,7 +235,7 @@ namespace Retouch_Photo2.Menus
 
     }
 
-    public sealed partial class FilterMenu : UserControl
+    public sealed partial class FilterMenu : Expander
     {
 
         //Strings
@@ -301,7 +301,7 @@ namespace Retouch_Photo2.Menus
 
     }
 
-    public sealed partial class FilterMenu : UserControl
+    public sealed partial class FilterMenu : Expander
     {
 
         public void AddControl(Filter filter, string rename)

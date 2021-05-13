@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -23,7 +24,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
     /// </summary>
-    public sealed partial class EditMenu : UserControl
+    public sealed partial class EditMenu : Expander
     {
 
         //@ViewModel
@@ -68,7 +69,7 @@ namespace Retouch_Photo2.Menus
 
     }
 
-    public sealed partial class EditMenu : UserControl
+    public sealed partial class EditMenu : Expander
     {
 
         //Strings

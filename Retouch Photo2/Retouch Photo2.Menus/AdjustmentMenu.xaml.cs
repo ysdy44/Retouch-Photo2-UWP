@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Adjustments.Pages;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -54,12 +55,14 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Adjustments"/>.
     /// </summary>
-    public sealed partial class AdjustmentMenu : UserControl
+    public sealed partial class AdjustmentMenu : Expander
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+
+        public bool MenuIsEnabled { get => this.ListView.IsEnabled; set => this.ListView.IsEnabled = value; }
 
 
         //@Construct
@@ -88,7 +91,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class AdjustmentMenu : UserControl
+    public sealed partial class AdjustmentMenu : Expander
     {
 
         //Strings

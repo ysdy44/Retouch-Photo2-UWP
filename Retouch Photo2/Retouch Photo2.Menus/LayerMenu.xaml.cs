@@ -11,13 +11,14 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.Menus
 {
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Layers"/>.
     /// </summary>
-    public sealed partial class LayerMenu : UserControl
+    public sealed partial class LayerMenu : Expander
     {
 
         //@ViewModel
@@ -55,7 +56,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class LayerMenu : UserControl
+    public sealed partial class LayerMenu : Expander
     {
 
         //Strings

@@ -3,6 +3,7 @@
 // Difficult:         ★★★★★
 // Only:              
 // Complete:      ★★★★★
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using System;
 using Windows.ApplicationModel.Resources;
@@ -34,7 +35,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Historys.IHistory"/>.
     /// </summary>
-    public sealed partial class HistoryMenu : UserControl
+    public sealed partial class HistoryMenu : Expander
     {
         //@Construct
         /// <summary>

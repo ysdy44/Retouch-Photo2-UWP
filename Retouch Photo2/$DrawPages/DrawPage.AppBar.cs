@@ -1,7 +1,10 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
@@ -14,14 +17,22 @@ namespace Retouch_Photo2
     {
 
         // Menu
-        private void ConstructMenuTypes(IList<string> menuTypes)
+        IDictionary<MenuType, Retouch_Photo2.Menus.Icon> MenuIcons;
+        private void ConstructMenuTypes(IList<MenuType> menuTypes)
         {
-            foreach (FrameworkElement button in this.MenuButtonsStackPanel.Children)
+            if (MenuIcons == null)
             {
-                string key = button.Name;
-                bool isContains = menuTypes.Contains(key);
-                button.Visibility = isContains ? Visibility.Visible : Visibility.Collapsed;
+                this.MenuIcons = new Dictionary<MenuType, Retouch_Photo2.Menus.Icon>();
+                foreach (MenuType type in (MenuType[])Enum.GetValues(typeof(MenuType)))
+                {
+                    this.MenuIcons.Add(type, new Retouch_Photo2.Menus.Icon
+                    {
+                        Type = type
+                    });
+                }
             }
+
+            this.MenuListView.ItemsSource = from t in menuTypes select this.MenuIcons[t];
         }
 
 
@@ -41,7 +52,7 @@ namespace Retouch_Photo2
             };
 
             //Right
-            this.RightScrollViewer.ViewChanged += (s, e) => this.ShadowRectangle.Visibility = (40 < this.RightScrollViewer.HorizontalOffset) ? Visibility.Visible : Visibility.Collapsed;
+            //this.MenuListView.ScrollIntoView.ViewChanged += (s, e) => this.ShadowRectangle.Visibility = (40 < this.RightScrollViewer.HorizontalOffset) ? Visibility.Visible : Visibility.Collapsed;
 
 
             //Document
@@ -141,7 +152,7 @@ namespace Retouch_Photo2
         private void AppBarOverflow(double width)
         {
             double overflowWidth = this.OverflowButton.ActualWidth;
-            double rightWidth = this.MenuButtonsStackPanel.ActualWidth;
+            double rightWidth = this.MenuListView.ItemsPanelRoot.ActualWidth;
             double leftWidth = width - overflowWidth - rightWidth;
             int count = (int)(leftWidth / 40.0d) - 1;
 

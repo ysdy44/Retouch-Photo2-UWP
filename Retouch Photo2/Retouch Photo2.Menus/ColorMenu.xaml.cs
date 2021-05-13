@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -14,7 +15,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref="Windows.UI.Color"/>.
     /// </summary>
-    public sealed partial class ColorMenu : UserControl
+    public sealed partial class ColorMenu : Expander
     {
 
         //@ViewModel

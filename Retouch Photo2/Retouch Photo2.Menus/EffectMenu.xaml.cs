@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Effects"/>.
     /// </summary>
-    public sealed partial class EffectMenu : UserControl
+    public sealed partial class EffectMenu : Expander
     {
 
         //@Delegate
@@ -26,6 +26,8 @@ namespace Retouch_Photo2.Menus
         public event TypedEventHandler<SplitView, object> PaneClosed { add => this.SplitView.PaneClosed += value; remove => this.SplitView.PaneClosed -= value; }
         /// <summary> Occurs when the splitview pane is opened. </summary>
         public event TypedEventHandler<SplitView, object> PaneOpened { add => this.SplitView.PaneOpened += value; remove => this.SplitView.PaneOpened -= value; }
+
+        public bool MenuIsEnabled { get => this.SplitView.IsEnabled; set => this.SplitView.IsEnabled = value; }
 
 
         #region DependencyProperty
@@ -39,11 +41,11 @@ namespace Retouch_Photo2.Menus
             {
                 if (value == null)
                 {
-                    this.IsEnabled = false;
+                    this.MenuIsEnabled = false;
                 }
                 else
                 {
-                    this.IsEnabled = true;
+                    this.MenuIsEnabled = true;
 
                     this.GaussianBlur.IsSelected = value.GaussianBlur_IsOn;
                     this.DirectionalBlur.IsSelected = value.DirectionalBlur_IsOn;
@@ -75,7 +77,7 @@ namespace Retouch_Photo2.Menus
             this.ConstructStrings();
             this.ConstructGroup();
 
-            base.SizeChanged += (s, e) =>
+            this.SplitView.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
                 this.SplitView.OpenPaneLength = e.NewSize.Width;
@@ -88,7 +90,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class EffectMenu : UserControl
+    public sealed partial class EffectMenu : Expander
     {
 
         //Strings

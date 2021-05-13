@@ -3,7 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
@@ -85,37 +85,21 @@ namespace Retouch_Photo2
                 this.TransformGroupHeader.Content = resource.GetString("More_Transform");
                 this.RatioControl.Content = resource.GetString("More_Transform_Ratio");
                 this.SnapToTickControl.Content = resource.GetString("More_Transform_SnapToTick");
-             
+
                 this.CreateGroupHeader.Content = resource.GetString("More_Create");
                 this.SquareControl.Content = resource.GetString("More_Create_Square");
                 this.CenterControl.Content = resource.GetString("More_Create_Center");
-         
+
                 this.OperateGroupHeader.Content = resource.GetString("More_Operate");
                 this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
             }
 
             //Menus
-            this.EditExpander.Title = resource.GetString("Menus_Edit");
-            this.OperateExpander.Title = resource.GetString("Menus_Operate");
-            this.AdjustmentExpander.Title = resource.GetString("Menus_Adjustment");
-            this.EffectExpander.Title = resource.GetString("Menus_Effect");
-            this.TextExpander.Title = resource.GetString("Menus_Text");
-            this.StrokeExpander.Title = resource.GetString("Menus_Stroke");
-            this.StyleExpander.Title = resource.GetString("Menus_Style");
-            this.FilterExpander.Title = resource.GetString("Menus_Filter");
-            this.HistoryExpander.Title = resource.GetString("Menus_History");
-            this.TransformerExpander.Title = resource.GetString("Menus_Transformer");
-            this.LayerExpander.Title = resource.GetString("Menus_Layer");
-            this.ColorExpander.Title = resource.GetString("Menus_Color");
-            foreach (FrameworkElement button in this.MenuButtonsStackPanel.Children)
+            foreach (Expander expander in Expander.Dictionary)
             {
-                string key = button.Name;
-                string title = resource.GetString($"Menus_{key}");
+                MenuType key = expander.Type;
 
-                if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
-                {
-                    toolTip.Content = title;
-                }
+                expander.Title = resource.GetString($"Menus_{key}");
             }
         }
 
@@ -123,11 +107,15 @@ namespace Retouch_Photo2
         //Menus
         private void ConstructMenus()
         {
-            foreach (FrameworkElement button in this.MenuButtonsStackPanel.Children)
+            this.MenuListView.ItemClick += (s, e) =>
             {
-                string key = button.Name;
-                button.Tapped += (s, e) => Expander.ShowAt(key, button);
-            }
+                if (e.ClickedItem is Retouch_Photo2.Menus.Icon value)
+                {
+                    MenuType key = value.Type;
+                    FrameworkElement placementTarget = value;
+                    Expander.ShowAt(key, placementTarget);
+                }
+            };
         }
 
 

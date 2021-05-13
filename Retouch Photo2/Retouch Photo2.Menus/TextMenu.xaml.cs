@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Toolkit.Uwp.UI;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -20,7 +21,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
-    public sealed partial class TextMenu : UserControl
+    public sealed partial class TextMenu : Expander
     {
 
         //@ViewModel

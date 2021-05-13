@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -15,7 +16,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
     /// </summary>
-    public sealed partial class StrokeMenu : UserControl
+    public sealed partial class StrokeMenu : Expander
     {
 
         //@ViewModel
@@ -67,7 +68,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class StrokeMenu : UserControl
+    public sealed partial class StrokeMenu : Expander
     {
 
         //Strings

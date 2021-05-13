@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using FanKit.Transformers;
 using Microsoft.Toolkit.Uwp.UI;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -19,7 +20,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
-    public sealed partial class TransformerMenu : UserControl
+    public sealed partial class TransformerMenu : Expander
     {
 
         //@ViewModel
@@ -316,7 +317,7 @@ namespace Retouch_Photo2.Menus
 
     }
 
-    public sealed partial class TransformerMenu : UserControl
+    public sealed partial class TransformerMenu : Expander
     {
 
         //Strings

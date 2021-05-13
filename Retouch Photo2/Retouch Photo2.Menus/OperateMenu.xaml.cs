@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★★★
 using FanKit.Transformers;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -20,7 +21,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
-    public sealed partial class OperateMenu : UserControl
+    public sealed partial class OperateMenu : Expander
     {
 
         //@ViewModel
@@ -99,7 +100,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class OperateMenu : UserControl
+    public sealed partial class OperateMenu : Expander
     {
 
         //Strings
@@ -287,7 +288,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class OperateMenu : UserControl
+    public sealed partial class OperateMenu : Expander
     {
 
         private void TransformSapce(Orientation orientation)

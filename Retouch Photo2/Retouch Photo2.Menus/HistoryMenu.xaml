@@ -1,23 +1,24 @@
-﻿<UserControl 
-    x:Name="UserControl"
+﻿<elements:Expander 
     x:Class="Retouch_Photo2.Menus.HistoryMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:historys="using:Retouch_Photo2.Historys"
     xmlns:local="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"                      
     MinHeight="165"
     d:DesignWidth="200"
     d:DesignHeight="400"
+    Type="History"
     >
 
 
-    <UserControl.Resources>
+    <elements:Expander.Resources>
         <!--Converter -->
         <local:HistoryTypeConverter x:Key="HistoryTypeConverter"/>
-    </UserControl.Resources>
+    </elements:Expander.Resources>
 
 
     <ListView x:Name="ListView" SelectionMode="None" IsItemClickEnabled="True">
@@ -51,4 +52,4 @@
         
     </ListView>
 
-</UserControl>
+</elements:Expander>
