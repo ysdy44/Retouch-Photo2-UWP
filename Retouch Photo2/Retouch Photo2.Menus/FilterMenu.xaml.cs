@@ -59,6 +59,7 @@ namespace Retouch_Photo2.Menus
                 this.selectedControlCategory = value;
                 this.Button.IsEnabled = value != null;
                 this.Control.Content = value?.Name;
+                this.ListView.SelectedItem = value;
                 this.GridView.ItemsSource = value;
             }
         }
