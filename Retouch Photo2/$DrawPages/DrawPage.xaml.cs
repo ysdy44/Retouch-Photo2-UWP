@@ -14,7 +14,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Globalization;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -271,14 +270,7 @@ namespace Retouch_Photo2
         /// <summary> The current page becomes the active page. </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
-            {
-                if (ApplicationLanguages.PrimaryLanguageOverride != this.Language)
-                {
-                    this.ConstructFlowDirection();
-                    this.ConstructStrings();
-                }
-            }
+            this.ConstructLanguages();
 
             this.ConstructMenuTypes(this.SettingViewModel.Setting.MenuTypes);
 

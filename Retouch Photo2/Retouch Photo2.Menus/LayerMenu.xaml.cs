@@ -5,13 +5,12 @@
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.Menus
 {
@@ -45,6 +44,7 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             this.NameButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
             this.ConstructVisibility();
@@ -58,6 +58,18 @@ namespace Retouch_Photo2.Menus
 
     public sealed partial class LayerMenu : Expander
     {
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()

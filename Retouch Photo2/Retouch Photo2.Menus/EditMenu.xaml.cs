@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
+using Windows.Globalization;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
@@ -41,6 +41,7 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             //Edit
             this.Edit_CutItem.Tapped += (s, e) => this.MethodViewModel.MethodEditCut();
@@ -71,6 +72,18 @@ namespace Retouch_Photo2.Menus
 
     public sealed partial class EditMenu : Expander
     {
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()

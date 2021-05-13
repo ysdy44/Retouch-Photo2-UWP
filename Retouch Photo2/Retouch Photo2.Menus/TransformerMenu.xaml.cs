@@ -11,6 +11,7 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -295,6 +296,7 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             this.ConstructWidthHeight();
             this.ConstructRadianSkew();
@@ -319,6 +321,18 @@ namespace Retouch_Photo2.Menus
 
     public sealed partial class TransformerMenu : Expander
     {
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()

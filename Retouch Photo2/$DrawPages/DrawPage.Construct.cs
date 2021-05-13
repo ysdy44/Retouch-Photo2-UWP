@@ -2,10 +2,10 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Menus;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.Graphics.Imaging;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -15,6 +15,19 @@ namespace Retouch_Photo2
 {
     public sealed partial class DrawPage : Page
     {
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructFlowDirection();
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //FlowDirection
         private void ConstructFlowDirection()

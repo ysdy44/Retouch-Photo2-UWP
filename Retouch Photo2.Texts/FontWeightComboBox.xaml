@@ -23,49 +23,49 @@
                 <ListView.Items>
 
                     <texts:FontWeightListViewItem x:Name="Black" Weight="Black" Index="0" Key="Number1">
-                        <ContentControl Tag="{x:Bind TagConverter(Black.Weight)}" Content="{x:Bind Black.Title}" Style="{StaticResource AppIconContentControlStyle}"/>
+                        <ContentControl Tag="{x:Bind TagConverter(Black.Weight)}" Content="{x:Bind Black.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"/>
                     </texts:FontWeightListViewItem>
                     <texts:FontWeightListViewItem x:Name="Bold" Weight="Bold" Index="1" Key="Number2">
-                        <ContentControl Tag="{x:Bind TagConverter(Bold.Weight)}" Content="{x:Bind Bold.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                        <ContentControl Tag="{x:Bind TagConverter(Bold.Weight)}" Content="{x:Bind Bold.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                            />
                     </texts:FontWeightListViewItem>
 
                     <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
                     <texts:FontWeightListViewItem x:Name="ExtraBlack" Weight="ExtraBlack" Index="3" Key="Number3">
-                        <ContentControl Tag="{x:Bind TagConverter(ExtraBlack.Weight)}" Content="{x:Bind ExtraBlack.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                        <ContentControl Tag="{x:Bind TagConverter(ExtraBlack.Weight)}" Content="{x:Bind ExtraBlack.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                                        />
                     </texts:FontWeightListViewItem>
                     <texts:FontWeightListViewItem x:Name="ExtraBold" Weight="ExtraBold" Index="4" Key="Number4">
-                        <ContentControl Tag="{x:Bind TagConverter(ExtraBold.Weight)}" Content="{x:Bind ExtraBold.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                        <ContentControl Tag="{x:Bind TagConverter(ExtraBold.Weight)}" Content="{x:Bind ExtraBold.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                            />
                     </texts:FontWeightListViewItem>
                     <texts:FontWeightListViewItem x:Name="ExtraLight" Weight="ExtraLight" Index="5" Key="Number5">
-                        <ContentControl Tag="{x:Bind TagConverter(ExtraLight.Weight)}" Content="{x:Bind ExtraLight.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                        <ContentControl Tag="{x:Bind TagConverter(ExtraLight.Weight)}" Content="{x:Bind ExtraLight.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                                        />
                     </texts:FontWeightListViewItem>
 
                     <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
                     <texts:FontWeightListViewItem x:Name="Light" Weight="Light" Index="7" Key="Number6">
-                        <ContentControl                                        Tag="{x:Bind TagConverter(Light.Weight)}" Content="{x:Bind Light.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                        <ContentControl                                        Tag="{x:Bind TagConverter(Light.Weight)}" Content="{x:Bind Light.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                            />
                     </texts:FontWeightListViewItem>
                     <texts:FontWeightListViewItem x:Name="Medium" Weight="Medium" Index="8" Key="Number7">
-                        <ContentControl                                        Tag="{x:Bind TagConverter(Medium.Weight)}" Content="{x:Bind Medium.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                        <ContentControl                                        Tag="{x:Bind TagConverter(Medium.Weight)}" Content="{x:Bind Medium.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                            />
                     </texts:FontWeightListViewItem>
                     <texts:FontWeightListViewItem x:Name="Normal" Weight="Normal" Index="9" Key="Number8">
-                        <ContentControl Tag="{x:Bind TagConverter(Normal.Weight)}" Content="{x:Bind Normal.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                        <ContentControl Tag="{x:Bind TagConverter(Normal.Weight)}" Content="{x:Bind Normal.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                                        />
                     </texts:FontWeightListViewItem>
 
                     <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
                     <texts:FontWeightListViewItem x:Name="SemiBold" Weight="SemiBold" Index="11" Key="Number9">
-                        <ContentControl Tag="{x:Bind TagConverter(SemiBold.Weight)}" Content="{x:Bind SemiBold.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                        <ContentControl Tag="{x:Bind TagConverter(SemiBold.Weight)}" Content="{x:Bind SemiBold.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                            />
                     </texts:FontWeightListViewItem>
                     <texts:FontWeightListViewItem x:Name="SemiLight" Weight="SemiLight" Index="12" Key="Number0">
-                        <ContentControl Tag="{x:Bind TagConverter(SemiLight.Weight)}" Content="{x:Bind SemiLight.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                        <ContentControl Tag="{x:Bind TagConverter(SemiLight.Weight)}" Content="{x:Bind SemiLight.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                                        />
                     </texts:FontWeightListViewItem>
 
                     <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
                     <texts:FontWeightListViewItem x:Name="Thin" Weight="Thin" Index="14">
-                        <ContentControl Tag="{x:Bind TagConverter(Thin.Weight)}" Content="{x:Bind Thin.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                        <ContentControl Tag="{x:Bind TagConverter(Thin.Weight)}" Content="{x:Bind Thin.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                            />
                     </texts:FontWeightListViewItem>
 
                 </ListView.Items>

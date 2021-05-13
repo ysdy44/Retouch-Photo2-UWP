@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,7 +19,19 @@ namespace Retouch_Photo2.Texts
         public FontWeight2 Weight { get; set; }
         public int Index { get; set; }
         public VirtualKey Key { get; set; }
-        public string Title { get; set; }
+
+        #region DependencyProperty
+
+        /// <summary> Gets or sets the title. </summary>
+        public string Title
+        {
+            get => (string)base.GetValue(TitleProperty);
+            set => base.SetValue(TitleProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "FontWeightListViewItem.Title" /> dependency property. </summary>
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(FontWeightListViewItem), new PropertyMetadata(string.Empty));
+
+        #endregion
     }
 
     /// <summary>
@@ -78,6 +91,7 @@ namespace Retouch_Photo2.Texts
             this.InitializeComponent();
             this.InitializeDictionary();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
             this.ListView.ItemClick += (s, e) =>
@@ -108,6 +122,18 @@ namespace Retouch_Photo2.Texts
             };
         }
 
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()

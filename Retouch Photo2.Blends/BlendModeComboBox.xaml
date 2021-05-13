@@ -19,7 +19,7 @@
                 <ListView.Items>
 
                     <blends:BlendModeListViewItem x:Name="None" Index="0" Key="Number1">
-                        <ContentControl Content="{x:Bind None.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind None.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/NoneIcon.xaml"/>
                             </ContentControl.Resources>
@@ -32,7 +32,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="Multiply" Mode="Multiply" Index="2" Key="Number2">
-                        <ContentControl Content="{x:Bind Multiply.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Multiply.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/MultiplyIcon.xaml"/>
                             </ContentControl.Resources>
@@ -42,7 +42,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Screen" Mode="Screen" Index="3" Key="Number3">
-                        <ContentControl Content="{x:Bind Screen.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Screen.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ScreenIcon.xaml"/>
                             </ContentControl.Resources>
@@ -55,7 +55,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="Darken" Mode="Darken" Index="5" Key="Number4">
-                        <ContentControl Content="{x:Bind Darken.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Darken.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkenIcon.xaml"/>
                             </ContentControl.Resources>
@@ -65,7 +65,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Lighten" Mode="Lighten" Index="6" Key="Number5">
-                        <ContentControl Content="{x:Bind Lighten.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Lighten.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LightenIcon.xaml"/>
                             </ContentControl.Resources>
@@ -78,7 +78,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="Dissolve" Mode="Dissolve" Index="8" Key="Number6">
-                        <ContentControl Content="{x:Bind Dissolve.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Dissolve.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DissolveIcon.xaml"/>
                             </ContentControl.Resources>
@@ -88,7 +88,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="ColorBurn" Mode="ColorBurn" Index="9" Key="Number7">
-                        <ContentControl Content="{x:Bind ColorBurn.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind ColorBurn.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorBurnIcon.xaml"/>
                             </ContentControl.Resources>
@@ -98,7 +98,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="LinearBurn" Mode="LinearBurn" Index="10" Key="Number8">
-                        <ContentControl Content="{x:Bind LinearBurn.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind LinearBurn.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearBurnIcon.xaml"/>
                             </ContentControl.Resources>
@@ -111,7 +111,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="DarkerColor" Mode="DarkerColor" Index="12" Key="Number9">
-                        <ContentControl Content="{x:Bind DarkerColor.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind DarkerColor.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkerColorIcon.xaml"/>
                             </ContentControl.Resources>
@@ -121,7 +121,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="LighterColor" Mode="LighterColor" Index="13" Key="Number0">
-                        <ContentControl Content="{x:Bind LighterColor.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind LighterColor.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LighterColorIcon.xaml"/>
                             </ContentControl.Resources>
@@ -134,7 +134,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="ColorDodge" Mode="ColorDodge" Index="15">
-                        <ContentControl Content="{x:Bind ColorDodge.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind ColorDodge.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorDodgeIcon.xaml"/>
                             </ContentControl.Resources>
@@ -144,7 +144,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="LinearDodge" Mode="LinearDodge" Index="16">
-                        <ContentControl Content="{x:Bind LinearDodge.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind LinearDodge.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearDodgeIcon.xaml"/>
                             </ContentControl.Resources>
@@ -157,7 +157,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="Overlay" Mode="Overlay" Index="18">
-                        <ContentControl Content="{x:Bind Overlay.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Overlay.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/OverlayIcon.xaml"/>
                             </ContentControl.Resources>
@@ -167,7 +167,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="SoftLight" Mode="SoftLight" Index="19">
-                        <ContentControl Content="{x:Bind SoftLight.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind SoftLight.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SoftLightIcon.xaml"/>
                             </ContentControl.Resources>
@@ -177,7 +177,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="HardLight" Mode="HardLight" Index="20">
-                        <ContentControl Content="{x:Bind HardLight.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind HardLight.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardLightIcon.xaml"/>
                             </ContentControl.Resources>
@@ -187,7 +187,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="VividLight" Mode="VividLight" Index="21">
-                        <ContentControl Content="{x:Bind VividLight.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind VividLight.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/VividLightIcon.xaml"/>
                             </ContentControl.Resources>
@@ -197,7 +197,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="LinearLight" Mode="LinearLight" Index="22">
-                        <ContentControl Content="{x:Bind LinearLight.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind LinearLight.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearLightIcon.xaml"/>
                             </ContentControl.Resources>
@@ -207,7 +207,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="PinLight" Mode="PinLight" Index="23">
-                        <ContentControl Content="{x:Bind PinLight.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind PinLight.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/PinLightIcon.xaml"/>
                             </ContentControl.Resources>
@@ -220,7 +220,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="HardMix" Mode="HardMix" Index="25">
-                        <ContentControl Content="{x:Bind HardMix.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind HardMix.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardMixIcon.xaml"/>
                             </ContentControl.Resources>
@@ -230,7 +230,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Difference" Mode="Difference" Index="26">
-                        <ContentControl Content="{x:Bind Difference.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Difference.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DifferenceIcon.xaml"/>
                             </ContentControl.Resources>
@@ -240,7 +240,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Exclusion" Mode="Exclusion" Index="27">
-                        <ContentControl Content="{x:Bind Exclusion.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Exclusion.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ExclusionIcon.xaml"/>
                             </ContentControl.Resources>
@@ -253,7 +253,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="Hue" Mode="Hue" Index="29">
-                        <ContentControl Content="{x:Bind Hue.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Hue.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HueIcon.xaml"/>
                             </ContentControl.Resources>
@@ -263,7 +263,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Saturation" Mode="Saturation" Index="30">
-                        <ContentControl Content="{x:Bind Saturation.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Saturation.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SaturationIcon.xaml"/>
                             </ContentControl.Resources>
@@ -273,7 +273,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Color" Mode="Color" Index="31">
-                        <ContentControl Content="{x:Bind Color.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Color.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorIcon.xaml"/>
                             </ContentControl.Resources>
@@ -286,7 +286,7 @@
                     <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
 
                     <blends:BlendModeListViewItem x:Name="Luminosity" Mode="Luminosity" Index="33">
-                        <ContentControl Content="{x:Bind Luminosity.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Luminosity.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LuminosityIcon.xaml"/>
                             </ContentControl.Resources>
@@ -296,7 +296,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Subtract" Mode="Subtract" Index="34">
-                        <ContentControl Content="{x:Bind Subtract.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Subtract.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SubtractIcon.xaml"/>
                             </ContentControl.Resources>
@@ -306,7 +306,7 @@
                         </ContentControl>
                     </blends:BlendModeListViewItem>
                     <blends:BlendModeListViewItem x:Name="Division" Mode="Division" Index="35">
-                        <ContentControl Content="{x:Bind Division.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl Content="{x:Bind Division.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
                                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DivisionIcon.xaml"/>
                             </ContentControl.Resources>

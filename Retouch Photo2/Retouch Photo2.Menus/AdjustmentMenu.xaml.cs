@@ -11,6 +11,7 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
@@ -73,6 +74,7 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             this.ListView.ItemClick += (s, e) =>
             {
@@ -93,6 +95,18 @@ namespace Retouch_Photo2.Menus
 
     public sealed partial class AdjustmentMenu : Expander
     {
+        
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()

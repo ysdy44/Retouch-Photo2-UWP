@@ -6,6 +6,7 @@
 using Microsoft.Graphics.Canvas.Text;
 using System;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -85,6 +86,7 @@ namespace Retouch_Photo2.Texts
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             this.Left.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
             this.Center.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
@@ -94,6 +96,18 @@ namespace Retouch_Photo2.Texts
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()

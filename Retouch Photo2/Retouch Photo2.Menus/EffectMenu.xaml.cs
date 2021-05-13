@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -76,6 +77,7 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructGroup();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             this.SplitView.SizeChanged += (s, e) =>
             {
@@ -92,6 +94,18 @@ namespace Retouch_Photo2.Menus
 
     public sealed partial class EffectMenu : Expander
     {
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()

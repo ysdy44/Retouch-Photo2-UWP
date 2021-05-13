@@ -14,7 +14,6 @@ using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
 {
@@ -60,6 +59,7 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
 
             this.HorizontalAlignmentSegmented.HorizontalAlignmentChanged += (s, alignment) => this.MethodViewModel.MethodSetHorizontalAlignment(alignment);
 
@@ -116,6 +116,18 @@ namespace Retouch_Photo2.Menus
             };
 
             this.DirectionComboBox.DirectionChanged += (s, direction) => this.MethodViewModel.MethodSetDirection(direction);
+        }
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
         }
 
         //Strings

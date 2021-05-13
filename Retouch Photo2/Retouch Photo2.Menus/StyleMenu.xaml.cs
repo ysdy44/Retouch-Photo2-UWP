@@ -3,20 +3,20 @@
 // Difficult:         ★★★★★
 // Only:              
 // Complete:      ★★★★★
-using System.ComponentModel;
+using FanKit.Transformers;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Styles;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Styles;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using FanKit.Transformers;
 
 namespace Retouch_Photo2.Menus
 {
@@ -105,6 +105,7 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            base.Loaded += (s, e) => this.ConstructLanguages();
             this.MoreButton.Tapped += (s, e) => this.MoreFlyout.ShowAt(this.MoreButton);
 
             this.Loaded += async (s, e) =>
@@ -252,6 +253,18 @@ namespace Retouch_Photo2.Menus
 
     public sealed partial class StyleMenu : Expander
     {
+
+        //Languages
+        private void ConstructLanguages()
+        {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != base.Language)
+                {
+                    this.ConstructStrings();
+                }
+            }
+        }
 
         //Strings
         private void ConstructStrings()
