@@ -43,17 +43,22 @@ namespace Retouch_Photo2
                 await file.CopyAsync(ApplicationData.Current.LocalFolder);
             }
 
-            if (file != null)
+            if (file == null) return null;
+
+            using (Stream stream = await file.OpenStreamForReadAsync())
             {
-                using (Stream stream = await file.OpenStreamForReadAsync())
+                try
                 {
                     XDocument document = XDocument.Load(stream);
 
                     IEnumerable<StyleCategory> source = Retouch_Photo2.Styles.XML.LoadStyleCategorys(document);
                     return source;
                 }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
-            return null;
         }
 
         /// <summary>

@@ -39,8 +39,7 @@ namespace Retouch_Photo2
             }
             catch (Exception)
             {
-                IEnumerable<ILayer> layers = new List<ILayer>();
-                return layers;
+                return null;
             }
         }
         

@@ -38,8 +38,7 @@ namespace Retouch_Photo2
             }
             catch (Exception)
             {
-                IEnumerable<Photo> photos = new List<Photo>();
-                return photos;
+                return null;
             }
         }
 

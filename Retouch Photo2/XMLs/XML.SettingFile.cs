@@ -18,7 +18,7 @@ namespace Retouch_Photo2
     /// </summary>
     public static partial class XML
     {
-        
+
         /// <summary>
         /// Construct <see cref="Setting"/>s File (Open from Defult, Save from LocalFolder)
         /// </summary>
@@ -34,17 +34,22 @@ namespace Retouch_Photo2
                 file = await ApplicationData.Current.LocalFolder.GetFileAsync("Setting.xml");
             }
 
-            if (file != null)
+            if (file == null) return null;
+
+            using (Stream stream = await file.OpenStreamForReadAsync())
             {
-                using (Stream stream = await file.OpenStreamForReadAsync())
+                try
                 {
                     XDocument document = XDocument.Load(stream);
 
                     Setting setting = Retouch_Photo2.ViewModels.XML.LoadSetting(document);
                     return setting;
                 }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
-            return null;
         }
 
         /// <summary>
