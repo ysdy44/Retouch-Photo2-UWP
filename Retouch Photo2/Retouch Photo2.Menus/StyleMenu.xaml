@@ -120,38 +120,6 @@
               >
 
 
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Rename-->
-                <VisualState x:Name="RenameState">
-                    <VisualState.Setters>
-                        <Setter Target = "GridView.SelectionMode" Value="None"/>
-
-                        <Setter Target = "MainGrid.Visibility" Value="Collapsed"/>
-                        <Setter Target = "RenameGrid.Visibility" Value="Visible"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Delete-->
-                <VisualState x:Name="DeleteState">
-                    <VisualState.Setters>
-                        <Setter Target = "GridView.SelectionMode" Value="Multiple"/>
-                        <Setter Target = "GridView.IsItemClickEnabled" Value="False"/>
-
-                        <Setter Target = "MainGrid.Visibility" Value="Collapsed"/>
-                        <Setter Target = "DeleteGrid.Visibility" Value="Visible"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-
         <GridView.ItemContainerStyle>
             <Style TargetType="GridViewItem">
                 <Setter Property="Width" Value="74"/>
@@ -174,7 +142,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
+                    <ListViewItem x:Name="Button" IsEnabled="False" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
                         <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />

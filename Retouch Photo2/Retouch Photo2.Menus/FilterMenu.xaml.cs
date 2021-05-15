@@ -14,8 +14,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.Globalization;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Menus
 {
@@ -66,35 +67,21 @@ namespace Retouch_Photo2.Menus
         private FilterShowControlCategory selectedControlCategory;
 
 
-        //@VisualState
-        MainPageState _vsState = MainPageState.None;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsState)
-                {
-                    case MainPageState.None: return this.Normal;
-                    case MainPageState.Rename: return this.RenameState;
-                    case MainPageState.Delete: return this.DeleteState;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, true);
-        }
         /// <summary> Gets or set the state. </summary>
         public MainPageState State
         {
-            get => this._vsState;
+            get => this.state;
             set
             {
-                this._vsState = value;
-                this.VisualState = this.VisualState;//VisualState
+                this.GridView.SelectionMode = value == MainPageState.Delete ? ListViewSelectionMode.Multiple : ListViewSelectionMode.None;
+                this.MainGrid.Visibility = value == MainPageState.None ? Visibility.Visible : Visibility.Collapsed;
+                this.RenameGrid.Visibility = value == MainPageState.Rename ? Visibility.Visible : Visibility.Collapsed;
+                this.DeleteGrid.Visibility = value == MainPageState.Delete ? Visibility.Visible : Visibility.Collapsed;
+                this.state = value;
             }
         }
+        private MainPageState state = MainPageState.None;
+
 
 
         //@Construct
@@ -327,9 +314,9 @@ namespace Retouch_Photo2.Menus
 
             if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
             {
-                controlCategory.Add(new FilterShowControl 
+                controlCategory.Add(new FilterShowControl
                 {
-                    Filter = filter2 
+                    Filter = filter2
                 });
             }
             else
