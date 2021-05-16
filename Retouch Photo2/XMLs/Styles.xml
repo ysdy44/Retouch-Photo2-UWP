@@ -1,10 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Root>
-
-  <StyleCategory Name="Default">
-
-
-    <Style Name="Magenta">
+  <StyleCategory>
+    <Strings>
+      <String Key="en" Value="Default" />
+      <String Key="zh" Value="默认" />
+      <String Key="ar" Value="تقصير" />
+      <String Key="de" Value="Standard" />
+      <String Key="es" Value="Defecto" />
+      <String Key="fr" Value="Défaut" />
+      <String Key="it" Value="Predefinito" />
+      <String Key="ja" Value="デフォルト" />
+      <String Key="ko" Value="기본" />
+      <String Key="nl" Value="Standaard" />
+      <String Key="pt" Value="Padrão" />
+      <String Key="ru" Value="Padrão" />
+    </Strings>
+    <Style>
+      <Strings>
+        <String Key="en" Value="Magenta" />
+        <String Key="zh" Value="品红" />
+        <String Key="ar" Value="أرجواني" />
+        <String Key="de" Value="Magenta" />
+        <String Key="es" Value="Magenta" />
+        <String Key="fr" Value="Magenta" />
+        <String Key="it" Value="Magenta" />
+        <String Key="ja" Value="赤紫色" />
+        <String Key="ko" Value="마젠타" />
+        <String Key="nl" Value="Magenta" />
+        <String Key="pt" Value="Magenta" />
+        <String Key="ru" Value="Magenta" />
+      </Strings>
       <IsFollowTransform>true</IsFollowTransform>
       <Fill Type="LinearGradient">
         <Stops>
@@ -26,9 +51,21 @@
       <StrokeWidth>0</StrokeWidth>
       <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
     </Style>
-
-
-    <Style Name="Green">
+    <Style>
+      <Strings>
+        <String Key="en" Value="Green" />
+        <String Key="zh" Value="绿色的" />
+        <String Key="ar" Value="أخضر" />
+        <String Key="de" Value="Grün" />
+        <String Key="es" Value="Verde" />
+        <String Key="fr" Value="Vert" />
+        <String Key="it" Value="verde" />
+        <String Key="ja" Value="緑" />
+        <String Key="ko" Value="초록" />
+        <String Key="nl" Value="Groen" />
+        <String Key="pt" Value="Verde" />
+        <String Key="ru" Value="Verde" />
+      </Strings>
       <IsFollowTransform>true</IsFollowTransform>
       <Fill Type="LinearGradient">
         <Stops>
@@ -50,9 +87,21 @@
       <StrokeWidth>0</StrokeWidth>
       <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
     </Style>
-
-
-    <Style Name="Purple">
+    <Style>
+      <Strings>
+        <String Key="en" Value="Purple" />
+        <String Key="zh" Value="紫色的" />
+        <String Key="ar" Value="نفسجي" />
+        <String Key="de" Value="Lila" />
+        <String Key="es" Value="Púrpura" />
+        <String Key="fr" Value="Mauve" />
+        <String Key="it" Value="Viola" />
+        <String Key="ja" Value="紫の" />
+        <String Key="ko" Value="보라색" />
+        <String Key="nl" Value="Purper" />
+        <String Key="pt" Value="Roxo" />
+        <String Key="ru" Value="Roxo" />
+      </Strings>
       <IsFollowTransform>true</IsFollowTransform>
       <Fill Type="LinearGradient">
         <Stops>
@@ -74,11 +123,21 @@
       <StrokeWidth>0</StrokeWidth>
       <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
     </Style>
-
-    
-    
-
-    <Style Name="Dotted">
+    <Style>
+      <Strings>
+        <String Key="en" Value="Dotted" />
+        <String Key="zh" Value="点缀" />
+        <String Key="ar" Value="منقط" />
+        <String Key="de" Value="Gepunktet" />
+        <String Key="es" Value="Punteado" />
+        <String Key="fr" Value="Pointé" />
+        <String Key="it" Value="Punteggiato" />
+        <String Key="ja" Value="装飾" />
+        <String Key="ko" Value="꾸밈" />
+        <String Key="nl" Value="Gestippeld" />
+        <String Key="pt" Value="Pontilhado" />
+        <String Key="ru" Value="Pontilhado" />
+      </Strings>
       <Fill Type="Color">
         <Color A="126" R="0" G="44" B="255" />
       </Fill>
@@ -88,9 +147,21 @@
       <StrokeWidth>12</StrokeWidth>
       <StrokeStyle DashStyle="Dash" DashCap="Round" StartCap="Round" EndCap="Round" DashOffset="3.29633474" MiterLimit="10" LineJoin="Miter" />
     </Style>
-    
-
-    <Style Name="Rect">
+    <Style>
+      <Strings>
+        <String Key="en" Value="Rect" />
+        <String Key="zh" Value="直角" />
+        <String Key="ar" Value="المستقيم" />
+        <String Key="de" Value="Rect" />
+        <String Key="es" Value="Rect" />
+        <String Key="fr" Value="Rect" />
+        <String Key="it" Value="Rect" />
+        <String Key="ja" Value="直角" />
+        <String Key="ko" Value="직각" />
+        <String Key="nl" Value="Rect" />
+        <String Key="pt" Value="Reto" />
+        <String Key="ru" Value="Reto" />
+      </Strings>
       <IsFollowTransform>true</IsFollowTransform>
       <Fill Type="Color">
         <Color A="255" R="255" G="195" B="54" />
@@ -101,9 +172,21 @@
       <StrokeWidth>91.40479</StrokeWidth>
       <StrokeStyle DashStyle="Solid" DashCap="Triangle" StartCap="Triangle" EndCap="Triangle" DashOffset="3.29633474" MiterLimit="10" LineJoin="Bevel" />
     </Style>
-    
-
-    <Style Name="Border">
+    <Style>
+      <Strings>
+        <String Key="en" Value="Border" />
+        <String Key="zh" Value="边界" />
+        <String Key="ar" Value="حدود" />
+        <String Key="de" Value="Rand" />
+        <String Key="es" Value="Frontera" />
+        <String Key="fr" Value="Frontière" />
+        <String Key="it" Value="Confine" />
+        <String Key="ja" Value="境界" />
+        <String Key="ko" Value="경계" />
+        <String Key="nl" Value="Grens" />
+        <String Key="pt" Value="Fronteira" />
+        <String Key="ru" Value="Fronteira" />
+      </Strings>
       <IsFollowTransform>true</IsFollowTransform>
       <Fill Type="None" />
       <Stroke Type="Color">
@@ -113,7 +196,7 @@
       <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
     </Style>
 
-    
+
   </StyleCategory>
 
 </Root>
