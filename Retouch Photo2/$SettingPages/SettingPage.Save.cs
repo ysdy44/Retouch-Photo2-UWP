@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System.Linq;
+using Windows.Globalization;
 
 namespace Retouch_Photo2
 {
@@ -78,6 +79,23 @@ namespace Retouch_Photo2
             IOrderedEnumerable<MenuType> order = this.SettingViewModel.Setting.MenuTypes.OrderBy(t => (int)t);
             this.SettingViewModel.Setting.MenuTypes = order.ToList();
             await this.Save();
+        }
+
+        private void SetLanguage(string language)
+        {
+            if (ApplicationLanguages.PrimaryLanguageOverride == language) return;
+            ApplicationLanguages.PrimaryLanguageOverride = language;
+
+            if (string.IsNullOrEmpty(language) == false)
+            {
+                if (Window.Current.Content is FrameworkElement frameworkElement)
+                {
+                    if (frameworkElement.Language != language)
+                    {
+                        frameworkElement.Language = language;
+                    }
+                }
+            }
         }
 
     }

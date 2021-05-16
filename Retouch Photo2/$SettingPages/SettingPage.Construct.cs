@@ -459,10 +459,7 @@ namespace Retouch_Photo2
 
                 radioButton.Checked += (s, e) =>
                 {
-                    if (ApplicationLanguages.PrimaryLanguageOverride == language) return;
-                    ApplicationLanguages.PrimaryLanguageOverride = language;
-
-                    if (string.IsNullOrEmpty(language) == false) this.Language = language;
+                    this.SetLanguage(language);
                     this.ConstructFlowDirection();
                     this.ConstructStrings();
                 };
