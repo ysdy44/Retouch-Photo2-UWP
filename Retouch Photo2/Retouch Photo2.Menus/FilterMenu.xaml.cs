@@ -20,22 +20,6 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Menus
 {
-    internal class FilterShowControlCategory : ObservableCollection<FilterShowControl>
-    {
-        public string Name
-        {
-            get => this.name;
-            set
-            {
-                if (this.name == value) return;
-
-                this.name = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Name)));//Notify  
-            }
-        }
-        private string name = string.Empty;
-    }
-
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Filters"/>.
     /// </summary>
@@ -48,25 +32,32 @@ namespace Retouch_Photo2.Menus
         IEnumerable<FilterShowControl> SelectedControls => from i in this.GridView.SelectedItems where (i is FilterShowControl) select (i as FilterShowControl);
 
 
+        //@Converter
+        private bool IsEnableConverter(FilterShowControlCategory value) => value != null;
+
         private string Untitled = "Untitled";
+
+
+        #region DependencyProperty
+
+
         private ObservableCollection<FilterShowControlCategory> ControlCategorys { get; set; } = new ObservableCollection<FilterShowControlCategory>();
 
 
-        internal FilterShowControlCategory SelectedControlCategory
+        /// <summary> Gets or sets <see cref = "FilterMenu" />'s SelectedControlCategory. </summary>
+        public FilterShowControlCategory SelectedControlCategory
         {
-            get => this.selectedControlCategory;
-            set
-            {
-                this.selectedControlCategory = value;
-                this.Button.IsEnabled = value != null;
-                this.Control.Content = value?.Name;
-                this.ListView.SelectedItem = value;
-                this.GridView.ItemsSource = value;
-            }
+            get => (FilterShowControlCategory)base.GetValue(SelectedControlCategoryProperty);
+            set => base.SetValue(SelectedControlCategoryProperty, value);
         }
-        private FilterShowControlCategory selectedControlCategory;
+        /// <summary> Identifies the <see cref = "FilterMenu.SelectedControlCategory" /> dependency property. </summary>
+        public static readonly DependencyProperty SelectedControlCategoryProperty = DependencyProperty.Register(nameof(SelectedControlCategory), typeof(FilterShowControlCategory), typeof(FilterMenu), new PropertyMetadata(null));
 
 
+        #endregion
+
+
+        //@VisualState
         /// <summary> Gets or set the state. </summary>
         public MainPageState State
         {
@@ -81,7 +72,6 @@ namespace Retouch_Photo2.Menus
             }
         }
         private MainPageState state = MainPageState.None;
-
 
 
         //@Construct
@@ -102,7 +92,13 @@ namespace Retouch_Photo2.Menus
                     IEnumerable<FilterCategory> filterCategorys = await Retouch_Photo2.XML.ConstructFiltersFile();
                     if (filterCategorys == null) return;
 
-                    this.AddFilterCategorys(filterCategorys);
+                    foreach (FilterCategory filterCategory in filterCategorys)
+                    {
+                        FilterShowControlCategory controlCategory = new FilterShowControlCategory(filterCategory);
+                        controlCategory.Rename(base.Language);
+                        this.ControlCategorys.Add(controlCategory);
+                    }
+                    this.SelectedControlCategory = this.ControlCategorys.FirstOrDefault();
                 }
             };
 
@@ -219,7 +215,7 @@ namespace Retouch_Photo2.Menus
 
         private async Task Save()
         {
-            await XML.SaveFiltersFile(this.ToFilterCategorys());
+            await XML.SaveFiltersFile(from c in this.ControlCategorys select c.ToFilterCategory());
         }
 
     }
@@ -259,47 +255,6 @@ namespace Retouch_Photo2.Menus
             this.MoreToolTip.Content = resource.GetString("Menus_More");
         }
 
-
-        public void AddFilterCategorys(IEnumerable<FilterCategory> filterCategorys)
-        {
-            foreach (FilterCategory filterCategory in filterCategorys)
-            {
-                FilterShowControlCategory controlategory = new FilterShowControlCategory
-                {
-                    Name = filterCategory.Name
-                };
-                foreach (Filter filter in filterCategory.Filters)
-                {
-                    controlategory.Add(new FilterShowControl
-                    {
-                        Filter = filter
-                    });
-                }
-                this.ControlCategorys.Add(controlategory);
-            }
-
-            this.SelectedControlCategory = this.ControlCategorys.FirstOrDefault();
-        }
-
-        public IEnumerable<FilterCategory> ToFilterCategorys()
-        {
-            return
-            (
-                from controlCategory
-                in this.ControlCategorys
-                select new FilterCategory
-                {
-                    Name = controlCategory.Name,
-                    Filters =
-                    (
-                        from control
-                        in controlCategory
-                        select control.Filter
-                    )
-                }
-            );
-        }
-
     }
 
     public sealed partial class FilterMenu : Expander
@@ -312,12 +267,14 @@ namespace Retouch_Photo2.Menus
             Filter filter2 = filter.Clone();
             filter2.Name = rename;
 
+            FilterShowControl control = new FilterShowControl
+            {
+                Filter = filter2
+            };
+
             if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
             {
-                controlCategory.Add(new FilterShowControl
-                {
-                    Filter = filter2
-                });
+                controlCategory.Add(control);
             }
             else
             {
@@ -325,10 +282,8 @@ namespace Retouch_Photo2.Menus
                 {
                     Name = rename
                 };
-                controlCategory2.Add(new FilterShowControl
-                {
-                    Filter = filter2
-                });
+                controlCategory2.Add(control);
+
                 this.ControlCategorys.Add(controlCategory2);
 
                 this.SelectedControlCategory = this.ControlCategorys.LastOrDefault();
@@ -355,6 +310,7 @@ namespace Retouch_Photo2.Menus
             if (string.IsNullOrEmpty(rename)) return;
 
             FilterShowControlCategory controlCategory = new FilterShowControlCategory { Name = rename };
+            controlCategory.Rename(base.Language);
             this.ControlCategorys.Add(controlCategory);
             this.SelectedControlCategory = controlCategory;
         }
@@ -363,10 +319,11 @@ namespace Retouch_Photo2.Menus
         {
             if (this.SelectedControlCategory is FilterShowControlCategory controlCategory)
             {
-                string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(controlCategory.Name);
+                string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(controlCategory.Title);
                 if (string.IsNullOrEmpty(rename)) return;
 
                 controlCategory.Name = rename;
+                controlCategory.Rename(base.Language);
             }
         }
 

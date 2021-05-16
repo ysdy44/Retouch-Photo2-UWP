@@ -113,6 +113,7 @@
     <Compile Include="FilterShowControl.xaml.cs">
       <DependentUpon>FilterShowControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FilterShowControlCategory.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -134,6 +135,10 @@
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
       <Name>Retouch Photo2.Adjustments</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
+      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
+      <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

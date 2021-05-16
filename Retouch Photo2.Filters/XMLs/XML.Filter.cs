@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Filters
     /// </summary>
     public static partial class XML
     {
-        
+
         /// <summary>
         /// Saves the entire <see cref="Filter"/> to a XElement.
         /// </summary>
@@ -23,8 +23,8 @@ namespace Retouch_Photo2.Filters
         public static XElement SaveFilter(string elementName, Filter filter)
         {
             XElement element = new XElement(elementName);
-            if (filter.Name != string.Empty) element.Add(new XAttribute("Name", filter.Name));
-
+            if (filter.Name != null) element.Add(new XAttribute("Name", filter.Name));
+            if (filter.Strings != null) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", filter.Strings));
             element.Add
             (
                 from adjustment
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Filters
         {
             Filter filter = new Filter();
             if (element.Attribute("Name") is XAttribute name) filter.Name = name.Value;
-
+            if (element.Element("Strings") is XElement strings) filter.Strings = Retouch_Photo2.Elements.XML.LoadStrings(strings);
             filter.Adjustments =
             (
                 from adjustment

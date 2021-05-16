@@ -17,7 +17,12 @@ namespace Retouch_Photo2.Filters
     {
 
         /// <summary> Gets or sets the name. </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } 
+
+        /// <summary>
+        /// The localized strings resources.
+        /// </summary>
+        public IDictionary<string, string> Strings { get; set; }
 
         /// <summary>
         /// The source data.

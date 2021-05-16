@@ -23,8 +23,8 @@ namespace Retouch_Photo2.Filters
         private static XElement SaveFilterCategory(string elementName, FilterCategory filterCategory)
         {
             XElement element = new XElement(elementName);
-            element.Add(new XAttribute("Name", filterCategory.Name));
-
+            if (filterCategory.Name != null) element.Add(new XAttribute("Name", filterCategory.Name));
+            if (filterCategory.Strings != null) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", filterCategory.Strings));
             element.Add
             (
                 from filter
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Filters
         {
             FilterCategory filterCategory = new FilterCategory();
             if (element.Attribute("Name") is XAttribute name) filterCategory.Name = name.Value;
-
+            if (element.Element("Strings") is XElement strings) filterCategory.Strings = Retouch_Photo2.Elements.XML.LoadStrings(strings);
             filterCategory.Filters =
             (
                 from filter

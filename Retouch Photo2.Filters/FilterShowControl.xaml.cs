@@ -9,6 +9,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -28,7 +29,7 @@ namespace Retouch_Photo2.Filters
 
 
         //@Task
-        private static readonly Task<CanvasBitmap> TaskBitmap = Task.Run<CanvasBitmap>(async () => await CanvasBitmap.LoadAsync(CanvasDevice, @"Icons\Lenna.jpg"));
+        private static readonly Task<CanvasBitmap> TaskBitmap = Task.Run<CanvasBitmap>(async () => await CanvasBitmap.LoadAsync(FilterShowControl.CanvasDevice, @"Icons\Lenna.jpg"));
         private static async Task CreateResourceAsync()
         {
             FilterShowControl.TaskBitmap.Wait();
@@ -53,7 +54,8 @@ namespace Retouch_Photo2.Filters
             if (e.NewValue is Filter value)
             {
                 control.CanvasControl.Invalidate();//Invalidate
-                control.TextBlock.Text = value.Name;
+                control.TextBlock.Text = Retouch_Photo2.Elements.XML.CreateString(value.Name, value.Strings, control.Language);
+                control.TextBlock.FontWeight = value.Strings == null ? FontWeights.Normal : FontWeights.Bold;
             }
         }));
 
