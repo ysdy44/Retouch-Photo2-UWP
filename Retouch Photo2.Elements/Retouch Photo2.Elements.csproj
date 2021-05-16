@@ -192,6 +192,8 @@
     <Compile Include="Toolkit\TextBox\TextBoxExtensions.Regex.Data.cs" />
     <Compile Include="Toolkit\TextBox\TextBoxExtensions.Regex.Internals.cs" />
     <Compile Include="Toolkit\TextBox\TextBoxExtensions.Regex.Properties.cs" />
+    <Compile Include="XMLs\XML.StringFactory.cs" />
+    <Compile Include="XMLs\XML.Strings.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Elements.rd.xml" />
   </ItemGroup>
