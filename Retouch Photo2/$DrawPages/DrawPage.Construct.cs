@@ -110,9 +110,9 @@ namespace Retouch_Photo2
             //Menus
             foreach (Expander expander in Expander.Dictionary)
             {
-                MenuType key = expander.Type;
+                MenuType type = expander.Type;
 
-                expander.Title = resource.GetString($"Menus_{key}");
+                expander.Title = resource.GetString($"Menus_{type}");
             }
         }
 
@@ -124,9 +124,9 @@ namespace Retouch_Photo2
             {
                 if (e.ClickedItem is Retouch_Photo2.Menus.Icon value)
                 {
-                    MenuType key = value.Type;
+                    MenuType type = value.Type;
                     FrameworkElement placementTarget = value;
-                    Expander.ShowAt(key, placementTarget);
+                    Expander.ShowAt(type, placementTarget);
                 }
             };
         }

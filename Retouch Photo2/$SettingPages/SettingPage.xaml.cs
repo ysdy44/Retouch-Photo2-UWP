@@ -57,6 +57,10 @@ namespace Retouch_Photo2
                 this.ConstructKey();
 
                 this.ConstructLanguage();
+                this.LanguageTipButton.Click += async (s, e) =>
+                {
+                    await Windows.ApplicationModel.Core.CoreApplication.RequestRestartAsync(string.Empty);
+                };                
 
                 this.LocalFolderButton.Click += async (s, e) =>
                 {

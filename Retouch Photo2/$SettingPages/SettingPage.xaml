@@ -8,7 +8,6 @@
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:globalization="using:System.Globalization"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Required" 
     >
 
@@ -470,7 +469,7 @@
                             <StackPanel x:Name="LanguageStackPanel">
                             </StackPanel>
                         </Border>
-                        <TextBlock x:Name="LanguageTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
+                        <HyperlinkButton x:Name="LanguageTipButton"/>
 
 
                         <ContentControl Height="12"/>

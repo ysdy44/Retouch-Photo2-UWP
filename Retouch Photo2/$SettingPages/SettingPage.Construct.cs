@@ -96,7 +96,7 @@ namespace Retouch_Photo2
 
             this.LanguageTextBlock.Text = resource.GetString("$SettingPage_Language");
             foreach (var item in this.LanguageStringsChanged) item(resource);
-            this.LanguageTipTextBlock.Text = resource.GetString("$SettingPage_LanguageTip");
+            this.LanguageTipButton.Content = resource.GetString("$SettingPage_LanguageTip");
 
             this.LocalFolderTextBlock.Text = resource.GetString("$SettingPage_LocalFolder");
             this.OpenTextBlock.Text = resource.GetString("$SettingPage_LocalFolder_Open");

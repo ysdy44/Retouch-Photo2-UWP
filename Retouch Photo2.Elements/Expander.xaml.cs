@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Elements
         /// <summary>
         /// Show a flyout with a specific name.
         /// </summary>
-        public static void ShowAt(MenuType key, FrameworkElement placementTarget) => Expander.Dictionary.First(e => e.Type == key).ShowAt(placementTarget);
+        public static void ShowAt(MenuType type, FrameworkElement placementTarget) => Expander.Dictionary.First(e => e.Type == type).ShowAt(placementTarget);
         /// <summary>
         /// Gets all Expanders.
         /// </summary>
