@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Elements
         /// <returns> The created string. </returns>
         public static string CreateString(string name, IDictionary<string, string> strings, string language)
         {
-            if (strings is null) return name;
+            if (strings is null) return name ?? string.Empty;
 
             if (strings.ContainsKey(language)) return strings[language];
 
@@ -34,9 +34,7 @@ namespace Retouch_Photo2.Elements
                 }
             }
 
-            if (name is null) return string.Empty;
-
-            return name;
+            return name ?? string.Empty;
         }
 
     }

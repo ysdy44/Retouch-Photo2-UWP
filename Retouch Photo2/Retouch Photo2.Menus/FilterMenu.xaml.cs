@@ -122,6 +122,10 @@ namespace Retouch_Photo2.Menus
                             if (e.ClickedItem is FilterShowControl control)
                             {
                                 Filter filter = control.Filter;
+
+                                Filter filter3 = filter.Clone();
+                                this.SelectionViewModel.SetFilter(filter3);
+
                                 this.MethodViewModel.ILayerChanged<Filter>
                                 (
                                     set: (layer) => layer.Filter = filter.Clone(),
@@ -130,9 +134,6 @@ namespace Retouch_Photo2.Menus
                                     getUndo: (layer) => layer.Filter.Clone(),
                                     setUndo: (layer, previous) => layer.Filter = previous.Clone()
                                 );
-
-                                Filter filter3 = filter.Clone();
-                                this.SelectionViewModel.SetFilter(filter3);
                             }
                         }
                         break;

@@ -23,7 +23,8 @@ namespace Retouch_Photo2.Styles
         {
             XElement element = new XElement(elementName);
 
-            if (style.Name != string.Empty) element.Add(new XAttribute("Name", style.Name));
+            if (style.Name !=null) element.Add(new XAttribute("Name", style.Name));
+            if (style.Strings != null) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", style.Strings));
 
             element.Add(new XElement("IsFollowTransform", style.IsFollowTransform));
 
@@ -51,6 +52,7 @@ namespace Retouch_Photo2.Styles
             IStyle style = new Style();
 
             if (element.Attribute("Name") is XAttribute name) style.Name = name.Value;
+            if (element.Element("Strings") is XElement strings) style.Strings = Retouch_Photo2.Elements.XML.LoadStrings(strings);
 
             if (element.Element("IsFollowTransform") is XElement isFollowTransform) style.IsFollowTransform = (bool)isFollowTransform;
 

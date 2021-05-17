@@ -5,6 +5,7 @@
 // Complete:      ★★★★
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Strokes;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -40,7 +41,8 @@ namespace Retouch_Photo2.Styles
                 control.Shape.StrokeThickness = strokeWidth;
 
                 control.Shape.SetStrokeStyle(value.StrokeStyle);
-                control.TextBlock.Text = value.Name;
+                control.TextBlock.Text = Retouch_Photo2.Elements.XML.CreateString(value.Name, value.Strings, control.Language);
+                control.TextBlock.FontWeight = value.Strings == null ? FontWeights.Normal : FontWeights.Bold;
             }
         }));
 

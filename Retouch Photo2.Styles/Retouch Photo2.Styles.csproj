@@ -118,6 +118,7 @@
     <Compile Include="IStyle.cs" />
     <Compile Include="Style.cs" />
     <Compile Include="StyleCategory.cs" />
+    <Compile Include="StyleShowControlCategory.cs" />
     <Compile Include="XMLs\XML.Style.cs" />
     <Compile Include="XMLs\XML.StyleCategory.cs" />
     <Compile Include="XMLs\XML.StyleCategorys.cs" />
@@ -148,6 +149,10 @@
     <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
       <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
       <Name>Retouch Photo2.Brushs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
+      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
+      <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Strokes\Retouch Photo2.Strokes.csproj">
       <Project>{9ecf765e-1976-4100-8d69-71dde162adab}</Project>

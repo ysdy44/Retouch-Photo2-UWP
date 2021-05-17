@@ -16,6 +16,11 @@ namespace Retouch_Photo2.Styles
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
+        /// The localized strings resources.
+        /// </summary>
+        public IDictionary<string, string> Strings { get; set; }
+
+        /// <summary>
         /// The source data.
         /// </summary>
         public IEnumerable<IStyle> Styles { get; set; }

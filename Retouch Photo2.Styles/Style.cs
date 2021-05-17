@@ -7,6 +7,7 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Strokes;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Retouch_Photo2.Styles
@@ -18,7 +19,12 @@ namespace Retouch_Photo2.Styles
     {
 
         /// <summary> Name </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } 
+
+        /// <summary>
+        /// The localized strings resources.
+        /// </summary>
+        public IDictionary<string, string> Strings { get; set; }
 
         /// <summary> Gets or sets whether the style follows the transform. </summary>
         public bool IsFollowTransform { get; set; } = true;

@@ -5,38 +5,21 @@
 // Complete:      ★★★★★
 using FanKit.Transformers;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Styles;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Styles;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml.Controls;
 using Windows.Globalization;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
 {
-    internal class StyleShowControlCategory : ObservableCollection<StyleShowControl>
-    {
-        public string Name
-        {
-            get => this.name;
-            set
-            {
-                if (this.name == value) return;
-
-                this.name = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Name)));//Notify  
-            }
-        }
-        private string name = string.Empty;
-    }
-
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Styles"/>.
     /// </summary>
@@ -49,25 +32,32 @@ namespace Retouch_Photo2.Menus
         IEnumerable<StyleShowControl> SelectedControls => from i in this.GridView.SelectedItems where (i is StyleShowControl) select (i as StyleShowControl);
 
 
+        //@Converter
+        private bool IsEnableConverter(StyleShowControlCategory value) => value != null;
+
         private string Untitled = "Untitled";
+
+
+        #region DependencyProperty
+
+
         private ObservableCollection<StyleShowControlCategory> ControlCategorys { get; set; } = new ObservableCollection<StyleShowControlCategory>();
 
 
-        internal StyleShowControlCategory SelectedControlCategory
+        /// <summary> Gets or sets <see cref = "StyleMenu" />'s SelectedControlCategory. </summary>
+        public StyleShowControlCategory SelectedControlCategory
         {
-            get => this.selectedControlCategory;
-            set
-            {
-                this.selectedControlCategory = value;
-                this.Button.IsEnabled = value != null;
-                this.Control.Content = value?.Name;
-                this.ListView.SelectedItem = value;
-                this.GridView.ItemsSource = value;
-            }
+            get => (StyleShowControlCategory)base.GetValue(SelectedControlCategoryProperty);
+            set => base.SetValue(SelectedControlCategoryProperty, value);
         }
-        private StyleShowControlCategory selectedControlCategory;
+        /// <summary> Identifies the <see cref = "StyleMenu.SelectedControlCategory" /> dependency property. </summary>
+        public static readonly DependencyProperty SelectedControlCategoryProperty = DependencyProperty.Register(nameof(SelectedControlCategory), typeof(StyleShowControlCategory), typeof(StyleMenu), new PropertyMetadata(null));
 
 
+        #endregion
+
+
+        //@VisualState
         /// <summary> Gets or set the state. </summary>
         public MainPageState State
         {
@@ -102,7 +92,13 @@ namespace Retouch_Photo2.Menus
                     IEnumerable<StyleCategory> styleCategorys = await Retouch_Photo2.XML.ConstructStylesFile();
                     if (styleCategorys == null) return;
 
-                    this.AddStyleCategorys(styleCategorys);
+                    foreach (StyleCategory StyleCategory in styleCategorys)
+                    {
+                        StyleShowControlCategory controlCategory = new StyleShowControlCategory(StyleCategory);
+                        controlCategory.Rename(base.Language);
+                        this.ControlCategorys.Add(controlCategory);
+                    }
+                    this.SelectedControlCategory = this.ControlCategorys.FirstOrDefault();
                 }
             };
 
@@ -147,7 +143,7 @@ namespace Retouch_Photo2.Menus
                                     },
 
                                     type: HistoryType.LayersProperty_SetStyle,
-                                    getUndo: (layer) => layer.Style,
+                                    getUndo: (layer) => layer.Style.Clone(),
                                     setUndo: (layer, previous) => layer.Style = previous.Clone()
                                 );
                             }
@@ -233,7 +229,7 @@ namespace Retouch_Photo2.Menus
 
         private async Task Save()
         {
-            await XML.SaveStylesFile(this.ToStyleCategorys());
+            await XML.SaveStylesFile(from c in this.ControlCategorys select c.ToStyleCategory());
         }
 
     }
@@ -273,47 +269,6 @@ namespace Retouch_Photo2.Menus
             this.MoreToolTip.Content = resource.GetString("Menus_More");
         }
 
-
-        public void AddStyleCategorys(IEnumerable<StyleCategory> styleCategorys)
-        {
-            foreach (StyleCategory styleCategory in styleCategorys)
-            {
-                StyleShowControlCategory controlategory = new StyleShowControlCategory
-                {
-                    Name = styleCategory.Name
-                };
-                foreach (IStyle style in styleCategory.Styles)
-                {
-                    controlategory.Add(new StyleShowControl
-                    {
-                        Style2 = style
-                    });
-                }
-                this.ControlCategorys.Add(controlategory);
-            }
-
-            this.SelectedControlCategory = this.ControlCategorys.FirstOrDefault();
-        }
-
-        public IEnumerable<StyleCategory> ToStyleCategorys()
-        {
-            return
-            (
-                from controlCategory
-                in this.ControlCategorys
-                select new StyleCategory
-                {
-                    Name = controlCategory.Name,
-                    Styles =
-                    (
-                        from control
-                        in controlCategory
-                        select control.Style2
-                    )
-                }
-            );
-        }
-
     }
 
     public sealed partial class StyleMenu : Expander
@@ -328,12 +283,14 @@ namespace Retouch_Photo2.Menus
             style2.CacheTransform();
             style2.OneBrushPoints(transformer);
 
+            StyleShowControl control = new StyleShowControl
+            {
+                Style2 = style2
+            };
+
             if (this.SelectedControlCategory is StyleShowControlCategory controlCategory)
             {
-                controlCategory.Add(new StyleShowControl
-                {
-                    Style2 = style2
-                });
+                controlCategory.Add(control);
             }
             else
             {
@@ -341,10 +298,8 @@ namespace Retouch_Photo2.Menus
                 {
                     Name = rename
                 };
-                controlCategory2.Add(new StyleShowControl
-                {
-                    Style2 = style2
-                });
+                controlCategory2.Add(control);
+
                 this.ControlCategorys.Add(controlCategory2);
 
                 this.SelectedControlCategory = this.ControlCategorys.LastOrDefault();
@@ -371,6 +326,7 @@ namespace Retouch_Photo2.Menus
             if (string.IsNullOrEmpty(rename)) return;
 
             StyleShowControlCategory controlCategory = new StyleShowControlCategory { Name = rename };
+            controlCategory.Rename(base.Language);
             this.ControlCategorys.Add(controlCategory);
             this.SelectedControlCategory = controlCategory;
         }
@@ -379,10 +335,11 @@ namespace Retouch_Photo2.Menus
         {
             if (this.SelectedControlCategory is StyleShowControlCategory controlCategory)
             {
-                string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(controlCategory.Name);
+                string rename = await Retouch_Photo2.DrawPage.ShowRenameFunc(controlCategory.Title);
                 if (string.IsNullOrEmpty(rename)) return;
 
                 controlCategory.Name = rename;
+                controlCategory.Rename(base.Language);
             }
         }
 

@@ -18,18 +18,18 @@ namespace Retouch_Photo2.Styles
         /// Saves the entire <see cref="StyleCategory"/> to a XDocument.
         /// </summary>
         /// <param name="elementName"> The element name. </param>
-        /// <param name="StyleCategory"> The source data. </param>
+        /// <param name="styleCategory"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
-        private static XElement SaveStyleCategory(string elementName, StyleCategory StyleCategory)
+        private static XElement SaveStyleCategory(string elementName, StyleCategory styleCategory)
         {
             XElement element = new XElement(elementName);
-            element.Add(new XAttribute("Name", StyleCategory.Name));
-
+            if (styleCategory.Name != null) element.Add(new XAttribute("Name", styleCategory.Name));
+            if (styleCategory.Strings != null) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", styleCategory.Strings));
             element.Add
             (
-                from Style
-                in StyleCategory.Styles
-                select XML.SaveStyle("Style", Style)
+                from style
+                in styleCategory.Styles
+                select XML.SaveStyle("Style", style)
             );
 
             return element;
@@ -42,17 +42,17 @@ namespace Retouch_Photo2.Styles
         /// <returns> The loaded <see cref="IStyle"/>s. </returns>
         private static StyleCategory LoadStyleCategory(XElement element)
         {
-            StyleCategory StyleCategory = new StyleCategory();
-            if (element.Attribute("Name") is XAttribute name) StyleCategory.Name = name.Value;
-
-            StyleCategory.Styles =
+            StyleCategory styleCategory = new StyleCategory();
+            if (element.Attribute("Name") is XAttribute name) styleCategory.Name = name.Value;
+            if (element.Element("Strings") is XElement strings) styleCategory.Strings = Retouch_Photo2.Elements.XML.LoadStrings(strings);
+            styleCategory.Styles =
             (
-                from Style
+                from style
                 in element.Elements("Style")
-                select XML.LoadStyle(Style)
+                select XML.LoadStyle(style)
             ).ToList();
 
-            return StyleCategory;
+            return styleCategory;
         }
 
     }

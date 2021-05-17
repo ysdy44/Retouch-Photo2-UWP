@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:local="using:Retouch_Photo2.Menus"
+    xmlns:styles="using:Retouch_Photo2.Styles"
     mc:Ignorable="d"              
     MinHeight="165"
     d:DesignWidth="200"
@@ -24,6 +24,7 @@
                       CanDragItems="True"
                       AllowDrop="True"
                       ItemsSource="{x:Bind ControlCategorys, Mode=OneWay}"
+                      SelectedItem="{x:Bind SelectedControlCategory, Mode=OneWay}"
                       >
 
                 <ListView.ItemContainerStyle>
@@ -37,8 +38,8 @@
                 </ListView.ItemContainerStyle>
 
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local:StyleShowControlCategory">
-                        <TextBlock Text="{x:Bind Name, Mode=OneWay}"/>
+                    <DataTemplate x:DataType="styles:StyleShowControlCategory">
+                        <TextBlock Text="{x:Bind Title, Mode=OneWay}" FontWeight="{x:Bind Weight, Mode=OneWay}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
@@ -117,6 +118,7 @@
               CanReorderItems="True"
               CanDragItems="True"
               AllowDrop="True"
+              ItemsSource="{x:Bind SelectedControlCategory, Mode=OneWay}"
               >
 
 
@@ -142,8 +144,15 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <ListViewItem x:Name="Button" IsEnabled="False" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-                        <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
+                    <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}"
+                                  IsEnabled="{x:Bind IsEnableConverter(SelectedControlCategory), Mode=OneWay}">
+                        <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}"
+                                        Content="{x:Bind SelectedControlCategory, Mode=OneWay}">
+                            <ContentControl.ContentTemplate>
+                                <DataTemplate x:DataType="styles:StyleShowControlCategory">
+                                    <TextBlock Text="{x:Bind Title, Mode=OneWay}" FontWeight="{x:Bind Weight, Mode=OneWay}"/>
+                                </DataTemplate>
+                            </ContentControl.ContentTemplate>
                             <ContentControl.Tag>
                                 <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                             </ContentControl.Tag>
