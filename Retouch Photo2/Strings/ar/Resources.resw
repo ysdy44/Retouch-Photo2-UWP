@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>إنقاذ</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>حفظ بنجاح</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>فشل الحفظ</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>ضبط</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>توثيق</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>جيثب</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>استجابة</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>نمط المجموعة هو مقياس Stroke Width مع Layer</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>تعيين مرشح</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>ضبط</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>خلف</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>حول...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>حول...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>محاذاة لليسار</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>مركز المحاذاة</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>محاذاة اليمين</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>ضبط</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>اندفاع</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>اندفاع</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>عرض</value></data>

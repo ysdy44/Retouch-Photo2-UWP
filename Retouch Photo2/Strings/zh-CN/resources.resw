@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>保存中</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>保存成功</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>保存失败</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>设置</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>文档</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>反馈</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>设置描边宽度是否跟随缩放</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>设置滤镜</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>修图2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>设置</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>返回</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>关于...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>关于...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>左对齐</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>居中对齐</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>右对齐</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>设置</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>破折</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>破折</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>宽度</value></data>

@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>保存</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>正常に保存</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>保存に失敗しました</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>設定</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>ドキュメンテーション</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>フィードバック</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>セットスタイルは、レイヤー付きのストローク幅スケールです。</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>フィルタを設定します</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>設定</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>バック</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>約...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>約...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>左揃え</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>センターを揃える</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>右揃え</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>設定</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>ダッシュ</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>ダッシュ</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>幅</value></data>

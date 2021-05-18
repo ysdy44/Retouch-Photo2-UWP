@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>Sparen</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>Erfolgreich gespeichert</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>Gespeichert fehlgeschlagen</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>Rahmen</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>Dokumentation</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>Feedback</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Der festgelegte Stil ist die Strichbreitenskala mit Ebene</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Filter einstellen</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>Rahmen</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>Zurück</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>Über...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>Über...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Linksbündig</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Im Zentrum anordnen</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Rechts ausrichten</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>Rahmen</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Strich</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Strich</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Breite</value></data>

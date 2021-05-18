@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>Besparing</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>Met succes opgeslagen</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>Opgeslagen mislukt</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>Instelling</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>Documentatie</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>Feedback</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>De stijl van de set is de schaal van de lijnbreedte met laag</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Filter instellen</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>Instelling</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>Terug</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>Over...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>Over...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Links uitlijnen</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Tekst in het midden uitlijnen</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Rechts uitlijnen</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>Instelling</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Breedte</value></data>

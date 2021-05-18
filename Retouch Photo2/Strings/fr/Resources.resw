@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>Économie</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>Enregistré avec succès</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>Échec de l'enregistrement</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>Réglage</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>Documentation</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>Retour d'information</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Définir le style est l'échelle de largeur de trait avec calque</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Définir le filtre</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>Réglage</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>Retour</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>À propos de...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>À propos de...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Alignez à gauche</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Aligner au centre</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Aligner à droite</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>Réglage</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Tiret</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Tiret</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Largeur</value></data>

@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>절약</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>성공적으로 저장되었다</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>저장 실패</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>환경</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>선적 서류 비치</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>피드백</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>설정된 스타일은 레이어가있는 스트로크 너비 배율입니다.</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>필터 설정</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>환경</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>뒤</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>약...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>약...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>왼쪽 정렬</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>중앙 정렬</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>오른쪽 정렬</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>환경</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>대시</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>대시</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>폭</value></data>

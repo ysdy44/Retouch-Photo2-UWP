@@ -72,7 +72,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>Ahorro</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>Guardado exitosamente</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>Guardado falló</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>Configuración</value></data>
 <data name='$SettingPage_Documentation' xml:space='preserve'><value>Documentación</value></data>
 <data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
 <data name='$SettingPage_Feedback' xml:space='preserve'><value>Realimentación</value></data>
@@ -544,6 +543,7 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Establecer el estilo es la escala de ancho de trazo con capa</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Establecer filtro</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>Configuración</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>atrás</value></data>
 <data name='$SettingPage_About' xml:space='preserve'><value>Sobre...</value></data>
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>Sobre...</value></data>
@@ -714,6 +714,7 @@
 <data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Alinear a la izquierda</value></data>
 <data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Alinear al centro</value></data>
 <data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Alinear a la derecha</value></data>
+<data name='Texts_FontFamilySetting' xml:space='preserve'><value>Configuración</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Pizca</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Pizca</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Ancho</value></data>
