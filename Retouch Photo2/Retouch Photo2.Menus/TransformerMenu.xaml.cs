@@ -306,7 +306,7 @@ namespace Retouch_Photo2.Menus
             this.ConstructIndicatorControl();
 
 
-            base.SizeChanged += (s, e) =>
+            this.SplitView.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
                 this.SplitView.OpenPaneLength = e.NewSize.Width;
