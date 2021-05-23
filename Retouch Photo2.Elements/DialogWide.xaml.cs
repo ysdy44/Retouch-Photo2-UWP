@@ -77,6 +77,9 @@ namespace Retouch_Photo2.Elements
         }
 
 
+        public bool IsShow => this._vsIsShow;
+
+
         //@Construct
         /// <summary>
         /// Initializes a DialogWide. 
