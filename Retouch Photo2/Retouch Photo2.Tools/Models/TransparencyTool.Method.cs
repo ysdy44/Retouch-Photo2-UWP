@@ -1,6 +1,8 @@
 ﻿using HSVColorPickers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Photos;
 using System.Numerics;
@@ -87,6 +89,33 @@ namespace Retouch_Photo2.Tools.Models
                 getUndo: (style) => style.StartingTransparency,
                 setUndo: (style, previous) => style.Transparency = previous.Clone()
             );
+        }
+
+        private void TransparencyCursor(Vector2 point)
+        {
+            if (this.Transparency == null) return;
+
+            //Contains Operate Mode
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+            BrushHandleMode handleMode = this.Transparency.ContainsHandleMode(point, matrix);
+
+            //Cursor
+            switch (handleMode)
+            {
+                case BrushHandleMode.Center:
+                case BrushHandleMode.XPoint:
+                case BrushHandleMode.YPoint:
+                case BrushHandleMode.ToInitializeController:
+                    //Cursor
+                    CoreCursorExtension.IsPointerEntered = true;
+                    CoreCursorExtension.Cross();
+                    break;
+                default:
+                    //Cursor
+                    CoreCursorExtension.IsPointerEntered = false;
+                    CoreCursorExtension.Cross();
+                    break;
+            }
         }
 
     }
