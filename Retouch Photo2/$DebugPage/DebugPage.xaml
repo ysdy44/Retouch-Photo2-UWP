@@ -447,19 +447,19 @@
                             </Border>
                             <Border>
                                 <Border.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//MirroredIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons/MirroredIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource MirroredIcon}"/>
                             </Border>
                             <Border>
                                 <Border.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//DisconnectedIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons/DisconnectedIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource DisconnectedIcon}"/>
                             </Border>
                             <Border>
                                 <Border.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//AsymmetricIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons/AsymmetricIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource AsymmetricIcon}"/>
                             </Border>
