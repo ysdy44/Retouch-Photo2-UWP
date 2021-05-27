@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Ohne Titel</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -228,6 +228,7 @@
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-Achse</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Fernbedienung positionieren</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anker</value></data>
+<data name='Menus_Pantone' xml:space='preserve'><value>Pantone</value></data>
 <data name='Menus_Layer' xml:space='preserve'><value>Schicht</value></data>
 <data name='Menus_Layer_Name' xml:space='preserve'><value>Name</value></data>
 <data name='Menus_Layer_BlendMode' xml:space='preserve'><value>Mischmodus</value></data>
