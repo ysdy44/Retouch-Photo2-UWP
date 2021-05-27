@@ -68,8 +68,10 @@ namespace Retouch_Photo2.Menus
                 case MenuType.Transformer: return new FanKit.Transformers.Icon();
 
                 case MenuType.Layer: return new Retouch_Photo2.Layers.Icon();
+              
+                case MenuType.Pantone: return new PantoneIcon();
                 case MenuType.Color: return new ColorIcon();
-                    
+
                 default: return null;
             }
         }

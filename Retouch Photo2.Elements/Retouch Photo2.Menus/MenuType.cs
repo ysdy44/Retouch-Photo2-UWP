@@ -23,6 +23,8 @@
         Transformer,
 
         Layer,
-        Color
+
+        Pantone,
+        Color,
     }
 }

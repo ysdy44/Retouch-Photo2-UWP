@@ -191,6 +191,9 @@
     <Compile Include="Retouch Photo2.Menus\AdjustmentMenu.xaml.cs">
       <DependentUpon>AdjustmentMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\PantoneIcon.xaml.cs">
+      <DependentUpon>PantoneIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Menus\ColorIcon.xaml.cs">
       <DependentUpon>ColorIcon.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,9 @@
     </Compile>
     <Compile Include="Retouch Photo2.Menus\OperateMenu.xaml.cs">
       <DependentUpon>OperateMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\PantoneMenu.xaml.cs">
+      <DependentUpon>PantoneMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\StrokeMenu.xaml.cs">
       <DependentUpon>StrokeMenu.xaml</DependentUpon>
@@ -535,6 +541,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Menus\PantoneIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Retouch Photo2.Menus\ColorIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -570,6 +580,10 @@
     <Page Include="Retouch Photo2.Menus\OperateMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\PantoneMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\StrokeMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
