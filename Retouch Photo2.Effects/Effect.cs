@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Effects
         }
         private float outerShadow_Angle = FanKit.Math.PiOver4;
         /// <summary> Starting outer-shadow's angle. </summary>
-        public float StartingOuterShadow_Angle { get; private set; }    
+        public float StartingOuterShadow_Angle { get; private set; }
         private Vector2 OuterShadow_Position = Vector2.Zero;
         /// <summary> Cache outer-shadow. </summary>
         public void CacheOuterShadow()
@@ -246,7 +246,7 @@ namespace Retouch_Photo2.Effects
                 GaussianBlur_IsOn = this.GaussianBlur_IsOn,
                 GaussianBlur_Radius = this.GaussianBlur_Radius,
                 GaussianBlur_BorderMode = this.GaussianBlur_BorderMode,
-                
+
                 //DirectionalBlur
                 DirectionalBlur_IsOn = this.DirectionalBlur_IsOn,
                 DirectionalBlur_Radius = this.DirectionalBlur_Radius,
@@ -299,7 +299,7 @@ namespace Retouch_Photo2.Effects
             //GaussianBlur
             if (effect.GaussianBlur_IsOn)
             {
-                image = new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
+                image = new GaussianBlurEffect
                 {
                     Source = image,
                     BlurAmount = effect.GaussianBlur_Radius,
@@ -310,7 +310,7 @@ namespace Retouch_Photo2.Effects
             //DirectionalBlur
             if (effect.DirectionalBlur_IsOn)
             {
-                image = new Microsoft.Graphics.Canvas.Effects.DirectionalBlurEffect
+                image = new DirectionalBlurEffect
                 {
                     Source = image,
                     BlurAmount = effect.DirectionalBlur_Radius,
@@ -332,17 +332,18 @@ namespace Retouch_Photo2.Effects
             //OuterShadow
             if (effect.OuterShadow_IsOn)
             {
-                image = new Microsoft.Graphics.Canvas.Effects.CompositeEffect
+                image = new CompositeEffect
                 {
                     Sources =
                 {
-                     new Microsoft.Graphics.Canvas.Effects.Transform2DEffect
+                     new Transform2DEffect
                      {
-                          TransformMatrix = Matrix3x2.CreateTranslation(effect.OuterShadow_Position),
-                          Source = new Microsoft.Graphics.Canvas.Effects.OpacityEffect
+                         InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
+                         TransformMatrix = Matrix3x2.CreateTranslation(effect.OuterShadow_Position),
+                          Source = new OpacityEffect
                           {
                               Opacity = effect.OuterShadow_Opacity,
-                              Source = new Microsoft.Graphics.Canvas.Effects.ShadowEffect
+                              Source = new ShadowEffect
                               {
                                    Source = image,
                                    BlurAmount = effect.OuterShadow_Radius,
@@ -358,7 +359,7 @@ namespace Retouch_Photo2.Effects
             //Edge
             if (effect.Edge_IsOn)
             {
-                image = new Microsoft.Graphics.Canvas.Effects.EdgeDetectionEffect
+                image = new EdgeDetectionEffect
                 {
                     Source = image,
                     Amount = effect.Edge_Amount,
@@ -369,7 +370,7 @@ namespace Retouch_Photo2.Effects
             //Morphology
             if (effect.Morphology_IsOn)
             {
-                image = new Microsoft.Graphics.Canvas.Effects.MorphologyEffect
+                image = new MorphologyEffect
                 {
                     Source = image,
                     Mode = effect.Morphology_Mode,
@@ -381,7 +382,7 @@ namespace Retouch_Photo2.Effects
             //Emboss
             if (effect.Emboss_IsOn)
             {
-                image = new Microsoft.Graphics.Canvas.Effects.EmbossEffect
+                image = new EmbossEffect
                 {
                     Source = image,
                     Amount = effect.Emboss_Radius,

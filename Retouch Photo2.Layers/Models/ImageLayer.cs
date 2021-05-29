@@ -110,8 +110,9 @@ namespace Retouch_Photo2.Layers.Models
             Matrix3x2 matrix = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
             Transform2DEffect effect = new Transform2DEffect
             {
+                InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
                 TransformMatrix = matrix,
-                Source = this.bitmap,
+                Source = this.bitmap
             };
 
             if (this.Transform.IsCrop == false)

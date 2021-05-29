@@ -79,8 +79,9 @@ namespace Retouch_Photo2.ViewModels
 
             drawingSession.DrawImage(new Transform2DEffect
             {
-                Source = canvasImage,
-                TransformMatrix = this.CanvasTransformer.GetMatrix()
+                InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
+                TransformMatrix = this.CanvasTransformer.GetMatrix(),
+                Source = canvasImage
             });
         }
 
@@ -116,6 +117,7 @@ namespace Retouch_Photo2.ViewModels
 
                     drawingSession.DrawImage(new Transform2DEffect
                     {
+                        InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                         TransformMatrix = matrix,
                         Source = canvasImage
                     });
@@ -132,7 +134,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="dpi"> The dpi. </param>
         /// <param name="isClearWhite"> Clears to the white color. </param>
         /// <returns> The image. </returns>
-        public CanvasRenderTarget Render(float width, float height , float dpi, bool isClearWhite = true)
+        public CanvasRenderTarget Render(float width, float height, float dpi, bool isClearWhite = true)
         {
             CanvasRenderTarget renderTarget = new CanvasRenderTarget(LayerManager.CanvasDevice, width, height, dpi);
 
@@ -158,10 +160,11 @@ namespace Retouch_Photo2.ViewModels
 
                         drawingSession.DrawImage(new Transform2DEffect
                         {
+                            InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                             TransformMatrix = matrix,
                             Source = canvasImage
                         });
-                    }                        
+                    }
                 }
             }
 
