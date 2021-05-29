@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class GrayPage : Page, IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

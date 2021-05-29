@@ -237,7 +237,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class StyleMenu : Expander
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -249,7 +249,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

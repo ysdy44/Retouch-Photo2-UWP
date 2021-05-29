@@ -14,7 +14,7 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //TaskCompletionSource
+        // TaskCompletionSource
         private TaskCompletionSource<string> RenameTaskSource;
 
         private async Task<string> ShowRenameDialogTask(string placeholderText)
@@ -45,7 +45,7 @@ namespace Retouch_Photo2
         //////////////////////////
 
 
-        //Rename
+        // Rename
         private void ConstructRenameDialog()
         {
             this.RenameDialog.SecondaryButtonClick += (s, e) => this.RenameDialogTrySetResult(null, null);
@@ -65,10 +65,10 @@ namespace Retouch_Photo2
             string name = await this.ShowRenameDialogTask(placeholderText);
             if (string.IsNullOrEmpty(name)) return;
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetName);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.LayerName = name;
             this.SelectionViewModel.SetValue((layerage) =>
             {
@@ -76,7 +76,7 @@ namespace Retouch_Photo2
 
                 if (layer.Name != name)
                 {
-                    //History
+                    // History
                     var previous = layer.Name;
                     history.UndoAction += () =>
                     {
@@ -87,7 +87,7 @@ namespace Retouch_Photo2
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
         }
 
@@ -95,7 +95,7 @@ namespace Retouch_Photo2
         //////////////////////////
 
 
-        //Transition
+        // Transition
         /// <summary> The transition data. </summary>
         Rect? _lockSourceRect;
 
@@ -112,12 +112,12 @@ namespace Retouch_Photo2
         }
 
 
-        //Staring
+        // Staring
         private void TransitionStaring()
         {
             this.LoadingControl.State = LoadingState.LoadingWithProgress;
 
-            //Destination
+            // Destination
             Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
             float destinationWidth = this.SettingViewModel.CanvasWidth;
             float destinationHeight = this.SettingViewModel.CanvasHeight;
@@ -126,33 +126,33 @@ namespace Retouch_Photo2
 
             if (this._lockSourceRect is Rect data)
             {
-                //Source
+                // Source
                 this.ViewModel.CanvasTransformer.TransitionSource(data);
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
 
-                this.LoadingControl.Begin();//Storyboard
+                this.LoadingControl.Begin(); // Storyboard
             }
             else this.TransitionComplete();
         }
 
-        //Delta
+        // Delta
         private void TransitionDelta(float value)
         {
             this.ViewModel.CanvasTransformer.Transition(value);
-            this.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.None); // Invalidate
         }
 
-        //Complete
+        // Complete
         private void TransitionComplete()
         {
             this.LoadingControl.State = LoadingState.None;
 
-            //Transition
+            // Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
 
             this.DrawLayout.IsFullScreen = false;
 
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
 
 

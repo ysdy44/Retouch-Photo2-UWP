@@ -28,19 +28,19 @@ namespace Retouch_Photo2.Layers
                     yield return photocopier;
                 }
 
-                //ImageLayer
+                // ImageLayer
                 if (layer.Type == LayerType.Image)
                 {
                     ImageLayer imageLayer = (ImageLayer)layer;
                     yield return imageLayer.Photocopier;
                 }
 
-                //Fill
+                // Fill
                 if (layer.Style.Fill.Type == BrushType.Image)
                 {
                     yield return layer.Style.Fill.Photocopier;
                 }
-                //Stroke
+                // Stroke
                 if (layer.Style.Stroke.Type == BrushType.Image)
                 {
                     yield return layer.Style.Stroke.Photocopier;

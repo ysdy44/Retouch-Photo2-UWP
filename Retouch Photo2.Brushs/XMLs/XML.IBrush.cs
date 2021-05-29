@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Brushs
             XElement element = new XElement(elementName);
             element.Add(new XAttribute("Type", brush.Type));
 
-            //SaveWith
+            // SaveWith
             {
                 brush.SaveWith(element);
             }
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Brushs
                 catch (Exception) { }
             }
 
-            //Load
+            // Load
             {
                 brush.Load(element);
             }

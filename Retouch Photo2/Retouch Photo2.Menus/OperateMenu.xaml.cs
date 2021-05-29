@@ -63,25 +63,25 @@ namespace Retouch_Photo2.Menus
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix); // Method
             };
             this.Transform_FlipVertical.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix); // Method
             };
             this.Transform_RotateLeft.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix); // Method
             };
             this.Transform_RotateRight.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix); // Method
             };
 
             this.Arrange_MoveBack.Tapped += (s, e) => this.MoveBack();
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class OperateMenu : Expander
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.Menus
         {
             if (this.Mode != ListViewSelectionMode.Single) return;
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
             this.ViewModel.HistoryPush(history);
 
@@ -165,13 +165,13 @@ namespace Retouch_Photo2.Menus
             parents.Children.Add(destination);
 
             LayerManager.ArrangeLayers();
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         private void BackOne()
         {
             if (this.Mode != ListViewSelectionMode.Single) return;
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
             this.ViewModel.HistoryPush(history);
 
@@ -189,13 +189,13 @@ namespace Retouch_Photo2.Menus
             parents.Children.Insert(index, destination);
 
             LayerManager.ArrangeLayers();
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         private void ForwardOne()
         {
             if (this.Mode != ListViewSelectionMode.Single) return;
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
             this.ViewModel.HistoryPush(history);
 
@@ -213,13 +213,13 @@ namespace Retouch_Photo2.Menus
             parents.Children.Insert(index, destination);
 
             LayerManager.ArrangeLayers();
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         private void MoveFront()
         {
             if (this.Mode != ListViewSelectionMode.Single) return;
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
             this.ViewModel.HistoryPush(history);
 
@@ -231,7 +231,7 @@ namespace Retouch_Photo2.Menus
             parents.Children.Insert(0, destination);
 
             LayerManager.ArrangeLayers();
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
 
@@ -257,10 +257,10 @@ namespace Retouch_Photo2.Menus
 
         private void TransformAlign(float positionValue, BorderMode borderMode, Orientation orientation)
         {
-            //History
+            // History
             LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 Transformer transformer = layerage.GetActualTransformer();
@@ -276,10 +276,10 @@ namespace Retouch_Photo2.Menus
                 {
                     ILayer layer = layerage2.Self;
 
-                    //History
+                    // History
                     history.PushTransform(layer, vector);
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -291,13 +291,13 @@ namespace Retouch_Photo2.Menus
                 });
 
             });
-            //Refactoring
+            // Refactoring
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate}
+            this.ViewModel.Invalidate(); // Invalidate}
         }
     }
 
@@ -326,19 +326,19 @@ namespace Retouch_Photo2.Menus
         /// </summary>
         private void TransformSapce(IEnumerable<Layerage> layerages, int count, Orientation orientation)
         {
-            //Layerage, Min, Center, Max, Length
+            // Layerage, Min, Center, Max, Length
             var borders = orientation == Orientation.Horizontal ?
                 from layerage in layerages select this._getBorderX(layerage) :
                 from layerage in layerages select this._getBorderY(layerage);
 
-            float min = borders.Min(border => border.Min);//Min
-            float max = borders.Max(border => border.Max);//Max
+            float min = borders.Min(border => border.Min); // Min
+            float max = borders.Max(border => border.Max); // Max
 
-            float lengthSum = borders.Sum(border => border.Length);//Sum of Length
-            float space = ((max - min) - lengthSum) / (count - 1);//Between [ previous.Max ] and [ current.Min ].
+            float lengthSum = borders.Sum(border => border.Length); // Sum of Length
+            float space = ((max - min) - lengthSum) / (count - 1); // Between [ previous.Max ] and [ current.Min ].
 
 
-            //History
+            // History
             LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
 
@@ -350,22 +350,22 @@ namespace Retouch_Photo2.Menus
                 Layerage layerage = border.Layerage;
 
                 float distance = postionMin - border.Min;
-                postionMin += border.Length + space;//Sum
+                postionMin += border.Length + space; // Sum
 
                 if (distance == 0) continue;
                 Vector2 vector = orientation == Orientation.Horizontal ?
                     new Vector2(distance, 0) :
                     new Vector2(0, distance);
 
-                //Selection
+                // Selection
                 layerage.SetValueWithChildren((layerage2) =>
                 {
                     ILayer layer = layerage2.Self;
 
-                    //History
+                    // History
                     history.PushTransform(layer, vector);
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
                     layer.CacheTransform();
@@ -373,10 +373,10 @@ namespace Retouch_Photo2.Menus
                 });
             }
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
         private (Layerage Layerage, float Min, float Center, float Max, float Length) _getBorderX(Layerage layerage)

@@ -29,17 +29,17 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint == false) this._previewLeft = canvasPoint;
             this._previewRight = canvasPoint;
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.Cross();
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         private void PreviewDelta(Vector2 canvasPoint)
         {
             this._previewRight = canvasPoint;
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         private void PreviewComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint, bool isOutNodeDistance)
         {
@@ -57,11 +57,11 @@ namespace Retouch_Photo2.Tools.Models
             {
                 this._hasPreviewTempLeftPoint = true;
 
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsManipulationStarted = false;
                 CoreCursorExtension.Cross();
 
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
             }
         }
 
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Add
+        // Add
         Node _addEndNode;
         Node _addLastNode;
 
@@ -94,21 +94,21 @@ namespace Retouch_Photo2.Tools.Models
             ILayer layer = this.CurveLayer;
             Layerage layerage = this.CurveLayerage;
 
-            //Snap
+            // Snap
             if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
 
             this._addEndNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
             this._addLastNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.Cross();
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         private void AddDelta(Vector2 canvasPoint)
         {
-            //Snap
+            // Snap
             if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
 
             Node node = new Node
@@ -121,14 +121,14 @@ namespace Retouch_Photo2.Tools.Models
             };
             this._addEndNode = node;
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         private void AddComplete(Vector2 canvasPoint)
         {
             ILayer layer = this.CurveLayer;
             Layerage layerage = this.CurveLayerage;
 
-            //Snap
+            // Snap
             if (this.IsSnap)
             {
                 canvasPoint = this.Snap.Snap(canvasPoint);
@@ -136,21 +136,21 @@ namespace Retouch_Photo2.Tools.Models
             }
 
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_AddNode);
 
-            //History
+            // History
             var previous = layer.Nodes.NodesClone().ToList();
             history.UndoAction += () =>
             {
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layer.Nodes.NodesReplace(previous);
             };
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
 
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Tools.Models
             layer.Nodes.PenAdd(node);
 
 
-            //Refactoring
+            // Refactoring
             layer.IsRefactoringTransformer = true;
             layer.IsRefactoringRender = true;
             layer.IsRefactoringIconRender = true;
@@ -174,11 +174,11 @@ namespace Retouch_Photo2.Tools.Models
             layerage.RefactoringParentsRender();
             layerage.RefactoringParentsIconRender();
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.Cross();
 
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
 
         private void AddDraw(CanvasDrawingSession drawingSession)
@@ -190,14 +190,14 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 endPoint = Vector2.Transform(this._addEndNode.Point, matrix);
 
 
-            //Geometry
+            // Geometry
             ICanvasBrush canvasBrush = layer.Style.Stroke.GetICanvasBrush(LayerManager.CanvasDevice);
             float strokeWidth = layer.Style.StrokeWidth;
             CanvasStrokeStyle strokeStyle = layer.Style.StrokeStyle;
             drawingSession.DrawLine(lastPoint, endPoint, canvasBrush, strokeWidth, strokeStyle);
 
 
-            //Draw
+            // Draw
             drawingSession.DrawLine(lastPoint, endPoint, this.ViewModel.AccentColor);
             drawingSession.DrawWireframe(layer, matrix, this.ViewModel.AccentColor);
 
@@ -205,7 +205,7 @@ namespace Retouch_Photo2.Tools.Models
             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
 
 
-            //Snapping
+            // Snapping
             if (this.IsSnap)
             {
                 this.Snap.Draw(drawingSession, matrix);

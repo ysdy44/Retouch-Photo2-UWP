@@ -69,8 +69,8 @@ namespace Retouch_Photo2.Tools.Models
 
             if (e.NewValue is double value)
             {
-                control.ViewModel.SetCanvasTransformerRadian((float)value);//CanvasTransformer
-                control.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+                control.ViewModel.SetCanvasTransformerRadian((float)value); // CanvasTransformer
+                control.ViewModel.Invalidate(InvalidateMode.None); // Invalidate
             }
         }));
 
@@ -88,8 +88,8 @@ namespace Retouch_Photo2.Tools.Models
 
             if (e.NewValue is double value)
             {
-                control.ViewModel.SetCanvasTransformerScale((float)value);//CanvasTransformer
-                control.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+                control.ViewModel.SetCanvasTransformerScale((float)value); // CanvasTransformer
+                control.ViewModel.Invalidate(InvalidateMode.None); // Invalidate
             }
         }));
 
@@ -130,34 +130,34 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            //Tip
+            // Tip
             this.ViewModel.SetTipTextPosition();
             this.ViewModel.TipTextVisibility = Visibility.Visible;
 
             this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.SizeAll();
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            //Tip
+            // Tip
             this.ViewModel.SetTipTextPosition();
 
             this.ViewModel.CanvasTransformer.Move(point);
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            //Tip
+            // Tip
             this.ViewModel.TipTextVisibility = Visibility.Collapsed;
 
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.SizeAll();
         }
@@ -180,7 +180,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class ViewTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -198,13 +198,13 @@ namespace Retouch_Photo2.Tools.Models
             // Binding own DependencyProperty to the Storyboard
             Storyboard.SetTarget(this.RadianKeyFrames, this);
             Storyboard.SetTargetProperty(this.RadianKeyFrames, "Radian");
-            this.RadianStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.RadianStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
             this.RadianClearButton.Tapped += (s, e) =>
             {
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
 
                 this.Radian = this.ViewModel.CanvasTransformer.Radian;
-                this.RadianStoryboard.Begin();//Storyboard
+                this.RadianStoryboard.Begin(); // Storyboard
             };
         }
 
@@ -215,8 +215,8 @@ namespace Retouch_Photo2.Tools.Models
             this.RadianPicker.ValueChanged += (sender, value) =>
             {
                 float radian = ViewRadianConverter.NumberToRadian((int)value);
-                this.ViewModel.SetCanvasTransformerRadian(radian);//CanvasTransformer
-                this.ViewModel.Invalidate();//Invalidate
+                this.ViewModel.SetCanvasTransformerRadian(radian); // CanvasTransformer
+                this.ViewModel.Invalidate(); // Invalidate
             };
         }
 
@@ -224,14 +224,14 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.RadianSlider.Minimum = ViewRadianConverter.MinValue;
             this.RadianSlider.Maximum = ViewRadianConverter.MaxValue;
-            this.RadianSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.RadianSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
             this.RadianSlider.ValueChangeDelta += (sender, value) =>
             {
                 float radian = ViewRadianConverter.ValueToRadian(value);
-                this.ViewModel.SetCanvasTransformerRadian(radian);//CanvasTransformer
-                this.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+                this.ViewModel.SetCanvasTransformerRadian(radian); // CanvasTransformer
+                this.ViewModel.Invalidate(InvalidateMode.None); // Invalidate
             };
-            this.RadianSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.RadianSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
 
 
@@ -240,13 +240,13 @@ namespace Retouch_Photo2.Tools.Models
             //  Binding own DependencyProperty to the Storyboard
             Storyboard.SetTarget(this.ScaleKeyFrames, this);
             Storyboard.SetTargetProperty(this.ScaleKeyFrames, "Scale");
-            this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
             this.ScaleClearButton.Tapped += (s, e) =>
             {
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
 
                 this.Scale = this.ViewModel.CanvasTransformer.Scale;
-                this.ScaleStoryboard.Begin();//Storyboard
+                this.ScaleStoryboard.Begin(); // Storyboard
             };
         }
 
@@ -257,8 +257,8 @@ namespace Retouch_Photo2.Tools.Models
             this.ScalePicker.ValueChanged += (sender, value) =>
             {
                 float scale = ViewScaleConverter.NumberToScale((int)value);
-                this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer
-                this.ViewModel.Invalidate();//Invalidate
+                this.ViewModel.SetCanvasTransformerScale(scale); // CanvasTransformer
+                this.ViewModel.Invalidate(); // Invalidate
             };
         }
 
@@ -266,14 +266,14 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.ScaleSlider.Minimum = ViewScaleConverter.MinValue;
             this.ScaleSlider.Maximum = ViewScaleConverter.MaxValue;
-            this.ScaleSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ScaleSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
             this.ScaleSlider.ValueChangeDelta += (sender, value) =>
             {
                 float scale = ViewScaleConverter.ValueToScale(value);
-                this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer
-                this.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+                this.ViewModel.SetCanvasTransformerScale(scale); // CanvasTransformer
+                this.ViewModel.Invalidate(InvalidateMode.None); // Invalidate
             };
-            this.ScaleSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ScaleSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
 
     }

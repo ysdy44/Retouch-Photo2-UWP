@@ -8,7 +8,7 @@ namespace Microsoft.Toolkit.Uwp.UI
     public static partial class TextBoxExtensions
     {
         /// <summary>
-        /// Regex validation mode.
+        ///Regex validation mode.
         /// </summary>
         public enum ValidationMode
         {

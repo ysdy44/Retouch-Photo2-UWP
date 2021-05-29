@@ -18,7 +18,7 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //TaskCompletionSource
+        // TaskCompletionSource
         private TaskCompletionSource<Photo> GalleryTaskSource;
 
         private async Task<Photo> ShowGalleryDialogTask()
@@ -45,13 +45,13 @@ namespace Retouch_Photo2
         //////////////////////////
 
 
-        //Gallery
+        // Gallery
         private void ConstructGalleryDialog()
         {
             this.GalleryDialog.CloseButtonTapped += (s, e) => this.GalleryDialogTrySetResult(null, null);
             this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
             {
-                //Files
+                // Files
                 IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);
                 if (files == null) return;
 
@@ -76,7 +76,7 @@ namespace Retouch_Photo2
 
                     foreach (IStorageItem item in items)
                     {
-                        //Photo
+                        // Photo
                         StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
                         if (copyFile == null) continue;
                         Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
@@ -93,7 +93,7 @@ namespace Retouch_Photo2
         }
 
 
-        //DragAndDrop
+        // DragAndDrop
         private void ConstructDragAndDrop()
         {
             this.AllowDrop = true;
@@ -126,11 +126,11 @@ namespace Retouch_Photo2
             Photo photo = await this.ShowGalleryDialogTask();
             if (photo == null) return;
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
-            //Layer
+            // Layer
             Layerage imageLayerage = Layerage.CreateByGuid();
             ImageLayer imageLayer = new ImageLayer(photo)
             {
@@ -139,26 +139,26 @@ namespace Retouch_Photo2
             };
             LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
 
-            //Mezzanine
+            // Mezzanine
             LayerManager.Mezzanine(imageLayerage);
 
-            this.SelectionViewModel.SetMode();//Selection
+            this.SelectionViewModel.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.ViewModel.Invalidate();//Invalidate     
+            this.ViewModel.Invalidate(); // Invalidate     
         }
         private async Task CopyMultipleImageFilesAndCreateImageLayersAsync(IReadOnlyList<IStorageItem> items)
         {
             if (items == null) return;
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
             IList<Layerage> imageLayerages = new List<Layerage>();
             foreach (IStorageItem item in items)
             {
-                //Photo
+                // Photo
                 StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
                 if (copyFile == null) continue;
                 Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
@@ -166,7 +166,7 @@ namespace Retouch_Photo2
 
                 if (photo == null) continue;
 
-                //Layer
+                // Layer
                 Layerage imageLayerage = Layerage.CreateByGuid();
                 ImageLayer imageLayer = new ImageLayer(photo)
                 {
@@ -177,13 +177,13 @@ namespace Retouch_Photo2
                 imageLayerages.Add(imageLayerage);
             }
 
-            //Mezzanine
+            // Mezzanine
             LayerManager.MezzanineRange(imageLayerages);
 
-            this.SelectionViewModel.SetMode();//Selection
+            this.SelectionViewModel.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.ViewModel.Invalidate();//Invalidate     
+            this.ViewModel.Invalidate(); // Invalidate     
         }
 
     }

@@ -32,14 +32,14 @@ namespace Retouch_Photo2
             string untitled = this.Untitled;
             string name = this.UntitledRenameByRecursive(untitled);
 
-            //Project
+            // Project
             Project project = new Project
             {
                 Width = width,
                 Height = height,
             };
 
-            //Item
+            // Item
             IProjectViewItem item = new ProjectViewItem
             {
                 Name = name,
@@ -49,7 +49,7 @@ namespace Retouch_Photo2
             this.Items.Insert(0, item);
 
             this.LoadingControl.State = LoadingState.None;
-            this.Frame.Navigate(typeof(DrawPage), item);//Navigate
+            this.Frame.Navigate(typeof(DrawPage), item); // Navigate
         }
 
 
@@ -61,7 +61,7 @@ namespace Retouch_Photo2
         {
             this.LoadingControl.State = LoadingState.Loading;
 
-            //FileUtil
+            // FileUtil
             string name = item.Name;
             if (name == null || name == string.Empty)
             {
@@ -71,7 +71,7 @@ namespace Retouch_Photo2
                 return;
             }
 
-            //FileUtil
+            // FileUtil
             await FileUtil.DeleteAllInTemporaryFolder();
             bool isExists = await FileUtil.MoveAllInZipFolderToTemporaryFolder(name);
             if (isExists == false)
@@ -83,7 +83,7 @@ namespace Retouch_Photo2
             }
 
 
-            //Load all photos file. 
+            // Load all photos file. 
             Photo.Instances.Clear();
             Photo.InstancesCollection.Clear();
             IEnumerable<Photo> photos = XML.LoadPhotosFile();
@@ -98,7 +98,7 @@ namespace Retouch_Photo2
                 }
             }
 
-            //Load all layers file. 
+            // Load all layers file. 
             LayerBase.Instances.Clear();
             IEnumerable<ILayer> layers = XML.LoadLayersFile();
             if (layers != null)
@@ -110,7 +110,7 @@ namespace Retouch_Photo2
                 }
             }
 
-            //Load project file. 
+            // Load project file. 
             Project project = XML.LoadProjectFile();
             if (project == null)
             {
@@ -120,12 +120,12 @@ namespace Retouch_Photo2
                 return;
             }
 
-            //Item
+            // Item
             item.Project = project;
             item.RenderImageVisualRect(Window.Current.Content);
 
             this.LoadingControl.State = LoadingState.None;
-            this.Frame.Navigate(typeof(DrawPage), item);//Navigate   
+            this.Frame.Navigate(typeof(DrawPage), item); // Navigate   
         }
 
 
@@ -154,7 +154,7 @@ namespace Retouch_Photo2
         {
             this.LoadingControl.State = LoadingState.Loading;
 
-            //Photo
+            // Photo
             if (copyFile == null)
             {
                 this.LoadingControl.State = LoadingState.None;
@@ -163,13 +163,13 @@ namespace Retouch_Photo2
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
 
-            //Transformer
+            // Transformer
             string name = this.UntitledRenameByRecursive($"{photo.Name}");
             int width = (int)photo.Width;
             int height = (int)photo.Height;
             Transformer transformerSource = new Transformer(width, height, Vector2.Zero);
 
-            //ImageLayer 
+            // ImageLayer 
             Photocopier photocopier = photo.ToPhotocopier();
             Layerage imageLayerage = Layerage.CreateByGuid();
             ImageLayer imageLayer = new ImageLayer
@@ -180,7 +180,7 @@ namespace Retouch_Photo2
             };
             LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
 
-            //Project
+            // Project
             Project project = new Project
             {
                 Width = width,
@@ -191,7 +191,7 @@ namespace Retouch_Photo2
                 }
             };
 
-            //Item
+            // Item
             IProjectViewItem item = new ProjectViewItem
             {
                 Name = name,
@@ -201,7 +201,7 @@ namespace Retouch_Photo2
             this.Items.Insert(0, item);
 
             this.LoadingControl.State = LoadingState.None;
-            this.Frame.Navigate(typeof(DrawPage), item);//Navigate
+            this.Frame.Navigate(typeof(DrawPage), item); // Navigate
         }
 
     }

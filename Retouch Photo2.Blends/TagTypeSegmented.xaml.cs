@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Blends
             if (e.NewValue is TagType value)
             {
                 control._vsTagType = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -81,14 +81,14 @@ namespace Retouch_Photo2.Blends
             this.ConstructStrings();
             this.ConstructGroup();
 
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
         }
     }
 
     public sealed partial class TagTypeSegmented : UserControl
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -125,8 +125,8 @@ namespace Retouch_Photo2.Blends
                     catch (Exception) { }
 
 
-                    //Button
-                    button.Click += (s, e) => this.TypeChanged?.Invoke(this, type);//Delegate
+                    // Button
+                    button.Click += (s, e) => this.TypeChanged?.Invoke(this, type); // Delegate
 
 
                     Color color = type.ToColor();

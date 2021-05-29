@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Returns a boolean indicating whether the given <see cref="Layerage"/> is equal to this <see cref="LayerBase"/> instance.
+        ///Returns a boolean indicating whether the given <see cref="Layerage"/> is equal to this <see cref="LayerBase"/> instance.
         /// </summary>
         /// <param name="other"> The <see cref="Layerage"/> to compare this instance to. </param>
         /// <returns> True if the other <see cref="Layerage"/> is equal to this instance; False otherwise. </returns>
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers
             return true;
         }
         /// <summary>
-        /// Returns a boolean indicating whether the given <see cref="LayerBase"/> is equal to this <see cref="LayerBase"/> instance.
+        ///Returns a boolean indicating whether the given <see cref="LayerBase"/> is equal to this <see cref="LayerBase"/> instance.
         /// </summary>
         /// <param name="other"> The <see cref="LayerBase"/> to compare this instance to. </param>
         /// <returns> True if the other <see cref="LayerBase"/> is equal to this instance; False otherwise. </returns>

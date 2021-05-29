@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.MethodViewModel.MethodConvertToCurves();
 
-                //Change tools group value.
+                // Change tools group value.
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
@@ -114,7 +114,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -126,7 +126,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class GeometryRoundRectTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -138,7 +138,7 @@ namespace Retouch_Photo2.Tools.Models
             this.MoreToolTip.Content = resource.GetString("Tools_More");
         }
 
-        //Corner
+        // Corner
         private void ConstructCorner1()
         {
             this.CornerPicker.Minimum = 0;

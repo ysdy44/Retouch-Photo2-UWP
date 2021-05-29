@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Strokes
             if (e.NewValue is CanvasDashStyle value)
             {
                 control._vsDash = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -86,16 +86,16 @@ namespace Retouch_Photo2.Strokes
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Solid.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Solid);//Delegate
-            this.Dash2.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dash);//Delegate
-            this.Dot.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dot);//Delegate
-            this.DashDot.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot);//Delegate
+            this.Solid.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Solid); // Delegate
+            this.Dash2.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dash); // Delegate
+            this.Dot.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dot); // Delegate
+            this.DashDot.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot); // Delegate
 
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

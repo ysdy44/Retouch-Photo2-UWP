@@ -37,21 +37,21 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
                     {
-                        //Line: white
+                        // Line: white
                         drawingSession.DrawLine(center, yPoint, Windows.UI.Colors.White, 4);
 
-                        //Circle: white
+                        // Circle: white
                         drawingSession.FillCircle(center, 10, Windows.UI.Colors.White);
                         drawingSession.FillCircle(yPoint, 10, Windows.UI.Colors.White);
 
-                        //Line: accent
+                        // Line: accent
                         drawingSession.DrawLine(center, yPoint, accentColor, 2);
 
                         foreach (CanvasGradientStop stop in this.Stops)
                         {
                             Vector2 position = center * (1.0f - stop.Position) + yPoint * stop.Position;
 
-                            //Circle: stop
+                            // Circle: stop
                             drawingSession.FillCircle(position, 8, accentColor);
                             drawingSession.FillCircle(position, 6, stop.Color);
                         }
@@ -60,15 +60,15 @@ namespace Retouch_Photo2.Brushs
 
                 case BrushType.EllipticalGradient:
                     {
-                        //Line: white
+                        // Line: white
                         drawingSession.DrawLine(center, xPoint, Colors.White, 4);
                         drawingSession.DrawLine(center, yPoint, Colors.White, 4);
 
-                        //Circle: white
+                        // Circle: white
                         drawingSession.FillCircle(center, 10, Colors.White);
                         drawingSession.FillCircle(yPoint, 10, Colors.White);
 
-                        //Line: accent
+                        // Line: accent
                         drawingSession.DrawLine(center, xPoint, accentColor, 2);
                         drawingSession.DrawLine(center, yPoint, accentColor, 2);
 
@@ -76,26 +76,26 @@ namespace Retouch_Photo2.Brushs
                         {
                             Vector2 position = center * (1.0f - stop.Position) + yPoint * stop.Position;
 
-                            //Circle: stop
+                            // Circle: stop
                             drawingSession.FillCircle(position, 8, accentColor);
                             drawingSession.FillCircle(position, 6, stop.Color);
                         }
 
-                        //Circle: node
+                        // Circle: node
                         drawingSession.DrawNode2(xPoint);
                     }
                     break;
                 case BrushType.Image:
                     {
-                        //Line: white
+                        // Line: white
                         drawingSession.DrawLine(center, xPoint, Colors.White, 4);
                         drawingSession.DrawLine(center, yPoint, Colors.White, 4);
 
-                        //Line: accent
+                        // Line: accent
                         drawingSession.DrawLine(center, xPoint, Colors.LimeGreen, 2); 
                         drawingSession.DrawLine(center, yPoint, Colors.Red, 2);
 
-                        //Circle: node
+                        // Circle: node
                         drawingSession.DrawNode2(center);
                         drawingSession.DrawNode2(xPoint);
                         drawingSession.DrawNode2(yPoint);

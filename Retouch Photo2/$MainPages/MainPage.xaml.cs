@@ -46,7 +46,7 @@ namespace Retouch_Photo2
             this.ConstructDragAndDrop();
 
 
-            //MainLayout
+            // MainLayout
             this.MainLayout.GridView.ItemsSource = this.Items;
             this.MainLayout.GridView.IsItemClickEnabled = true;
             this.MainLayout.GridView.ItemClick += (s, e) =>
@@ -90,12 +90,12 @@ namespace Retouch_Photo2
             };
 
 
-            //Select
+            // Select
             this.AllButton.Tapped += (s, e) =>
             {
                 bool isAnyUnSelected = this.Items.Any(p => p.IsSelected == false);
 
-                //Refresh all items select-mode.
+                // Refresh all items select-mode.
                 foreach (IProjectViewItem item in this.Items)
                 {
                     item.IsMultiple = true;
@@ -104,12 +104,12 @@ namespace Retouch_Photo2
 
                 this.RefreshSelectCount();
             };
-            //Head
+            // Head
             this.Head.LeftButtonTapped += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
-            this.Head.RightButtonTapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
+            this.Head.RightButtonTapped += (s, e) => this.Frame.Navigate(typeof(SettingPage)); // Navigate     
 
 
-            //Foot
+            // Foot
             this.ConstructAddDialog();
             this.NewButton.Tapped += (s, e) => this.ShowAddDialog();
 
@@ -137,7 +137,7 @@ namespace Retouch_Photo2
         /// <summary> The current page becomes the active page. </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Setting
+            // Setting
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
             {
                 if (ApplicationLanguages.PrimaryLanguageOverride != this.Language)
@@ -147,7 +147,7 @@ namespace Retouch_Photo2
                 }
             }
 
-            //Extension
+            // Extension
             this.ApplicationView.IsAccent = false;
         }
 

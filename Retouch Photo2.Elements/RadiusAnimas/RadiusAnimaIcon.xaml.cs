@@ -56,13 +56,13 @@ namespace Retouch_Photo2.Elements
 
         private void RootGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.Toggled?.Invoke(this, e);//Delegate 
+            this.Toggled?.Invoke(this, e); // Delegate 
         }
         private void RootGrid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
             {
-                this.Toggled?.Invoke(this, e);//Delegate
+                this.Toggled?.Invoke(this, e); // Delegate
             }
         }
 

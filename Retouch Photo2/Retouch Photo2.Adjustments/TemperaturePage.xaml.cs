@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class TemperaturePage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (layer.Filter.Adjustments[this.Index] is TemperatureAdjustment adjustment)
                 {
-                    //History
+                    // History
                     LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_Temperature);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
                         if (layer.Filter.Adjustments[previous] is TemperatureAdjustment adjustment2)
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             adjustment2.Temperature = previous1;
@@ -121,7 +121,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         }
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -129,10 +129,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                     adjustment.Temperature = 0.0f;
                     adjustment.Tint = 0.0f;
 
-                    //History
+                    // History
                     this.ViewModel.HistoryPush(history);
 
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.ViewModel.Invalidate(); // Invalidate
                 }
             }
         }
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class TemperaturePage : IAdjustmentPage
     {
 
-        //Temperature
+        // Temperature
         private void ConstructTemperature1()
         {
             this.TemperaturePicker.Unit = "%";
@@ -212,7 +212,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //Tint
+        // Tint
         private void ConstructTint1()
         {
             this.TintPicker.Unit = "%";

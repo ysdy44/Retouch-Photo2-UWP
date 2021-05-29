@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Historys
         LayeragesArrange_RemoveLayers,
 
 
-        //Tool
+        // Tool
         LayeragesArrange_AddLayer,
         LayeragesArrange_AddLayer_ConvertToCurves,
 
@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Historys
         LayersProperty_Set_GeometryHeartLayer_Spread,
 
          
-        //Menu
+        // Menu
         LayersProperty_SetName,
         LayersProperty_SetBlendMode,
         LayersProperty_SetOpacity,
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Historys
         LayersProperty_SetTagType,
 
 
-        //Edit
+        // Edit
         LayeragesArrange_CutLayers,
         LayeragesArrange_DuplicateLayer,
         LayeragesArrange_DuplicateLayers,
@@ -117,7 +117,7 @@ namespace Retouch_Photo2.Historys
         LayeragesArrange_AddLayers_ExpandStroke,
 
 
-        //Adjustment
+        // Adjustment
         LayersProperty_ResetAdjustment_Exposure,
         LayersProperty_SetAdjustment_Exposure_Exposure,
 
@@ -170,7 +170,7 @@ namespace Retouch_Photo2.Historys
         LayersProperty_SetAdjustment_Vignette_Color,
 
 
-        //Effect
+        // Effect
         LayersProperty_ResetEffect_GaussianBlur,
         LayersProperty_SwitchEffect_GaussianBlur,
         LayersProperty_SetEffect_GaussianBlur_Amount,
@@ -213,7 +213,7 @@ namespace Retouch_Photo2.Historys
         LayersProperty_SetEffect_Straighten_Angle,
 
 
-        //Text
+        // Text
         LayersProperty_SetFontText,
         LayersProperty_SetFontSize,
         LayersProperty_SetFontFamily,
@@ -226,7 +226,7 @@ namespace Retouch_Photo2.Historys
         LayersProperty_SetFontWeight,
 
 
-        //Stroke
+        // Stroke
         LayersProperty_SetStyle_StrokeStyle_Dash,
         LayersProperty_SetStyle_StrokeWidth,
         LayersProperty_SetStyle_StrokeStyle_Cap,
@@ -238,7 +238,7 @@ namespace Retouch_Photo2.Historys
         LayersProperty_SetStyle_IsStrokeWidthFollowScale,
 
 
-        //Filter
+        // Filter
         LayersProperty_SetFilter,
     }
 }

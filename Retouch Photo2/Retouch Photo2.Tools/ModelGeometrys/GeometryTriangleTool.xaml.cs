@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.MethodViewModel.MethodConvertToCurves();
 
-                //Change tools group value.
+                // Change tools group value.
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
@@ -117,7 +117,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class GeometryTriangleTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Tools.Models
             this.MoreToolTip.Content = resource.GetString("Tools_More");
         }
 
-        //Center
+        // Center
         private void ConstructCenter1()
         {
             this.CenterPicker.Minimum = 0;

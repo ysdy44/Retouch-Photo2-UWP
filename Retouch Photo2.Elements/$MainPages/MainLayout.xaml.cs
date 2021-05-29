@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Elements
         public MainLayout()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
         }
 
     }

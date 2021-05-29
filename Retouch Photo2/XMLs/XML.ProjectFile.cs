@@ -25,7 +25,7 @@ namespace Retouch_Photo2
         /// <returns> The product <see cref="Project"/>. </returns>
         public static Project LoadProjectFile()
         {
-            //Create an XDocument object.
+            // Create an XDocument object.
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\Project.xml";
             XDocument document = XDocument.Load(path);
 
@@ -42,7 +42,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
 
-            //Save the project file.      
+            // Save the project file.      
             StorageFile file = await zipFolder.CreateFileAsync("Project.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

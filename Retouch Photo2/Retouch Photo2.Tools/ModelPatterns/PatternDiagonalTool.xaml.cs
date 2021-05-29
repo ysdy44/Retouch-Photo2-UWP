@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class PatternDiagonalTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepTextBlock.Text = resource.GetString("Tools_PatternDiagonal_HorizontalStep");
         }
 
-        //Offset
+        // Offset
         private void ConstructOffset1()
         {
             this.OffsetPicker.Minimum = -100;
@@ -167,7 +167,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //HorizontalStep
+        // HorizontalStep
         private void ConstructHorizontalStep1()
         {
             this.HorizontalStepPicker.Minimum = 5;

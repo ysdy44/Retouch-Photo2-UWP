@@ -43,8 +43,8 @@ namespace Retouch_Photo2.Photos
         {
             set
             {
-                if (value) this.ShowStoryboard.Begin();//Storyboard
-                else this.HideStoryboard.Begin();//Storyboard
+                if (value) this.ShowStoryboard.Begin(); // Storyboard
+                else this.HideStoryboard.Begin(); // Storyboard
             }
         }
 

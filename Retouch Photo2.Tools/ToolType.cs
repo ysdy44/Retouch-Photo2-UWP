@@ -18,7 +18,7 @@
         /// <summary> Transparency tool. </summary>
         Transparency,
 
-        //Geometry0
+        // Geometry0
         /// <summary> Create rectangle geometry. </summary>
         GeometryRectangle,
         /// <summary> Create ellipse geometry. </summary>
@@ -41,7 +41,7 @@
         /// <summary> More. </summary>
         More,
 
-        //Pattern
+        // Pattern
         /// <summary> Grid pattern. </summary>
         PatternGrid,
         /// <summary> Diagonal pattern. </summary>
@@ -50,7 +50,7 @@
         PatternSpotted,
 
 
-        //Geometry1
+        // Geometry1
         /// <summary> Create round-rect geometry. </summary>
         GeometryRoundRect,
         /// <summary> Create triangle geometry. </summary>
@@ -58,7 +58,7 @@
         /// <summary> Create diamond geometry. </summary>
         GeometryDiamond,
 
-        //Geometry2
+        // Geometry2
         /// <summary> Create pentagon geometry. </summary>
         GeometryPentagon,
         /// <summary> Create star geometry. </summary>
@@ -66,7 +66,7 @@
         /// <summary> Create cog geometry. </summary>
         GeometryCog,
 
-        //Geometry3
+        // Geometry3
         /// <summary> Create dount geometry. </summary>
         GeometryDount,
         /// <summary> Create pie geometry. </summary>
@@ -74,7 +74,7 @@
         /// <summary> Create cookie geometry. </summary>
         GeometryCookie,
 
-        //Geometry4
+        // Geometry4
         /// <summary> Create arrow geometry. </summary>
         GeometryArrow,
         /// <summary> Create caopsule geometry. </summary>

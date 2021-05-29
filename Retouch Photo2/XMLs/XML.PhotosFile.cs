@@ -26,7 +26,7 @@ namespace Retouch_Photo2
         /// <returns> The product <see cref="Photo"/>s. </returns>
         public static IEnumerable<Photo> LoadPhotosFile()
         {
-            //Create an XDocument object.
+            // Create an XDocument object.
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}/Photos.xml";
 
             try
@@ -51,7 +51,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.Photos.XML.SavePhotos(photos);
 
-            //Save the project xml file.      
+            // Save the project xml file.      
             StorageFile file = await zipFolder.CreateFileAsync("Photos.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

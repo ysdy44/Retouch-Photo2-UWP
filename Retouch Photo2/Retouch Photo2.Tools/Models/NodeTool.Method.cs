@@ -93,7 +93,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void MoveStarted()
         {
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -105,30 +105,30 @@ namespace Retouch_Photo2.Tools.Models
             });
 
             {
-                //Selection
+                // Selection
                 ILayer layer = this.Layerage.Self;
 
                 if (layer.Type == LayerType.Curve)
                 {
-                    //Snap
+                    // Snap
                     if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
                 }
             }
         }
         private void MoveDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
-            //Snap
+            // Snap
             if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
             Vector2 canvasMove = canvasPoint - canvasStartingPoint;
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.Type == LayerType.Curve)
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
                     layer.Nodes.TransformAddOnlySelected(canvasMove);
@@ -137,7 +137,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void MoveComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
-            //Snap
+            // Snap
             if (this.IsSnap)
             {
                 canvasPoint = this.Snap.Snap(canvasPoint);
@@ -145,28 +145,28 @@ namespace Retouch_Photo2.Tools.Models
             }
             Vector2 canvasMove = canvasPoint - canvasStartingPoint;
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNodes);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.Type == LayerType.Curve)
                 {
-                    //History
+                    // History
                     var previous = layer.Nodes.NodesStartingClone().ToList();
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringTransformer = true;
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Nodes.NodesReplace(previous);
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -177,21 +177,21 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
         }
 
 
         private void MoveSingleNodePointStarted(Vector2 startingPoint, Matrix3x2 matrix)
         {
-            //Selection
+            // Selection
             ILayer layer = this.Layerage.Self;
 
             if (layer.Type == LayerType.Curve)
             {
                 layer.Nodes.SelectionOnlyOne(startingPoint, matrix);
 
-                //Snap
+                // Snap
                 if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
             }
         }
@@ -203,10 +203,10 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Node node = layer.Nodes.SelectedItem;
 
-                //Snap
+                // Snap
                 if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
                 Node.Move(canvasPoint, node);
@@ -220,28 +220,28 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Node node = layer.Nodes.SelectedItem;
 
-                //Snap
+                // Snap
                 if (this.IsSnap)
                 {
                     canvasPoint = this.Snap.Snap(canvasPoint);
                     this.Snap.Default();
                 }
 
-                //History
+                // History
                 LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNodes);
 
                 var previous = layer.Nodes.Index;
                 var previous1 = node.Clone();
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Nodes[previous] = previous1;
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
@@ -250,7 +250,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.Layerage.RefactoringParentsIconRender();
                 Node.Move(canvasPoint, node);
 
-                //History
+                // History
                 this.ViewModel.HistoryPush(history);
             }
         }
@@ -258,7 +258,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void MoveSingleNodeControlPointStarted()
         {
-            //Selection
+            // Selection
             ILayer layer = this.Layerage.Self;
 
             if (layer.Type == LayerType.Curve)
@@ -274,7 +274,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Node node = layer.Nodes.SelectedItem;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
                 Node.Controller(this.PenFlyout.ControlPointMode, this.PenFlyout.ControlLengthMode, this.PenFlyout.ControlAngleMode, canvasPoint, node, isLeftControlPoint);
@@ -288,7 +288,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Node node = layer.Nodes.SelectedItem;
 
-                //History
+                // History
                 LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNode_ControlPoint);
 
                 var previous = layer.Nodes.Index;
@@ -298,7 +298,7 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     Node node2 = layer.Nodes[previous];
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -306,7 +306,7 @@ namespace Retouch_Photo2.Tools.Models
                     node2.RightControlPoint = previous2;
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
@@ -315,7 +315,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.Layerage.RefactoringParentsIconRender();
                 Node.Controller(this.PenFlyout.ControlPointMode, this.PenFlyout.ControlLengthMode, this.PenFlyout.ControlAngleMode, canvasPoint, node, isLeftControlPoint);
 
-                //History
+                // History
                 this.ViewModel.HistoryPush(history);
             }
         }
@@ -329,7 +329,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -344,7 +344,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -359,10 +359,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNode_IsChecked);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -371,11 +371,11 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     layer.Nodes.BoxChoose(this.TransformerRect);
 
-                    //History
+                    // History
                     var previous = layer.Nodes.NodesStartingClone().ToList();
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringTransformer = true;
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
@@ -384,7 +384,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
         }
 

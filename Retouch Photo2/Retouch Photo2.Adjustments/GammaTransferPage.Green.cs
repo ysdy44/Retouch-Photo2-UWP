@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //GreenDisable
+        // GreenDisable
         private void ConstructGreenDisable()
         {
             this.GreenCheckControl.Tapped += (s, e) =>
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //GreenOffset
+        // GreenOffset
         private void ConstructGreenOffset1()
         {
             this.GreenOffsetPicker.Unit = "%";
@@ -149,7 +149,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //GreenExponent
+        // GreenExponent
         private void ConstructGreenExponent1()
         {
             this.GreenExponentPicker.Unit = "%";
@@ -203,7 +203,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //GreenAmplitude
+        // GreenAmplitude
         private void ConstructGreenAmplitude1()
         {
             this.GreenAmplitudePicker.Unit = "%";

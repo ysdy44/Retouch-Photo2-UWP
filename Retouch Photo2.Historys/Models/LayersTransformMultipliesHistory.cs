@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Historys
                 Transformer transformer = layer.Transform.Transformer;
                 Matrix3x2 matrix = Transformer.FindHomography(transformer, undo.Value);
                       
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;

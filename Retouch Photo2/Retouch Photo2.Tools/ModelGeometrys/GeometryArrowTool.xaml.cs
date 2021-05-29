@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.MethodViewModel.MethodConvertToCurves();
 
-                //Change tools group value.
+                // Change tools group value.
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -144,7 +144,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class GeometryArrowTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -160,7 +160,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Value
+        // Value
         private void ConstructValue1()
         {
             this.ValuePicker.Minimum = 0;
@@ -212,7 +212,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //LeftTail
+        // LeftTail
         private void ConstructLeftTail()
         {
             this.LeftTailComboBox.TypeChanged += (s, type) =>
@@ -230,11 +230,11 @@ namespace Retouch_Photo2.Tools.Models
                     setUndo: (tLayer, previous) => tLayer.LeftTail = previous
                 );
             };
-            this.LeftTailComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.LeftTailComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.LeftTailComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.LeftTailComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
         }
 
-        //RightTail
+        // RightTail
         private void ConstructRightTail()
         {
             this.RightTailComboBox.TypeChanged += (s, type) =>
@@ -252,8 +252,8 @@ namespace Retouch_Photo2.Tools.Models
                     setUndo: (tLayer, previous) => tLayer.RightTail = previous
                 );
             };
-            this.RightTailComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.RightTailComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.RightTailComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.RightTailComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
         }
 
     }

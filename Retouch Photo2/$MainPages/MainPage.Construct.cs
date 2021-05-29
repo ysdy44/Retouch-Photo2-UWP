@@ -20,7 +20,7 @@ namespace Retouch_Photo2
         private string DocumentationLink = "https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README.md";
 
 
-        //FlowDirection
+        // FlowDirection
         private void ConstructFlowDirection()
         {
             bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
@@ -28,7 +28,7 @@ namespace Retouch_Photo2
             base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -100,7 +100,7 @@ namespace Retouch_Photo2
         }
 
 
-        //InitialControl
+        // InitialControl
         private void ConstructInitialControl()
         {
             this.InitialSampleButton.Click += async (s, e) =>
@@ -109,7 +109,7 @@ namespace Retouch_Photo2
                 this.MainLayout.State = MainPageState.Main;
                 await FileUtil.SaveSampleFile();
 
-                //Projects 
+                // Projects 
                 foreach (StorageFolder zipFolder in await FileUtil.FIndAllZipFolders())
                 {
                     // [StorageFolder] --> [projectViewItem]
@@ -123,7 +123,7 @@ namespace Retouch_Photo2
         }
 
 
-        //DragAndDrop
+        // DragAndDrop
         private void ConstructDragAndDrop()
         {
             this.AllowDrop = true;
@@ -149,7 +149,7 @@ namespace Retouch_Photo2
 
 
 
-        //AddDialog
+        // AddDialog
         private void ConstructAddDialog()
         {
             this.AddDialog.SecondaryButtonClick += (s, e) => this.HideAddDialog();
@@ -172,7 +172,7 @@ namespace Retouch_Photo2
         }
 
 
-        //PicturesControl
+        // PicturesControl
         private void ConstructPicturesControl()
         {
             this.PicturesPhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
@@ -181,7 +181,7 @@ namespace Retouch_Photo2
         }
 
 
-        //RenameDialog
+        // RenameDialog
         string _rename;
         private void ConstructRenameDialog()
         {
@@ -216,10 +216,10 @@ namespace Retouch_Photo2
         }
 
 
-        //DeleteControl
+        // DeleteControl
         private void ConstructDeleteControl()
         {
-            //Delete
+            // Delete
             this.DeleteCloseButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Main;
             this.DeletePrimaryButton.Tapped += async (s, e) =>
             {
@@ -235,10 +235,10 @@ namespace Retouch_Photo2
         }
 
 
-        //DuplicateControl
+        // DuplicateControl
         private void ConstructDuplicateControl()
         {
-            //Duplicate
+            // Duplicate
             this.DuplicateCloseButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Main;
             this.DuplicatePrimaryButton.Tapped += async (s, e) =>
             {

@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Layers
             return layer.GetActualTransformer(this);
         }
 
-        //Refactoring
+        // Refactoring
         /// <summary>
         /// Open the <see cref="ILayer.IsRefactoringTransformer"/> with <see cref="Layerage.Parents"/>.
         /// </summary>
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Layers
 
                 if (layer.Type == LayerType.Group)
                 {
-                    //Refactoring
+                    // Refactoring
                     ILayer groupLayer = layer;
                     groupLayer.IsRefactoringTransformer = true;
                     this.Parents.RefactoringParentsTransformer();
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = this.Parents.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 this.Parents.RefactoringParentsRender();
             }
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = this.Parents.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringIconRender = true;
                 this.Parents.RefactoringParentsIconRender();
             }

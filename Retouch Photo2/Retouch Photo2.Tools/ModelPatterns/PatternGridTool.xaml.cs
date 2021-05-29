@@ -108,7 +108,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class PatternGridTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Tools.Models
             this.VerticalStepTextBlock.Text = resource.GetString("Tools_PatternGrid_VerticalStep");
         }
 
-        //GridType
+        // GridType
         private void ConstructGridType()
         {
             this.TypeComboBox.TypeChanged += (s, type) =>
@@ -148,12 +148,12 @@ namespace Retouch_Photo2.Tools.Models
                     setUndo: (tLayer, previous) => tLayer.GridType = previous
                 );
             };
-            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
         }
 
 
-        //HorizontalStep
+        // HorizontalStep
         private void ConstructHorizontalStep1()
         {
             this.HorizontalStepPicker.Minimum = 5;
@@ -205,7 +205,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         
 
-        //VerticalStep
+        // VerticalStep
         private void ConstructVerticalStep1()
         {
             this.VerticalStepPicker.Minimum = 5;

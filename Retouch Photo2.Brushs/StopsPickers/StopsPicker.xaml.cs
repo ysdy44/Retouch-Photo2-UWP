@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Brushs
         public Flyout ColorFlyout => this._ColorFlyout;
 
 
-        //Background
+        // Background
         CanvasRenderTarget GrayAndWhiteBackground;
 
         readonly StopsSize Size = new StopsSize();
@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Brushs
             }
 
             this.array = value;
-            this.CanvasControl.Invalidate();//Invalidate
+            this.CanvasControl.Invalidate(); // Invalidate
         }
 
 
@@ -76,30 +76,30 @@ namespace Retouch_Photo2.Brushs
             this.ConstructStop();
             base.IsEnabledChanged += (s, e) =>
             {
-                this.CanvasControl.Invalidate();//Invalidate
+                this.CanvasControl.Invalidate(); // Invalidate
             };
 
-            //Color    
+            // Color    
             this._ColorPicker.ColorChanged += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
-                if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
+                if (isSucces) this.StopsChanged?.Invoke(this, this.array); // Delegate
             };
 
             this._ColorPicker.ColorChangedStarted += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
-                if (isSucces) this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                if (isSucces) this.StopsChangeStarted?.Invoke(this, this.array); // Delegate
             };
             this._ColorPicker.ColorChangedDelta += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
-                if (isSucces) this.StopsChangeDelta?.Invoke(this, this.array);//Delegate
+                if (isSucces) this.StopsChangeDelta?.Invoke(this, this.array); // Delegate
             };
             this._ColorPicker.ColorChangedCompleted += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
-                if (isSucces) this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate
+                if (isSucces) this.StopsChangeCompleted?.Invoke(this, this.array); // Delegate
             };
 
             this.ColorButton.Tapped += (s, e) =>
@@ -109,25 +109,25 @@ namespace Retouch_Photo2.Brushs
                 if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
                 {
                     this._ColorPicker.Color = this.ColorEllipse.Color;
-                    this._ColorFlyout.ShowAt(this.ColorEllipse);//Flyout
+                    this._ColorFlyout.ShowAt(this.ColorEllipse); // Flyout
                 }
             };
 
 
-            //Offset         
+            // Offset         
             this.OffsetPicker.ValueChanged += (s, value) =>
             {
                 float offset = value / 100.0f;
                 bool isSucces = this.SetOffset(offset);
-                if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
+                if (isSucces) this.StopsChanged?.Invoke(this, this.array); // Delegate
             };
-            //Alpha
+            // Alpha
             this.AlphaPicker.ValueChanged += (s, value) =>
             {
                 Color color = this.ColorEllipse.Color;
                 color.A = (byte)value;
                 bool isSucces = this.SetColor(color);
-                if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
+                if (isSucces) this.StopsChanged?.Invoke(this, this.array); // Delegate
             };
         }
     }

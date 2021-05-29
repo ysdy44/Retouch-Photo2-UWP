@@ -78,7 +78,7 @@ namespace Retouch_Photo2.Tools.Models
             ILayer layer = layerage.Self;
 
 
-            //Transformer
+            // Transformer
             Transformer transformer = layerage.GetActualTransformer();
             if (this.TransformerMode == TransformerMode.None)
             {
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Tools.Models
             }
 
 
-            //Snap
+            // Snap
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(layer.Transform.Transformer);
 
 
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
             layer.Transform.CacheTransform();
             if (layer.Transform.IsCrop == false) this.CropStarted(layer);
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -109,12 +109,12 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
 
             this.CropDelta(canvasStartingPoint, canvasPoint);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -125,7 +125,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap)
             {
                 canvasPoint = this.Snap.Snap(canvasPoint);
@@ -139,7 +139,7 @@ namespace Retouch_Photo2.Tools.Models
             this.IsMove = false;
             this.TransformerMode = TransformerMode.None;
 
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
@@ -169,14 +169,14 @@ namespace Retouch_Photo2.Tools.Models
             }
 
 
-            //Snapping
+            // Snapping
             if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
         }
 
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -189,7 +189,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class CropTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -201,27 +201,27 @@ namespace Retouch_Photo2.Tools.Models
 
         private void Reset()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ResetTransformer);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.Transform.IsCrop)
                 {
-                    //History
+                    // History
                     var previous = layer.Transform.IsCrop;
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Transform.IsCrop = previous;
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -230,30 +230,30 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
         private void Fit()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_FitTransformer);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.Transform.IsCrop)
                 {
-                        //History
+                        // History
                         var previous1 = layer.Transform.Transformer;
                     var previous2 = layer.Transform.IsCrop;
                     history.UndoAction += () =>
                     {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Transform.Transformer = previous1;
@@ -261,7 +261,7 @@ namespace Retouch_Photo2.Tools.Models
                     };
 
                     Transformer cropTransformer = layer.Transform.CropTransformer;
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Transform.Transformer = cropTransformer;
@@ -269,45 +269,45 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
         private void Clear()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ClearTransformer);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.Transform.IsCrop)
                 {
-                        //History
+                        // History
                         var previous = true;
                     history.UndoAction += () =>
                     {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Transform.IsCrop = previous;
                     };
 
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Transform.IsCrop = false;
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
     }

@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Layers
             }
             else
             {
-                //Layerages
+                // Layerages
                 IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
 
                 switch (destinationOverlayMode)
@@ -86,8 +86,8 @@ namespace Retouch_Photo2.Layers
 
             if (source.Parents != LayerManager.RootLayerage)
             {
-                //Refactoring
-                //ILayer sourceParents = source.Parents.Self;
+                // Refactoring
+                // ILayer sourceParents = source.Parents.Self;
                 //source.Parents.IsRefactoringTransformer = true;
                 //source.Parents.IsRefactoringRender = true;
                 //source.Parents.IsRefactoringIconRender = true;
@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Layers
 
             if (destination.Parents != LayerManager.RootLayerage)
             {
-                //Refactoring
+                // Refactoring
                 ILayer destinationParents = destination.Parents.Self;
                 destinationParents.IsRefactoringTransformer = true;
                 destinationParents.IsRefactoringRender = true;
@@ -149,7 +149,7 @@ namespace Retouch_Photo2.Layers
             {
                 if (source.Parents != LayerManager.RootLayerage)
                 {
-                    //Refactoring
+                    // Refactoring
                     ILayer sourceParents = source.Parents.Self;
                     sourceParents.IsRefactoringTransformer = true;
                     sourceParents.IsRefactoringRender = true;
@@ -168,7 +168,7 @@ namespace Retouch_Photo2.Layers
 
                 if (destination.Parents != LayerManager.RootLayerage)
                 {
-                    //Refactoring
+                    // Refactoring
                     ILayer destinationParents = destination.Parents.Self;
                     destinationParents.IsRefactoringTransformer = true;
                     destinationParents.IsRefactoringRender = true;
@@ -184,7 +184,7 @@ namespace Retouch_Photo2.Layers
                 {
                     if (child.Parents != LayerManager.RootLayerage)
                     {
-                        //Refactoring
+                        // Refactoring
                         ILayer childParents = child.Parents.Self;
                         childParents.IsRefactoringTransformer = true;
                         childParents.IsRefactoringRender = true;
@@ -204,7 +204,7 @@ namespace Retouch_Photo2.Layers
 
             if (destination.Parents != LayerManager.RootLayerage)
             {
-                //Refactoring
+                // Refactoring
                 ILayer destinationParents = destination.Parents.Self;
                 destinationParents.IsRefactoringTransformer = true;
                 destinationParents.IsRefactoringRender = true;
@@ -242,7 +242,7 @@ namespace Retouch_Photo2.Layers
             {
                 if (layerage.Parents != LayerManager.RootLayerage)
                 {
-                    //Refactoring
+                    // Refactoring
                     ILayer layerageParents = layerage.Parents.Self;
                     layerageParents.IsRefactoringTransformer = true;
                     layerageParents.IsRefactoringRender = true;
@@ -257,7 +257,7 @@ namespace Retouch_Photo2.Layers
                 currentLayerage.Children.Add(layerage);
 
 
-                //Refactoring
+                // Refactoring
                 ILayer currentLayer = currentLayerage.Self;
                 currentLayer.IsRefactoringTransformer = true;
                 currentLayer.IsRefactoringRender = true;
@@ -272,7 +272,7 @@ namespace Retouch_Photo2.Layers
                 {
                     if (child.Parents != LayerManager.RootLayerage)
                     {
-                        //Refactoring
+                        // Refactoring
                         ILayer childParents = child.Parents.Self;
                         childParents.IsRefactoringTransformer = true;
                         childParents.IsRefactoringRender = true;
@@ -287,7 +287,7 @@ namespace Retouch_Photo2.Layers
                         currentLayerage.Children.Add(child);
                     }
 
-                    //Refactoring
+                    // Refactoring
                     ILayer currentLayer = currentLayerage.Self;
                     currentLayer.IsRefactoringTransformer = true;
                     currentLayer.IsRefactoringRender = true;

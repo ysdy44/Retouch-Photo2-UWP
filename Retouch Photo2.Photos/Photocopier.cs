@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Photos
 
         //@Override
         /// <summary>
-        /// Returns a String representing this <see cref="Photo"/> instance.
+        ///Returns a String representing this <see cref="Photo"/> instance.
         /// </summary>
         /// <returns> The string representation. </returns>
         public override string ToString() => this.FolderRelativeId;

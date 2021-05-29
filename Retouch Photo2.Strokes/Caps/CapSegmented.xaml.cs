@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Strokes
             if (e.NewValue is CanvasCapStyle value)
             {
                 control._vsCap = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -86,16 +86,16 @@ namespace Retouch_Photo2.Strokes
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Flat.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Flat);//Delegate
-            this.Square.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Square);//Delegate
-            this.Round.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Round);//Delegate
-            this.Triangle.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Triangle);//Delegate
+            this.Flat.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Flat); // Delegate
+            this.Square.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Square); // Delegate
+            this.Round.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Round); // Delegate
+            this.Triangle.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Triangle); // Delegate
 
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

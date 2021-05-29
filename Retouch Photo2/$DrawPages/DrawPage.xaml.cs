@@ -75,53 +75,53 @@ namespace Retouch_Photo2
             this.RegisteTransition();
             this.ConstructAppBar();
 
-            //CanvasControl
+            // CanvasControl
             this.ConstructCanvasControl();
             this.ConstructCanvasOperator();
 
-            //ToolTypeComboBox
+            // ToolTypeComboBox
             this.ToolTypeComboBox.AssemblyType = typeof(Retouch_Photo2.Tools.Models.CursorTool);
-            this.ToolTypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.ToolTypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.ToolTypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.ToolTypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
 
-            //LayerManager
+            // LayerManager
             this.ConstructLayerManager();
 
-            //Menus
+            // Menus
             this.ConstructMenus();
             this.EffectMenu.PaneOpened += (s, e) => this.DrawLayout.IsFullScreen = false;
             this.EffectMenu.PaneClosed += (s, e) => this.DrawLayout.IsFullScreen = true;
 
-            //Dialog
+            // Dialog
             this.ConstructExportDialog();
             this.ConstructSetupDialog();
             this.ConstructRenameDialog();
             this.ConstructGalleryDialog();
 
-            //DrawLayout
+            // DrawLayout
             this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
 
-            //Gallery
+            // Gallery
             this.DrawLayout.GalleryButtonTapped += (s, e) => this.ShowGalleryDialog();
             this.ConstructDragAndDrop();
 
-            //Flyout
+            // Flyout
             this.ConstructFillColorFlyout();
             this.ConstructStrokeColorFlyout();
 
-            //More
+            // More
             this.ConstructMore();
 
-            //Writable
+            // Writable
             this.DrawLayout.WritableOKButtonClick += (s, e) => this.DrawLayout.Hide();
         }
 
         private void UnregisterDrawPage()
         {
-            //CanvasControl
+            // CanvasControl
             this.ViewModel.InvalidateAction -= this.CanvasControlInvalidate;
 
-            //LayerManager
+            // LayerManager
             this.LayersScrollViewer.Content = null;
             LayerManager.ItemClick -= this.LayerItemClick;
             LayerManager.RightTapped -= this.LayerRightTapped;
@@ -132,43 +132,43 @@ namespace Retouch_Photo2
             LayerManager.DragItemsDelta -= this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted -= this.LayerDragItemsCompleted;
 
-            //DrawLayout
+            // DrawLayout
             TouchbarExtension.PickerBorder = null;
             TouchbarExtension.SliderBorder = null;
 
-            //Dialog
+            // Dialog
             DrawPage.ShowExport -= this.ShowExportDialog;
             DrawPage.ShowSetup -= this.ShowSetupDialog;
             DrawPage.ShowRename -= this.ShowRenameDialog;
             DrawPage.FullScreen -= this.FullScreenChanged;
             DrawPage.ShowGallery -= this.ShowGalleryDialog;
 
-            //Gallery
+            // Gallery
             this.GalleryGridView.ItemsSource = null;
             DrawPage.ShowGalleryFunc -= this.ShowGalleryDialogTask;
             Photo.ItemClick -= this.GalleryDialogTrySetResult;
             Photo.FlyoutShow -= this.BillboardCanvas.Show;
 
-            //Rename
+            // Rename
             DrawPage.ShowRenameFunc -= this.ShowRenameDialogTask;
 
-            //Color
+            // Color
             DrawPage.ShowFillColorFlyout -= this.ShowFillColorFlyout2;
             DrawPage.ShowStrokeColorFlyout -= this.ShowStrokeColorFlyout2;
 
-            //More
+            // More
             DrawPage.ShowMoreFlyout -= this.MoreFlyout.ShowAt;
 
-            //Writable
+            // Writable
             AdjustmentCommand.Edit -= this.AdjustmentMenuEdit;
             AdjustmentCommand.Remove -= this.AdjustmentMenu.Remove;
         }
         private void RegisterDrawPage()
         {
-            //CanvasControl
+            // CanvasControl
             this.ViewModel.InvalidateAction += this.CanvasControlInvalidate;
 
-            //LayerManager
+            // LayerManager
             this.LayersScrollViewer.Content = LayerManager.RootStackPanel;
             LayerManager.ItemClick += this.LayerItemClick;
             LayerManager.RightTapped += this.LayerRightTapped;
@@ -179,34 +179,34 @@ namespace Retouch_Photo2
             LayerManager.DragItemsDelta += this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted += this.LayerDragItemsCompleted;
 
-            //DrawLayout
+            // DrawLayout
             TouchbarExtension.PickerBorder = this.DrawLayout.TouchbarPicker;
             TouchbarExtension.SliderBorder = this.DrawLayout.TouchbarSlider;
 
-            //Dialog
+            // Dialog
             DrawPage.ShowExport += this.ShowExportDialog;
             DrawPage.ShowSetup += this.ShowSetupDialog;
             DrawPage.ShowRename += this.ShowRenameDialog;
             DrawPage.FullScreen += this.FullScreenChanged;
             DrawPage.ShowGallery += this.ShowGalleryDialog;
 
-            //Gallery
+            // Gallery
             this.GalleryGridView.ItemsSource = Photo.InstancesCollection;
             DrawPage.ShowGalleryFunc += this.ShowGalleryDialogTask;
             Photo.ItemClick += this.GalleryDialogTrySetResult;
             Photo.FlyoutShow += this.BillboardCanvas.Show;
 
-            //Rename
+            // Rename
             DrawPage.ShowRenameFunc += this.ShowRenameDialogTask;
 
-            //Color
+            // Color
             DrawPage.ShowFillColorFlyout += this.ShowFillColorFlyout2;
             DrawPage.ShowStrokeColorFlyout += this.ShowStrokeColorFlyout2;
 
-            //More
+            // More
             DrawPage.ShowMoreFlyout += this.MoreFlyout.ShowAt;
 
-            //Writable
+            // Writable
             AdjustmentCommand.Edit += this.AdjustmentMenuEdit;
             AdjustmentCommand.Remove += this.AdjustmentMenu.Remove;
         }
@@ -245,7 +245,7 @@ namespace Retouch_Photo2
                 adjustmentPage.Follow();
             }
 
-            this.DrawLayout.ShowWritable(adjustmentPage.Icon, adjustmentPage.Title, adjustmentPage.Self);//Delegat
+            this.DrawLayout.ShowWritable(adjustmentPage.Icon, adjustmentPage.Title, adjustmentPage.Self); // Delegat
         }
     }
 
@@ -259,10 +259,10 @@ namespace Retouch_Photo2
         {
             this.UnregisterDrawPage();
 
-            //Extension
+            // Extension
             this.ApplicationView.Title = string.Empty;
 
-            //Key
+            // Key
             this.SettingViewModel.UnregisteKey();
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= this.BackRequested;
@@ -276,23 +276,23 @@ namespace Retouch_Photo2
 
             this.RegisterDrawPage();
 
-            //Extension
+            // Extension
             this.ApplicationView.IsAccent = false;
 
-            //Key
+            // Key
             this.SettingViewModel.RegisteKey();
 
             if (this.DrawLayout.IsFullScreen == false) return;
 
             if (e.Parameter is IProjectViewItem item)
             {
-                //Name
+                // Name
                 this.ApplicationView.Title = item.Name;
 
-                //Project
+                // Project
                 this.ViewModel.LoadFromProject(item.Project);
 
-                //ImageVisualRect
+                // ImageVisualRect
                 if (item.ImageVisualRect != Rect.Empty)
                 {
                     this._lockSourceRect = item.ImageVisualRect;

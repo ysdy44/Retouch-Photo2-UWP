@@ -58,7 +58,7 @@ namespace Retouch_Photo2
             set
             {
                 this._vsIsMultiple = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
         /// <summary> Gets or sets the weather is selected. </summary>
@@ -68,7 +68,7 @@ namespace Retouch_Photo2
             set
             {
                 this._vsIsSelected = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 
@@ -89,8 +89,8 @@ namespace Retouch_Photo2
         /// <returns> The calculated widnows. </returns>
         public void RenderImageVisualRect(UIElement widnows)
         {
-            //Gets visual-postion in visual.
-            Point sourcePostion = this.ImageBorder.TransformToVisual(widnows).TransformPoint(new Point());//@VisualPostion
+            // Gets visual-postion in visual.
+            Point sourcePostion = this.ImageBorder.TransformToVisual(widnows).TransformPoint(new Point()); //@VisualPostion
 
             this.ImageVisualRect = new Rect
             {

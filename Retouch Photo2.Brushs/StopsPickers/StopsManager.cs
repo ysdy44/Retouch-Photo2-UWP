@@ -55,11 +55,11 @@ namespace Retouch_Photo2.Brushs
                 this.IsRight = true;
             }
 
-            //Left right
+            // Left right
             this.LeftColor = array.First().Color;
             this.RightColor = array.Last().Color;
 
-            //Stops
+            // Stops
             this.Stops.Clear();
             for (int i = 1; i < count - 1; i++)
             {
@@ -95,14 +95,14 @@ namespace Retouch_Photo2.Brushs
                 Position = 0.0f
             };
 
-            //Right
+            // Right
             array[this.Count + 1] = new CanvasGradientStop
             {
                 Color = this.RightColor,
                 Position = 1.0f
             };
 
-            //Stops
+            // Stops
             if (this.Count == 0) return;
             for (int i = 0; i < this.Count; i++)
             {
@@ -117,15 +117,15 @@ namespace Retouch_Photo2.Brushs
         /// <returns> stop </returns>
         public CanvasGradientStop InsertNewStepByOffset(float offset)
         {
-            //Left
+            // Left
             Color left = this.LeftColor;
             float leftDistance = 1.0f;
 
-            //Right
+            // Right
             Color right = this.RightColor;
             float rightDistance = 1.0f;
 
-            //Stops
+            // Stops
             foreach (CanvasGradientStop stop in this.Stops)
             {
                 float distance = offset - stop.Position;
@@ -282,16 +282,16 @@ namespace Retouch_Photo2.Brushs
         /// </summary>
         public void Reserve()
         {
-            //Index
+            // Index
             this.Index = this.Count - this.Index - 1;
 
-            //Reserve
+            // Reserve
             Color leftStopColor = this.LeftColor;
             Color RightColorColor = this.RightColor;
             this.LeftColor = RightColorColor;
             this.RightColor = leftStopColor;
 
-            //Stops
+            // Stops
             for (int i = 0; i < this.Stops.Count; i++)
             {
                 CanvasGradientStop stop = this.Stops[i];

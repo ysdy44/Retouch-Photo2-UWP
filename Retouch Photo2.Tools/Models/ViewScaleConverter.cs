@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Tools.Models
         */ 
 
 
-        //Number 
+        // Number 
         public const int MinNumber = 10;
         public const int MaxNumber =1000;
 
@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         public static float NumberToScale(int number) => number / 100.0f;
 
 
-        //Value
+        // Value
         private const double _defultValue = -9;
         public const double MinValue = -99;
         public const double MaxValue = 0;

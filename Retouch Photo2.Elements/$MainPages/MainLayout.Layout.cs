@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsCount = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 

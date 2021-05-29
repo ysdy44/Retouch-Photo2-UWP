@@ -242,22 +242,22 @@ namespace Retouch_Photo2.Effects
         {
             return new Effect
             {
-                //GaussianBlur
+                // GaussianBlur
                 GaussianBlur_IsOn = this.GaussianBlur_IsOn,
                 GaussianBlur_Radius = this.GaussianBlur_Radius,
                 GaussianBlur_BorderMode = this.GaussianBlur_BorderMode,
 
-                //DirectionalBlur
+                // DirectionalBlur
                 DirectionalBlur_IsOn = this.DirectionalBlur_IsOn,
                 DirectionalBlur_Radius = this.DirectionalBlur_Radius,
                 DirectionalBlur_Angle = this.DirectionalBlur_Angle,
                 DirectionalBlur_BorderMode = this.DirectionalBlur_BorderMode,
 
-                //Sharpen
+                // Sharpen
                 Sharpen_IsOn = this.Sharpen_IsOn,
                 Sharpen_Amount = this.Sharpen_Amount,
 
-                //OuterShadow
+                // OuterShadow
                 OuterShadow_IsOn = this.OuterShadow_IsOn,
                 OuterShadow_Radius = this.OuterShadow_Radius,
                 OuterShadow_Opacity = this.OuterShadow_Opacity,
@@ -267,21 +267,21 @@ namespace Retouch_Photo2.Effects
                 OuterShadow_Angle = this.OuterShadow_Angle,
                 OuterShadow_Position = this.OuterShadow_Position,
 
-                //Edge
+                // Edge
                 Edge_IsOn = this.Edge_IsOn,
                 Edge_Amount = this.Edge_Amount,
                 Edge_Radius = this.Edge_Radius,
 
-                //Morphology
+                // Morphology
                 Morphology_IsOn = this.Morphology_IsOn,
                 Morphology_Size = this.Morphology_Size,
 
-                //Emboss
+                // Emboss
                 Emboss_IsOn = this.Emboss_IsOn,
                 Emboss_Radius = this.Emboss_Radius,
                 Emboss_Angle = this.Emboss_Angle,
 
-                //Straighten
+                // Straighten
                 Straighten_IsOn = this.Straighten_IsOn,
                 Straighten_Angle = this.Straighten_Angle,
             };
@@ -296,7 +296,7 @@ namespace Retouch_Photo2.Effects
         /// <returns> The rendered image. </returns>
         public static ICanvasImage Render(Effect effect, ICanvasImage image)
         {
-            //GaussianBlur
+            // GaussianBlur
             if (effect.GaussianBlur_IsOn)
             {
                 image = new GaussianBlurEffect
@@ -307,7 +307,7 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //DirectionalBlur
+            // DirectionalBlur
             if (effect.DirectionalBlur_IsOn)
             {
                 image = new DirectionalBlurEffect
@@ -319,7 +319,7 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //Sharpen
+            // Sharpen
             if (effect.Sharpen_IsOn)
             {
                 image = new Microsoft.Graphics.Canvas.Effects.SharpenEffect
@@ -329,7 +329,7 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //OuterShadow
+            // OuterShadow
             if (effect.OuterShadow_IsOn)
             {
                 image = new CompositeEffect
@@ -356,7 +356,7 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //Edge
+            // Edge
             if (effect.Edge_IsOn)
             {
                 image = new EdgeDetectionEffect
@@ -367,7 +367,7 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //Morphology
+            // Morphology
             if (effect.Morphology_IsOn)
             {
                 image = new MorphologyEffect
@@ -379,7 +379,7 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //Emboss
+            // Emboss
             if (effect.Emboss_IsOn)
             {
                 image = new EmbossEffect
@@ -390,7 +390,7 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //Straighten
+            // Straighten
             if (effect.Straighten_IsOn)
             {
                 image = new StraightenEffect

@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Tools.Elements
              if (e.NewValue is MarqueeCompositeMode value)
              {
                  control._vsMode = value;
-                 control.VisualState = control.VisualState;//State
+                 control.VisualState = control.VisualState; // State
             }
          }));
 
@@ -86,11 +86,11 @@ namespace Retouch_Photo2.Tools.Elements
             this.Subtract.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
             //this.Intersect.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
 
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

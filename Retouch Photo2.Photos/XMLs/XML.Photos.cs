@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Photos
         {
             return new XDocument
             (
-                //Set the document definition for xml.
+                // Set the document definition for xml.
                 new XDeclaration("1.0", "utf-8", "no"),
                 new XElement
                 (

@@ -20,14 +20,14 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "ViewModel.CanvasTransformer" />'s radian. </summary>
         public float CanvasTransformerRadian => this.CanvasTransformer.Radian;
         /// <summary> Notify <see cref="CanvasTransformerRadian"/>. </summary>
-        public void NotifyCanvasTransformerRadian() => this.OnPropertyChanged(nameof(CanvasTransformerRadian));//Notify 
+        public void NotifyCanvasTransformerRadian() => this.OnPropertyChanged(nameof(CanvasTransformerRadian)); // Notify 
         /// <summary> Set <see cref="CanvasTransformerRadian"/>. </summary>
         public void SetCanvasTransformerRadian(float radian)
         {
             this.CanvasTransformer.Radian = radian;
             this.CanvasTransformer.ReloadMatrix();
 
-            this.NotifyCanvasTransformerRadian();//Notify
+            this.NotifyCanvasTransformerRadian(); // Notify
         }
         /// <summary> Left rotate. </summary>
         public void CanvasTransformerLeftRotate(float sweep = 0.1f)
@@ -51,14 +51,14 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "ViewModel.CanvasTransformer" />'s scale. </summary>
         public float CanvasTransformerScale => this.CanvasTransformer.Scale;
         /// <summary> Notify <see cref="CanvasTransformerScale"/>. </summary>
-        public void NotifyCanvasTransformerScale() => this.OnPropertyChanged(nameof(CanvasTransformerScale));//Notify 
+        public void NotifyCanvasTransformerScale() => this.OnPropertyChanged(nameof(CanvasTransformerScale)); // Notify 
         /// <summary> Set <see cref="CanvasTransformerScale"/>. </summary>
         public void SetCanvasTransformerScale(float scale)
         {
             this.CanvasTransformer.Scale = scale;
             this.CanvasTransformer.ReloadMatrix();
 
-            this.NotifyCanvasTransformerScale();//Notify
+            this.NotifyCanvasTransformerScale(); // Notify
         }
 
 
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary>
-        /// Render all layers with size.
+        ///Render all layers with size.
         /// </summary>
         /// <param name="fileWidth"> The file width.</param>
         /// <param name="fileHeight"> The file height.</param>
@@ -145,7 +145,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary>
-        /// Render image.
+        ///Render image.
         /// </summary>
         /// <param name="size"> The size. </param>
         /// <param name="dpi"> The dpi. </param>

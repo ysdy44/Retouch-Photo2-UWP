@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Tools.Models
         */
 
 
-        //Number 
+        // Number 
         public const int DefultNumber = 0;
         public const int MinNumber = -180;
         public const int MaxNumber = 180;
@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         public static float NumberToRadian(int number) => number * Math.Pi / 180.0f;
 
 
-        //Value
+        // Value
         public const double DefultValue = 0;
         public const double MinValue = -180;
         public const double MaxValue = 180;

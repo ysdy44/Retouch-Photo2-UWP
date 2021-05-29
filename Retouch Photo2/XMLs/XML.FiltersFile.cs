@@ -31,15 +31,15 @@ namespace Retouch_Photo2
 
             if (isLocalFilterExists)
             {
-                //Read the file from the local folder.
+                // Read the file from the local folder.
                 file = await ApplicationData.Current.LocalFolder.GetFileAsync("Filters.xml");
             }
             else
             {
-                //Read the file from the package.
-                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///XMLs/Filters.xml"));
+                // Read the file from the package.
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:/// XMLs/Filters.xml"));
 
-                //Copy to the local folder.
+                // Copy to the local folder.
                 await file.CopyAsync(ApplicationData.Current.LocalFolder);
             }
 
@@ -69,7 +69,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.Filters.XML.SaveFilterCategorys(filterCategorys);
 
-            //Save the Setting xml file.      
+            // Save the Setting xml file.      
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Filters.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

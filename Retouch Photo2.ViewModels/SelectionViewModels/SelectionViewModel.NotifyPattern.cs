@@ -48,7 +48,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.patternGrid_Type == value) return;
                 this.patternGrid_Type = value;
-                this.OnPropertyChanged(nameof(PatternGrid_Type));//Notify 
+                this.OnPropertyChanged(nameof(PatternGrid_Type)); // Notify 
             }
         }
         private PatternGridType patternGrid_Type = PatternGridType.Grid;
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.patternGrid_HorizontalStep == value) return;
                 this.patternGrid_HorizontalStep = value;
-                this.OnPropertyChanged(nameof(PatternGrid_HorizontalStep));//Notify 
+                this.OnPropertyChanged(nameof(PatternGrid_HorizontalStep)); // Notify 
             }
         }
         private float patternGrid_HorizontalStep = 30.0f;
@@ -74,7 +74,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.patternGrid_VerticalStep == value) return;
                 this.patternGrid_VerticalStep = value;
-                this.OnPropertyChanged(nameof(PatternGrid_VerticalStep));//Notify 
+                this.OnPropertyChanged(nameof(PatternGrid_VerticalStep)); // Notify 
             }
         }
         private float patternGrid_VerticalStep = 30.0f;
@@ -89,7 +89,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.patternDiagonal_Offset == value) return;
                 this.patternDiagonal_Offset = value;
-                this.OnPropertyChanged(nameof(PatternDiagonal_Offset));//Notify 
+                this.OnPropertyChanged(nameof(PatternDiagonal_Offset)); // Notify 
             }
         }
         private float patternDiagonal_Offset = 30.0f;
@@ -102,7 +102,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.patternDiagonal_HorizontalStep == value) return;
                 this.patternDiagonal_HorizontalStep = value;
-                this.OnPropertyChanged(nameof(PatternDiagonal_HorizontalStep));//Notify 
+                this.OnPropertyChanged(nameof(PatternDiagonal_HorizontalStep)); // Notify 
             }
         }
         private float patternDiagonal_HorizontalStep = 30.0f;
@@ -117,7 +117,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.patternSpotted_Radius == value) return;
                 this.patternSpotted_Radius = value;
-                this.OnPropertyChanged(nameof(PatternSpotted_Radius));//Notify 
+                this.OnPropertyChanged(nameof(PatternSpotted_Radius)); // Notify 
             }
         }
         private float patternSpotted_Radius = 8.0f;
@@ -130,7 +130,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.patternSpotted_Step == value) return;
                 this.patternSpotted_Step = value;
-                this.OnPropertyChanged(nameof(PatternSpotted_Step));//Notify 
+                this.OnPropertyChanged(nameof(PatternSpotted_Step)); // Notify 
             }
         }
         private float patternSpotted_Step = 30.0f;

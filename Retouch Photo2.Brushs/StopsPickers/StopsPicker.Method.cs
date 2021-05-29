@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Brushs
 
             this.OffsetPicker.Value = offset;
 
-            //IsEnabled
+            // IsEnabled
             this.RemoveButton.IsEnabled = isEnabled;
             this.OffsetPicker.IsEnabled = isEnabled;
         }

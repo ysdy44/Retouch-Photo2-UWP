@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Texts
                     if (control.Parent is FontWeightListViewItem item)
                     {
                         FontWeight2 weight = item.Weight;
-                        this.WeightChanged?.Invoke(this, weight);//Delegate
+                        this.WeightChanged?.Invoke(this, weight); // Delegate
                     }
                 }
             };
@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Texts
         }
 
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -135,7 +135,7 @@ namespace Retouch_Photo2.Texts
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

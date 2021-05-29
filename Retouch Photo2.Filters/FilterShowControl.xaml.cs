@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Filters
 
             if (e.NewValue is Filter value)
             {
-                control.CanvasControl.Invalidate();//Invalidate
+                control.CanvasControl.Invalidate(); // Invalidate
                 control.TextBlock.Text = Retouch_Photo2.Elements.XML.CreateString(value.Name, value.Strings, control.Language);
                 control.TextBlock.FontWeight = value.Strings == null ? FontWeights.Normal : FontWeights.Bold;
             }

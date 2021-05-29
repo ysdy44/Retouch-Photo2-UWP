@@ -87,17 +87,17 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStopsPicker();
             this.ConstructFill();
             this.ConstructStroke();
-            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
             this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt(MenuType.Stroke, this.StrokeShowControl);
 
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
             {
                 this.FillOrStroke = fillOrStroke;
-                this.ViewModel.Invalidate(); //Invalidate
+                this.ViewModel.Invalidate(); // Invalidate
             };
-            this.FillOrStrokeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.FillOrStrokeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.FillOrStrokeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.FillOrStrokeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
 
             this.ExtendComboBox.ExtendChanged += (s, extend) =>
             {
@@ -111,8 +111,8 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                 }
             };
-            this.ExtendComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.ExtendComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.ExtendComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.ExtendComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
         }
 
 
@@ -120,10 +120,10 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            //Selection
+            // Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            //Snap
+            // Snap
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.Transformer);
 
             switch (this.FillOrStroke)
@@ -136,18 +136,18 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            //Selection
+            // Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
 
             switch (this.FillOrStroke)
@@ -160,18 +160,18 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            //Selection
+            // Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap)
             {
                 canvasPoint = this.Snap.Snap(canvasPoint);
@@ -189,7 +189,7 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             this.HandleMode = BrushHandleMode.None;
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
@@ -236,7 +236,7 @@ namespace Retouch_Photo2.Tools.Models
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        //Snapping
+                        // Snapping
                         if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
 
                         switch (this.FillOrStroke)
@@ -262,7 +262,7 @@ namespace Retouch_Photo2.Tools.Models
                 ILayer layer = layerage.Self;
                 this.SelectionViewModel.SetStyle(layer.Style);
             }
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom() { }
 
@@ -272,7 +272,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class BrushTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

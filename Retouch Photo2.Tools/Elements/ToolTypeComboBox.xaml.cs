@@ -103,13 +103,13 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ToolTypeComboBox control = (ToolTypeComboBox)sender;
 
-            //The current tool becomes the active tool.
+            // The current tool becomes the active tool.
             if (e.OldValue is ITool oldTool)
             {
                 oldTool.OnNavigatedFrom();
             }
 
-            //The current tool does not become an active tool.
+            // The current tool does not become an active tool.
             if (e.NewValue is ITool newTool)
             {
                 newTool.OnNavigatedTo();
@@ -242,7 +242,7 @@ namespace Retouch_Photo2.Tools.Elements
     public sealed partial class ToolTypeComboBox : UserControl
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -254,7 +254,7 @@ namespace Retouch_Photo2.Tools.Elements
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

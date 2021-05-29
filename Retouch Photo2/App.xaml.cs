@@ -49,7 +49,7 @@ namespace Retouch_Photo2
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel ViewModel { get; } = new ViewModel
         {
-            //Tool
+            // Tool
             MoveTool = new MoveTool(),
             TransformerTool = new TransformerTool(),
             CreateTool = new CreateTool(),
@@ -76,7 +76,7 @@ namespace Retouch_Photo2
                     {
                         App.ViewModel.CanvasTransformer.Position -= new Vector2(20, 0);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
-                        App.ViewModel.Invalidate();//Invalidate                          
+                        App.ViewModel.Invalidate(); // Invalidate                          
                     }
                 },
                 new KeyboardAccelerator2
@@ -88,7 +88,7 @@ namespace Retouch_Photo2
                     {
                         App.ViewModel.CanvasTransformer.Position -= new Vector2(0, 20);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
-                        App.ViewModel.Invalidate();//Invalidate
+                        App.ViewModel.Invalidate(); // Invalidate
                     }
                 },
                 new KeyboardAccelerator2
@@ -100,7 +100,7 @@ namespace Retouch_Photo2
                     {
                         App.ViewModel.CanvasTransformer.Position += new Vector2(20, 0);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
-                        App.ViewModel.Invalidate();//Invalidate
+                        App.ViewModel.Invalidate(); // Invalidate
                     }
                 },
                 new KeyboardAccelerator2
@@ -112,7 +112,7 @@ namespace Retouch_Photo2
                     {
                         App.ViewModel.CanvasTransformer.Position += new Vector2(0, 20);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
-                        App.ViewModel.Invalidate();//Invalidate
+                        App.ViewModel.Invalidate(); // Invalidate
                     }
                 },
 
@@ -290,10 +290,10 @@ namespace Retouch_Photo2
             {
                 if (rootFrame.Content == null)
                 {
-                    //FileUtil
+                    // FileUtil
                     await FileUtil.DeleteAllInTemporaryFolder();
 
-                    //Projects 
+                    // Projects 
                     foreach (StorageFolder zipFolder in await FileUtil.FIndAllZipFolders())
                     {
                         // [StorageFolder] --> [projectViewItem]
@@ -301,7 +301,7 @@ namespace Retouch_Photo2
                         App.Projects.Add(item);
                     }
 
-                    //Setting
+                    // Setting
                     Setting setting = await XML.ConstructSettingFile();
                     App.SettingViewModel.ConstructSetting(setting);
 

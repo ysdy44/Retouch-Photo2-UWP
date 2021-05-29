@@ -9,17 +9,17 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodSelectedNone()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.IsSelected == true)
                 {
-                    //History
+                    // History
                     var previous = layer.IsSelected;
                     history.UndoAction += () =>
                     {
@@ -30,19 +30,19 @@ namespace Retouch_Photo2.ViewModels
                 }
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.SetModeNone();//Selection
+            this.SetModeNone(); // Selection
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate     
+            this.Invalidate(); // Invalidate     
         }
 
         public void MethodSelectedNot(Layerage selectedLayerage)
         {
             ILayer selectedLayer = selectedLayerage.Self;
 
-            //History 
+            // History 
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             var previous = selectedLayer.IsSelected;
@@ -53,13 +53,13 @@ namespace Retouch_Photo2.ViewModels
 
             selectedLayer.IsSelected = !selectedLayer.IsSelected;
 
-            //History 
+            // History 
             this.HistoryPush(history);
 
-            this.SetMode();//Selection
-            //LayerManager.ArrangeLayersBackgroundItemClick(selectedLayerage);
+            this.SetMode(); // Selection
+            // LayerManager.ArrangeLayersBackgroundItemClick(selectedLayerage);
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.ViewModels
         {
             ILayer selectedLayer = selectedLayerage.Self;
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             if (selectedLayer.IsSelected == false)
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.ViewModels
                 selectedLayer.IsSelected = true;
             }
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.ViewModels
                 {
                     if (layer.IsSelected == true)
                     {
-                        //History
+                        // History
                         var previous = layer.IsSelected;
                         history.UndoAction += () =>
                         {
@@ -103,24 +103,24 @@ namespace Retouch_Photo2.ViewModels
                 }
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.SetModeSingle(selectedLayerage);//Selection
+            this.SetModeSingle(selectedLayerage); // Selection
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate     
+            this.Invalidate(); // Invalidate     
         }
 
         public void MethodSelectedAdd(Layerage selectedLayerage)
         {
             ILayer selectedLayer = selectedLayerage.Self;
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             if (selectedLayer.IsSelected == false)
             {
-                //History
+                // History
                 var previous = selectedLayer.IsSelected;
                 history.UndoAction += () =>
                 {
@@ -130,24 +130,24 @@ namespace Retouch_Photo2.ViewModels
                 selectedLayer.IsSelected = true;
             }
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodSelectedSubtract(Layerage selectedLayerage)
         {
             ILayer selectedLayer = selectedLayerage.Self;
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             if (selectedLayerage.Self.IsSelected == true)
             {
-                //History
+                // History
                 var previous = selectedLayer.IsSelected;
                 history.UndoAction += () =>
                 {
@@ -157,12 +157,12 @@ namespace Retouch_Photo2.ViewModels
                 selectedLayer.IsSelected = false;
             }
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         /*
@@ -170,10 +170,10 @@ namespace Retouch_Photo2.ViewModels
     {
         ILayer selectedLayer = selectedLayerage.Self;
 
-        //History
+        // History
         LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
-        //Selection
+        // Selection
         this.SetValue((layerage) =>
         {
             if (layerage != selectedLayerage)
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.ViewModels
 
                 if (layer.IsSelected == true)
                 {
-                    //History
+                    // History
                     var previous = selectedLayer.IsSelected;
                     history.UndoAction += () =>
                     {
@@ -194,12 +194,12 @@ namespace Retouch_Photo2.ViewModels
             }
         });
 
-        //History
+        // History
         this.HistoryPush(history);
 
-        this.SetModeSingle(selectedLayerage);//Selection
+        this.SetModeSingle(selectedLayerage); // Selection
         LayerManager.ArrangeLayersBackground();
-        this.Invalidate();//Invalidate
+        this.Invalidate(); // Invalidate
     }
         */
 

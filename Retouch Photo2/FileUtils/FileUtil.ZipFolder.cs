@@ -19,10 +19,10 @@ namespace Retouch_Photo2
             //get all folders.
             IReadOnlyList<StorageFolder> folders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
 
-            //Sort by Time
+            // Sort by Time
             IOrderedEnumerable<StorageFolder> orderedFolders = folders.OrderByDescending(file => file.DateCreated);
 
-            //Ordered
+            // Ordered
             IEnumerable<StorageFolder> zipFolders =
                 from zipFolder
                 in orderedFolders
@@ -55,7 +55,7 @@ namespace Retouch_Photo2
         }
 
         /// <summary>
-        /// Rename zip folder and thumbnail.
+        ///Rename zip folder and thumbnail.
         /// </summary>
         /// <param name="oldName"> The old name. </param>
         /// <param name="newName"> The new name. </param>
@@ -75,7 +75,7 @@ namespace Retouch_Photo2
         {
             try
             {
-                //Delete zip folder.
+                // Delete zip folder.
                 StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
                 if (zipFolder == null) return false;
 
@@ -102,7 +102,7 @@ namespace Retouch_Photo2
                 Name = newName
             };
 
-            //Duplicate zip folder.
+            // Duplicate zip folder.
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{oldName}.photo2pk");
             StorageFolder zipFolderNew = await ApplicationData.Current.LocalFolder.CreateFolderAsync($"{newName}.photo2pk", CreationCollisionOption.ReplaceExisting);
 

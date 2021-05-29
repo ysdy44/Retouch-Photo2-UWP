@@ -31,15 +31,15 @@ namespace Retouch_Photo2
 
             if (isLocalStyleExists)
             {
-                //Read the file from the local folder.
+                // Read the file from the local folder.
                 file = await ApplicationData.Current.LocalFolder.GetFileAsync("Styles.xml");
             }
             else
             {
-                //Read the file from the package.
-                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///XMLs/Styles.xml"));
+                // Read the file from the package.
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:/// XMLs/Styles.xml"));
 
-                //Copy to the local folder.
+                // Copy to the local folder.
                 await file.CopyAsync(ApplicationData.Current.LocalFolder);
             }
 
@@ -69,7 +69,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.Styles.XML.SaveStyleCategorys(styleCategorys);
 
-            //Save the Setting xml file.      
+            // Save the Setting xml file.      
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Styles.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

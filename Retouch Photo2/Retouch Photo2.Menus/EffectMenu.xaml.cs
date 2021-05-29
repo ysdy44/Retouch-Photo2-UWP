@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class EffectMenu : Expander
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -107,7 +107,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -155,7 +155,7 @@ namespace Retouch_Photo2.Menus
                                 catch (Exception) { }
 
 
-                                //Button
+                                // Button
                                 item.Tapped += (s, e) =>
                                 {
                                     if (item.IsSelected)
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Menus
                                 };
 
 
-                                //Button
+                                // Button
                                 check.Tapped += (s, e) => { Switch(); e.Handled = true; };
 
 

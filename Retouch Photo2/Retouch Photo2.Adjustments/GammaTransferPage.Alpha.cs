@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //AlphaDisable
+        // AlphaDisable
         private void ConstructAlphaDisable()
         {
             this.AlphaCheckControl.Tapped += (s, e) =>
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //AlphaOffset
+        // AlphaOffset
         private void ConstructAlphaOffset1()
         {
             this.AlphaOffsetPicker.Unit = "%";
@@ -149,7 +149,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //AlphaExponent
+        // AlphaExponent
         private void ConstructAlphaExponent1()
         {
             this.AlphaExponentPicker.Unit = "%";
@@ -203,7 +203,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //AlphaAmplitude
+        // AlphaAmplitude
         private void ConstructAlphaAmplitude1()
         {
             this.AlphaAmplitudePicker.Unit = "%";

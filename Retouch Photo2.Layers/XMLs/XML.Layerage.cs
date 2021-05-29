@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Layers
         {
             XElement element = new XElement(elementName);
 
-            //SaveWith
+            // SaveWith
             {
                 element.Add(new XAttribute("Id", layerage.Id));
 

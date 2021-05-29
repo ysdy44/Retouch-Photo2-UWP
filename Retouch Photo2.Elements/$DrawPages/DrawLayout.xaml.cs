@@ -30,14 +30,14 @@ namespace Retouch_Photo2.Elements
 
         //@Content
 
-        //Touchbar
+        // Touchbar
         /// <summary> TouchbarPickerBorder's child. </summary>
         public Border TouchbarPicker => this.TouchbarPickerBorder;
         /// <summary> TouchbarSliderBorder's child. </summary>
         public Border TouchbarSlider => this.TouchbarSliderBorder;
 
 
-        //Foot
+        // Foot
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
         public UIElement FootPage { set => this.FootPanel.Child = value; }
         /// <summary> _LeftIcon's content. </summary>
@@ -45,14 +45,14 @@ namespace Retouch_Photo2.Elements
         /// <summary> _RightIcon's content. </summary>
         public object RightIcon { get => this.RightContentControl.Content; set => this.RightContentControl.Content = value; }
 
-        //Head
+        // Head
         /// <summary> HeadBorder's child. </summary>
         public UIElement HeadChild { get => this.HeadBorder.Child; set => this.HeadBorder.Child = value; }
 
-        //Left
+        // Left
         /// <summary> LeftBorder's child. </summary>
         public UIElement LeftPanel { get => this.LeftBorder.Child; set => this.LeftBorder.Child = value; }
-        //Right
+        // Right
         /// <summary> RightBorder's child. </summary>
         public UIElement RightPanel { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
         /// <summary> GalleryToolTip's content. </summary>   
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Elements
         /// <summary> WidthToolTip's content. </summary>   
         public object WidthToolTipContent { get => this.WidthToolTip.Content; set => this.WidthToolTip.Content = value; }
 
-        //Pin
+        // Pin
         /// <summary> Pin StackPanel. </summary>   
         public StackPanel PinStackPanel => this._PinStackPanel;
 
@@ -94,9 +94,9 @@ namespace Retouch_Photo2.Elements
         public DrawLayout()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualStateCore = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualStateCore = this.VisualState; // State
 
-            //Foot
+            // Foot
             this._LeftIcon.Tapped += (s, e) => this.ShowPhone(PhoneLayoutType.ShowLeft);
             this._LeftIcon.PointerEntered += (s, e) =>
             {
@@ -114,16 +114,16 @@ namespace Retouch_Photo2.Elements
                 }
             };
 
-            //DismissOverlay
+            // DismissOverlay
             this.DismissOverlay.PointerPressed += (s, e) => this.Hide();
 
-            //Width
+            // Width
             this.WidthButton.Click += (s, e) =>
             {
                 if (this.RightGrid.ActualWidth < 100)
-                    this.WidthToWideStoryboard.Begin();//Storyboard
+                    this.WidthToWideStoryboard.Begin(); // Storyboard
                 else
-                    this.WideToWidthStoryboard.Begin();//Storyboard
+                    this.WideToWidthStoryboard.Begin(); // Storyboard
             };
         }
     }

@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            //Flyout
+            // Flyout
             this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
             this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt(MenuType.Stroke, this.StrokeShowControl);
@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.MethodViewModel.MethodConvertToCurves();
 
-                //Change tools group value.
+                // Change tools group value.
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.None:
                     break;
                 case NodeCollectionMode.Preview:
-                    this.PreviewDelta(canvasPoint);//PreviewNode
+                    this.PreviewDelta(canvasPoint); // PreviewNode
                     break;
                 case NodeCollectionMode.Add:
                     {
@@ -146,7 +146,7 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.None:
                     break;
                 case NodeCollectionMode.Preview:
-                    this.PreviewComplete(canvasStartingPoint, canvasPoint, isOutNodeDistance);//PreviewNode
+                    this.PreviewComplete(canvasStartingPoint, canvasPoint, isOutNodeDistance); // PreviewNode
                     break;
                 case NodeCollectionMode.Add:
                     {
@@ -211,15 +211,15 @@ namespace Retouch_Photo2.Tools.Models
 
         private void CreateLayer(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
 
-            //Transformer
+            // Transformer
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
-            //Layer
+            // Layer
             Layerage curveLayerage = Layerage.CreateByGuid();
             CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
@@ -230,29 +230,29 @@ namespace Retouch_Photo2.Tools.Models
             };
             LayerBase.Instances.Add(curveLayerage.Id, curveLayer);
 
-            //Mezzanine
+            // Mezzanine
             LayerManager.Mezzanine(curveLayerage);
 
 
-            this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
+            this.SelectionViewModel.SetModeSingle(curveLayerage); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
 
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
-            //Refactoring
+            // Refactoring
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

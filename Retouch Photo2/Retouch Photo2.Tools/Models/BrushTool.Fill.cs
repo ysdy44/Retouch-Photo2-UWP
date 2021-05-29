@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.Fill == null) return;
 
-            //Contains Operate Mode
+            // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             this.HandleMode = this.Fill.ContainsHandleMode(startingPoint, matrix);
 
@@ -45,14 +45,14 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            //Cursor
+            // Cursor
             switch (this.HandleMode)
             {
                 case BrushHandleMode.Center:
                 case BrushHandleMode.XPoint:
                 case BrushHandleMode.YPoint:
                 case BrushHandleMode.ToInitializeController:
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsManipulationStarted = true;
                     CoreCursorExtension.Cross();
                     break;
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void FillDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
-            //Selection
+            // Selection
             if (this.Fill == null) return;
 
             switch (this.HandleMode)
@@ -89,12 +89,12 @@ namespace Retouch_Photo2.Tools.Models
 
         private void FillComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
-            //Selection
+            // Selection
             if (this.Fill == null) return;
             this.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
             this.HandleMode = BrushHandleMode.None;
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.Cross();
 
@@ -111,23 +111,23 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.Fill == null) return;
 
-            //Contains Operate Mode
+            // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             BrushHandleMode handleMode = this.Fill.ContainsHandleMode(point, matrix);
 
-            //Cursor
+            // Cursor
             switch (handleMode)
             {
                 case BrushHandleMode.Center:
                 case BrushHandleMode.XPoint:
                 case BrushHandleMode.YPoint:
                 case BrushHandleMode.ToInitializeController:
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsPointerEntered = true;
                     CoreCursorExtension.Cross();
                     break;
                 default:
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsPointerEntered = false;
                     CoreCursorExtension.Cross();
                     break;

@@ -33,10 +33,10 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="setUndo"> The sets of history undo T. </param>
         public void ILayerChanged<T>(Action<ILayer> set, HistoryType type, Func<ILayer, T> getUndo, Action<ILayer, T> setUndo)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -44,13 +44,13 @@ namespace Retouch_Photo2.ViewModels
                 var previous = getUndo(layer);
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     setUndo(layer, previous);
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -58,47 +58,47 @@ namespace Retouch_Photo2.ViewModels
                 set(layer);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
         public void ILayerChangeStarted(Action<ILayer> cache)
         {
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 cache(layer);
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
 
         public void ILayerChangeDelta(Action<ILayer> set)
         {
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
                 set(layer);
             });
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void ILayerChangeCompleted<T>(Action<ILayer> set, HistoryType type, Func<ILayer, T> getUndo, Action<ILayer, T> setUndo)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -106,13 +106,13 @@ namespace Retouch_Photo2.ViewModels
                 var previous = getUndo(layer);
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     setUndo(layer, previous);
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -120,10 +120,10 @@ namespace Retouch_Photo2.ViewModels
                 set(layer);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
@@ -147,10 +147,10 @@ namespace Retouch_Photo2.ViewModels
         public void TLayerChanged<T, TLayer>(LayerType layerType, Action<TLayer> set, HistoryType type, Func<TLayer, T> getUndo, Action<TLayer, T> setUndo)
             where TLayer : ILayer
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -162,13 +162,13 @@ namespace Retouch_Photo2.ViewModels
                     var previous = getUndo(tLayer);
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         tLayer.IsRefactoringRender = true;
                         tLayer.IsRefactoringIconRender = true;
                         setUndo(tLayer, previous);
                     };
 
-                    //Refactoring
+                    // Refactoring
                     tLayer.IsRefactoringRender = true;
                     tLayer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -177,17 +177,17 @@ namespace Retouch_Photo2.ViewModels
                 }
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
         public void TLayerChangeStarted<TLayer>(LayerType layerType, Action<TLayer> cache)
             where TLayer : ILayer
         {
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -199,13 +199,13 @@ namespace Retouch_Photo2.ViewModels
                 }
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
 
         public void TLayerChangeDelta<TLayer>(LayerType layerType, Action<TLayer> set)
             where TLayer : ILayer
         {
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -214,23 +214,23 @@ namespace Retouch_Photo2.ViewModels
                 {
                     TLayer tLayer = (TLayer)layer;
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
                     set(tLayer);
                 }
             });
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void TLayerChangeCompleted<T, TLayer>(LayerType layerType, Action<TLayer> set, HistoryType type, Func<TLayer, T> getUndo, Action<TLayer, T> setUndo)
             where TLayer : ILayer
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -242,13 +242,13 @@ namespace Retouch_Photo2.ViewModels
                     var previous = getUndo(tLayer);
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         setUndo(tLayer, previous);
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -257,10 +257,10 @@ namespace Retouch_Photo2.ViewModels
                 }
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
@@ -281,10 +281,10 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="setUndo"> The sets of history undo T. </param>
         public void EffectChanged<T>(Action<Effect> set, HistoryType type, Func<Effect, T> getUndo, Action<Effect, T> setUndo)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -292,13 +292,13 @@ namespace Retouch_Photo2.ViewModels
                 var previous = getUndo(layer.Effect);
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     setUndo(layer.Effect, previous);
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -306,39 +306,39 @@ namespace Retouch_Photo2.ViewModels
                 set(layer.Effect);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
         public void EffectChangeStarted(Action<Effect> cache)
         {
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 cache(layer.Effect);
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
 
         public void EffectChangeDelta(Action<Effect> set)
         {
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
                 set(layer.Effect);
             });
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void EffectChangeCompleted<T>
@@ -350,10 +350,10 @@ namespace Retouch_Photo2.ViewModels
             Action<Effect, T> setUndo
         )
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -361,13 +361,13 @@ namespace Retouch_Photo2.ViewModels
                 var previous = getUndo(layer.Effect);
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     setUndo(layer.Effect, previous);
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -375,10 +375,10 @@ namespace Retouch_Photo2.ViewModels
                 set(layer.Effect);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
@@ -411,7 +411,7 @@ namespace Retouch_Photo2.ViewModels
                 if (index > layer.Filter.Adjustments.Count - 1) return;
                 if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
-                    //History
+                    // History
                     LayersPropertyHistory history = new LayersPropertyHistory(type);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
@@ -422,24 +422,24 @@ namespace Retouch_Photo2.ViewModels
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
                         if (layer.Filter.Adjustments[previous] is TAdjustment previousAdjustment)
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringTransformer = true;
                             layer.IsRefactoringRender = true;
                             setUndo(previousAdjustment, previous1);
                         }
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
                     layerage.RefactoringParentsIconRender();
                     set(adjustment);
 
-                    //History
+                    // History
                     this.HistoryPush(history);
 
-                    this.Invalidate(InvalidateMode.HD);//Invalidate
+                    this.Invalidate(InvalidateMode.HD); // Invalidate
                 }
             }
         }
@@ -455,7 +455,7 @@ namespace Retouch_Photo2.ViewModels
                 if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
                     cache(adjustment);
-                    this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
                 }
             }
         }
@@ -470,12 +470,12 @@ namespace Retouch_Photo2.ViewModels
                 if (index > layer.Filter.Adjustments.Count - 1) return;
                 if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
                     set(adjustment);
 
-                    this.Invalidate();//Invalidate
+                    this.Invalidate(); // Invalidate
                 }
             }
         }
@@ -491,7 +491,7 @@ namespace Retouch_Photo2.ViewModels
                 if (index > layer.Filter.Adjustments.Count - 1) return;
                 if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
-                    //History
+                    // History
                     LayersPropertyHistory history = new LayersPropertyHistory(type);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
@@ -502,24 +502,24 @@ namespace Retouch_Photo2.ViewModels
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
                         if (layer.Filter.Adjustments[previous] is TAdjustment previousAdjustment)
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             setUndo(previousAdjustment, previous1);
                         }
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
                     layerage.RefactoringParentsIconRender();
                     set(adjustment);
 
-                    //History
+                    // History
                     this.HistoryPush(history);
 
-                    this.Invalidate(InvalidateMode.HD);//Invalidate
+                    this.Invalidate(InvalidateMode.HD); // Invalidate
                 }
             }
         }
@@ -542,10 +542,10 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="setUndo"> The sets of history undo T. </param>
         public void StyleChanged<T>(Action<IStyle, Transformer> set, HistoryType type, Func<IStyle, T> getUndo, Action<IStyle, T> setUndo)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -553,13 +553,13 @@ namespace Retouch_Photo2.ViewModels
                 var previous = getUndo(layer.Style);
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     setUndo(layer.Style, previous);
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -568,47 +568,47 @@ namespace Retouch_Photo2.ViewModels
                 this.StandardStyleLayer = layer;
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
         public void StyleChangeStarted(Action<IStyle> cache)
         {
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 cache(layer.Style);
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
 
         public void StyleChangeDelta(Action<IStyle> set)
         {
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
                 set(layer.Style);
             });
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void StyleChangeCompleted<T>(Action<IStyle> set, HistoryType type, Func<IStyle, T> getUndo, Action<IStyle, T> setUndo)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -616,13 +616,13 @@ namespace Retouch_Photo2.ViewModels
                 var previous = getUndo(layer.Style);
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     setUndo(layer.Style, previous);
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -631,10 +631,10 @@ namespace Retouch_Photo2.ViewModels
                 this.StandardStyleLayer = layer;
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 

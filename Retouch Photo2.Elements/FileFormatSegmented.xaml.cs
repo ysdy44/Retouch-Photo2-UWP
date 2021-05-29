@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Elements
             if (e.NewValue is CanvasBitmapFileFormat value)
             {
                 control._vsFileFormat = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Elements
         public FileFormatSegmented()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
             this.JpegButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Jpeg;
             this.PngButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Png;
             this.BmpButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Bmp;

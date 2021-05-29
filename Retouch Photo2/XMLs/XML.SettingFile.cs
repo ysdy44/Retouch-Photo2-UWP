@@ -30,7 +30,7 @@ namespace Retouch_Photo2
 
             if (isLocalSettingExists)
             {
-                //Read the file from the local folder.
+                // Read the file from the local folder.
                 file = await ApplicationData.Current.LocalFolder.GetFileAsync("Setting.xml");
             }
 
@@ -60,7 +60,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.ViewModels.XML.SaveSetting(setting);
 
-            //Save the Setting xml file.      
+            // Save the Setting xml file.      
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Setting.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

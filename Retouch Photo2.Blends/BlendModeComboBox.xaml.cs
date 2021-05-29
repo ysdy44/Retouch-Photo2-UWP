@@ -99,12 +99,12 @@ namespace Retouch_Photo2.Blends
                     {
                         if (item == this.None)
                         {
-                            this.ModeChanged?.Invoke(this, null);//Delegate
+                            this.ModeChanged?.Invoke(this, null); // Delegate
                         }
                         else
                         {
                             BlendEffectMode weight = item.Mode;
-                            this.ModeChanged?.Invoke(this, weight);//Delegate
+                            this.ModeChanged?.Invoke(this, weight); // Delegate
                         }
                     }
                 }
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Blends
     public sealed partial class BlendModeComboBox : UserControl
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -145,7 +145,7 @@ namespace Retouch_Photo2.Blends
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class OuterShadowPage : Page, IEffectPage
     {
 
-        //String
+        // String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -180,7 +180,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class OuterShadowPage : Page, IEffectPage
     {
 
-        //Radius
+        // Radius
         private void ConstructRadius1()
         {
             this.RadiusPicker.Unit = null;
@@ -231,7 +231,7 @@ namespace Retouch_Photo2.Effects.Pages
         }
 
 
-        //Opacity
+        // Opacity
         private void ConstructOpacity1()
         {
             this.OpacityPicker.Unit = "%";
@@ -282,7 +282,7 @@ namespace Retouch_Photo2.Effects.Pages
         }
 
 
-        //Offset
+        // Offset
         private void ConstructOffset1()
         {
             this.OffsetPicker.Unit = null;
@@ -333,7 +333,7 @@ namespace Retouch_Photo2.Effects.Pages
         }
 
 
-        //Angle
+        // Angle
         private void ConstructAngle1()
         {
             this.AnglePicker.Unit = "º";
@@ -384,7 +384,7 @@ namespace Retouch_Photo2.Effects.Pages
         }
 
 
-        //Color
+        // Color
         private void ConstructColor1()
         {
             this.ColorButton.Tapped += (s, e) =>

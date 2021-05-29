@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
 
         private static void MezzanineCore(Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
         {
-            //Layerages
+            // Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
             //if (outermost == null) return; // If count = 0, it will be useless.
@@ -34,14 +34,14 @@ namespace Retouch_Photo2.Layers
             if (mezzanineLayer != null)
             {
                 mezzanineLayer.Self.IsSelected = true;
-                parents.Children.Insert(index, mezzanineLayer);//Insert
+                parents.Children.Insert(index, mezzanineLayer); // Insert
             }
             else if (mezzanineLayers != null)
             {
                 foreach (Layerage child in mezzanineLayers)
                 {
                     child.Self.IsSelected = true;
-                    parents.Children.Insert(index, child);//Insert
+                    parents.Children.Insert(index, child); // Insert
                 }
             }
         }

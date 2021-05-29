@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Menus
                         IAdjustment adjustment = Retouch_Photo2.Adjustments.XML.CreateAdjustment(key);
                         this.Add(adjustment);
 
-                        AdjustmentCommand.Edit(adjustment);//Delegate
+                        AdjustmentCommand.Edit(adjustment); // Delegate
                     }
                 }
             };
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class AdjustmentMenu : Expander
     {
         
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -108,7 +108,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -131,10 +131,10 @@ namespace Retouch_Photo2.Menus
 
         private void Add(IAdjustment adjustment)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
 
-            //Selection
+            // Selection
             ILayer outermostLayer = null;
             this.SelectionViewModel.SetValue((layerage) =>
             {
@@ -144,14 +144,14 @@ namespace Retouch_Photo2.Menus
                 var previous = layer.Filter.Clone();
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Filter = previous.Clone();
                 };
 
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -160,10 +160,10 @@ namespace Retouch_Photo2.Menus
             });
             this.SelectionViewModel.SetFilter(outermostLayer?.Filter);
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate     
+            this.ViewModel.Invalidate(); // Invalidate     
         }
 
 
@@ -173,10 +173,10 @@ namespace Retouch_Photo2.Menus
         /// <param name="adjustment"> The removed adjustment. </param>
         public void Remove(IAdjustment removeAdjustment)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
 
-            //Selection
+            // Selection
             ILayer outermostLayer = null;
             this.SelectionViewModel.SetValue((layerage) =>
             {
@@ -186,13 +186,13 @@ namespace Retouch_Photo2.Menus
                 var previous = layer.Filter.Clone();
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Filter = previous.Clone();
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -201,12 +201,12 @@ namespace Retouch_Photo2.Menus
             });
             this.SelectionViewModel.SetFilter(outermostLayer?.Filter);
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate     
+            this.ViewModel.Invalidate(); // Invalidate     
 
-            AdjustmentCommand.Edit(null);//Delegate
+            AdjustmentCommand.Edit(null); // Delegate
         }
 
     }

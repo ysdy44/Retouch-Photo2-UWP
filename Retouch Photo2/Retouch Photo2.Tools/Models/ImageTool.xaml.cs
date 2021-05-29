@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Tools.Models
 
         Layerage MezzanineLayerage = null;
         /// <summary> Tip. </summary>
-        public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
+        public void TipSelect() => this.EaseStoryboard.Begin(); // Storyboard
 
 
         //@Converter
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.SelectButton.Tapped += async (s, e) => await this.Select();
             this.ReplaceButton.Tapped += async (s, e) => await this.Replace();
-            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
+            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier(); // Photocopier
         }
 
 
@@ -90,16 +90,16 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
-            //Transformer
+            // Transformer
             this._sizeWidth = photo.Width;
             this._sizeHeight = photo.Height;
             Transformer transformer = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
-            //Mezzanine         
+            // Mezzanine         
             Layerage imageLayerage = Layerage.CreateByGuid();
             ImageLayer imageLayer = new ImageLayer
             {
@@ -115,30 +115,30 @@ namespace Retouch_Photo2.Tools.Models
             this.MezzanineLayerage = imageLayerage;
             LayerManager.Mezzanine(this.MezzanineLayerage);
 
-            this.SelectionViewModel.Transformer = transformer;//Selection
+            this.SelectionViewModel.Transformer = transformer; // Selection
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            //ILayer
+            // ILayer
             if (this.MezzanineLayerage == null) return;
             ILayer mezzanineLayer = this.MezzanineLayerage.Self;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
             mezzanineLayer.Transform.Transformer = transformerDestination;
 
-            //Refactoring
+            // Refactoring
             mezzanineLayer.IsRefactoringRender = true;
             mezzanineLayer.IsRefactoringIconRender = true;
             this.MezzanineLayerage.RefactoringParentsRender();
             this.MezzanineLayerage.RefactoringParentsIconRender();
 
 
-            //Selection
-            this.SelectionViewModel.Transformer = transformerDestination;//Selection
+            // Selection
+            this.SelectionViewModel.Transformer = transformerDestination; // Selection
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -152,10 +152,10 @@ namespace Retouch_Photo2.Tools.Models
 
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
 
-                this.SelectionViewModel.Transformer = transformerDestination;//Selection
+                this.SelectionViewModel.Transformer = transformerDestination; // Selection
                 mezzanineLayer.Transform.Transformer = transformerDestination;
 
-                //Refactoring
+                // Refactoring
                 mezzanineLayer.IsRefactoringRender = true;
                 mezzanineLayer.IsRefactoringIconRender = true;
                 this.MezzanineLayerage.RefactoringParentsRender();
@@ -172,14 +172,14 @@ namespace Retouch_Photo2.Tools.Models
                 mezzanineLayer.IsSelected = true;
                 this.MezzanineLayerage = null;
             }
-            else LayerManager.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
+            else LayerManager.RemoveMezzanine(this.MezzanineLayerage); // Mezzanine
 
-            // this.SelectionViewModel.SetMode();//Selection
+            // this.SelectionViewModel.SetMode(); // Selection
 
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
 
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
@@ -212,7 +212,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -225,7 +225,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class ImageTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

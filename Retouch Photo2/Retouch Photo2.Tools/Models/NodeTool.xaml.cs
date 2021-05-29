@@ -102,11 +102,11 @@ namespace Retouch_Photo2.Tools.Models
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                 this.NodeCollectionMode = NodeCollectionMode.RectChoose;
 
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsManipulationStarted = true;
                 CoreCursorExtension.Cross();
 
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
                 return;
             }
 
@@ -114,32 +114,32 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case NodeCollectionMode.Move:
                     this.MoveStarted();
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsManipulationStarted = true;
                     CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                     this.MoveSingleNodePointStarted(startingPoint, matrix);
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsManipulationStarted = true;
                     CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
                     this.MoveSingleNodeControlPointStarted();
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsManipulationStarted = true;
                     CoreCursorExtension.Cross();
                     break;
                 case NodeCollectionMode.RectChoose:
                     this.RectChooseStarted(startingPoint, point);
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsManipulationStarted = true;
                     CoreCursorExtension.Cross();
                     break;
             }
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -150,7 +150,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Layerage == null)
             {
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
-                this.ViewModel.Invalidate();//Invalidate
+                this.ViewModel.Invalidate(); // Invalidate
                 return;
             }
 
@@ -173,7 +173,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.Cross();
 
@@ -189,7 +189,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                 this.NodeCollectionMode = NodeCollectionMode.None;
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
                 return;
             }
 
@@ -217,17 +217,17 @@ namespace Retouch_Photo2.Tools.Models
 
             this.NodeCollectionMode = NodeCollectionMode.None;
 
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
 
         public void Clicke(Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNode_IsChecked);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -237,20 +237,20 @@ namespace Retouch_Photo2.Tools.Models
                     layer.Nodes.CacheTransform();
                     layer.Nodes.SelectionOnlyOne(point, matrix);
 
-                    //History
+                    // History
                     var previous = layer.Nodes.NodesStartingClone().ToList();
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         layer.Nodes.NodesReplace(previous);
                     };
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
         public void Cursor(Vector2 point)
@@ -325,7 +325,7 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.Move:
                 case NodeCollectionMode.MoveSingleNodePoint:
                     {
-                        //Snapping
+                        // Snapping
                         if (this.IsSnap)
                         {
                             this.Snap.Draw(drawingSession, matrix);
@@ -346,7 +346,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -357,7 +357,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class NodeTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -377,10 +377,10 @@ namespace Retouch_Photo2.Tools.Models
 
 
             {
-                //History
+                // History
                 LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_RemoveNodes);
 
-                //Selection
+                // Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
@@ -403,7 +403,7 @@ namespace Retouch_Photo2.Tools.Models
                                     var previous = layer.Nodes.NodesClone().ToList();
                                     history.UndoAction += () =>
                                     {
-                                        //Refactoring
+                                        // Refactoring
                                         layer.IsRefactoringTransformer = true;
                                         layer.IsRefactoringRender = true;
                                         layer.IsRefactoringIconRender = true;
@@ -413,7 +413,7 @@ namespace Retouch_Photo2.Tools.Models
                                         layer.Nodes.NodesReplace(previous);
                                     };
 
-                                    //Refactoring
+                                    // Refactoring
                                     layer.IsRefactoringTransformer = true;
                                     layer.IsRefactoringRender = true;
                                     layer.IsRefactoringIconRender = true;
@@ -431,15 +431,15 @@ namespace Retouch_Photo2.Tools.Models
                     }
                 });
 
-                //History
+                // History
                 this.ViewModel.HistoryPush(history);
             }
 
 
-            //Remove
+            // Remove
             if (removeLayerage.Count != 0)
             {
-                //History
+                // History
                 LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_RemoveLayers);
                 this.ViewModel.HistoryPush(history);
 
@@ -448,20 +448,20 @@ namespace Retouch_Photo2.Tools.Models
                     LayerManager.Remove(remove);
                 }
 
-                //Selection
-                this.SelectionViewModel.SetMode();//Selection
+                // Selection
+                this.SelectionViewModel.SetMode(); // Selection
                 LayerManager.ArrangeLayers();
             }
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
         private void Insert()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_InsertNodes);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -471,7 +471,7 @@ namespace Retouch_Photo2.Tools.Models
                     var previous = layer.Nodes.NodesStartingClone().ToList();
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringTransformer = true;
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
@@ -481,7 +481,7 @@ namespace Retouch_Photo2.Tools.Models
                         layer.Nodes.NodesReplace(previous);
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -492,26 +492,26 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
 
         private void Sharp()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_SharpNodes);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.Type == LayerType.Curve)
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -523,11 +523,11 @@ namespace Retouch_Photo2.Tools.Models
 
                     if (isSuccessful)
                     {
-                        //History
+                        // History
                         var previous = layer.Nodes.NodesStartingClone().ToList();
                         history.UndoAction += () =>
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringTransformer = true;
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
@@ -537,25 +537,25 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
         private void Smooth()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_SmoothNodes);
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
                 if (layer.Type == LayerType.Curve)
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -567,11 +567,11 @@ namespace Retouch_Photo2.Tools.Models
 
                     if (isSuccessful)
                     {
-                        //History
+                        // History
                         var previous = layer.Nodes.NodesStartingClone().ToList();
                         history.UndoAction += () =>
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringTransformer = true;
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
@@ -581,10 +581,10 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
     }

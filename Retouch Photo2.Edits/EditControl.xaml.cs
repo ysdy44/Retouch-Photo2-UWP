@@ -41,12 +41,12 @@ namespace Retouch_Photo2.Edits
             this.DefaultStyleKey = typeof(EditControl);
 
             this._vsIsEnabled = this.IsEnabled;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
 
             this.IsEnabledChanged += (s, e) =>
             {
                 this._vsIsEnabled = this.IsEnabled;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             };
         }
 
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Edits
             this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
             this.Disabled = base.GetTemplateChild(nameof(Disabled)) as VisualState;
             this._vsIsEnabled = this.IsEnabled;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
         }
 
     }

@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConstructStopsPicker();
 
-            //Type
+            // Type
             this.ConstructTransparency();
         }
 
@@ -79,38 +79,38 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            //Selection
+            // Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            //Snap
+            // Snap
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.Transformer);
 
             this.TransparencyStarted(startingPoint, point);
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.Cross();
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            //Selection
+            // Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
 
             this.TransparencyDelta(canvasStartingPoint, canvasPoint);
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            //Selection
+            // Selection
             if (this.Mode == ListViewSelectionMode.None) return;
             this.HandleMode = BrushHandleMode.None;
 
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap)
             {
                 canvasPoint = this.Snap.Snap(canvasPoint);
@@ -127,11 +127,11 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TransparencyComplete(canvasStartingPoint, canvasPoint);
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.Cross();
 
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
         }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
@@ -167,7 +167,7 @@ namespace Retouch_Photo2.Tools.Models
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        //Snapping
+                        // Snapping
                         if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
 
                         this.Transparency.Draw(drawingSession, matrix, this.ViewModel.AccentColor);
@@ -185,7 +185,7 @@ namespace Retouch_Photo2.Tools.Models
                 ILayer layer = layerage.Self;
                 this.SelectionViewModel.SetStyle(layer.Style);
             }
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom() { }
 
@@ -195,7 +195,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class TransparencyTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

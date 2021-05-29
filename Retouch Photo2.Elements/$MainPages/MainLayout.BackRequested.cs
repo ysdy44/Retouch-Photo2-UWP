@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Elements
         public void Show(MainPageState state)
         {
             this._vsState = state;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
 
             BackRequestedExtension.LayoutIsShow = true;
             BackRequestedExtension.Current.BackRequested += this.BackRequested;
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Elements
         public void Hide()
         {
             this._vsState = MainPageState.Main;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
 
             BackRequestedExtension.LayoutIsShow = false;
             BackRequestedExtension.Current.BackRequested -= this.BackRequested;

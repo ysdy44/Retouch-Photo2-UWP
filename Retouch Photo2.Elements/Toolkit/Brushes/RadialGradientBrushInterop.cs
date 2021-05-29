@@ -58,7 +58,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         }
 
         /// <summary>
-        /// Returns a new <see cref="Windows.Foundation.Rect(double, double, double, double)"/> representing the size of the <see cref="Vector2"/>.
+        ///Returns a new <see cref="Windows.Foundation.Rect(double, double, double, double)"/> representing the size of the <see cref="Vector2"/>.
         /// </summary>
         /// <param name="vector"><see cref="Vector2"/> vector representing object size for Rectangle.</param>
         /// <returns><see cref="Windows.Foundation.Rect(double, double, double, double)"/> value.</returns>
@@ -68,7 +68,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         }
 
         /// <summary>
-        /// Returns a new <see cref="Vector2"/> representing the <see cref="Size(double,double)"/>.
+        ///Returns a new <see cref="Vector2"/> representing the <see cref="Size(double,double)"/>.
         /// </summary>
         /// <param name="size"><see cref="Size(double,double)"/> value.</param>
         /// <returns><see cref="Vector2"/> value.</returns>

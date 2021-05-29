@@ -31,21 +31,21 @@ namespace Retouch_Photo2.Tools
 
         public bool Clicke(Vector2 point)
         {
-            //SelectedLayer
+            // SelectedLayer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
             Layerage selectedLayerage = this.SelectionViewModel.GetClickSelectedLayerage(canvasPoint);
 
             if (selectedLayerage == null)
             {
-                this.MethodViewModel.MethodSelectedNone();//Method
+                this.MethodViewModel.MethodSelectedNone(); // Method
                 return false;
             }
 
 
             switch (this.CompositeMode)
             {
-                //Method
+                // Method
                 case MarqueeCompositeMode.New: this.MethodViewModel.MethodSelectedNew(selectedLayerage); return true;
                 case MarqueeCompositeMode.Add: this.MethodViewModel.MethodSelectedAdd(selectedLayerage); return true;
                 case MarqueeCompositeMode.Subtract: this.MethodViewModel.MethodSelectedSubtract(selectedLayerage); return true;
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None)
             {
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsPointerEntered = false;
                 CoreCursorExtension.None();
                 return;
@@ -69,13 +69,13 @@ namespace Retouch_Photo2.Tools
             TransformerMode mode = Transformer.ContainsNodeMode(point, this.Transformer, matrix);
             if (mode == TransformerMode.None)
             {
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsPointerEntered = false;
                 CoreCursorExtension.None();
                 return;
             }
 
-            //Cursor
+            // Cursor
             Vector2 horizontal = this.Transformer.Horizontal;
             float angle = Transformer.GetRadians(horizontal);
             CoreCursorExtension.IsPointerEntered = true;

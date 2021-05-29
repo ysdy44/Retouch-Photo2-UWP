@@ -29,13 +29,13 @@ namespace Retouch_Photo2.Layers
                     }
                     else
                     {
-                        //Recursive
+                        // Recursive
                         addLayer(child);
                     }
                 }
             }
 
-            //Recursive
+            // Recursive
             addLayer(LayerManager.RootLayerage);
 
             return selectedLayerages;
@@ -60,12 +60,12 @@ namespace Retouch_Photo2.Layers
                         selectedLayerages.Add(child);
                     }
 
-                    //Recursive
+                    // Recursive
                     addLayer(child);
                 }
             }
 
-            //Recursive
+            // Recursive
             addLayer(LayerManager.RootLayerage);
 
             return selectedLayerages;

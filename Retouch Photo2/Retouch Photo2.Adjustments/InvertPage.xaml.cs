@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class InvertPage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

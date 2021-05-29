@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ContrastPage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ContrastPage : IAdjustmentPage
     {
 
-        //Contrast
+        // Contrast
         private void ConstructContrast1()
         {
             this.ContrastPicker.Unit = "%";

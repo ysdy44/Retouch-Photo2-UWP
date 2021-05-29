@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Elements
     public sealed partial class LoadingControl : UserControl
     {
 
-        //String
+        // String
         readonly static ResourceLoader resource = ResourceLoader.GetForCurrentView();
         private string StringsConverter(LoadingState value)
         {
@@ -89,7 +89,7 @@ namespace Retouch_Photo2.Elements
         public void Begin()
         {
             this.ProgressBar.Value = 0.0d;
-            this.Storyboard.Begin();//Storyboard}
+            this.Storyboard.Begin(); // Storyboard}
         }
 
 

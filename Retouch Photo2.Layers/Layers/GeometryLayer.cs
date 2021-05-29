@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Layers.Models
             {
 
 
-                //Fill
+                // Fill
                 // Fill a geometry with style.
                 if (this.Style.Fill.Type != BrushType.None)
                 {
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Layers.Models
                     drawingSession.FillGeometry(geometry, canvasBrush);
                 }
 
-                //CanvasActiveLayer
+                // CanvasActiveLayer
                 if (layerage.Children.Count != 0)
                 {
                     using (drawingSession.CreateLayer(1, geometry))
@@ -119,7 +119,7 @@ namespace Retouch_Photo2.Layers.Models
                     }
                 }
 
-                //Stroke
+                // Stroke
                 // Draw a geometry with style.
                 if (this.Style.Stroke.Type != BrushType.None)
                 {
@@ -138,7 +138,7 @@ namespace Retouch_Photo2.Layers.Models
             {
 
 
-                //Stroke
+                // Stroke
                 // Draw a geometry with style.
                 if (this.Style.Stroke.Type != BrushType.None)
                 {
@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Layers.Models
                     }
                 }
 
-                //CanvasActiveLayer
+                // CanvasActiveLayer
                 if (layerage.Children.Count != 0)
                 {
                     using (drawingSession.CreateLayer(1, geometry))
@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Layers.Models
                     }
                 }
 
-                //Fill
+                // Fill
                 // Fill a geometry with style.
                 if (this.Style.Fill.Type != BrushType.None)
                 {
@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Layers.Models
 
 
         /// <summary>
-        /// Returns whether the area filled by the layer contains the specified point.
+        ///Returns whether the area filled by the layer contains the specified point.
         /// </summary>
         /// <param name="layerage"> The layerage. </param>
         /// <param name="point"> The point. </param>

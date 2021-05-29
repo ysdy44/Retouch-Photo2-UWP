@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public static void UngroupAllSelectedLayer()
         {
-            //Layerages
+            // Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Layers
                 if (groupLayerage == null) break;
                 ILayer groupLayer = groupLayerage.Self;
 
-                //Insert
+                // Insert
                 foreach (Layerage layerage in groupLayerage.Children)
                 {
                     ILayer layer = layerage.Self;
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Layers
                 }
                 groupLayerage.Children.Clear();
 
-                //Remove
+                // Remove
                 {
                     Layerage groupLayerageParents = LayerManager.GetParentsChildren(groupLayerage);
                     groupLayerageParents.Children.Remove(groupLayerage);
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>     
         public static void GroupAllSelectedLayers()
         {
-            //Layerages
+            // Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
@@ -91,20 +91,20 @@ namespace Retouch_Photo2.Layers
             if (index < 0) index = 0;
 
 
-            //GroupLayer
+            // GroupLayer
             Layerage groupLayerage = Layerage.CreateByGuid();
             GroupLayer groupLayer = new GroupLayer
             {
                 Id = groupLayerage.Id,
                 IsSelected = true,
                 IsExpand = false,
-                //Refactoring
+                // Refactoring
                 IsRefactoringTransformer = true,
             };
             LayerBase.Instances.Add(groupLayerage.Id, groupLayer);
 
 
-            //Temp
+            // Temp
             foreach (Layerage layerage in selectedLayerages)
             {
                 ILayer layer = layerage.Self;
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.Layers
                 groupLayerage.Children.Add(layerage);
             }
 
-            //Insert
+            // Insert
             parents.Children.Insert(index, groupLayerage);
         }
 

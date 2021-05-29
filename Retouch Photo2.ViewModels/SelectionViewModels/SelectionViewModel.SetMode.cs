@@ -19,22 +19,22 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void SetMode()
         {
-            //Layerages
+            // Layerages
             IEnumerable<Layerage> selectedLayeragesRecursive = LayerManager.GetAllSelectedRecursive();
             int count = selectedLayeragesRecursive.Count();
 
             if (count == 0)
             {
-                this.SetModeNone();//None
+                this.SetModeNone(); // None
             }
             else if (count == 1)
             {
                 Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayeragesRecursive);
-                this.SetModeSingle(outermost);//Single
+                this.SetModeSingle(outermost); // Single
             }
             else if (count >= 2)
             {
-                this.SetModeMultiple(selectedLayeragesRecursive);//Multiple
+                this.SetModeMultiple(selectedLayeragesRecursive); // Multiple
             }
         }
 
@@ -142,12 +142,12 @@ namespace Retouch_Photo2.ViewModels
             Layerage outermost = LayerManager.FindOutermostLayerage(layerages);
             ILayer outermostLayer = outermost.Self;
 
-            this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer
+            this.SelectionMode = ListViewSelectionMode.Multiple;// Transformer
 
             this.SelectionLayerage = null;
             this.SelectionLayerages = layerages;
 
-            //TransformerBorder
+            // TransformerBorder
             TransformerBorder border = new TransformerBorder(layerages);
             this.Transformer = border.ToTransformer();
 

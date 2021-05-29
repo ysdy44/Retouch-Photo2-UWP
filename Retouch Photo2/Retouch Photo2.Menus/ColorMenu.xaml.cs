@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Menus
 
         private void ConstructColor2()
         {
-            //Color
+            // Color
             this.ColorPicker.ColorChangedStarted += (s, value) =>
             {
                 switch (this.SelectionViewModel.FillOrStroke)

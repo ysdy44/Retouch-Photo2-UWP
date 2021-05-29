@@ -18,7 +18,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.fontText == value) return;
                 this.fontText = value;
-                this.OnPropertyChanged(nameof(FontText));//Notify 
+                this.OnPropertyChanged(nameof(FontText)); // Notify 
             }
         }
         private string fontText = null;
@@ -30,7 +30,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontFamily = value;
-                this.OnPropertyChanged(nameof(FontFamily));//Notify 
+                this.OnPropertyChanged(nameof(FontFamily)); // Notify 
             }
         }
         private string fontFamily = "Arial";
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontSize = value;
-                this.OnPropertyChanged(nameof(FontSize));//Notify 
+                this.OnPropertyChanged(nameof(FontSize)); // Notify 
             }
         }
         private float fontSize = 22;
@@ -55,7 +55,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.horizontalAlignment = value;
-                this.OnPropertyChanged(nameof(HorizontalAlignment));//Notify 
+                this.OnPropertyChanged(nameof(HorizontalAlignment)); // Notify 
             }
         }
         private CanvasHorizontalAlignment horizontalAlignment = CanvasHorizontalAlignment.Left;
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.direction = value;
-                this.OnPropertyChanged(nameof(Direction));//Notify 
+                this.OnPropertyChanged(nameof(Direction)); // Notify 
             }
         }
         private CanvasTextDirection direction = CanvasTextDirection.LeftToRightThenTopToBottom;
@@ -80,7 +80,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.underline = value;
-                this.OnPropertyChanged(nameof(Underline));//Notify 
+                this.OnPropertyChanged(nameof(Underline)); // Notify 
             }
         }
         private bool underline;
@@ -92,7 +92,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontStyle = value;
-                this.OnPropertyChanged(nameof(FontStyle));//Notify 
+                this.OnPropertyChanged(nameof(FontStyle)); // Notify 
             }
         }
         private FontStyle fontStyle = FontStyle.Normal;
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontWeight = value;
-                this.OnPropertyChanged(nameof(FontWeight));//Notify 
+                this.OnPropertyChanged(nameof(FontWeight)); // Notify 
             }
         }
         private FontWeight2 fontWeight = FontWeight2.Normal;

@@ -157,7 +157,7 @@ namespace Retouch_Photo2.Elements
             if (offset < this.Distance / 2)
             {
                 this._vsIsExpaned = true;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
                 return;
             }
 
@@ -170,14 +170,14 @@ namespace Retouch_Photo2.Elements
                 this.cacheDistance = this.Distance;
 
                 this._vsIsExpaned = false;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
             else if (this.cacheDistance < -this.Distance)
             {
                 this.cacheDistance = -this.Distance;
 
                 this._vsIsExpaned = true;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 

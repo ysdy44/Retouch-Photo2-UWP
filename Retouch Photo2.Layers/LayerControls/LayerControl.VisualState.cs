@@ -51,13 +51,13 @@ namespace Retouch_Photo2.Layers
             set
             {
                 this._vsClickMode = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 
 
 
-        //Control
+        // Control
         /// <summary> Gets or sets the height. </summary>
         public int ControlHeight
         {
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.Layers
                 this.IconBorder.Width = value;
                 this.IconBorder.Height = value;
 
-                //Overlay
+                // Overlay
                 double heightOver7 = value / 7;
                 this.OverlayShowTopBorder.Height = heightOver7 + heightOver7;
                 this.OverlayShowCenterBorder.Height = heightOver7 + heightOver7 + heightOver7;
@@ -127,7 +127,7 @@ namespace Retouch_Photo2.Layers
 
         
 
-        //Property
+        // Property
         /// <summary> Gets or sets the type. </summary>
         private string Type { set => this.TypeRun.Text = value; }
         /// <summary> Gets or sets the name. </summary>
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.Layers
 
                
 
-        //LayerManager
+        // LayerManager
         /// <summary> Gets or sets the depth. </summary>
         public int Depth
         {
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Layers
             set
             {
                 this._vsBackgroundMode = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 

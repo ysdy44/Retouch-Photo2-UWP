@@ -49,10 +49,10 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="setUndo"> The sets of history undo T. </param>
         public void ITextLayerChanged<T>(Action<ITextLayer> set, HistoryType type, Func<ITextLayer, T> getUndo, Action<ITextLayer, T> setUndo)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -64,13 +64,13 @@ namespace Retouch_Photo2.ViewModels
                     var previous = getUndo(textLayer);
                     history.UndoAction += () =>
                     {
-                        //Refactoring
+                        // Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         setUndo(textLayer, previous);
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -79,10 +79,10 @@ namespace Retouch_Photo2.ViewModels
                 }
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.ViewModels
                 setUndo: (textLayer, previous) => textLayer.FontSize = previous
            );
 
-            //Refactoring
+            // Refactoring
             this.Transformer = this.RefactoringTransformer();
         }
 

@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         private void RenderCore(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
         {
-            //Fill
+            // Fill
             // Fill a geometry with style.
             if (this.Style.Fill.Type != BrushType.None)
             {
@@ -93,11 +93,11 @@ namespace Retouch_Photo2.Layers.Models
                 drawingSession.FillGeometry(geometry, canvasBrush);
             }
 
-            //CanvasActiveLayer
+            // CanvasActiveLayer
             using (drawingSession.CreateLayer(1, geometry))
             {
 
-                //Stroke
+                // Stroke
                 // Draw a geometry with style
                 if (this.Style.Stroke.Type != BrushType.None)
                 {

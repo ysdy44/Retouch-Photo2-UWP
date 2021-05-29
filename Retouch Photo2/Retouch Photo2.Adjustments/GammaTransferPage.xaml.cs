@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ConstructStrings();
 
 
-            //Alpha
+            // Alpha
             this.ConstructAlphaDisable();
 
             this.ConstructAlphaOffset1();
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ConstructAlphaAmplitude2();
 
 
-            //Red
+            // Red
             this.ConstructRedDisable();
 
             this.ConstructRedOffset1();
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ConstructRedAmplitude2();
 
             
-            //Green
+            // Green
             this.ConstructGreenDisable();
 
             this.ConstructGreenOffset1();
@@ -92,7 +92,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ConstructGreenAmplitude2();
 
 
-            //Blue
+            // Blue
             this.ConstructBlueDisable();
 
             this.ConstructBlueOffset1();
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class GammaTransferPage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -146,7 +146,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (layer.Filter.Adjustments[this.Index] is GammaTransferAdjustment adjustment)
                 {
-                    //History
+                    // History
                     LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_GammaTransfer);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
@@ -175,7 +175,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
                         if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
 
@@ -201,7 +201,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         }
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -227,10 +227,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                     adjustment.BlueExponent = 1.0f;
                     adjustment.BlueAmplitude = 1.0f;
 
-                    //History
+                    // History
                     this.ViewModel.HistoryPush(history);
 
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.ViewModel.Invalidate(); // Invalidate
                 }
             }
         }

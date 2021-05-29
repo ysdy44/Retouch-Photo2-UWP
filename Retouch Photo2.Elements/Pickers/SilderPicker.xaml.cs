@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsClickMode = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 
@@ -89,12 +89,12 @@ namespace Retouch_Photo2.Elements
             };
 
 
-            //Manipulation
+            // Manipulation
             //htis.RootGrid.ManipulationMode = ManipulationModes.All;
             this.RootGrid.ManipulationStarted += (sender, e) =>
             {
                 this._vsIsManipulationStarted = true;
-                this.VisualState = this.VisualState;//VisualState
+                this.VisualState = this.VisualState; // VisualState
             };
             this.RootGrid.ManipulationDelta += (sender, e) =>
             {
@@ -102,14 +102,14 @@ namespace Retouch_Photo2.Elements
             this.RootGrid.ManipulationCompleted += (sender, e) =>
             {
                 this._vsIsManipulationStarted = false;
-                this.VisualState = this.VisualState;//VisualState
+                this.VisualState = this.VisualState; // VisualState
             };
         }
 
         private void IsEnabledChange()
         {
             this._vsIsEnabled = this.IsEnabled;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
         }
 
     }

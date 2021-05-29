@@ -97,7 +97,7 @@ namespace Retouch_Photo2.ViewModels
                     return this.SelectionLayerage.GetActualTransformer();
 
                 case ListViewSelectionMode.Multiple:
-                    //TransformerBorder
+                    // TransformerBorder
                     TransformerBorder border = new TransformerBorder(this.SelectionLayerages);
                     return border.ToTransformer();
 
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.ViewModels
         /// <returns> The selected layerage. </returns>
         public Layerage GetClickSelectedLayerage(Vector2 canvasPoint)
         {
-            //Select a layer of the same depth
+            // Select a layer of the same depth
             Layerage selectedLayerage = this.GetFirstSelectedLayerage();
             Layerage parents = LayerManager.GetParentsChildren(selectedLayerage);
 

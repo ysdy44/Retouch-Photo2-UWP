@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Brushs
 
                 case BrushType.Image:
                     {
-                        //Photo
+                        // Photo
                         if (photo == null) return;
 
                         Photocopier photocopier = photo.ToPhotocopier();
@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Brushs
 
                 case BrushType.Image:
                     {
-                        //Photo
+                        // Photo
                         if (photo == null) return;
 
                         Photocopier photocopier = photo.ToPhotocopier();

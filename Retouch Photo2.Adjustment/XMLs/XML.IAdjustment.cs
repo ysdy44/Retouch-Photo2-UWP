@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Adjustments
             XElement element = new XElement(elementName);
             element.Add(new XAttribute("Type", adjustment.Type));
             {
-                //SaveWith
+                // SaveWith
                 adjustment.SaveWith(element);
             }
             return element;
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Adjustments
         /// <returns> The loaded <see cref="IAdjustment"/>. </returns>
         public static IAdjustment LoadIAdjustment(XElement element)
         {
-            //Load
+            // Load
             string type2 = element.Attribute("Type") is XAttribute type ? type.Value : null;
             IAdjustment adjustment = XML.CreateAdjustment(type2);
             {

@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Layers
         /// <summary> Normal. </summary>
         None,
 
-        //Geometry0            
+        // Geometry0            
         /// <summary> Rectangle geometry. </summary>                           
         GeometryRectangle,
         /// <summary> Rllipse geometry. </summary>
@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Layers
         Group,
 
 
-        //Pattern
+        // Pattern
         /// <summary> Grid pattern. </summary>
         PatternGrid,
         /// <summary> Diagonal pattern. </summary>
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers
         PatternSpotted,
 
 
-        //Geometry1
+        // Geometry1
         /// <summary> Round-rect geometry. </summary>
         GeometryRoundRect,
         /// <summary> Triangle geometry. </summary>
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Layers
         /// <summary> Diamond geometry. </summary>
         GeometryDiamond,
 
-        //Geometry2
+        // Geometry2
         /// <summary> Pentagon geometry. </summary>
         GeometryPentagon,
         /// <summary> Star geometry. </summary>
@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Layers
         /// <summary> Cog geometry. </summary>
         GeometryCog,
 
-        //Geometry3
+        // Geometry3
         /// <summary> Dount geometry. </summary>
         GeometryDount,
         /// <summary> Pie geometry. </summary>
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Layers
         /// <summary> Cookie geometry. </summary>
         GeometryCookie,
 
-        //Geometry4
+        // Geometry4
         /// <summary> Arrow geometry. </summary>
         GeometryArrow,
         /// <summary> Capsule geometry. </summary>

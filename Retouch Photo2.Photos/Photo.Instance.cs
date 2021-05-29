@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Photos
                 return;
             }
 
-            Photo.Instances.Add(id, photo);//Photos
+            Photo.Instances.Add(id, photo); // Photos
             Photo.UpdateInstancesCollection();
         }
 
@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Photos
         /// <param name="zipFolder"> the zip folder. </param>
         public async Task MoveFile(StorageFolder zipFolder)
         {
-            //Move photo file.
+            // Move photo file.
             StorageFile item = await StorageFile.GetFileFromPathAsync(this.ImageFilePath);
             await item.CopyAsync(zipFolder);
         }

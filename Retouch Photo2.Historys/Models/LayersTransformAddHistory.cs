@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Historys
                 ILayer layer = undo.Key;
                 Vector2 previous = undo.Value;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;

@@ -26,7 +26,7 @@ namespace Retouch_Photo2.ViewModels
                 where node.IsChecked == false && node.Type != NodeType.EndFigure
                 select node.Point;
 
-            //NodeRadius
+            // NodeRadius
             float scale = this.CanvasTransformer.Scale;
             this.VectorVectorSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
@@ -35,7 +35,7 @@ namespace Retouch_Photo2.ViewModels
         {
             this.VectorBorderSnap.Destinations = this.GetSnapDestinations(transformer);
 
-            //NodeRadius
+            // NodeRadius
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
@@ -47,7 +47,7 @@ namespace Retouch_Photo2.ViewModels
                 this.VectorBorderSnap.Destinations = this.GetSnapDestinations(firstLayerages);
             }
 
-            //NodeRadius
+            // NodeRadius
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.ViewModels
                 this.BorderBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
             }
             
-            //NodeRadius
+            // NodeRadius
             float scale = this.CanvasTransformer.Scale;
             this.BorderBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
@@ -71,13 +71,13 @@ namespace Retouch_Photo2.ViewModels
         }
         private IEnumerable<TransformerBorder> GetSnapDestinations(Layerage firstLayer)
         {
-            //CanvasTransformer
+            // CanvasTransformer
             float width = this.CanvasTransformer.Width;
             float height = this.CanvasTransformer.Height;
             yield return new TransformerBorder(width, height);
 
 
-            //Parents
+            // Parents
             if (firstLayer.Parents != LayerManager.RootLayerage)
             {
                 Transformer transformer = firstLayer.Parents.Self.Transform.Transformer;
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.ViewModels
             }
 
 
-            //Layers
+            // Layers
             Layerage layerage = LayerManager.GetParentsChildren(firstLayer);
 
             foreach (Layerage child in layerage.Children)

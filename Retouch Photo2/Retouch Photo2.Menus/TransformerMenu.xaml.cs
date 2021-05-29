@@ -81,41 +81,41 @@ namespace Retouch_Photo2.Menus
                     case ToolType.Crop:
 
 
-                    //Pattern
+                    // Pattern
                     case ToolType.PatternGrid:
                     case ToolType.PatternDiagonal:
                     case ToolType.PatternSpotted:
 
 
-                    //Geometry1
+                    // Geometry1
                     case ToolType.GeometryRoundRect:
                     case ToolType.GeometryTriangle:
                     case ToolType.GeometryDiamond:
 
-                    //Geometry2
+                    // Geometry2
                     case ToolType.GeometryPentagon:
                     case ToolType.GeometryStar:
                     case ToolType.GeometryCog:
 
-                    //Geometry3
+                    // Geometry3
                     case ToolType.GeometryDount:
                     case ToolType.GeometryPie:
                     case ToolType.GeometryCookie:
 
-                    //Geometry4
+                    // Geometry4
                     case ToolType.GeometryArrow:
                     case ToolType.GeometryCapsule:
                     case ToolType.GeometryHeart:
                         {
                             control._vsDisabledTool = false;
-                            control.VisualState = control.VisualState;//State
+                            control.VisualState = control.VisualState; // State
                             return;
                         }
                 }
             }
 
             control._vsDisabledTool = true;
-            control.VisualState = control.VisualState;//State
+            control.VisualState = control.VisualState; // State
             return;
         }));
 
@@ -134,7 +134,7 @@ namespace Retouch_Photo2.Menus
             if (e.NewValue is ListViewSelectionMode value)
             {
                 control._vsMode = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.Menus
             if (e.NewValue is Transformer value)
             {
                 control._vsTransformer = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -183,7 +183,7 @@ namespace Retouch_Photo2.Menus
 
                 return ListViewReorderMode.Enabled;
             }
-            set => this.SetTransformerState(value, this._vsTransformer);//asdsad
+            set => this.SetTransformerState(value, this._vsTransformer); //asdsad
         }
 
 
@@ -193,12 +193,12 @@ namespace Retouch_Photo2.Menus
             {
                 case ListViewReorderMode.Enabled:
                     {
-                        //Value
+                        // Value
                         {
                             Vector2 horizontal = transformer.Horizontal;
                             Vector2 vertical = transformer.Vertical;
 
-                            //Radians Skew
+                            // Radians Skew
                             float angle = Transformer.GetRadians(horizontal);
                             float skew = Transformer.GetSkew(vertical, angle);
                             this.RotateTextBox.Text = this.Round2Converter(angle) + " º";
@@ -206,7 +206,7 @@ namespace Retouch_Photo2.Menus
 
                             //@Release: case Debug
                             {
-                                //Width Height
+                                // Width Height
                                 //float width = horizontal.Length();
                                 //float height = vertical.Length();
                             }
@@ -218,15 +218,15 @@ namespace Retouch_Photo2.Menus
                                 this.HeightTextBox.Text = this.Round2Converter(height);
                             }
 
-                            //X Y
+                            // X Y
                             Vector2 vector = transformer.GetIndicatorVector(this.IndicatorMode);
                             this.XTextBox.Text = this.Round2Converter(vector.X);
                             this.YTextBox.Text = this.Round2Converter(vector.Y);
 
-                            //Indicator
+                            // Indicator
                             this.IndicatorControl.Radians = angle;
                         }
-                        //IsEnabled
+                        // IsEnabled
                         {
                             this.RotateTextBox.IsEnabled = true;
                             this.SkewTextBox.IsEnabled = true;
@@ -248,23 +248,23 @@ namespace Retouch_Photo2.Menus
 
                 case ListViewReorderMode.Disabled:
                     {
-                        //Value
+                        // Value
                         {
-                            //Radians Skew
+                            // Radians Skew
                             this.RotateTextBox.Text = $"{0} º";
                             this.SkewTextBox.Text = $"{0} º";
-                            //Width Height
+                            // Width Height
                             this.WidthTextBox.Text = $"{0}";
                             this.HeightTextBox.Text = $"{0}";
 
-                            //X Y
+                            // X Y
                             this.XTextBox.Text = $"{0}";
                             this.YTextBox.Text = $"{0}";
 
-                            //Indicator
+                            // Indicator
                             this.IndicatorControl.Radians = 0;
                         }
-                        //IsEnabled
+                        // IsEnabled
                         {
                             this.RotateTextBox.IsEnabled = false;
                             this.SkewTextBox.IsEnabled = false;
@@ -322,7 +322,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class TransformerMenu : Expander
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -334,7 +334,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -357,7 +357,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //RemoteControl
+        // RemoteControl
         private void ConstructPositionRemoteControl()
         {
             this.PositionRemoteButton.Click += (s, e) =>
@@ -370,19 +370,19 @@ namespace Retouch_Photo2.Menus
                 new Vector2(value.X, 0) :
                 new Vector2(0, value.Y);
 
-            this.PositionRemoteControl.Moved += (s, value) => this.MethodViewModel.MethodTransformAdd(value);//Method
-            this.PositionRemoteControl.ValueChangeStarted += (s, value) => this.MethodViewModel.MethodTransformAddStarted();//Method
-            this.PositionRemoteControl.ValueChangeDelta += (s, value) => this.MethodViewModel.MethodTransformAddDelta(remote(value));//Method
-            this.PositionRemoteControl.ValueChangeCompleted += (s, value) => this.MethodViewModel.MethodTransformAddComplete(remote(value));//Method
+            this.PositionRemoteControl.Moved += (s, value) => this.MethodViewModel.MethodTransformAdd(value); // Method
+            this.PositionRemoteControl.ValueChangeStarted += (s, value) => this.MethodViewModel.MethodTransformAddStarted(); // Method
+            this.PositionRemoteControl.ValueChangeDelta += (s, value) => this.MethodViewModel.MethodTransformAddDelta(remote(value)); // Method
+            this.PositionRemoteControl.ValueChangeCompleted += (s, value) => this.MethodViewModel.MethodTransformAddComplete(remote(value)); // Method
         }
 
 
-        //IndicatorControl
+        // IndicatorControl
         private void ConstructIndicatorControl()
         {
             this.IndicatorControl.ModeChanged += (s, mode) =>
             {
-                this.IndicatorMode = mode;//IndicatorMode
+                this.IndicatorMode = mode; // IndicatorMode
 
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
@@ -395,7 +395,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Width Height
+        // Width Height
         private void ConstructWidthHeight()
         {
             //@Focus
@@ -416,7 +416,7 @@ namespace Retouch_Photo2.Menus
                     Transformer transformer = this.SelectionTransformer;
                     Matrix3x2 matrix = transformer.TransformWidth((float)width, this.IndicatorMode, this.IsRatio);
 
-                    //Method
+                    // Method
                     this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
@@ -439,14 +439,14 @@ namespace Retouch_Photo2.Menus
                     Transformer transformer = this.SelectionTransformer;
                     Matrix3x2 matrix = transformer.TransformHeight((float)height, this.IndicatorMode, this.IsRatio);
 
-                    //Method
+                    // Method
                     this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
         }
 
 
-        //Radian Skew
+        // Radian Skew
         private void ConstructRadianSkew()
         {
             //@Focus
@@ -469,7 +469,7 @@ namespace Retouch_Photo2.Menus
                     Transformer transformer = this.SelectionTransformer;
                     Matrix3x2 matrix = transformer.TransformRotate((float)angle, this.IndicatorMode);
 
-                    //Method
+                    // Method
                     this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
@@ -495,14 +495,14 @@ namespace Retouch_Photo2.Menus
                     Transformer transformer = this.SelectionTransformer;
                     Matrix3x2 matrix = transformer.TransformSkew((float)angle, this.IndicatorMode);
 
-                    //Method
+                    // Method
                     this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
         }
 
 
-        //X Y
+        // X Y
         private void ConstructXY()
         {
             //@Focus
@@ -521,7 +521,7 @@ namespace Retouch_Photo2.Menus
                     Transformer transformer = this.SelectionTransformer;
                     Vector2 vector = transformer.TransformX((float)x, this.IndicatorMode);
 
-                    //Method
+                    // Method
                     this.MethodViewModel.MethodTransformAdd(vector);
                 }
             };
@@ -543,7 +543,7 @@ namespace Retouch_Photo2.Menus
                     Transformer transformer = this.SelectionTransformer;
                     Vector2 vector = transformer.TransformY((float)y, this.IndicatorMode);
 
-                    //Method
+                    // Method
                     this.MethodViewModel.MethodTransformAdd(vector);
                 }
             };

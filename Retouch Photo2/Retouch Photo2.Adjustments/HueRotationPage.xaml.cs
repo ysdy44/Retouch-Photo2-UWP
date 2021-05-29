@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class HueRotationPage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class HueRotationPage : IAdjustmentPage
     {
 
-        //HueRotation
+        // HueRotation
         private void ConstructHueRotation1()
         {
             this.AnglePicker.Unit = "º";

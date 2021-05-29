@@ -11,17 +11,17 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //LayerManager
+        // LayerManager
         Layerage DragSourceLayerage;
         Layerage DragDestinationLayerage;
         bool DragLayerIsSelected;
         OverlayMode DragLayerOverlayMode;
 
 
-        //LayerManager
+        // LayerManager
         private void ConstructLayerManager()
         {
-            this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
+            this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone(); // Method
             this.LayersScrollViewer.Holding += (s, e) => this.LayersRightTapped();
             this.LayersScrollViewer.RightTapped += (s, e) => this.LayersRightTapped();
         }
@@ -54,32 +54,32 @@ namespace Retouch_Photo2
             }
             else
             {
-                //History
+                // History
                 LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetVisibility);
 
-                //Selection
+                // Selection
                 ILayer layer = layer2;
 
                 var previous = layer.Visibility;
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Visibility = previous;
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 //layerage.RefactoringParentsRender();
                 //layerage.RefactoringParentsIconRender();
                 layer.Visibility = visibility;
 
-                //History
+                // History
                 this.ViewModel.HistoryPush(history);
 
-                this.ViewModel.Invalidate();//Invalidate
+                this.ViewModel.Invalidate(); // Invalidate
             }
         }
         private void LayerIsExpandChanged(ILayer layer)
@@ -92,7 +92,7 @@ namespace Retouch_Photo2
         private void LayerIsSelectedChanged(ILayer layer)
         {
             Layerage layerage = LayerManager.FindFirstLayerage(layer);
-            this.MethodViewModel.MethodSelectedNot(layerage);//Method
+            this.MethodViewModel.MethodSelectedNot(layerage); // Method
         }
         private void LayerDragItemsStarted(ILayer layer, ManipulationModes manipulationModes)
         {
@@ -118,16 +118,16 @@ namespace Retouch_Photo2
         }
         private void LayerDragItemsCompleted()
         {
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
             this.ViewModel.HistoryPush(history);
 
             LayerManager.DragComplete(this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
-            this.SelectionViewModel.SetMode();//Selection
+            this.SelectionViewModel.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
 
             this.DragSourceLayerage = null;
             this.DragDestinationLayerage = null;
@@ -141,22 +141,22 @@ namespace Retouch_Photo2
         {
             Layerage selectedLayerage = LayerManager.FindFirstLayerage(layer);
 
-            //ILayer selectedLayer = selectedLayerage.Self;
+            // ILayer selectedLayer = selectedLayerage.Self;
 
-            //Is it independent of other layers?
+            // Is it independent of other layers?
             bool isfreedom = this.SettingViewModel.KeyCtrl | this.SettingViewModel.KeyShift;
             //bool isfreedom = this.SettingViewModel.KeyCtrl;
-            //Is select successively?
+            // Is select successively?
             //bool isLinear = this.SettingViewModel.KeyShift;
 
             if (isfreedom)
-                this.MethodViewModel.MethodSelectedNot(selectedLayerage);//Method
+                this.MethodViewModel.MethodSelectedNot(selectedLayerage); // Method
 
             // else if (isLinear)       
-            //LayerManager.ShiftSelectCurrentLayer(selectedLayerage);
+            // LayerManager.ShiftSelectCurrentLayer(selectedLayerage);
 
             else
-                this.MethodViewModel.MethodSelectedNew(selectedLayerage);//Method
+                this.MethodViewModel.MethodSelectedNew(selectedLayerage); // Method
         }
 
     }

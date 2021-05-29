@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class PatternSpottedTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Radius
+        // Radius
         private void ConstructRadius1()
         {
             this.RadiusPicker.Minimum = 5;
@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Step
+        // Step
         private void ConstructStep1()
         {
             this.StepPicker.Minimum = 5;

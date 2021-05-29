@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Brushs
             set
             {
                 this._vsTransparency = value;
-                this.Invalidate();//Invalidate
+                this.Invalidate(); // Invalidate
             }
         }
 

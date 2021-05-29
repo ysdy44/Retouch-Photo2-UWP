@@ -11,10 +11,10 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodFillColorChanged(Color value)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
-            //Selection
+            // Selection
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
@@ -27,17 +27,17 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                //History
+                // History
                 var previous = layer.Style.Fill.Clone();
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -47,46 +47,46 @@ namespace Retouch_Photo2.ViewModels
                 this.StandardStyleLayerage = layerage;
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodFillColorChangeStarted(Color value)
         {
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 layer.Style.CacheFill();
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
 
         public void MethodFillColorChangeDelta(Color value)
         {
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
                 layer.Style.Fill = BrushBase.ColorBrush(value);
             });
 
-            this.Invalidate();//Invalidate         
+            this.Invalidate(); // Invalidate         
         }
 
         public void MethodFillColorChangeCompleted(Color value)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
-            //Selection
+            // Selection
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
@@ -99,17 +99,17 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                //History
+                // History
                 var previous = layer.Style.StartingFill.Clone();
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -119,10 +119,10 @@ namespace Retouch_Photo2.ViewModels
                 this.StandardStyleLayerage = layerage;
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate(InvalidateMode.HD);//Invalidate 
+            this.Invalidate(InvalidateMode.HD); // Invalidate 
         }
 
 
@@ -130,10 +130,10 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodStrokeColorChanged(Color value)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
-            //Selection
+            // Selection
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Stroke:
@@ -146,17 +146,17 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                //History
+                // History
                 var previous = layer.Style.Stroke.Clone();
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Stroke = previous.Clone();
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -166,46 +166,46 @@ namespace Retouch_Photo2.ViewModels
                 this.StandardStyleLayerage = layerage;
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodStrokeColorChangeStarted(Color value)
         {
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 layer.Style.CacheStroke();
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
 
         public void MethodStrokeColorChangeDelta(Color value)
         {
-            //Selection
+            // Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
             });
 
-            this.Invalidate();//Invalidate         
+            this.Invalidate(); // Invalidate         
         }
 
         public void MethodStrokeColorChangeCompleted(Color value)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
-            //Selection
+            // Selection
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Stroke:
@@ -218,17 +218,17 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                //History
+                // History
                 var previous = layer.Style.StartingStroke.Clone();
                 history.UndoAction += () =>
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Stroke = previous.Clone();
                 };
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
@@ -238,10 +238,10 @@ namespace Retouch_Photo2.ViewModels
                 this.StandardStyleLayerage = layerage;
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate(InvalidateMode.HD);//Invalidate 
+            this.Invalidate(InvalidateMode.HD); // Invalidate 
         }
 
     }

@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Brushs
     public partial class StopsPicker : UserControl
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -51,16 +51,16 @@ namespace Retouch_Photo2.Brushs
                 if (base.IsEnabled == false) return;
                 if (this.array == null) return;
 
-                //Background
+                // Background
                 args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);
 
-                //LinearGradient
+                // LinearGradient
                 this.Size.DrawLinearGradient(args.DrawingSession, this.CanvasControl, this.array);
 
-                //Lines
+                // Lines
                 this.Size.DrawLines(args.DrawingSession);
 
-                //Nodes
+                // Nodes
                 this.Size.DrawNodes(args.DrawingSession, this.Manager);
             };
         }
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Brushs
                 this.Manager.IsLeft = false;
                 this.Manager.IsRight = false;
 
-                //Stops
+                // Stops
                 for (int i = this.Manager.Count - 1; i >= 0; i--)
                 {
                     float x = this.Size.OffsetToPositionConverter(this.Manager.Stops[i].Position);
@@ -84,37 +84,37 @@ namespace Retouch_Photo2.Brushs
                     {
                         this.Manager.Index = i;
                         CanvasGradientStop stop = this.Manager.Stops[i];
-                        this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
-                        this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                        this.StopChanged(stop.Color, (int)(stop.Position * 100), true); // Delegate
+                        this.StopsChangeStarted?.Invoke(this, this.array); // Delegate
                         this.CanvasControl.Invalidate();
                         return;
                     }
                 }
 
-                //Left
+                // Left
                 bool isLeft = (Math.Abs(this.Size.Left - point.X) < StopsSize.Radius);
                 if (isLeft)
                 {
                     this.Manager.IsLeft = true;
-                    this.StopChanged(this.Manager.LeftColor, 0, false);//Delegate
-                    this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                    this.StopChanged(this.Manager.LeftColor, 0, false); // Delegate
+                    this.StopsChangeStarted?.Invoke(this, this.array); // Delegate
                     this.CanvasControl.Invalidate();
                     return;
                 }
 
-                //Right
+                // Right
                 bool isRight = (Math.Abs(this.Size.Right - point.X) < StopsSize.Radius);
                 if (isRight)
                 {
                     this.Manager.IsRight = true;
-                    this.StopChanged(this.Manager.RightColor, 100, false);//Delegate
-                    this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                    this.StopChanged(this.Manager.RightColor, 100, false); // Delegate
+                    this.StopsChangeStarted?.Invoke(this, this.array); // Delegate
                     this.CanvasControl.Invalidate();
                     return;
                 }
 
 
-                //Add
+                // Add
                 float offset = this.Size.PositionToOffsetConverter(point.X);
                 CanvasGradientStop addStop = this.Manager.InsertNewStepByOffset(offset);
 
@@ -124,8 +124,8 @@ namespace Retouch_Photo2.Brushs
                 CanvasGradientStop[] array = this.Manager.GenerateArrayFromDate();
                 this.SetArray(array);
 
-                this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
-                this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true); // Delegate
+                this.StopsChangeStarted?.Invoke(this, this.array); // Delegate
                 this.CanvasControl.Invalidate();
                 return;
             };
@@ -140,7 +140,7 @@ namespace Retouch_Photo2.Brushs
                 this.SetOffset(offset);
 
                 this.CanvasControl.Invalidate();
-                this.StopsChangeDelta?.Invoke(this, this.array);//Delegate
+                this.StopsChangeDelta?.Invoke(this, this.array); // Delegate
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
@@ -149,22 +149,22 @@ namespace Retouch_Photo2.Brushs
                 if (this.Manager.IsLeft)
                 {
                     Color color = this.Manager.LeftColor;
-                    this.StopChanged(color, 0, false);//Delegate
+                    this.StopChanged(color, 0, false); // Delegate
                 }
                 else if (this.Manager.IsRight)
                 {
                     Color color = this.Manager.RightColor;
-                    this.StopChanged(color, 100, false);//Delegate
+                    this.StopChanged(color, 100, false); // Delegate
                 }
                 else
                 {
                     int i = this.Manager.Index;
                     CanvasGradientStop stop = this.Manager.Stops[i];
-                    this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
-                    this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                    this.StopChanged(stop.Color, (int)(stop.Position * 100), true); // Delegate
+                    this.StopsChangeStarted?.Invoke(this, this.array); // Delegate
                 }
 
-                this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate
+                this.StopsChangeCompleted?.Invoke(this, this.array); // Delegate
                 this.CanvasControl.Invalidate();
             };
         }
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.Brushs
 
                 this.array = this.Manager.GenerateArrayFromDate();
 
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array); // Delegate
                 this.CanvasControl.Invalidate();
             };
 
@@ -195,7 +195,7 @@ namespace Retouch_Photo2.Brushs
                 this.Manager.Copy(this.array);
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array); // Delegate
             };
 
             // Remove current stop.
@@ -212,7 +212,7 @@ namespace Retouch_Photo2.Brushs
                 this.array = this.Manager.GenerateArrayFromDate();
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array); // Delegate
             };
         }
 

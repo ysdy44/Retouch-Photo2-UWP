@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Brushs
                     if (control.Parent is FillOrStrokeListViewItem item)
                     {
                         FillOrStroke type = item.FillOrStroke;
-                        this.FillOrStrokeChanged?.Invoke(this, type); //Delegate
+                        this.FillOrStrokeChanged?.Invoke(this, type); // Delegate
                         this.Flyout.Hide();
                     }
                 }
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Brushs
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

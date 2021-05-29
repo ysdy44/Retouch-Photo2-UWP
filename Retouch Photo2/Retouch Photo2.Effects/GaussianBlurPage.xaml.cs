@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class GaussianBlurPage : Page, IEffectPage
     {
 
-        //String
+        // String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -135,7 +135,7 @@ namespace Retouch_Photo2.Effects.Pages
     {
 
 
-        //Radius
+        // Radius
         private void ConstructRadius1()
         {
             this.RadiusPicker.Unit = null;
@@ -185,7 +185,7 @@ namespace Retouch_Photo2.Effects.Pages
             };
         }
 
-        //IsHardBorder
+        // IsHardBorder
         private void ConstructIsHard()
         {
             this.IsHardBorderCheckBox.Tapped += (s, e) =>

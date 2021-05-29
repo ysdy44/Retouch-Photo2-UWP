@@ -19,13 +19,13 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.clipboardEnable = value;
-                this.OnPropertyChanged(nameof(ClipboardEnable));//Notify 
+                this.OnPropertyChanged(nameof(ClipboardEnable)); // Notify 
             }
         }
         private bool clipboardEnable;
 
 
-        //Edit
+        // Edit
         //private Layerage CloneLayerageCore(ILayer source)
         //{
         //   ILayer clone = source.Clone();
@@ -43,11 +43,11 @@ namespace Retouch_Photo2.ViewModels
 
             if (isUndo)
             {
-                this.SetMode();//Selection          
+                this.SetMode(); // Selection          
                 LayerManager.ArrangeLayers();
                 LayerManager.ArrangeLayersBackground();
 
-                this.Invalidate();//Invalidate
+                this.Invalidate(); // Invalidate
             }
 
             this.IsUndoEnabled = HistoryBase.IsUndoEnabled;
@@ -55,33 +55,33 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditCut()
         {
-            this.Clipboard.SetMode();//Clipboard
-            this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
+            this.Clipboard.SetMode(); // Clipboard
+            this.ClipboardEnable = this.Clipboard.CanPaste; // PasteButton
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_CutLayers);
             this.HistoryPush(history);
 
-            LayerManager.RemoveAllSelected();//Remove
+            LayerManager.RemoveAllSelected(); // Remove
 
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodEditDuplicate()
         {
-            this.Clipboard.SetMode();//Clipboard
-            this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
+            this.Clipboard.SetMode(); // Clipboard
+            this.ClipboardEnable = this.Clipboard.CanPaste; // PasteButton
 
-            //Clipboard
+            // Clipboard
             switch (this.Clipboard.SelectionMode)
             {
                 case ListViewSelectionMode.None: return;
                 case ListViewSelectionMode.Single:
                     {
-                        //History
+                        // History
                         LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_DuplicateLayer);
                         this.HistoryPush(history);
 
@@ -92,7 +92,7 @@ namespace Retouch_Photo2.ViewModels
                     break;
                 case ListViewSelectionMode.Multiple:
                     {
-                        //History
+                        // History
                         LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_DuplicateLayers);
                         this.HistoryPush(history);
 
@@ -106,24 +106,24 @@ namespace Retouch_Photo2.ViewModels
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
             this.SetMode();
-            this.Invalidate();//Invalidate                          
+            this.Invalidate(); // Invalidate                          
         }
 
         public void MethodEditCopy()
         {
-            this.Clipboard.SetMode();//Clipboard
-            this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
+            this.Clipboard.SetMode(); // Clipboard
+            this.ClipboardEnable = this.Clipboard.CanPaste; // PasteButton
         }
 
         public void MethodEditPaste()
         {
-            //Clipboard
+            // Clipboard
             switch (this.Clipboard.SelectionMode)
             {
                 case ListViewSelectionMode.None: return;
                 case ListViewSelectionMode.Single:
                     {
-                        //History
+                        // History
                         LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_PasteLayers);
                         this.HistoryPush(history);
 
@@ -134,7 +134,7 @@ namespace Retouch_Photo2.ViewModels
                     break;
                 case ListViewSelectionMode.Multiple:
                     {
-                        //History
+                        // History
                         LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_PasteLayers);
                         this.HistoryPush(history);
 
@@ -145,42 +145,42 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
 
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
 
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
 
-            this.Invalidate();//Invalidate        
+            this.Invalidate(); // Invalidate        
         }
 
         public void MethodEditClear()
         {
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_ClearLayers);
             this.HistoryPush(history);
 
-            LayerManager.RemoveAllSelected();//Remove
+            LayerManager.RemoveAllSelected(); // Remove
 
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
 
-        //Select
+        // Select
         private void SelectAllCore(bool isSelected)
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
-            //Selection
+            // Selection
             foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
                 ILayer layer = child.Self;
 
-                //History
+                // History
                 var previous = layer.IsSelected;
                 if (previous != isSelected)
                 {
@@ -193,13 +193,13 @@ namespace Retouch_Photo2.ViewModels
                 layer.IsSelected = isSelected;
             }
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodSelectAll() => this.SelectAllCore(true);
@@ -208,15 +208,15 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodSelectInvert()
         {
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
-            //Selection
+            // Selection
             foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
                 ILayer layer = child.Self;
 
-                //History
+                // History
                 var previous = layer.IsSelected;
                 history.UndoAction += () =>
                 {
@@ -226,21 +226,21 @@ namespace Retouch_Photo2.ViewModels
                 layer.IsSelected = !layer.IsSelected;
             }
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
 
-        //Group
+        // Group
         public void MethodGroupGroup()
         {
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_GroupLayers);
             this.HistoryPush(history);
 
@@ -249,12 +249,12 @@ namespace Retouch_Photo2.ViewModels
             this.SetMode();
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodGroupUngroup()
         {
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_UngroupLayers);
             this.HistoryPush(history);
 
@@ -263,16 +263,16 @@ namespace Retouch_Photo2.ViewModels
             this.SetMode();
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodGroupRelease()
         {
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_ReleaseLayers);
             this.HistoryPush(history);
 
-            //Selection
+            // Selection
             this.SetValue((layerage) =>
             {
                 LayerManager.ReleaseGroupLayer(layerage);
@@ -281,15 +281,15 @@ namespace Retouch_Photo2.ViewModels
             this.SetMode();
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
 
-        //ConvertToCurves
+        // ConvertToCurves
         public void MethodConvertToCurves()
         {
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_ConvertToCurves);
             this.HistoryPush(history);
 
@@ -297,7 +297,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                //Turn to curve layer
+                // Turn to curve layer
                 ILayer curveLayer = this.MethodConvertToCurves_CreateCurveLayer(layer);
 
                 if (curveLayer != null)
@@ -319,10 +319,10 @@ namespace Retouch_Photo2.ViewModels
 
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.SetMode();//Selection
+            this.SetMode(); // Selection
         }
 
-        //Create curve layer
+        // Create curve layer
         private ILayer MethodConvertToCurves_CreateCurveLayer(ILayer layer)
         {
             NodeCollection nodes = layer.ConvertToCurves(LayerManager.CanvasDevice);
@@ -340,7 +340,7 @@ namespace Retouch_Photo2.ViewModels
 
             return null;
         }
-        //Replace curveLayerage to layerage
+        // Replace curveLayerage to layerage
         private void MethodConvertToCurves_ReplaceLayerage(Layerage curveLayerage, Layerage layerage)
         {
             Layerage parents = LayerManager.GetParentsChildren(layerage);

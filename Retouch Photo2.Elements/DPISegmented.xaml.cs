@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsDPI = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 
@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Elements
         public DPISegmented()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
             this.DPI72Button.Tapped += (s, e) => this.DPI = DPI.DPI72;
             this.DPI96Button.Tapped += (s, e) => this.DPI = DPI.DPI96;
             this.DPI144Button.Tapped += (s, e) => this.DPI = DPI.DPI144;

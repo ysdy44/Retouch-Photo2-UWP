@@ -91,25 +91,25 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.CursorMode = CursorMode.None;
 
-            if (this.ViewModel.TransformerTool.Started(startingPoint, point))//TransformerTool
+            if (this.ViewModel.TransformerTool.Started(startingPoint, point))// TransformerTool
             {
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsManipulationStarted = false;
                 CoreCursorExtension.None();
                 this.CursorMode = CursorMode.Transformer;
                 return;
             }
 
-            if (this.ViewModel.MoveTool.Started(startingPoint, point))//MoveTool
+            if (this.ViewModel.MoveTool.Started(startingPoint, point))// MoveTool
             {
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsManipulationStarted = false;
                 CoreCursorExtension.None();
                 this.CursorMode = CursorMode.Move;
                 return;
             }
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.Cross();
             this.CursorMode = CursorMode.BoxChoose;
@@ -119,17 +119,17 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
             this.BoxRect = new TransformerRect(canavsStartingPoint, canvasPoint);
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             switch (this.CursorMode)
             {
                 case CursorMode.Transformer:
-                    this.ViewModel.TransformerTool.Delta(startingPoint, point);//TransformerTool
+                    this.ViewModel.TransformerTool.Delta(startingPoint, point); // TransformerTool
                     break;
                 case CursorMode.Move:
-                    this.ViewModel.MoveTool.Delta(startingPoint, point);//MoveTool
+                    this.ViewModel.MoveTool.Delta(startingPoint, point); // MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
@@ -138,7 +138,7 @@ namespace Retouch_Photo2.Tools.Models
                         Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
                         this.BoxRect = new TransformerRect(canavsStartingPoint, canvasPoint);
 
-                        this.ViewModel.Invalidate();//Invalidate
+                        this.ViewModel.Invalidate(); // Invalidate
                     }
                     break;
             }
@@ -148,32 +148,32 @@ namespace Retouch_Photo2.Tools.Models
             CursorMode cursorMode = this.CursorMode;
             this.CursorMode = CursorMode.None;
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.None();
 
             switch (cursorMode)
             {
                 case CursorMode.Transformer:
-                    this.ViewModel.TransformerTool.Complete(startingPoint, point); //TransformerTool
+                    this.ViewModel.TransformerTool.Complete(startingPoint, point); // TransformerTool
                     break;
                 case CursorMode.Move:
-                    this.ViewModel.MoveTool.Complete(startingPoint, point);//MoveTool
+                    this.ViewModel.MoveTool.Complete(startingPoint, point); // MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
                         if (isOutNodeDistance)
                         {
-                            //BoxChoose 
+                            // BoxChoose 
                             Layerage layerage = this.SelectionViewModel.GetFirstSelectedLayerage();
                             Layerage parents = LayerManager.GetParentsChildren(layerage);
                             this.BoxChoose(parents.Children);
 
-                            this.SelectionViewModel.SetMode();//Selection
+                            this.SelectionViewModel.SetMode(); // Selection
 
                             LayerManager.ArrangeLayersBackground();
 
-                            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                            this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
                         }
                     }
                     break;
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.Tools.Models
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
                     drawingSession.DrawWireframe(layer2, matrix, this.ViewModel.AccentColor);
 
-                    this.ViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.ViewModel.TransformerTool.Draw(drawingSession); // TransformerTool
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
@@ -206,7 +206,7 @@ namespace Retouch_Photo2.Tools.Models
                         drawingSession.DrawWireframe(layer, matrix, this.ViewModel.AccentColor);
                     }
 
-                    this.ViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.ViewModel.TransformerTool.Draw(drawingSession); // TransformerTool
                     break;
             }
 
@@ -215,10 +215,10 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case CursorMode.None:
                 case CursorMode.Transformer:
-                    this.ViewModel.TransformerTool.Draw(drawingSession);//TransformerTool
+                    this.ViewModel.TransformerTool.Draw(drawingSession); // TransformerTool
                     break;
                 case CursorMode.Move:
-                    this.ViewModel.MoveTool.Draw(drawingSession);//MoveTool
+                    this.ViewModel.MoveTool.Draw(drawingSession); // MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     CanvasGeometry geometry = this.BoxRect.ToRectangle(LayerManager.CanvasDevice, matrix);
@@ -228,10 +228,10 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Box
+        // Box
         private void BoxChoose(IList<Layerage> layerages)
         {
-            //History 
+            // History 
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             foreach (Layerage layerage in layerages)
@@ -288,14 +288,14 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            //History 
+            // History 
             this.ViewModel.HistoryPush(history);
         }
 
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -308,7 +308,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class CursorTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

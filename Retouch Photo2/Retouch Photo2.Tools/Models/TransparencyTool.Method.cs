@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.Transparency == null) return;
 
-            //Contains Operate Mode
+            // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             this.HandleMode = this.Transparency.ContainsHandleMode(startingPoint, matrix);
 
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void TransparencyDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
-            //Selection
+            // Selection
             if (this.Transparency == null) return;
 
             switch (this.HandleMode)
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void TransparencyComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
-            //Selection
+            // Selection
             if (this.Transparency == null) return;
             this.Transparency.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
 
@@ -95,23 +95,23 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.Transparency == null) return;
 
-            //Contains Operate Mode
+            // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             BrushHandleMode handleMode = this.Transparency.ContainsHandleMode(point, matrix);
 
-            //Cursor
+            // Cursor
             switch (handleMode)
             {
                 case BrushHandleMode.Center:
                 case BrushHandleMode.XPoint:
                 case BrushHandleMode.YPoint:
                 case BrushHandleMode.ToInitializeController:
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsPointerEntered = true;
                     CoreCursorExtension.Cross();
                     break;
                 default:
-                    //Cursor
+                    // Cursor
                     CoreCursorExtension.IsPointerEntered = false;
                     CoreCursorExtension.Cross();
                     break;
@@ -130,8 +130,8 @@ namespace Retouch_Photo2.Tools.Models
             {
                 this.TransparencyTypeChanged(brushType);
             };
-            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
         }
 
 

@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None)
             {
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsManipulationStarted = false;
                 CoreCursorExtension.SizeTranfrom(TransformerMode.None, 0);
                 return false;
@@ -54,22 +54,22 @@ namespace Retouch_Photo2.Tools
 
             if (this.TransformerMode == TransformerMode.None)
             {
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsManipulationStarted = false;
                 CoreCursorExtension.SizeTranfrom(TransformerMode.None, 0);
                 return false;
             }
 
-            //Cursor
+            // Cursor
             Vector2 horizontal = this.Transformer.Horizontal;
             float angle = Transformer.GetRadians(horizontal);
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.SizeTranfrom(this.TransformerMode, angle);
 
-            //Snap
+            // Snap
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
-            //Method
+            // Method
             this.MethodViewModel.MethodTransformMultipliesStarted();
             return true;
         }
@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Tools
 
             if (this.TransformerMode == TransformerMode.Rotation)
             {
-                //Cursor
+                // Cursor
                 Vector2 horizontal = this.Transformer.Horizontal;
                 float angle = Transformer.GetRadians(horizontal);
                 CoreCursorExtension.IsManipulationStarted = true;
@@ -91,21 +91,21 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap && this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
 
-            //Selection
+            // Selection
             /// Scaling <see cref="TextArtisticLayer"/> equally.
             bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
             Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsSnapToTick);
 
-            //Method
+            // Method
             this.MethodViewModel.MethodTransformMultipliesDelta(transformer);
             return true;
         }
         public bool Complete(Vector2 startingPoint, Vector2 point)
         {
-            //Cursor
+            // Cursor
             Vector2 horizontal = this.Transformer.Horizontal;
             float angle = Transformer.GetRadians(horizontal);
             CoreCursorExtension.IsManipulationStarted = false;
@@ -118,27 +118,27 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap
+            // Snap
             if (this.IsSnap)
             {
                 if (this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
                 this.Snap.Default();
             }
 
-            //Selection
+            // Selection
             /// Scaling <see cref="TextArtisticLayer"/> equally.
             bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
             Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsSnapToTick);
 
-            //Method
+            // Method
             this.MethodViewModel.MethodTransformMultipliesComplete(transformer);
-            this.TransformerMode = TransformerMode.None;//TransformerMode
+            this.TransformerMode = TransformerMode.None;// TransformerMode
 
 
             /// Gets font size for <see cref="TextArtisticLayer"/>.
             if (this.SelectionViewModel.LayerType == LayerType.TextArtistic)
             {
-                //Selection
+                // Selection
                 this.SelectionViewModel.SetValueWithChildren((layerage) =>
                 {
                     ILayer layer = layerage.Self;
@@ -160,11 +160,11 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            //Transformer
+            // Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor);
 
-            //Snapping
+            // Snapping
             if (this.IsSnap)
             {
                 this.Snap.Draw(drawingSession, matrix);

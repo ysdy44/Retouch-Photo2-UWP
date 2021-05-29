@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Layers
     public static partial class LayerManager
     {
 
-        //Action
+        // Action
         /// <summary> Occurs when a layerage receive interaction. </summary>
         public static Action<ILayer> ItemClick { get; set; }
         /// <summary> Occurs when right-click input a layerage. </summary>
@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Layers
         public static Action<ILayer> IsExpandChanged { get; set; }
 
 
-        //Overlay
+        // Overlay
         /// <summary>
         /// Gets drag layerage overlay properties.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Layers
         public static Action DragItemsCompleted { get; set; }
 
 
-        //Root
+        // Root
         /// <summary>
         /// The root layerage.
         /// </summary>

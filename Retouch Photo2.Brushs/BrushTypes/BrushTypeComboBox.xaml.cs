@@ -188,10 +188,10 @@ namespace Retouch_Photo2.Brushs
                         switch (this.FillOrStroke)
                         {
                             case FillOrStroke.Fill:
-                                this.FillTypeChanged?.Invoke(this, type); //Delegate
+                                this.FillTypeChanged?.Invoke(this, type); // Delegate
                                 break;
                             case FillOrStroke.Stroke:
-                                this.StrokeTypeChanged?.Invoke(this, type); //Delegate
+                                this.StrokeTypeChanged?.Invoke(this, type); // Delegate
                                 break;
                         }
                         this.Flyout.Hide();
@@ -216,7 +216,7 @@ namespace Retouch_Photo2.Brushs
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

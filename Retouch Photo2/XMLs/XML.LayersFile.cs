@@ -27,7 +27,7 @@ namespace Retouch_Photo2
         /// <returns> The product <see cref="ILayer"/>s. </returns>
         public static IEnumerable<ILayer> LoadLayersFile()
         {
-            //Create an XDocument object.
+            // Create an XDocument object.
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}/Layers.xml";
 
             try
@@ -52,7 +52,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.Layers.XML.SaveLayers(layers);
 
-            //Save the project xml file.      
+            // Save the project xml file.      
             StorageFile file = await zipFolder.CreateFileAsync("Layers.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

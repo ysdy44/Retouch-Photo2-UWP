@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Layers
             if (e.NewValue is bool value)
             {
                 control._vsIsChecked = value;
-                control.VisualState = control.VisualState;//State         
+                control.VisualState = control.VisualState; // State         
             }
         }));
 
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.Layers
             set
             {
                 this._vsClickMode = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Layers
         public SelectedToggleButton()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State 
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State 
 
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;

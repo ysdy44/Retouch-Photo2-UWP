@@ -53,9 +53,9 @@ namespace Retouch_Photo2.Styles
         public void Rename(string language)
         {
             this.Title = Retouch_Photo2.Elements.XML.CreateString(this.Name, this.Strings, language);
-            this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Title)));//Notify
+            this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Title))); // Notify
             this.Weight = this.Strings == null ? FontWeights.Normal : FontWeights.Bold;
-            this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Weight)));//Notify
+            this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Weight))); // Notify
         }
 
         public StyleCategory ToStyleCategory() => new StyleCategory

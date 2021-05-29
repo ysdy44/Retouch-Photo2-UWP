@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Elements
             }
         }
 
-        //Manipulation
+        // Manipulation
         Vector2 Vector;
         bool InRadians = false;
 
@@ -144,7 +144,7 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsClickMode = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
         }
 
@@ -160,7 +160,7 @@ namespace Retouch_Photo2.Elements
             this.IsEnabledChanged += (s, e) =>
             {
                 this._vsIsEnabled = this.IsEnabled;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             };
 
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
@@ -171,7 +171,7 @@ namespace Retouch_Photo2.Elements
 
             this.Loaded += (s, e) =>
             {
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
 
                 this.Arrow = RadiansPicker.RadiansToVector(this.Radians, this.Radius, this.Center);
             };
@@ -183,7 +183,7 @@ namespace Retouch_Photo2.Elements
                 this.Arrow = RadiansPicker.RadiansToVector(this.Radians, this.Radius, this.Center);
             };
 
-            //Manipulation
+            // Manipulation
             this.RootGrid.ManipulationMode = ManipulationModes.All;
             this.RootGrid.ManipulationStarted += (sender, e) =>
             {
@@ -194,10 +194,10 @@ namespace Retouch_Photo2.Elements
                 if (!this.InRadians) return;
                 this.OnRadiansChanged(RadiansPicker.VectorToRadians(this.Vector));
 
-                this.ValueChangedStarted?.Invoke(this, this.Radians);//Delegate
+                this.ValueChangedStarted?.Invoke(this, this.Radians); // Delegate
 
                 this._vsIsManipulationStarted = true;
-                this.VisualState = this.VisualState;//VisualState
+                this.VisualState = this.VisualState; // VisualState
             };
             this.RootGrid.ManipulationDelta += (sender, e) =>
             {
@@ -206,14 +206,14 @@ namespace Retouch_Photo2.Elements
                 if (!this.InRadians) return;
                 this.OnRadiansChanged(RadiansPicker.VectorToRadians(this.Vector));
 
-                this.ValueChangedDelta?.Invoke(this, this.Radians);//Delegate
+                this.ValueChangedDelta?.Invoke(this, this.Radians); // Delegate
             };
             this.RootGrid.ManipulationCompleted += (sender, e) =>
             {
-                this.ValueChangedCompleted?.Invoke(this, this.Radians);//Delegate
+                this.ValueChangedCompleted?.Invoke(this, this.Radians); // Delegate
 
                 this._vsIsManipulationStarted = false;
-                this.VisualState = this.VisualState;//VisualState
+                this.VisualState = this.VisualState; // VisualState
             };
         }
     }

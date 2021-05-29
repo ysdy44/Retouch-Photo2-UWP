@@ -16,16 +16,16 @@ namespace Retouch_Photo2.ViewModels
 
             switch (layer.Type)
             {
-                //Geometry0
+                // Geometry0
                 case LayerType.GeometryRectangle: break;
                 case LayerType.GeometryEllipse: break;
 
-                //Geometry1
+                // Geometry1
                 case LayerType.GeometryRoundRect: this.GeometryRoundRect_Corner = ((GeometryRoundRectLayer)layer).Corner; break;
                 case LayerType.GeometryTriangle: this.GeometryTriangle_Center = ((GeometryTriangleLayer)layer).Center; break;
                 case LayerType.GeometryDiamond: this.GeometryDiamond_Mid = ((GeometryDiamondLayer)layer).Mid; break;
 
-                //Geometry12
+                // Geometry12
                 case LayerType.GeometryPentagon: this.GeometryPentagon_Points = ((GeometryPentagonLayer)layer).Points; break;
                 case LayerType.GeometryStar:
                     GeometryStarLayer starLayer = (GeometryStarLayer)layer;
@@ -40,7 +40,7 @@ namespace Retouch_Photo2.ViewModels
                     this.GeometryCog_Notch = cogLayer.Notch;
                     break;
 
-                //Geometry3
+                // Geometry3
                 case LayerType.GeometryDount: this.GeometryDount_HoleRadius = ((GeometryDountLayer)layer).HoleRadius; break;
                 case LayerType.GeometryPie: this.GeometryPie_SweepAngle = ((GeometryPieLayer)layer).SweepAngle; break;
                 case LayerType.GeometryCookie:
@@ -49,7 +49,7 @@ namespace Retouch_Photo2.ViewModels
                     this.GeometryCookie_SweepAngle = cookieLayer.SweepAngle;
                     break;
 
-                //Geometry4
+                // Geometry4
                 case LayerType.GeometryArrow:
                     GeometryArrowLayer arrowLayer = (GeometryArrowLayer)layer;
                     this.GeometryArrow_Value = arrowLayer.Value;
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryRoundRect_Corner == value) return;
                 this.geometryRoundRect_Corner = value;
-                this.OnPropertyChanged(nameof(GeometryRoundRect_Corner));//Notify 
+                this.OnPropertyChanged(nameof(GeometryRoundRect_Corner)); // Notify 
             }
         }
         private float geometryRoundRect_Corner = 0.12f;
@@ -87,7 +87,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryTriangle_Center == value) return;
                 this.geometryTriangle_Center = value;
-                this.OnPropertyChanged(nameof(GeometryTriangle_Center));//Notify 
+                this.OnPropertyChanged(nameof(GeometryTriangle_Center)); // Notify 
             }
         }
         private float geometryTriangle_Center = 0.5f;
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryDiamond_Mid == value) return;
                 this.geometryDiamond_Mid = value;
-                this.OnPropertyChanged(nameof(GeometryDiamond_Mid));//Notify 
+                this.OnPropertyChanged(nameof(GeometryDiamond_Mid)); // Notify 
             }
         }
         private float geometryDiamond_Mid = 0.5f;
@@ -121,7 +121,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryPentagon_Points == value) return;
                 this.geometryPentagon_Points = value;
-                this.OnPropertyChanged(nameof(GeometryPentagon_Points));//Notify 
+                this.OnPropertyChanged(nameof(GeometryPentagon_Points)); // Notify 
             }
         }
         private int geometryPentagon_Points = 5;
@@ -135,7 +135,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryStar_Points == value) return;
                 this.geometryStar_Points = value;
-                this.OnPropertyChanged(nameof(GeometryStar_Points));//Notify 
+                this.OnPropertyChanged(nameof(GeometryStar_Points)); // Notify 
             }
         }
         private int geometryStar_Points = 5;
@@ -147,7 +147,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryStar_InnerRadius == value) return;
                 this.geometryStar_InnerRadius = value;
-                this.OnPropertyChanged(nameof(GeometryStar_InnerRadius));//Notify 
+                this.OnPropertyChanged(nameof(GeometryStar_InnerRadius)); // Notify 
             }
         }
         private float geometryStar_InnerRadius = 0.4f;
@@ -161,7 +161,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryCog_Count == value) return;
                 this.geometryCog_Count = value;
-                this.OnPropertyChanged(nameof(GeometryCog_Count));//Notify 
+                this.OnPropertyChanged(nameof(GeometryCog_Count)); // Notify 
             }
         }
         private int geometryCog_Count = 8;
@@ -173,7 +173,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryCog_InnerRadius == value) return;
                 this.geometryCog_InnerRadius = value;
-                this.OnPropertyChanged(nameof(GeometryCog_InnerRadius));//Notify 
+                this.OnPropertyChanged(nameof(GeometryCog_InnerRadius)); // Notify 
             }
         }
         private float geometryCog_InnerRadius = 0.7f;
@@ -185,7 +185,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryCog_Tooth == value) return;
                 this.geometryCog_Tooth = value;
-                this.OnPropertyChanged(nameof(GeometryCog_Tooth));//Notify 
+                this.OnPropertyChanged(nameof(GeometryCog_Tooth)); // Notify 
             }
         }
         private float geometryCog_Tooth = 0.3f;
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryCog_Notch == value) return;
                 this.geometryCog_Notch = value;
-                this.OnPropertyChanged(nameof(GeometryCog_Notch));//Notify 
+                this.OnPropertyChanged(nameof(GeometryCog_Notch)); // Notify 
             }
         }
         private float geometryCog_Notch = 0.6f;
@@ -217,7 +217,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryPie_SweepAngle == value) return;
                 this.geometryPie_SweepAngle = value;
-                this.OnPropertyChanged(nameof(GeometryPie_SweepAngle));//Notify 
+                this.OnPropertyChanged(nameof(GeometryPie_SweepAngle)); // Notify 
             }
         }
         private float geometryPie_SweepAngle = FanKit.Math.Pi / 2f;
@@ -231,7 +231,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryDount_HoleRadius == value) return;
                 this.geometryDount_HoleRadius = value;
-                this.OnPropertyChanged(nameof(GeometryDount_HoleRadius));//Notify 
+                this.OnPropertyChanged(nameof(GeometryDount_HoleRadius)); // Notify 
             }
         }
         private float geometryDount_HoleRadius = 0.5f;
@@ -245,7 +245,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryCookie_InnerRadius == value) return;
                 this.geometryCookie_InnerRadius = value;
-                this.OnPropertyChanged(nameof(GeometryCookie_InnerRadius));//Notify 
+                this.OnPropertyChanged(nameof(GeometryCookie_InnerRadius)); // Notify 
             }
         }
         private float geometryCookie_InnerRadius = 0.5f;
@@ -257,7 +257,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryCookie_SweepAngle == value) return;
                 this.geometryCookie_SweepAngle = value;
-                this.OnPropertyChanged(nameof(GeometryCookie_SweepAngle));//Notify 
+                this.OnPropertyChanged(nameof(GeometryCookie_SweepAngle)); // Notify 
             }
         }
         private float geometryCookie_SweepAngle = FanKit.Math.PiOver2;
@@ -277,7 +277,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryArrow_Value == value) return;
                 this.geometryArrow_Value = value;
-                this.OnPropertyChanged(nameof(GeometryArrow_Value));//Notify 
+                this.OnPropertyChanged(nameof(GeometryArrow_Value)); // Notify 
             }
         }
         private float geometryArrow_Value = 0.5f;
@@ -289,7 +289,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryArrow_LeftTail == value) return;
                 this.geometryArrow_LeftTail = value;
-                this.OnPropertyChanged(nameof(GeometryArrow_LeftTail));//Notify 
+                this.OnPropertyChanged(nameof(GeometryArrow_LeftTail)); // Notify 
             }
         }
         private GeometryArrowTailType geometryArrow_LeftTail = GeometryArrowTailType.None;
@@ -301,7 +301,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryArrow_RightTail == value) return;
                 this.geometryArrow_RightTail = value;
-                this.OnPropertyChanged(nameof(GeometryArrow_RightTail));//Notify 
+                this.OnPropertyChanged(nameof(GeometryArrow_RightTail)); // Notify 
             }
         }
         private GeometryArrowTailType geometryArrow_RightTail = GeometryArrowTailType.Arrow;
@@ -315,7 +315,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.geometryHeart_Spread == value) return;
                 this.geometryHeart_Spread = value;
-                this.OnPropertyChanged(nameof(GeometryHeart_Spread));//Notify 
+                this.OnPropertyChanged(nameof(GeometryHeart_Spread)); // Notify 
             }
         }
         private float geometryHeart_Spread = 0.8f;

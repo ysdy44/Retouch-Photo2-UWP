@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Media;
 namespace Microsoft.Toolkit.Uwp.UI.Media
 {
     /// <summary>
-    /// RadialGradientBrush - This GradientBrush defines its Gradient as an interpolation
+    ///RadialGradientBrush - This GradientBrush defines its Gradient as an interpolation
     /// within an Ellipse.
     /// </summary>
     [Obsolete("Please migrate to the RadialGradientBrush control from WinUI, this control will be removed in a future release. https://aka.ms/winui")]

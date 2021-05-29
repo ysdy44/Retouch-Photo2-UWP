@@ -38,16 +38,16 @@ namespace Retouch_Photo2.Layers
                 this.IsRefactoringRender = false;
 
                 {
-                    //Layer
+                    // Layer
                     ICanvasImage currentImage = this.GetRender(resourceCreator, layerage);
 
-                    //Effect
+                    // Effect
                     currentImage = Effect.Render(this.Effect, currentImage);
 
-                    //Adjustment
+                    // Adjustment
                     currentImage = Filter.Render(this.Filter, currentImage);
 
-                    //Opacity
+                    // Opacity
                     if (this.Opacity < 1.0)
                     {
                         currentImage = new OpacityEffect
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Returns whether the area filled by the layer contains the specified point.
+        ///Returns whether the area filled by the layer contains the specified point.
         /// </summary>
         public virtual bool FillContainsPoint(Layerage layerage, Vector2 point)
         {
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.Layers
 
         //@Static
         /// <summary>
-        /// Render layers.
+        ///Render layers.
         /// </summary>  
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="layerage"> The layerage. </param>
@@ -159,7 +159,7 @@ namespace Retouch_Photo2.Layers
                 if (currentLayer.Opacity == 0) continue;
 
 
-                //Layer
+                // Layer
                 ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, currentLayerage);
                 if (currentImage == null) continue;
                 if (previousImage == null)
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Layers
                 }
 
 
-                //Blend
+                // Blend
                 if (currentLayer.BlendMode is BlendEffectMode blendMode)
                 {
                     previousImage = new BlendEffect
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Layers
                     continue;
                 }
 
-                //Composite
+                // Composite
                 previousImage = new CompositeEffect
                 {
                     Sources =

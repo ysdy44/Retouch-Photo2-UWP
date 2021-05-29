@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class EdgePage : Page, IEffectPage
     {
 
-        //String
+        // String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class EdgePage : Page, IEffectPage
     {
 
-        //Amount
+        // Amount
         private void ConstructAmount1()
         {
             this.AmountPicker.Unit = "%";
@@ -175,7 +175,7 @@ namespace Retouch_Photo2.Effects.Pages
         }
 
 
-        //Radius
+        // Radius
         private void ConstructRadius1()
         {
             this.RadiusPicker.Unit = null;

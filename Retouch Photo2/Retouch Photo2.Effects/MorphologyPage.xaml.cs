@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class MorphologyPage : Page, IEffectPage
     {
 
-        //String
+        // String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class MorphologyPage : Page, IEffectPage
     {
 
-        //Size
+        // Size
         private void ConstructSize1()
         {
             this.SizePicker.Unit = null;

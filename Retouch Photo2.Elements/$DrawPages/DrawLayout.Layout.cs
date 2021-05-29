@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsIsWritable = value;
-                this.WritableVisualState = this.WritableVisualState;//State
+                this.WritableVisualState = this.WritableVisualState; // State
 
                 this.MenuOverlayCanvasVisibility = value ? Visibility.Collapsed : Visibility.Visible;
             }
@@ -114,7 +114,7 @@ namespace Retouch_Photo2.Elements
 
                 this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsIsFullScreen = value;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
 
                 this.UnFullScreenVisibility = value ? Visibility.Visible : Visibility.Collapsed;
             }
@@ -126,8 +126,8 @@ namespace Retouch_Photo2.Elements
             {
                 this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsDeviceLayoutType = value;
-                this.WritableVisualState = this.WritableVisualState;//State
-                this.VisualState = this.VisualState;//State
+                this.WritableVisualState = this.WritableVisualState; // State
+                this.VisualState = this.VisualState; // State
             }
         }
 

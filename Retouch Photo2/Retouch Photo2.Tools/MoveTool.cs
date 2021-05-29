@@ -43,17 +43,17 @@ namespace Retouch_Photo2.Tools
             this.IsMove = this.GetIsFillContainsPointWithSelectedLayer(canvasStartingPoint);
             if (this.IsMove == false) return false;
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.SizeAll();
 
-            //Snap
+            // Snap
             if (this.IsSnap) this.ViewModel.BorderBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
-            //Selection
+            // Selection
             if (this.IsSnap) this.Snap.StartingSource = new TransformerBorder(this.Transformer);
 
-            //Method
+            // Method
             this.MethodViewModel.MethodTransformAddStarted();
             return true;
         }
@@ -67,10 +67,10 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
             Vector2 canvasMove = canvasPoint - canvasStartingPoint;
 
-            //Snap
+            // Snap
             if (this.IsSnap) canvasMove = this.Snap.Snap(canvasMove);
 
-            //Method
+            // Method
             this.MethodViewModel.MethodTransformAddDelta(canvasMove);
             return true;
         }
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Tools
             if (this.IsMove == false) return false;
             if (this.Mode == ListViewSelectionMode.None) return false;
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.SizeAll();
 
@@ -88,14 +88,14 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
             Vector2 canvasMove = canvasPoint - canvasStartingPoint;
 
-            //Snap
+            // Snap
             if (this.IsSnap)
             {
                 canvasMove = this.Snap.Snap(canvasMove);
                 this.Snap.Default();
             }
 
-            //Method
+            // Method
             this.MethodViewModel.MethodTransformAddComplete(canvasMove);
             return true;
         }
@@ -106,11 +106,11 @@ namespace Retouch_Photo2.Tools
             if (this.IsMove == false) return;
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            //Transformer
+            // Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor);
 
-            //Snapping
+            // Snapping
             if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
         }
 
@@ -129,17 +129,17 @@ namespace Retouch_Photo2.Tools
                     break;
             }
 
-            //SelectedLayerage
+            // SelectedLayerage
             Layerage selectedLayerage = this.SelectionViewModel.GetClickSelectedLayerage(canvasStartingPoint);
 
             if (selectedLayerage == null)
             {
-                this.MethodViewModel.MethodSelectedNone();//Method
+                this.MethodViewModel.MethodSelectedNone(); // Method
                 return false;
             }
             else
             {
-                this.MethodViewModel.MethodSelectedNew(selectedLayerage);//Method
+                this.MethodViewModel.MethodSelectedNew(selectedLayerage); // Method
                 return true;
             }
         }

@@ -26,17 +26,17 @@ namespace Retouch_Photo2.ViewModels
                 this.Setting = setting;
             }
 
-            //Theme
+            // Theme
             this.ConstructTheme();
 
-            //DeviceLayout
+            // DeviceLayout
             this.ConstructDeviceLayout();
             this.RegisteDeviceLayout();
 
-            //CanvasBackground
+            // CanvasBackground
             this.ConstructCanvasBackground();
 
-            //DeviceLayout
+            // DeviceLayout
             this.ConstructLayersHeight();
         }
 

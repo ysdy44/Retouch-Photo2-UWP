@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //RedDisable
+        // RedDisable
         private void ConstructRedDisable()
         {
             this.RedCheckControl.Tapped += (s, e) =>
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //RedOffset
+        // RedOffset
         private void ConstructRedOffset1()
         {
             this.RedOffsetPicker.Unit = "%";
@@ -149,7 +149,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //RedExponent
+        // RedExponent
         private void ConstructRedExponent1()
         {
             this.RedExponentPicker.Unit = "%";
@@ -203,7 +203,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //RedAmplitude
+        // RedAmplitude
         private void ConstructRedAmplitude1()
         {
             this.RedAmplitudePicker.Unit = "%";

@@ -13,7 +13,7 @@ namespace Retouch_Photo2
         /// Copy file to the temporary folder, and return the copy.
         /// </summary>
         /// <param name="file"> The destination file. </param>
-        /// <returns> The copied  file. </returns>
+        /// <returns> The copied file. </returns>
         public async static Task<StorageFile> CopySingleImageFileAsync(StorageFile file)
         {
             if (file == null) return null;
@@ -29,7 +29,7 @@ namespace Retouch_Photo2
         /// <returns> The product file. </returns>
         public async static Task<StorageFile> PickSingleImageFileAsync(PickerLocationId location)
         {
-            //Picker
+            // Picker
             FileOpenPicker openPicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
@@ -43,7 +43,7 @@ namespace Retouch_Photo2
                 }
             };
 
-            //File
+            // File
             StorageFile file = await openPicker.PickSingleFileAsync();
             return file;
         }
@@ -55,7 +55,7 @@ namespace Retouch_Photo2
         /// <returns> The product files. </returns>
         public async static Task<IReadOnlyList<StorageFile>> PickMultipleImageFilesAsync(PickerLocationId location)
         {
-            //Picker
+            // Picker
             FileOpenPicker openPicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
@@ -69,7 +69,7 @@ namespace Retouch_Photo2
                 }
             };
 
-            //File
+            // File
             IReadOnlyList<StorageFile> files = await openPicker.PickMultipleFilesAsync();
             return files;
         }

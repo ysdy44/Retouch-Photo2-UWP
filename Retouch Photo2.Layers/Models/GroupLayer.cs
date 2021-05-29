@@ -23,14 +23,14 @@ namespace Retouch_Photo2.Layers.Models
 
         public override Transformer GetActualTransformer(Layerage layerage)
         {
-            //Refactoring
+            // Refactoring
             if (this.IsRefactoringTransformer)
             {
                 this.IsRefactoringTransformer = false;
 
                 if (layerage.Children.Count != 0)
                 {
-                    //TransformerBorder
+                    // TransformerBorder
                     TransformerBorder border = new TransformerBorder(layerage.Children);
                     Transformer transformer = border.ToTransformer();
                     this.Transform.Transformer = transformer;

@@ -17,7 +17,7 @@ namespace Retouch_Photo2
     public sealed partial class SettingPage : Page
     {
 
-        //FlowDirection
+        // FlowDirection
         private void ConstructFlowDirection()
         {
             bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
@@ -25,7 +25,7 @@ namespace Retouch_Photo2
             base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 
-        //Strings
+        // Strings
         public IList<Action<ResourceLoader>> KeyStringsChanged = new List<Action<ResourceLoader>>();
         public IList<Action<ResourceLoader>> CanvasBackgroundChanged = new List<Action<ResourceLoader>>();
         public IList<Action<ResourceLoader>> MenuTypeStringsChanged = new List<Action<ResourceLoader>>();
@@ -103,7 +103,7 @@ namespace Retouch_Photo2
         }
 
 
-        //About
+        // About
         private void ConstructAbout()
         {
             this.AboutDialog.SecondaryButtonClick += (s, e) => this.AboutDialog.Hide();
@@ -115,15 +115,15 @@ namespace Retouch_Photo2
                 if (about <= -1)
                 {
                     about = 3;
-                    this.Frame.Navigate(typeof(DebugPage));//Navigate
+                    this.Frame.Navigate(typeof(DebugPage)); // Navigate
                 }
-                else if (about <= 3) this.AboutStoryboard.Begin();//Storyboard
+                else if (about <= 3) this.AboutStoryboard.Begin(); // Storyboard
                 about--;
             };
         }
 
 
-        //Theme
+        // Theme
         private void ConstructTheme()
         {
             ElementTheme theme = this.SettingViewModel.Setting.Theme;
@@ -137,12 +137,12 @@ namespace Retouch_Photo2
         }
 
 
-        //DeviceLayout
+        // DeviceLayout
         private void ConstructDeviceLayout()
         {
             DeviceLayout deviceLayout = this.SettingViewModel.Setting.DeviceLayout;
 
-            //Type
+            // Type
             {
                 DeviceLayoutType type = deviceLayout.FallBackType;
                 bool isAdaptive = deviceLayout.IsAdaptive;
@@ -158,7 +158,7 @@ namespace Retouch_Photo2
                 this.AdaptiveButton.Click += async (s, e) => await this.SetDeviceLayoutType(DeviceLayoutType.PC, true);
             }
 
-            //Adaptive
+            // Adaptive
             {
                 int phone = deviceLayout.PhoneMaxWidth;
                 int pad = deviceLayout.PadMaxWidth;
@@ -175,7 +175,7 @@ namespace Retouch_Photo2
                 };
                 this.AdaptiveWidthGrid.PhoneWidthChanged += async (s, value) =>
                 {
-                    //Setting
+                    // Setting
                     DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
                     {
                         layout.PhoneMaxWidth = value;
@@ -186,7 +186,7 @@ namespace Retouch_Photo2
                 };
                 this.AdaptiveWidthGrid.PadWidthChanged += async (s, value) =>
                 {
-                    //Setting
+                    // Setting
                     DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
                     {
                         layout.PadMaxWidth = value;
@@ -208,7 +208,7 @@ namespace Retouch_Photo2
                 this.AdaptiveWidthGrid.PadWidth = pad2;
                 this.AdaptiveWidthGrid.SetWidth();
 
-                //Setting
+                // Setting
                 DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
                 {
                     layout.PhoneMaxWidth = phone2;
@@ -221,13 +221,13 @@ namespace Retouch_Photo2
         }
 
 
-        //CanvasBackground        
+        // CanvasBackground        
         private void ConstructCanvasBackground()
         {
-            //CanvasBackgrounds
+            // CanvasBackgrounds
             byte? cannnel = this.SettingViewModel.Setting.CanvasBaclground;
 
-            //UIElementCollection 
+            // UIElementCollection 
             this.CanvasBackgroundChanged.Clear();
             this.CanvasBackgroundStackPanel.Children.Clear();
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(0, cannnel));
@@ -240,7 +240,7 @@ namespace Retouch_Photo2
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(255, cannnel));
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(null, cannnel));
 
-            //Construct
+            // Construct
             RadioButton constructLayersHeightButton(byte? value, byte? groupValue)
             {
                 RadioButton radioButton = new RadioButton
@@ -260,7 +260,7 @@ namespace Retouch_Photo2
                 }
                 else
                 {
-                    //Strings
+                    // Strings
                     this.CanvasBackgroundChanged.Add((resource) => radioButton.Content = resource.GetString("$SettingPage_CanvasBackground_None"));
 
                     radioButton.Tag = new ColorEllipse
@@ -275,13 +275,13 @@ namespace Retouch_Photo2
         }
 
 
-        //LayersHeight        
+        // LayersHeight        
         private void ConstructLayersHeight()
         {
-            //LayersHeights
+            // LayersHeights
             int layersHeight = this.SettingViewModel.Setting.LayersHeight;
 
-            //UIElementCollection 
+            // UIElementCollection 
             this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(30, layersHeight));
             this.LayersHeightStackPanel.Children.Add(new Rectangle { Style = this.RectangleStyle });
             this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(40, layersHeight));
@@ -294,7 +294,7 @@ namespace Retouch_Photo2
             this.LayersHeightStackPanel.Children.Add(new Rectangle { Style = this.RectangleStyle });
             this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(80, layersHeight));
 
-            //Construct
+            // Construct
             RadioButton constructLayersHeightButton(int value, int groupValue)
             {
                 RadioButton radioButton = new RadioButton
@@ -314,14 +314,14 @@ namespace Retouch_Photo2
         }
 
 
-        //MenuType
+        // MenuType
         private void ConstructMenuType()
         {
-            //Style
+            // Style
             int index = 0;
             Style getStyle() => ((index++) % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
 
-            //UIElementCollection 
+            // UIElementCollection 
             foreach (MenuType type in (MenuType[])Enum.GetValues(typeof(MenuType)))
             {
                 if (type == MenuType.None) continue;
@@ -333,7 +333,7 @@ namespace Retouch_Photo2
                 });
             }
 
-            //Construct
+            // Construct
             CheckBox constructMenuTypeCheckBox(MenuType type)
             {
                 CheckBox check = new CheckBox
@@ -344,24 +344,24 @@ namespace Retouch_Photo2
                 check.Checked += async (s, e) => await this.AddMenu(type);
                 check.Unchecked += async (s, e) => await this.RemoveMenu(type);
 
-                //Strings
+                // Strings
                 this.MenuTypeStringsChanged.Add((resource) => check.Content = resource.GetString($"Menus_{type}"));
                 return check;
             }
         }
 
 
-        //Key
+        // Key
         private void ConstructKey()
         {
-            //Style
+            // Style
             int index = 0;
             Style getStyle2() => ((index++) % 2 == 0) ? this.KeyContentControlBackgroundStyle : this.KeyContentControlStyle;
 
-            //Keys
+            // Keys
             IList<KeyboardAccelerator2> keys = this.SettingViewModel.KeyboardAccelerators;
 
-            //UIElementCollection 
+            // UIElementCollection 
             this.KeyStringsChanged.Clear();
             this.Key00StackPanel.Children.Clear();
             this.Key01StackPanel.Children.Clear();
@@ -384,7 +384,7 @@ namespace Retouch_Photo2
                 }
             }
 
-            //Construct
+            // Construct
             ContentControl constructKeyContentControl(string key, string titleResource)
             {
                 ContentControl contentControl = new ContentControl
@@ -393,7 +393,7 @@ namespace Retouch_Photo2
                     Style = getStyle2()
                 };
 
-                //Strings
+                // Strings
                 this.KeyStringsChanged.Add((resource) => contentControl.Content = resource.GetString(titleResource));
 
                 return contentControl;
@@ -401,19 +401,19 @@ namespace Retouch_Photo2
         }
 
 
-        //Language
+        // Language
         private void ConstructLanguage()
         {
-            //Style
+            // Style
             int index = 0;
             Style getStyle() => ((index++) % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
 
-            //Languages
+            // Languages
             string groupLanguage = ApplicationLanguages.PrimaryLanguageOverride;
             List<string> languages = new List<string>(ApplicationLanguages.ManifestLanguages);
             languages.Sort();
 
-            //UIElementCollection 
+            // UIElementCollection 
             this.LanguageStringsChanged.Clear();
             this.LanguageStackPanel.Children.Clear();
             this.LanguageStackPanel.Children.Add(new Border
@@ -430,7 +430,7 @@ namespace Retouch_Photo2
                 });
             }
 
-            //Construct
+            // Construct
             RadioButton constructLanguageRadioButton(string language)
             {
                 RadioButton radioButton = new RadioButton
@@ -439,10 +439,10 @@ namespace Retouch_Photo2
                     IsChecked = groupLanguage == language,
                 };
 
-                //Use system settin
+                // Use system settin
                 if (string.IsNullOrEmpty(language))
                 {
-                    //Strings
+                    // Strings
                     this.LanguageStringsChanged.Add((resource) => radioButton.Content = resource.GetString("$SettingPage_Language_UseSystemSetting"));
                 }
                 else

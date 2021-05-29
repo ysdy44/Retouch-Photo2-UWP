@@ -47,13 +47,13 @@ namespace Retouch_Photo2.ViewModels
                         this.SelectionMultiple = false;
                         break;
                 }
-                this.OnPropertyChanged(nameof(SelectionUnNone));//Notify 
-                this.OnPropertyChanged(nameof(SelectionSingle));//Notify 
-                this.OnPropertyChanged(nameof(SelectionMultiple));//Notify 
+                this.OnPropertyChanged(nameof(SelectionUnNone)); // Notify 
+                this.OnPropertyChanged(nameof(SelectionSingle)); // Notify 
+                this.OnPropertyChanged(nameof(SelectionMultiple)); // Notify 
 
 
                 this.selectionMode = value;
-                this.OnPropertyChanged(nameof(SelectionMode));//Notify 
+                this.OnPropertyChanged(nameof(SelectionMode)); // Notify 
             }
         }
         private ListViewSelectionMode selectionMode;
@@ -92,7 +92,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.transformer = value;
-                this.OnPropertyChanged(nameof(Transformer));//Notify 
+                this.OnPropertyChanged(nameof(Transformer)); // Notify 
             }
         }
         private Transformer transformer;

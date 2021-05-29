@@ -16,38 +16,38 @@ namespace Microsoft.Toolkit
     public static class StringExtensions
     {
         /// <summary>
-        /// Regular expression for matching a phone number.
+        ///Regular expression for matching a phone number.
         /// </summary>
         internal const string PhoneNumberRegex = @"^[+]?(\d{1,3})?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$";
 
         /// <summary>
-        /// Regular expression for matching a string that contains only letters.
+        ///Regular expression for matching a string that contains only letters.
         /// </summary>
         internal const string CharactersRegex = "^[A-Za-z]+$";
 
         /// <summary>
-        /// Regular expression for matching an email address.
+        ///Regular expression for matching an email address.
         /// </summary>
         /// <remarks>General Email Regex (RFC 5322 Official Standard) from https://emailregex.com.</remarks>
         internal const string EmailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
         /// <summary>
-        /// Regular expression of HTML tags to remove.
+        ///Regular expression of HTML tags to remove.
         /// </summary>
         private const string RemoveHtmlTagsRegex = @"(?></?\w+)(?>(?:[^>'""]+|'[^']*'|""[^""]*"")*)>";
 
         /// <summary>
-        /// Regular expression for removing comments from HTML.
+        ///Regular expression for removing comments from HTML.
         /// </summary>
         private static readonly Regex RemoveHtmlCommentsRegex = new Regex("<!--.*?-->", RegexOptions.Singleline);
 
         /// <summary>
-        /// Regular expression for removing scripts from HTML.
+        ///Regular expression for removing scripts from HTML.
         /// </summary>
         private static readonly Regex RemoveHtmlScriptsRegex = new Regex(@"(?s)<script.*?(/>|</script>)", RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
         /// <summary>
-        /// Regular expression for removing styles from HTML.
+        ///Regular expression for removing styles from HTML.
         /// </summary>
         private static readonly Regex RemoveHtmlStylesRegex = new Regex(@"(?s)<style.*?(/>|</style>)", RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
@@ -93,7 +93,7 @@ namespace Microsoft.Toolkit
         public static bool IsCharacterString(this string str) => Regex.IsMatch(str, CharactersRegex);
 
         /// <summary>
-        /// Returns a string with HTML comments, scripts, styles, and tags removed.
+        ///Returns a string with HTML comments, scripts, styles, and tags removed.
         /// </summary>
         /// <param name="htmlText">HTML string.</param>
         /// <returns>Decoded HTML string.</returns>
@@ -113,7 +113,7 @@ namespace Microsoft.Toolkit
         }
 
         /// <summary>
-        /// Returns a string with HTML comments, scripts, and styles removed.
+        ///Returns a string with HTML comments, scripts, and styles removed.
         /// </summary>
         /// <param name="html">HTML string to fix.</param>
         /// <returns>Fixed HTML string.</returns>

@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class HighlightsAndShadowsPage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -127,7 +127,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (layer.Filter.Adjustments[this.Index] is HighlightsAndShadowsAdjustment adjustment)
                 {
-                    //History
+                    // History
                     LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_HighlightsAndShadows);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
                         if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             adjustment2.Shadows = previous1;
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                     this.ViewModel.HistoryPush(history);
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -163,7 +163,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                     adjustment.Clarity = 0.0f;
                     adjustment.MaskBlurAmount = 1.25f;
 
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.ViewModel.Invalidate(); // Invalidate
                 }
             }
         }
@@ -190,7 +190,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class HighlightsAndShadowsPage : IAdjustmentPage
     {
 
-        //Shadows
+        // Shadows
         private void ConstructShadows1()
         {
             this.ShadowsPicker.Unit = "%";
@@ -244,7 +244,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //Highlights
+        // Highlights
         private void ConstructHighlights1()
         {
             this.HighlightsPicker.Unit = "%";
@@ -298,7 +298,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
         
 
-        //Clarity
+        // Clarity
         private void ConstructClarity1()
         {
             this.ClarityPicker.Unit = "%";
@@ -352,7 +352,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //MaskBlurAmount
+        // MaskBlurAmount
         private void ConstructMaskBlurAmount1()
         {
             this.MaskBlurAmountPicker.Unit = "%";

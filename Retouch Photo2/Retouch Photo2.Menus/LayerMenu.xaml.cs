@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class LayerMenu : Expander
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Visibility
+        // Visibility
         private void ConstructVisibility()
         {
             this.VisibilityButton.Tapped += (s, e) =>
@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Opacity
+        // Opacity
         private void ConstructOpacity1()
         {
             this.OpacityPicker.Unit = "%";
@@ -239,7 +239,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Blend Mode
+        // Blend Mode
         private void ConstructBlendMode()
         {
             this.BlendModeComboBox.ModeChanged += (s, mode) =>
@@ -256,12 +256,12 @@ namespace Retouch_Photo2.Menus
                     setUndo: (layer, previous) => layer.BlendMode = previous
                 );
             };
-            this.BlendModeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.BlendModeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            this.BlendModeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
+            this.BlendModeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
         }
 
 
-        //Tag Type
+        // Tag Type
         private void ConstructTagType()
         {
             this.TagTypeSegmented.TypeChanged += (s, type) =>

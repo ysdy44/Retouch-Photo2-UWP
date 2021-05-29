@@ -11,10 +11,10 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodTransformMultiplies(Matrix3x2 matrix)
         {
-            //History
+            // History
             LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory(HistoryType.LayersTransformMultiplies_Transform);
 
-            //Selection 
+            // Selection 
             this.CacheTransformer();
             Transformer transformer = this.StartingTransformer * matrix;
             this.Transformer = transformer;
@@ -22,10 +22,10 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                //History
+                // History
                 history.PushTransform(layer);
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
@@ -33,16 +33,16 @@ namespace Retouch_Photo2.ViewModels
                 layer.TransformMultiplies(matrix);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         
         public void MethodTransformMultipliesStarted()
         {
-            //Selection
+            // Selection
             this.CacheTransformer();
             this.SetValueWithChildren((layerage) =>
             {
@@ -51,43 +51,43 @@ namespace Retouch_Photo2.ViewModels
                 layer.CacheTransform();
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
          
         public void MethodTransformMultipliesDelta(Transformer transformer)
         {
-            //Selection
+            // Selection
             this.Transformer = transformer;
             Matrix3x2 matrix = Transformer.FindHomography(this.StartingTransformer, transformer);
             this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
                 layer.TransformMultiplies(matrix);
             });
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
         public void MethodTransformMultipliesComplete(Transformer transformer)
         {
-            //History
+            // History
             LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory(HistoryType.LayersTransformMultiplies_Transform);
 
-            //Selection
+            // Selection
             this.Transformer = transformer;
             Matrix3x2 matrix = Transformer.FindHomography(this.StartingTransformer, transformer);
             this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //History
+                // History
                 history.PushStartingTransform(layer);
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
@@ -97,30 +97,30 @@ namespace Retouch_Photo2.ViewModels
                 layer.TransformMultiplies(matrix);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate(InvalidateMode.HD);//Invalidate
+            this.Invalidate(InvalidateMode.HD); // Invalidate
         }
 
         
 
         public void MethodTransformAdd(Vector2 vector)
         {
-            //History
+            // History
             LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
-            //Selection
+            // Selection
             this.CacheTransformer();
             this.Transformer = Transformer.Add(this.StartingTransformer, vector);
             this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //History
+                // History
                 history.PushTransform(layer, vector);
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
@@ -131,16 +131,16 @@ namespace Retouch_Photo2.ViewModels
                 layer.TransformAdd(vector);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
 
 
         public void MethodTransformAddStarted()
         {
-            //Selection
+            // Selection
             this.CacheTransformer();
             this.SetValueWithChildren((layerage) =>
             {
@@ -148,43 +148,43 @@ namespace Retouch_Photo2.ViewModels
                 layer.CacheTransform();
             });
 
-            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
 
         public void MethodTransformAddDelta(Vector2 vector)
         {
-            //Selection
+            // Selection
             Transformer transformer = Transformer.Add(this.StartingTransformer, vector);
             this.Transformer = transformer;
             this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
                 layer.TransformAdd(vector);
             });
 
-            this.Invalidate();//Invalidate
+            this.Invalidate(); // Invalidate
         }
     
         public void MethodTransformAddComplete(Vector2 vector)
         {
-            //History
+            // History
             LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
-            //Selection
+            // Selection
             Transformer transformer = Transformer.Add(this.StartingTransformer, vector);
             this.Transformer = transformer;
             this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 
-                //History
+                // History
                 history.PushTransform(layer, vector);
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
@@ -194,10 +194,10 @@ namespace Retouch_Photo2.ViewModels
                 layer.TransformAdd(vector);
             });
 
-            //History
+            // History
             this.HistoryPush(history);
 
-            this.Invalidate(InvalidateMode.HD);//Invalidate
+            this.Invalidate(InvalidateMode.HD); // Invalidate
         }
                
 

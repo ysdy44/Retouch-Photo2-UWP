@@ -93,7 +93,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class VignettePage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (layer.Filter.Adjustments[this.Index] is VignetteAdjustment adjustment)
                 {
-                    //History
+                    // History
                     LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_Vignette);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
                         if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             adjustment2.Amount = previous1;
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         }
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -151,10 +151,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                     adjustment.Curve = 0.0f;
                     adjustment.Color = Colors.Black;
 
-                    //History
+                    // History
                     this.ViewModel.HistoryPush(history);
 
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.ViewModel.Invalidate(); // Invalidate
                 }
             }
         }
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class VignettePage : IAdjustmentPage
     {
 
-        //Amount
+        // Amount
         private void ConstructAmount1()
         {
             this.AmountPicker.Unit = "%";
@@ -235,7 +235,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //Curve
+        // Curve
         private void ConstructCurve1()
         {
             this.CurvePicker.Unit = "%";
@@ -289,7 +289,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //Color
+        // Color
         private void ConstructColor1()
         {
             this.ColorButton.Tapped += (s, e) =>

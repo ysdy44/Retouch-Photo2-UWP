@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Tools.Elements
                     if (control.Parent is PatternGridTypeListViewItem item)
                     {
                         PatternGridType type = item.Type;
-                        this.TypeChanged?.Invoke(this, type); //Delegate
+                        this.TypeChanged?.Invoke(this, type); // Delegate
                         this.Flyout.Hide();
                     }
                 }
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Tools.Elements
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

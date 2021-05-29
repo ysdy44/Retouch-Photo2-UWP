@@ -38,13 +38,13 @@ namespace Retouch_Photo2.Layers
         /// </summary>     
         public void SetMode()
         {
-            //Layerages
+            // Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             int count = selectedLayerages.Count();
 
             if (count == 0)
             {
-                this.SelectionMode = ListViewSelectionMode.None;//None
+                this.SelectionMode = ListViewSelectionMode.None; // None
 
                 this.Layerage = null;
                 this.Layerages = null;
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers
             }
             else if (count == 1)
             {
-                this.SelectionMode = ListViewSelectionMode.Single;//None
+                this.SelectionMode = ListViewSelectionMode.Single; // None
 
                 Layerage layerage = selectedLayerages.Single();
                 this.Layerage = layerage.Clone();
@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Layers
             }
             else if (count >= 2)
             {
-                this.SelectionMode = ListViewSelectionMode.Multiple;//None
+                this.SelectionMode = ListViewSelectionMode.Multiple; // None
                 this.Layerage = null;
                 this.Layerages = from layerage in selectedLayerages select layerage.Clone();
 

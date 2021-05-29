@@ -68,7 +68,7 @@ namespace Retouch_Photo2.Layers.Models
             Photocopier photocopier = photo.ToPhotocopier();
             this.Photocopier = photocopier;
 
-            //Transformer
+            // Transformer
             Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
             base.Transform = new Transform(transformerSource);
         }
@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Layers.Models
             }
 
 
-            //Image
+            // Image
             Matrix3x2 matrix = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
             Transform2DEffect effect = new Transform2DEffect
             {
@@ -143,7 +143,7 @@ namespace Retouch_Photo2.Layers.Models
             }
 
 
-            //Crop
+            // Crop
             {
                 CanvasCommandList command = new CanvasCommandList(resourceCreator);
                 using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())

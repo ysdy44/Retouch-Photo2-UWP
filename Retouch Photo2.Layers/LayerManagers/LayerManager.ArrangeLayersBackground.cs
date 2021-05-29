@@ -24,7 +24,7 @@
         //    else LayerManager._arrangeLayersBackgroundNullParents(layerage);
         //}
 
-        //Judge Recursive
+        // Judge Recursive
         private static void ArrangeLayersBackgroundCore(Layerage layerage)
         {
             ILayer layer = layerage.Self;
@@ -58,7 +58,7 @@
             }
         }
 
-        //Self Recursive
+        // Self Recursive
         private static void ArrangeLayersBackgroundHasParentsSelectedCore(Layerage layerage)
         {
             ILayer layer = layerage.Self;

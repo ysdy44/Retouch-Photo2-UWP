@@ -31,7 +31,7 @@ namespace Retouch_Photo2
     public sealed partial class DebugPage : Page
     {
 
-        //FlowDirection
+        // FlowDirection
         private void ConstructFlowDirection()
         {
             bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;

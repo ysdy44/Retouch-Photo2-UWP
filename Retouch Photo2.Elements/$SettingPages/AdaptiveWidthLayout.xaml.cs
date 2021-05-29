@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Elements
             if (e.NewValue is DeviceLayoutType value)
             {
                 control._vsType = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Elements
             this.PC = base.GetTemplateChild(nameof(PC)) as VisualState;
             this.Pad = base.GetTemplateChild(nameof(Pad)) as VisualState;
             this.Phone = base.GetTemplateChild(nameof(Phone)) as VisualState;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
         }
 
     }

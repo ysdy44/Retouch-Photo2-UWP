@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Layers
         {
             XElement element = new XElement(elementName);
 
-            //SaveWith
+            // SaveWith
             {
                 element.Add(new XAttribute("Id", layer.Id));
                 element.Add(new XAttribute("Type", layer.Type));
@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Layers
         /// <returns> The loaded <see cref="ILayer"/>. </returns>
         private static ILayer LoadILayer(XElement element)
         {
-            //Load
+            // Load
             string type2 = element.Attribute("Type") is XAttribute type ? type.Value : null;
             ILayer layer = XML.CreateLayer(typeof(ILayer), type2);
             {

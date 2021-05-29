@@ -19,12 +19,12 @@ namespace Retouch_Photo2
         /// </summary>
         public static async Task SaveSampleFile()
         {
-            //Read the file from the package.
-            StorageFile file0 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils/App.photo2pk.zip"));
-            StorageFile file1 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils/Banner.photo2pk.zip"));
-            StorageFile file2 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils/MFY.photo2pk.zip"));
+            // Read the file from the package.
+            StorageFile file0 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:/// FileUtils/App.photo2pk.zip"));
+            StorageFile file1 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:/// FileUtils/Banner.photo2pk.zip"));
+            StorageFile file2 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:/// FileUtils/MFY.photo2pk.zip"));
 
-            //Unzip to local folder
+            // Unzip to local folder
             await FileUtil.ExtractToDirectory(file0);
             await FileUtil.ExtractToDirectory(file1);
             await FileUtil.ExtractToDirectory(file2);
@@ -36,10 +36,10 @@ namespace Retouch_Photo2
         /// <returns> The extract project. </returns>
         private static async Task ExtractToDirectory(StorageFile file)
         {
-            //Read the file stream
+            // Read the file stream
             using (Stream stream = await file.OpenStreamForReadAsync())
             {
-                //Unzip to local folder
+                // Unzip to local folder
                 ZipArchive archive = new ZipArchive(stream);
                 archive.ExtractToDirectory(ApplicationData.Current.LocalFolder.Path);
             }
@@ -70,7 +70,7 @@ namespace Retouch_Photo2
         /// <returns> Return image source. </returns>
         private static async Task<WriteableBitmap> GetImageSource(IRandomAccessStream stream)
         {
-            //Display
+            // Display
             BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
 
             using (SoftwareBitmap bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied))
@@ -94,7 +94,7 @@ namespace Retouch_Photo2
         /// <returns> Saved successful? </returns>
         public static async Task<bool> SaveCanvasBitmapFile(CanvasRenderTarget renderTarget, string fileChoices = ".Jpeg", string suggestedFileName = "Untitled", CanvasBitmapFileFormat fileFormat = CanvasBitmapFileFormat.Jpeg, float quality = 1.0f)
         {
-            //FileSavePicker
+            // FileSavePicker
             FileSavePicker savePicker = new FileSavePicker
             {
                 SuggestedStartLocation = PickerLocationId.Desktop,
@@ -103,7 +103,7 @@ namespace Retouch_Photo2
             savePicker.FileTypeChoices.Add("DB", new[] { fileChoices });
 
 
-            //PickSaveFileAsync
+            // PickSaveFileAsync
             StorageFile file = await savePicker.PickSaveFileAsync();
             if (file == null) return false;
 

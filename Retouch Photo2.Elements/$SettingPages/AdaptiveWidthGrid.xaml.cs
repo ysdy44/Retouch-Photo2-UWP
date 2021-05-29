@@ -210,7 +210,7 @@ namespace Retouch_Photo2.Elements
         public AdaptiveWidthGrid()
         {
             this.DefaultStyleKey = typeof(AdaptiveWidthGrid);
-            base.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
+            base.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState; // State
         }
 
         /// <inheritdoc/>
@@ -221,14 +221,14 @@ namespace Retouch_Photo2.Elements
             this.CommonStates = base.GetTemplateChild(nameof(CommonStates)) as VisualStateGroup;
             this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
             this.Disable = base.GetTemplateChild(nameof(Disable)) as VisualState;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
 
             this.PhoneGridLength = base.GetTemplateChild(nameof(PhoneGridLength)) as ColumnDefinition;
             this.PadGridLength = base.GetTemplateChild(nameof(PadGridLength)) as ColumnDefinition;
             this.PCGridLength = base.GetTemplateChild(nameof(PCGridLength)) as ColumnDefinition;
             this.SetWidth();
 
-            //Phone
+            // Phone
             if (this.PhoneThumb != null)
             {
                 this.PhoneThumb.DragStarted -= this.PhoneThumb_DragStarted;
@@ -243,7 +243,7 @@ namespace Retouch_Photo2.Elements
                 this.PhoneThumb.DragCompleted += this.PhoneThumb_DragCompleted;
             }
 
-            //Pad
+            // Pad
             if (this.PadThumb != null)
             {
                 this.PadThumb.DragStarted -= this.PadThumb_DragStarted;
@@ -263,7 +263,7 @@ namespace Retouch_Photo2.Elements
         private void PhoneThumb_DragStarted(object sender, DragStartedEventArgs e)
         {
             this.DragStarted();
-            this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled);//Delegate
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled); // Delegate
         }
         private void PhoneThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
@@ -278,14 +278,14 @@ namespace Retouch_Photo2.Elements
         }
         private void PhoneThumb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled);//Delegate
-            this.PhoneWidthChanged?.Invoke(this, this.PhoneWidth);//Delegate
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled); // Delegate
+            this.PhoneWidthChanged?.Invoke(this, this.PhoneWidth); // Delegate
         }
 
         private void PadThumb_DragStarted(object sender, DragStartedEventArgs e)
         {
             this.DragStarted();
-            this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled);//Delegate
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled); // Delegate
         }
         private void PadThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
@@ -300,8 +300,8 @@ namespace Retouch_Photo2.Elements
         }
         private void PadThumb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled);//Delegate
-            this.PadWidthChanged?.Invoke(this, this.PadWidth);//Delegate
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled); // Delegate
+            this.PadWidthChanged?.Invoke(this, this.PadWidth); // Delegate
         }
 
 

@@ -20,15 +20,15 @@ namespace Retouch_Photo2
 
         private async Task SetTheme(ElementTheme theme2)
         {
-            //Setting
+            // Setting
             this.SettingViewModel.Setting.Theme = theme2;
-            this.SettingViewModel.ConstructTheme();//Construct
-            await this.Save();//Write
+            this.SettingViewModel.ConstructTheme(); // Construct
+            await this.Save(); // Write
         }
 
         private async Task SetDeviceLayoutType(DeviceLayoutType type2, bool isAdaptive)
         {
-            //Setting
+            // Setting
             DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
             {
                 layout.IsAdaptive = isAdaptive;
@@ -41,7 +41,7 @@ namespace Retouch_Photo2
 
         private async Task SetLayersHeight(int height)
         {
-            //Setting
+            // Setting
             this.SettingViewModel.Setting.LayersHeight = height;
             this.SettingViewModel.ConstructLayersHeight();
 
@@ -50,7 +50,7 @@ namespace Retouch_Photo2
 
         private async Task SetCanvasBackground(byte? cannel)
         {
-            //Setting
+            // Setting
             this.SettingViewModel.Setting.CanvasBaclground = cannel;
             this.SettingViewModel.ConstructCanvasBackground();
 
@@ -59,7 +59,7 @@ namespace Retouch_Photo2
 
         private async Task AddMenu(MenuType type)
         {
-            //Setting
+            // Setting
             this.SettingViewModel.Setting.MenuTypes.Add(type);
 
             IOrderedEnumerable<MenuType> order = this.SettingViewModel.Setting.MenuTypes.OrderBy(t => (int)t);
@@ -69,7 +69,7 @@ namespace Retouch_Photo2
 
         private async Task RemoveMenu(MenuType type)
         {
-            //Setting
+            // Setting
             do
             {
                 this.SettingViewModel.Setting.MenuTypes.Remove(type);

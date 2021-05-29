@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class StraightenPage : Page, IEffectPage
     {
 
-        //String
+        // String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class StraightenPage : Page, IEffectPage
     {
 
-        //Straighten_Angle
+        // Straighten_Angle
         private void ConstructStraighten_Angle1()
         {
             this.AnglePicker.Unit = "º";

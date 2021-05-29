@@ -17,10 +17,10 @@ namespace Retouch_Photo2.Elements
         {
             if (this._vsPhoneType != PhoneLayoutType.Hided) return;
 
-            //Phone
+            // Phone
             {
                 this._vsPhoneType = type;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
 
             BackRequestedExtension.LayoutIsShow = true;
@@ -38,17 +38,17 @@ namespace Retouch_Photo2.Elements
         {
             if (this.IsWritable) return;
 
-            //Writable
+            // Writable
             {
                 this.WritableIconContentControl.Template = icon;
                 this.WritableTextBlock.Text = title;
                 this.WritableContentPresenter.Content = content;
 
                 this.IsWritable = true;
-                this.WritableVisualState = this.WritableVisualState;//State
+                this.WritableVisualState = this.WritableVisualState; // State
 
                 this._vsIsFullScreen = true;
-                this.VisualStateCore = this.VisualState;//State
+                this.VisualStateCore = this.VisualState; // State
             }
 
             BackRequestedExtension.LayoutIsShow = true;
@@ -59,14 +59,14 @@ namespace Retouch_Photo2.Elements
         /// <summary> Hide the layout. </summary>
         public void Hide()
         {
-            //Phone
+            // Phone
             if (this._vsPhoneType != PhoneLayoutType.Hided)
             {
                 this._vsPhoneType = PhoneLayoutType.Hided;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
 
-            //Writable
+            // Writable
             if (this.IsWritable)
             {
                 this.WritableIconContentControl.Template = null;
@@ -74,10 +74,10 @@ namespace Retouch_Photo2.Elements
                 this.WritableContentPresenter.Content = null;
 
                 this.IsWritable = false;
-                this.WritableVisualState = this.WritableVisualState;//State
+                this.WritableVisualState = this.WritableVisualState; // State
 
                 this._vsIsFullScreen = false;
-                this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState; // State
             }
 
             BackRequestedExtension.LayoutIsShow = false;

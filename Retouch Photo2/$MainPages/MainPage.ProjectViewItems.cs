@@ -38,7 +38,7 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Refresh the selected count.
+        ///Refresh the selected count.
         /// </summary>
         public void RefreshSelectCount()
         {
@@ -54,20 +54,20 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Rename the ProjectViewItem.
+        ///Rename the ProjectViewItem.
         /// </summary>
         /// <param name="oldName"> The old name. </param>
         /// <param name="newName"> The new name. </param>
         public async Task RenameProjectViewItem(string oldName, string newName)
         {
-            //Same name. 
+            // Same name. 
             if (oldName == newName)
             {
                 this.TextBoxTipTextBlock.Visibility = Visibility.Visible;
                 return;
             }
 
-            //Name is already occupied.
+            // Name is already occupied.
             bool hasRenamed = this.Items.Any(p => p.Name == newName);
             if (hasRenamed)
             {
@@ -75,7 +75,7 @@ namespace Retouch_Photo2
                 return;
             }
 
-            //Rename
+            // Rename
             IProjectViewItem item = this.Items.First(p => p.Name == oldName);
             item.Name = newName;
             await FileUtil.RenameZipFolder(oldName, newName);
@@ -93,7 +93,7 @@ namespace Retouch_Photo2
         {
             foreach (IProjectViewItem item in items)
             {
-                //Delete
+                // Delete
                 string name = item.Name;
                 bool result = await FileUtil.DeleteZipFolder(name);
                 if (result)
@@ -101,7 +101,7 @@ namespace Retouch_Photo2
                     item.Visibility = Visibility.Collapsed;
                     item.ImageSource = null;
                     item.Project = null;
-                    this.Items.Remove(item);//Notify
+                    this.Items.Remove(item); // Notify
 
                     await Task.Delay(300);
                 }
@@ -121,7 +121,7 @@ namespace Retouch_Photo2
                 string newName = this.UntitledRenameByRecursive(oldName);
 
                 IProjectViewItem newItem = await FileUtil.DuplicateZipFolder(oldName, newName);
-                this.Items.Add(newItem);//Notify
+                this.Items.Add(newItem); // Notify
             }
         }
 

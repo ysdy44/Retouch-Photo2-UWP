@@ -43,24 +43,24 @@ namespace Retouch_Photo2.Menus
             this.ConstructStrings();
             base.Loaded += (s, e) => this.ConstructLanguages();
 
-            //Edit
+            // Edit
             this.Edit_CutItem.Tapped += (s, e) => this.MethodViewModel.MethodEditCut();
             this.Edit_DuplicateItem.Tapped += (s, e) => this.MethodViewModel.MethodEditDuplicate();
             this.Edit_CopyItem.Tapped += (s, e) => this.MethodViewModel.MethodEditCopy();
             this.Edit_PasteItem.Tapped += (s, e) => this.MethodViewModel.MethodEditPaste();
             this.Edit_ClearItem.Tapped += (s, e) => this.MethodViewModel.MethodEditClear();
 
-            //Select
+            // Select
             this.Select_AllItem.Tapped += (s, e) => this.MethodViewModel.MethodSelectAll();
             this.Select_DeselectItem.Tapped += (s, e) => this.MethodViewModel.MethodSelectDeselect();
             this.Select_InvertItem.Tapped += (s, e) => this.MethodViewModel.MethodSelectInvert();
 
-            //Group
+            // Group
             this.Group_GroupItem.Tapped += (s, e) => this.MethodViewModel.MethodGroupGroup();
             this.Group_UngroupItem.Tapped += (s, e) => this.MethodViewModel.MethodGroupUngroup();
             this.Group_ReleaseItem.Tapped += (s, e) => this.MethodViewModel.MethodGroupRelease();
 
-            //Combine
+            // Combine
             this.Combine_UnionItem.Tapped += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Union);
             this.Combine_ExcludeItem.Tapped += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Exclude);
             this.Combine_XorItem.Tapped += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Xor);
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class EditMenu : Expander
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Menus
         {
             IList<Layerage> layerages = new List<Layerage>();
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Menus
                     };
 
 
-                    //Turn to curve layer
+                    // Turn to curve layer
                     ILayer curveLayer = this.CreateCurveLayer(strokeGeometry, strokeStyleClone);
                     if (curveLayer != null)
                     {
@@ -172,39 +172,39 @@ namespace Retouch_Photo2.Menus
             {
                 Layerage curveLayerage = layerages.Single();
 
-                //History
+                // History
                 LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_ExpandStroke);
                 this.ViewModel.HistoryPush(history);
 
-                //Mezzanine
+                // Mezzanine
                 LayerManager.Mezzanine(curveLayerage);
 
-                //History
+                // History
                 this.ViewModel.MethodSelectedNone();
 
                 LayerManager.ArrangeLayers();
                 LayerManager.ArrangeLayersBackground();
-                this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
-                this.ViewModel.Invalidate();//Invalidate
+                this.SelectionViewModel.SetModeSingle(curveLayerage); // Selection
+                this.ViewModel.Invalidate(); // Invalidate
             }
 
 
             if (layerages.Count > 1)
             {
-                //History
+                // History
                 LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayers_ExpandStroke);
                 this.ViewModel.HistoryPush(history);
 
-                //Mezzanine
+                // Mezzanine
                 LayerManager.MezzanineRange(layerages);
 
-                //History
+                // History
                 this.ViewModel.MethodSelectedNone();
 
                 LayerManager.ArrangeLayers();
                 LayerManager.ArrangeLayersBackground();
-                this.SelectionViewModel.SetModeMultiple(layerages);//Selection
-                this.ViewModel.Invalidate();//Invalidate
+                this.SelectionViewModel.SetModeMultiple(layerages); // Selection
+                this.ViewModel.Invalidate(); // Invalidate
             }
         }
 
@@ -220,7 +220,7 @@ namespace Retouch_Photo2.Menus
 
             CanvasGeometry other = null;
 
-            //Selection
+            // Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -247,7 +247,7 @@ namespace Retouch_Photo2.Menus
             {
                 CanvasGeometry combineGeometry = geometry.CombineWith(other, Matrix3x2.CreateTranslation(Vector2.Zero), combine);
 
-                //Turn to curve layer
+                // Turn to curve layer
                 ILayer curveLayer = this.CreateCurveLayer(combineGeometry, style);
                 if (curveLayer != null)
                 {
@@ -255,26 +255,26 @@ namespace Retouch_Photo2.Menus
                     curveLayer.Id = curveLayerage.Id;
                     LayerBase.Instances.Add(curveLayerage.Id, curveLayer);
 
-                    //History
+                    // History
                     LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_Combine);
                     this.ViewModel.HistoryPush(history);
 
-                    //Mezzanine
+                    // Mezzanine
                     LayerManager.Mezzanine(curveLayerage);
 
-                    //History
+                    // History
                     this.ViewModel.MethodSelectedNone();
 
                     LayerManager.ArrangeLayers();
                     LayerManager.ArrangeLayersBackground();
-                    this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.SelectionViewModel.SetModeSingle(curveLayerage); // Selection
+                    this.ViewModel.Invalidate(); // Invalidate
                 }
             }
         }
 
 
-        //Create curve layer
+        // Create curve layer
         private ILayer CreateCurveLayer(CanvasGeometry geometry, IStyle style)
         {
             NodeCollection nodes = new NodeCollection(geometry);

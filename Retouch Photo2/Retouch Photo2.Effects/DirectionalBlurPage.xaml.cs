@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class DirectionalBlurPage : Page, IEffectPage
     {
 
-        //String
+        // String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class DirectionalBlurPage : Page, IEffectPage
     {
 
-        //Radius
+        // Radius
         private void ConstructRadius1()
         {
             this.RadiusPicker.Minimum = 0;
@@ -202,7 +202,7 @@ namespace Retouch_Photo2.Effects.Pages
         }
 
 
-        //Angle
+        // Angle
         private void ConstructAngle1()
         {
             this.AnglePicker.Unit = "º";
@@ -252,7 +252,7 @@ namespace Retouch_Photo2.Effects.Pages
             };
         }
 
-        //IsHardBorder
+        // IsHardBorder
         private void ConstructIsHard()
         {
             this.IsHardBorderCheckBox.Tapped += (s, e) =>

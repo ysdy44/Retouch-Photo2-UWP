@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override Transformer GetActualTransformer(Layerage layerage)
         {
-            //Refactoring
+            // Refactoring
             if (this.IsRefactoringTransformer)
             {
                 this.IsRefactoringTransformer = false;
@@ -58,8 +58,8 @@ namespace Retouch_Photo2.Layers.Models
 
                 //@Release: case Debug
                 {
-                    //TransformerBorder border = new TransformerBorder(base.Nodes);
-                    //Transformer transformer = border.ToTransformer();
+                    // TransformerBorder border = new TransformerBorder(base.Nodes);
+                    // Transformer transformer = border.ToTransformer();
                 }
                 //@Release: case Release
                 //{

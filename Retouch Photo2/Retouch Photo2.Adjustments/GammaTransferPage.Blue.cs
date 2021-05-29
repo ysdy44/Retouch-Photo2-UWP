@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //BlueDisable
+        // BlueDisable
         private void ConstructBlueDisable()
         {
             this.BlueCheckControl.Tapped += (s, e) =>
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //BlueOffset
+        // BlueOffset
         private void ConstructBlueOffset1()
         {
             this.BlueOffsetPicker.Unit = "%";
@@ -149,7 +149,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //BlueExponent
+        // BlueExponent
         private void ConstructBlueExponent1()
         {
             this.BlueExponentPicker.Unit = "%";
@@ -203,7 +203,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //BlueAmplitude
+        // BlueAmplitude
         private void ConstructBlueAmplitude1()
         {
             this.BlueAmplitudePicker.Unit = "%";

@@ -87,7 +87,7 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsWidth = value;
-                this.WidthVisualState = this.WidthVisualState;//State
+                this.WidthVisualState = this.WidthVisualState; // State
             }
         }
 
@@ -232,7 +232,7 @@ namespace Retouch_Photo2.Elements
 
             this.left = Canvas.GetLeft(this);
             this.top = Canvas.GetTop(this);
-            this.MoveToTop(); //Delegate
+            this.MoveToTop(); // Delegate
         }
         private void TitleGrid_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
@@ -301,7 +301,7 @@ namespace Retouch_Photo2.Elements
 
             this._vsIsOverlay = false;
             this._vsIsPin = false;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
         }
         private void AsOverlay()
         {
@@ -327,7 +327,7 @@ namespace Retouch_Photo2.Elements
 
             this._vsIsOverlay = true;
             this._vsIsPin = false;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
         }
         private void AsPin()
         {
@@ -345,7 +345,7 @@ namespace Retouch_Photo2.Elements
 
             this._vsIsOverlay = false;
             this._vsIsPin = true;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
         }
 
 

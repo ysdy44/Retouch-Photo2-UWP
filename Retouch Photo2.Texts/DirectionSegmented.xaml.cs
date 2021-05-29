@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Texts
             if (e.NewValue is CanvasTextDirection value)
             {
                 control._vsDirection = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -98,24 +98,24 @@ namespace Retouch_Photo2.Texts
             this.ConstructStrings();
             base.Loaded += (s, e) => this.ConstructLanguages();
 
-            this.LeftToRightThenTopToBottom.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.LeftToRightThenTopToBottom);//Delegate
-            this.RightToLeftThenTopToBottom.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.RightToLeftThenTopToBottom);//Delegate
+            this.LeftToRightThenTopToBottom.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.LeftToRightThenTopToBottom); // Delegate
+            this.RightToLeftThenTopToBottom.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.RightToLeftThenTopToBottom); // Delegate
 
-            this.LeftToRightThenBottomToTop.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.LeftToRightThenBottomToTop);//Delegate
-            this.RightToLeftThenBottomToTop.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.RightToLeftThenBottomToTop);//Delegate
+            this.LeftToRightThenBottomToTop.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.LeftToRightThenBottomToTop); // Delegate
+            this.RightToLeftThenBottomToTop.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.RightToLeftThenBottomToTop); // Delegate
 
 
-            this.TopToBottomThenLeftToRight.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.TopToBottomThenLeftToRight);//Delegate
-            this.BottomToTopThenLeftToRight.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.BottomToTopThenLeftToRight);//Delegate
+            this.TopToBottomThenLeftToRight.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.TopToBottomThenLeftToRight); // Delegate
+            this.BottomToTopThenLeftToRight.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.BottomToTopThenLeftToRight); // Delegate
 
-            this.TopToBottomThenRightToLeft.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.TopToBottomThenRightToLeft);//Delegate
-            this.BottomToTopThenRightToLeft.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.BottomToTopThenRightToLeft);//Delegate
+            this.TopToBottomThenRightToLeft.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.TopToBottomThenRightToLeft); // Delegate
+            this.BottomToTopThenRightToLeft.Tapped += (s, e) => this.DirectionChanged?.Invoke(this, CanvasTextDirection.BottomToTopThenRightToLeft); // Delegate
 
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
         }
 
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -127,7 +127,7 @@ namespace Retouch_Photo2.Texts
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

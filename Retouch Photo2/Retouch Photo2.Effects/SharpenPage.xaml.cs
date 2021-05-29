@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class SharpenPage : Page, IEffectPage
     {
 
-        //String
+        // String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Effects.Pages
     public sealed partial class SharpenPage : Page, IEffectPage
     {
 
-        //Amount
+        // Amount
         private void ConstructAmount1()
         {
             this.AmountPicker.Unit = null;

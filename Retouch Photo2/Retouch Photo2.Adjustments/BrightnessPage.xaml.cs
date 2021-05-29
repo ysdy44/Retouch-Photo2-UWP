@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class BrightnessPage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -128,7 +128,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (layer.Filter.Adjustments[this.Index] is BrightnessAdjustment adjustment)
                 {
-                    //History
+                    // History
                     LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_Brightness);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
                         if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
                         {
-                            //Refactoring
+                            // Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             adjustment2.WhiteLight = previous1;
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                         }
                     };
 
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layerage.RefactoringParentsRender();
@@ -162,10 +162,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                     adjustment.BlackLight = 0.0f;
                     adjustment.BlackDark = 0.0f;
 
-                    //History
+                    // History
                     this.ViewModel.HistoryPush(history);
 
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.ViewModel.Invalidate(); // Invalidate
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class BrightnessPage : IAdjustmentPage
     {
 
-        //WhiteLight
+        // WhiteLight
         private void ConstructWhiteLight1()
         {
             this.WhiteLightPicker.Unit = "%";
@@ -257,7 +257,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //WhiteDark
+        // WhiteDark
         private void ConstructWhiteDark1()
         {
             this.WhiteDarkPicker.Unit = "%";
@@ -320,7 +320,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //BlackLight
+        // BlackLight
         private void ConstructBlackLight1()
         {
             this.BlackLightPicker.Unit = "%";
@@ -383,7 +383,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        //BlackDark
+        // BlackDark
         private void ConstructBlackDark1()
         {
             this.BlackDarkPicker.Unit = "%";

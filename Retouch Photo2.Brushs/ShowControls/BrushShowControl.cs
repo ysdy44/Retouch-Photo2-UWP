@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Brushs
             set
             {
                 this._vsFillOrStroke = value;
-                this.Invalidate();//Invalidate
+                this.Invalidate(); // Invalidate
             }
         }
 
@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Brushs
             set
             {
                 this._vsFill = value;
-                this.Invalidate();//Invalidate
+                this.Invalidate(); // Invalidate
             }
         }
 
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Brushs
             set
             {
                 this._vsStroke = value;
-                this.Invalidate();//Invalidate
+                this.Invalidate(); // Invalidate
             }
         }
 

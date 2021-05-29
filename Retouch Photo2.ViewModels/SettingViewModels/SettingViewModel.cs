@@ -21,7 +21,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isSnap = value;
-                this.OnPropertyChanged(nameof(this.IsSnap));//Notify 
+                this.OnPropertyChanged(nameof(this.IsSnap)); // Notify 
             }
         }
         private bool isSnap = true;
@@ -34,7 +34,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isRuler = value;
-                this.OnPropertyChanged(nameof(this.IsRuler));//Notify 
+                this.OnPropertyChanged(nameof(this.IsRuler)); // Notify 
             }
         }
         private bool isRuler;
@@ -47,7 +47,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isCenter = value;
-                this.OnPropertyChanged(nameof(this.IsCenter));//Notify 
+                this.OnPropertyChanged(nameof(this.IsCenter)); // Notify 
             }
         }
         private bool isCenter;
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isRatio = value;
-                this.OnPropertyChanged(nameof(this.IsRatio));//Notify 
+                this.OnPropertyChanged(nameof(this.IsRatio)); // Notify 
             }
         }
         private bool isRatio;
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isSquare = value;
-                this.OnPropertyChanged(nameof(this.IsSquare));//Notify 
+                this.OnPropertyChanged(nameof(this.IsSquare)); // Notify 
             }
         }
         private bool isSquare;
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isSnapToTick = value;
-                this.OnPropertyChanged(nameof(this.IsSnapToTick));//Notify 
+                this.OnPropertyChanged(nameof(this.IsSnapToTick)); // Notify 
             }
         }
         private bool isSnapToTick;
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isWheelToRotate = value;
-                this.OnPropertyChanged(nameof(this.IsWheelToRotate));//Notify 
+                this.OnPropertyChanged(nameof(this.IsWheelToRotate)); // Notify 
             }
         }
         private bool isWheelToRotate;
@@ -108,7 +108,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.compositeMode == value) return;
                 this.compositeMode = value;
-                this.OnPropertyChanged(nameof(this.CompositeMode));//Notify 
+                this.OnPropertyChanged(nameof(this.CompositeMode)); // Notify 
             }
         }
         private MarqueeCompositeMode compositeMode;
@@ -121,13 +121,13 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.controlPointMode == value) return;
                 this.controlPointMode = value;
-                this.OnPropertyChanged(nameof(this.ControlPointMode));//Notify 
+                this.OnPropertyChanged(nameof(this.ControlPointMode)); // Notify 
             }
         }
         private SelfControlPointMode controlPointMode;
 
 
-        //Notify 
+        // Notify 
         /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>

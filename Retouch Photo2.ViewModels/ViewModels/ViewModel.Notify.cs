@@ -21,7 +21,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isOpen = value;
-                this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
+                this.OnPropertyChanged(nameof(this.IsOpen)); // Notify 
             }
         }
         private bool isOpen;
@@ -35,7 +35,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.tipText == value) return;
                 this.tipText = value;
-                this.OnPropertyChanged(nameof(TipText));//Notify 
+                this.OnPropertyChanged(nameof(TipText)); // Notify 
             }
         }
         private string tipText = string.Empty;
@@ -47,7 +47,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.tipTextVisibility == value) return;
                 this.tipTextVisibility = value;
-                this.OnPropertyChanged(nameof(TipTextVisibility));//Notify 
+                this.OnPropertyChanged(nameof(TipTextVisibility)); // Notify 
             }
         }
         private Visibility tipTextVisibility = Visibility.Collapsed;

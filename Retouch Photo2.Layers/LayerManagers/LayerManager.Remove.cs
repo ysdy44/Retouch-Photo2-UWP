@@ -33,10 +33,10 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = child.Self;
 
-                //Recursive
+                // Recursive
                 if (layer.IsSelected == true)
                 {
-                    //Refactoring
+                    // Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -45,12 +45,12 @@ namespace Retouch_Photo2.Layers
                     child.RefactoringParentsIconRender();
                     LayerManager.RemoveAllCore(child);
                 }
-                //Recursive
+                // Recursive
                 else
                     LayerManager.RemoveAllSelectedCore(child);
             }
 
-            //Remove
+            // Remove
             Layerage removeLayerage = null;
             do
             {
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = child.Self;
 
-                //Recursive
+                // Recursive
                 LayerManager.RemoveAllCore(child);
 
                 LayerManager.RootStackPanel.Children.Remove(layer.Control);

@@ -114,7 +114,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.MethodViewModel.MethodConvertToCurves();
 
-                //Change tools group value.
+                // Change tools group value.
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo()
         {
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
         public void OnNavigatedFrom()
         {
@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class GeometryCogTool : Page, ITool
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Count
+        // Count
         private void ConstructCount1()
         {
             this.CountPicker.Minimum = 4;
@@ -233,7 +233,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //InnerRadius
+        // InnerRadius
         private void ConstructInnerRadius1()
         {
             this.InnerRadiusPicker.Minimum = 0;
@@ -285,7 +285,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Tooth
+        // Tooth
         private void ConstructTooth1()
         {
             this.ToothPicker.Minimum = 0;
@@ -337,7 +337,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Notch
+        // Notch
         private void ConstructNotch1()
         {
             this.NotchPicker.Minimum = 0;

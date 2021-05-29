@@ -40,49 +40,49 @@ namespace Retouch_Photo2.Tools
 
         public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
-            if (this.ViewModel.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
+            if (this.ViewModel.TransformerTool.Started(startingPoint, point)) return;// TransformerTool
 
-            //Transformer
+            // Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Snap         
+            // Snap         
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
-            //History
+            // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
-            //Selection
+            // Selection
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
 
-            //Mezzanine
+            // Mezzanine
             ILayer layer = createLayer(transformer);
             Layerage layerage = Layerage.CreateByGuid();
             layer.Id = layerage.Id;
             LayerBase.Instances.Add(layerage.Id, layer);
 
-            //Mezzanine
+            // Mezzanine
             this.MezzanineLayerage = layerage;
             LayerManager.Mezzanine(this.MezzanineLayerage);
 
-            //History
+            // History
             this.ViewModel.MethodSelectedNone();
 
-            //Tip
+            // Tip
             this.ViewModel.SetTipTextWidthHeight(transformer);
             this.ViewModel.TipTextVisibility = Visibility.Visible;
 
-            //Selection
+            // Selection
             this.Transformer = transformer;
             this.SelectionViewModel.SetModeExtended();
 
-            //Cursor
+            // Cursor
             CoreCursorExtension.IsManipulationStarted = true;
             CoreCursorExtension.Cross();
 
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -92,27 +92,27 @@ namespace Retouch_Photo2.Tools
                 Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
                 Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-                //Snap
+                // Snap
                 if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
 
-                //Selection
+                // Selection
                 Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
                 this.Transformer = transformer;
 
-                //Mezzanine
+                // Mezzanine
                 ILayer mezzanineLayer = this.MezzanineLayerage.Self;
                 mezzanineLayer.Transform = new Transform(transformer);
                 mezzanineLayer.Style.DeliverBrushPoints(transformer);
-                //Refactoring
+                // Refactoring
                 mezzanineLayer.IsRefactoringRender = true;
                 this.MezzanineLayerage.RefactoringParentsRender();
 
-                this.ViewModel.SetTipTextWidthHeight(transformer);//Tip
-                this.ViewModel.Invalidate();//Invalidate
+                this.ViewModel.SetTipTextWidthHeight(transformer); // Tip
+                this.ViewModel.Invalidate(); // Invalidate
                 return;
             }
 
-            if (this.ViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
+            if (this.ViewModel.TransformerTool.Delta(startingPoint, point)) return;// TransformerTool
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -124,58 +124,58 @@ namespace Retouch_Photo2.Tools
                     Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
                     Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-                    //Snap
+                    // Snap
                     if (this.IsSnap)
                     {
                         canvasPoint = this.Snap.Snap(canvasPoint);
                         this.Snap.Default();
                     }
 
-                    //Transformer
+                    // Transformer
                     Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
                     this.Transformer = transformer;
 
-                    //Mezzanine
+                    // Mezzanine
                     ILayer mezzanineLayer = this.MezzanineLayerage.Self;
                     mezzanineLayer.Transform = new Transform(transformer);
                     mezzanineLayer.IsSelected = true;
-                    //Refactoring
+                    // Refactoring
                     mezzanineLayer.IsRefactoringRender = true;
                     mezzanineLayer.IsRefactoringIconRender = true;
 
-                    //Selection
+                    // Selection
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayerage);
                     LayerManager.ArrangeLayers();
                     LayerManager.ArrangeLayersBackground();
                 }
                 else
                 {
-                    LayerManager.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
+                    LayerManager.RemoveMezzanine(this.MezzanineLayerage); // Mezzanine
 
-                    //Selection
+                    // Selection
                     this.SelectionViewModel.SetModeNone();
                     LayerManager.ArrangeLayers();
                     LayerManager.ArrangeLayersBackground();
                 }
 
                 this.MezzanineLayerage = null;
-                this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Tip
+                this.ViewModel.TipTextVisibility = Visibility.Collapsed;// Tip
 
-                //Cursor
+                // Cursor
                 CoreCursorExtension.IsManipulationStarted = false;
                 CoreCursorExtension.Cross();
 
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
             }
 
-            if (this.ViewModel.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
+            if (this.ViewModel.TransformerTool.Complete(startingPoint, point)) return;// TransformerTool
         }
 
         public void Cursor(Vector2 point)
         {
             if (this.Mode == ListViewSelectionMode.Extended) return;
 
-            this.ViewModel.ClickeTool.Cursor(point);//TransformerTool
+            this.ViewModel.ClickeTool.Cursor(point); // TransformerTool
         }
 
         public void Draw(CanvasDrawingSession drawingSession)
@@ -191,7 +191,7 @@ namespace Retouch_Photo2.Tools
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
                     drawingSession.DrawWireframe(layer2, matrix, this.ViewModel.AccentColor);
 
-                    this.ViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.ViewModel.TransformerTool.Draw(drawingSession); // TransformerTool
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
@@ -200,12 +200,12 @@ namespace Retouch_Photo2.Tools
                         drawingSession.DrawWireframe(layer, matrix, this.ViewModel.AccentColor);
                     }
 
-                    this.ViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.ViewModel.TransformerTool.Draw(drawingSession); // TransformerTool
                     break;
                 case ListViewSelectionMode.Extended:
                     drawingSession.DrawBound(this.Transformer, matrix, this.ViewModel.AccentColor);
 
-                    //Snapping
+                    // Snapping
                     if (this.IsSnap)
                     {
                         this.Snap.Draw(drawingSession, matrix);

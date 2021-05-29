@@ -28,7 +28,7 @@ namespace Retouch_Photo2.ViewModels
             Window.Current.CoreWindow.KeyDown -= this.CoreWindow_KeyDown;
         }
         /// <summary>
-        /// Registe the key.
+        ///Registe the key.
         /// </summary>
         public void RegisteKey()
         {
@@ -107,27 +107,27 @@ namespace Retouch_Photo2.ViewModels
         {
             if (this.KeyCtrl == false && this.KeyShift == false)
             {
-                this.CompositeMode = MarqueeCompositeMode.New;//CompositeMode
-                this.ControlPointMode = SelfControlPointMode.None;//ControlPointMode 
+                this.CompositeMode = MarqueeCompositeMode.New; // CompositeMode
+                this.ControlPointMode = SelfControlPointMode.None; // ControlPointMode 
             }
             else if (this.KeyCtrl == false && this.KeyShift)
             {
-                this.CompositeMode = MarqueeCompositeMode.Add;//CompositeMode
-                this.ControlPointMode = SelfControlPointMode.Angle;//ControlPointMode 
+                this.CompositeMode = MarqueeCompositeMode.Add; // CompositeMode
+                this.ControlPointMode = SelfControlPointMode.Angle; // ControlPointMode 
             }
             else if (this.KeyCtrl && this.KeyShift == false)
             {
-                this.CompositeMode = MarqueeCompositeMode.Subtract;//CompositeMode
-                this.ControlPointMode = SelfControlPointMode.Length;//ControlPointMode 
+                this.CompositeMode = MarqueeCompositeMode.Subtract; // CompositeMode
+                this.ControlPointMode = SelfControlPointMode.Length; // ControlPointMode 
             }
             else //if (this.KeyCtrl && this.KeyShift)       
             {
-                this.CompositeMode = MarqueeCompositeMode.New;//CompositeMode
-                this.ControlPointMode = SelfControlPointMode.None;//ControlPointMode 
+                this.CompositeMode = MarqueeCompositeMode.New; // CompositeMode
+                this.ControlPointMode = SelfControlPointMode.None; // ControlPointMode 
             }
             //else //if (this.KeyCtrl && this.KeyShift)       
             {
-                //this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
+                //this.CompositeMode = MarqueeCompositeMode.Intersect; // CompositeMode
             }
         }
 
@@ -139,7 +139,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.keyShift = value;
-                this.OnPropertyChanged(nameof(this.KeyShift));//Notify 
+                this.OnPropertyChanged(nameof(this.KeyShift)); // Notify 
             }
         }
         private bool keyShift = false;
@@ -151,7 +151,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.keyCtrl = value;
-                this.OnPropertyChanged(nameof(this.KeyCtrl));//Notify 
+                this.OnPropertyChanged(nameof(this.KeyCtrl)); // Notify 
             }
         }
         private bool keyCtrl = false;
@@ -163,7 +163,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.keySpace = value;
-                this.OnPropertyChanged(nameof(this.KeySpace));//Notify 
+                this.OnPropertyChanged(nameof(this.KeySpace)); // Notify 
             }
         }
         private bool keySpace = false;

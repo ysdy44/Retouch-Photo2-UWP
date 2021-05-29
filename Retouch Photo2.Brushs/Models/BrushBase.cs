@@ -179,14 +179,14 @@ namespace Retouch_Photo2.Brushs
         private static Vector2 YToX(Vector2 yPoint, Vector2 center)
         {
             float radiusY = Vector2.Distance(yPoint, center);
-            float radiusX = radiusY;// If radiusX = radiusY ? Yes !
+            float radiusX = radiusY; // If radiusX = radiusY ? Yes !
 
             return BrushBase.YToX(yPoint, center, radiusX);
         }
         private static Vector2 YToX(Vector2 yPoint, Vector2 center, float width, float height)
         {
             float radiusY = Vector2.Distance(yPoint, center);
-            float radiusX = radiusY / height * width;//Ratio
+            float radiusX = radiusY / height * width; // Ratio
 
             return BrushBase.YToX(yPoint, center, radiusX);
         }

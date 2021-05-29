@@ -39,23 +39,23 @@ namespace Retouch_Photo2
         // AppBar. 
         private void ConstructAppBar()
         {
-            //AppBarGrid
+            // AppBarGrid
             this.AppBarGrid.SizeChanged += (s, e) =>
             {
                 if (e.NewSize.IsEmpty) return;
                 if (e.NewSize == e.PreviousSize) return;
 
-                //Document
+                // Document
                 this.DocumentColumnDefinition.Width = new GridLength(e.NewSize.Width / 8);
-                //Overflow
+                // Overflow
                 this.AppBarOverflow(e.NewSize.Width);
             };
 
-            //Right
+            // Right
             //this.MenuListView.ScrollIntoView.ViewChanged += (s, e) => this.ShadowRectangle.Visibility = (40 < this.RightScrollViewer.HorizontalOffset) ? Visibility.Visible : Visibility.Collapsed;
 
 
-            //Document
+            // Document
             this.DocumentButton.Holding += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
             this.DocumentButton.RightTapped += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
 
@@ -77,7 +77,7 @@ namespace Retouch_Photo2
             };
 
 
-            //Appbar
+            // Appbar
             this.ExportButton.Click += (s, e) => this.ShowExportDialog();
             this.OverflowExportItem.Tapped += (s, e) =>
             {
@@ -101,11 +101,11 @@ namespace Retouch_Photo2
             this.OverflowSnapItem.Tapped += (s, e) => this.OverflowSnapItem.IsSelected = !this.OverflowSnapItem.IsSelected;
 
             /*
-            this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
+            this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate(); // Invalidate
             this.OverflowRulerItem.Tapped += (s, e) =>
             {
                 this.OverflowRulerItem.IsSelected = !this.OverflowRulerItem.IsSelected;
-                this.ViewModel.Invalidate();//Invalidate
+                this.ViewModel.Invalidate(); // Invalidate
             };
              */
 
@@ -117,7 +117,7 @@ namespace Retouch_Photo2
             };
 
             this.UnFullScreenButton.Click += (s, e) => this.FullScreenChanged();
-            this.WireframeButton.Click += (s, e) => this.ViewModel.Invalidate();//Invalidate
+            this.WireframeButton.Click += (s, e) => this.ViewModel.Invalidate(); // Invalidate
 
             this.ConstructAppBar_TipButton(this.TipButton);
             this.ConstructAppBar_TipButton(this.OverflowTipItem);
@@ -154,17 +154,17 @@ namespace Retouch_Photo2
             double leftWidth = width - overflowWidth - rightWidth;
             int count = (int)(leftWidth / 40.0d) - 1;
 
-            //Overflow
+            // Overflow
             this.OverflowButton.Visibility = (count < this.LeftStackPanel.Children.Count) ? Visibility.Visible : Visibility.Collapsed;
 
-            //Left
+            // Left
             for (int i = 0; i < this.LeftStackPanel.Children.Count; i++)
             {
                 UIElement leftButton = this.LeftStackPanel.Children[i];
                 leftButton.Visibility = (i < count) ? Visibility.Visible : Visibility.Collapsed;
             }
 
-            //Overflow
+            // Overflow
             for (int i = 0; i < this.OverflowStackPanel.Children.Count; i++)
             {
                 UIElement overflowButton = this.OverflowStackPanel.Children[i];
@@ -184,7 +184,7 @@ namespace Retouch_Photo2
 
             await this.Exit();
             this.DrawLayout.IsFullScreen = true;
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate}
 
             this.LoadingControl.State = LoadingState.None;
             this.Frame.GoBack();
@@ -199,7 +199,7 @@ namespace Retouch_Photo2
 
             await this.Exit();
             this.DrawLayout.IsFullScreen = true;
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail); // Invalidate
 
             this.LoadingControl.State = LoadingState.None;
             this.Frame.GoBack();

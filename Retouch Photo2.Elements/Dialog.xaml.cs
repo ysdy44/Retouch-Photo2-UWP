@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Elements
             this.DialogShowingStates = base.GetTemplateChild(nameof(DialogShowingStates)) as VisualStateGroup;
             this.DialogShowed = base.GetTemplateChild(nameof(DialogShowed)) as VisualState;
             this.DialogHidden = base.GetTemplateChild(nameof(DialogHidden)) as VisualState;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
 
             if (this.LayoutRoot != null) this.LayoutRoot.Tapped -= this.LayoutRoot_Tapped;
             this.LayoutRoot = base.GetTemplateChild(nameof(LayoutRoot)) as Border;

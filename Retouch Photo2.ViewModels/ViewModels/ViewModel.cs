@@ -40,7 +40,7 @@ namespace Retouch_Photo2.ViewModels
                 if (this.toolType == value) return;
 
                 this.toolType = value;
-                this.OnPropertyChanged(nameof(ToolType));//Notify  
+                this.OnPropertyChanged(nameof(ToolType)); // Notify  
             }
         }
         private ToolType toolType = ToolType.Cursor;
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isUndoEnabled = value;
-                this.OnPropertyChanged(nameof(IsUndoEnabled));//Notify 
+                this.OnPropertyChanged(nameof(IsUndoEnabled)); // Notify 
             }
         }
         private bool isUndoEnabled;
@@ -87,11 +87,11 @@ namespace Retouch_Photo2.ViewModels
         {
             if (project == null) return;
 
-            //Width Height
+            // Width Height
             this.CanvasTransformer.Width = project.Width;
             this.CanvasTransformer.Height = project.Height;
             
-            //Layers
+            // Layers
             LayerManager.RootLayerage.Children.Clear();
             if (project.Layerages != null)
             {
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.ViewModels
                 }
             }
 
-            //Arrange
+            // Arrange
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
         }

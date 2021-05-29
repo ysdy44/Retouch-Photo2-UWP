@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Photos
 
             this.FlyoutButton.Tapped += (s, e) =>
             {
-                Photo.FlyoutShow?.Invoke(this.RootGrid, this);//Delegate
+                Photo.FlyoutShow?.Invoke(this.RootGrid, this); // Delegate
                 e.Handled = true;
             };
 
@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Photos
 
             this.Tapped += (s, e) =>
             {
-                Photo.ItemClick?.Invoke(this.RootGrid, this);//Delegate
+                Photo.ItemClick?.Invoke(this.RootGrid, this); // Delegate
             };
         }
     }

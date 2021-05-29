@@ -40,10 +40,10 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = value;
 
-                //Switch
+                // Switch
                 switch (layer.Type)
                 {
-                    //Curve & Pattern
+                    // Curve & Pattern
                     case LayerType.Curve:
                     case LayerType.PatternGrid:
                     case LayerType.PatternSpotted:
@@ -51,14 +51,14 @@ namespace Retouch_Photo2.ViewModels
                             this.standardStyleCurveLayer = layer;
                         break;
 
-                    //Text
+                    // Text
                     case LayerType.TextFrame:
                     case LayerType.TextArtistic:
                         if (value != standardStyleTextLayer)
                             this.standardStyleTextLayer = layer;
                         break;
 
-                    //Geometry
+                    // Geometry
                     default:
                         if (value != standardStyleGeometryLayer)
                             this.standardStyleGeometryLayer = layer;
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.standardStyleGeometryLayer is ILayer layer)
                 {
-                    //CacheBrush
+                    // CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
                     IStyle style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.standardStyleCurveLayer is ILayer layer)
                 {
-                    //CacheBrush
+                    // CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
                     IStyle style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.standardStyleTextLayer is ILayer layer)
                 {
-                    //CacheBrush
+                    // CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
                     IStyle style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);

@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Menus
     public sealed partial class StrokeMenu : Expander
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Dash
+        // Dash
         private void ConstructDash()
         {
             this.DashSegmented.DashChanged += (s, dash) =>
@@ -125,7 +125,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Width
+        // Width
         private void ConstructWidth1()
         {
             this.WidthPicker.Unit = null;
@@ -184,7 +184,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Cap
+        // Cap
         private void ConstructCap()
         {
             this.CapSegmented.CapChanged += (s, cap) =>
@@ -210,7 +210,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Join
+        // Join
         private void ConstructJoin()
         {
             this.JoinSegmented.JoinChanged += (s, join) =>
@@ -234,7 +234,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //Offset
+        // Offset
         private void ConstructOffset1()
         {
             this.OffsetPicker.Unit = null;
@@ -293,7 +293,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //IsFollowTransform
+        // IsFollowTransform
         private void ConstructIsFollowTransform()
         {
             this.IsFollowTransformCheckBox.Tapped += (s, e) =>
@@ -313,7 +313,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //IsStrokeBehindFill
+        // IsStrokeBehindFill
         private void ConstructIsStrokeBehindFill()
         {
             this.IsStrokeBehindFillCheckBox.Tapped += (s, e) =>
@@ -333,7 +333,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //IsStrokeWidthFollowScale
+        // IsStrokeWidthFollowScale
         private void ConstructIsStrokeWidthFollowScale()
         {
             this.IsStrokeWidthFollowScaleCheckBox.Tapped += (s, e) =>

@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Elements
         public void Show()
         {
             this._vsIsShow = true;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
 
             BackRequestedExtension.DialogIsShow = true;
             BackRequestedExtension.Current.BackRequested += this.BackRequested;
@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Elements
         public void Hide()
         {
             this._vsIsShow = false;
-            this.VisualState = this.VisualState;//State
+            this.VisualState = this.VisualState; // State
 
             BackRequestedExtension.DialogIsShow = false;
             BackRequestedExtension.Current.BackRequested -= this.BackRequested;
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Elements
         {
             e.Handled = true;
             //this.Hide();
-            this.CloseButtonTapped?.Invoke(this, null);//Delegate
+            this.CloseButtonTapped?.Invoke(this, null); // Delegate
         }
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
         {
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Elements
             {
                 case VirtualKey.Escape:
                     //this.Hide();
-                    this.CloseButtonTapped?.Invoke(this, null);//Delegate
+                    this.CloseButtonTapped?.Invoke(this, null); // Delegate
                     break;
             }
         }

@@ -131,7 +131,7 @@ namespace Retouch_Photo2.Brushs
                     if (control.Parent is ExtendListViewItem item)
                     {
                         CanvasEdgeBehavior type = item.Type;
-                        this.ExtendChanged?.Invoke(this, type); //Delegate
+                        this.ExtendChanged?.Invoke(this, type); // Delegate
                         this.Flyout.Hide();
                     }
                 }
@@ -154,7 +154,7 @@ namespace Retouch_Photo2.Brushs
         }
 
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

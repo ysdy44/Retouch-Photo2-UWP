@@ -18,7 +18,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void ConstructDeviceLayout()
         {
-            //Width
+            // Width
             DeviceLayout layout = this.Setting.DeviceLayout;
             {
                 double width = Window.Current.Bounds.Width;
@@ -64,7 +64,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.windowWidth = value;
-                this.OnPropertyChanged(nameof(this.WindowWidth));//Notify 
+                this.OnPropertyChanged(nameof(this.WindowWidth)); // Notify 
             }
         }
         private double windowWidth = 400;
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.windowHeight = value;
-                this.OnPropertyChanged(nameof(this.WindowHeight));//Notify 
+                this.OnPropertyChanged(nameof(this.WindowHeight)); // Notify 
             }
         }
         private double windowHeight = 400;
@@ -89,7 +89,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.deviceLayoutType = value;
-                this.OnPropertyChanged(nameof(this.DeviceLayoutType));//Notify 
+                this.OnPropertyChanged(nameof(this.DeviceLayoutType)); // Notify 
             }
         }
         private DeviceLayoutType deviceLayoutType = DeviceLayoutType.PC;
@@ -102,7 +102,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.canvasBackground = value;
-                this.OnPropertyChanged(nameof(this.CanvasBackground));//Notify 
+                this.OnPropertyChanged(nameof(this.CanvasBackground)); // Notify 
             }
         }
         private SolidColorBrush canvasBackground;

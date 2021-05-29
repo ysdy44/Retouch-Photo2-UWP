@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class SaturationPage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class SaturationPage : IAdjustmentPage
     {
 
-        //Saturation
+        // Saturation
         private void ConstructSaturation1()
         {
             this.SaturationPicker.Unit = "%";

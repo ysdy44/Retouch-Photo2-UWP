@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Texts
             if (e.NewValue is CanvasHorizontalAlignment value)
             {
                 control._vsHorizontalAlignment = value;
-                control.VisualState = control.VisualState;//State
+                control.VisualState = control.VisualState; // State
             }
         }));
 
@@ -88,16 +88,16 @@ namespace Retouch_Photo2.Texts
             this.ConstructStrings();
             base.Loaded += (s, e) => this.ConstructLanguages();
 
-            this.Left.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
-            this.Center.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
-            this.Right.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right);//Delegate
-            this.Justified.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified);//Delegate
+            this.Left.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left); // Delegate
+            this.Center.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center); // Delegate
+            this.Right.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right); // Delegate
+            this.Justified.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified); // Delegate
 
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualState = this.VisualState; // State
         }
 
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Texts
             }
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();

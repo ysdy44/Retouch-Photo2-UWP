@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Photos
 
 
         /// <summary>
-        /// Returns a boolean indicating whether the given <see cref="Photocopier"/> is equal to this <see cref="Photo"/> instance.
+        ///Returns a boolean indicating whether the given <see cref="Photocopier"/> is equal to this <see cref="Photo"/> instance.
         /// </summary>
         /// <param name="other"> The <see cref="Photocopier"/> to compare this instance to. </param>
         /// <returns> True if the other <see cref="Photocopier"/> is equal to this instance; False otherwise. </returns>
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Photos
             return true;
         }
         /// <summary>
-        /// Returns a boolean indicating whether the given <see cref="Photo"/> is equal to this <see cref="Photo"/> instance.
+        ///Returns a boolean indicating whether the given <see cref="Photo"/> is equal to this <see cref="Photo"/> instance.
         /// </summary>
         /// <param name="other"> The <see cref="Photo"/> to compare this instance to. </param>
         /// <returns> True if the other <see cref="Photo"/> is equal to this instance; False otherwise. </returns>
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Photos
 
 
         /// <summary>
-        /// Returns a String representing this <see cref="Photo"/> instance.
+        ///Returns a String representing this <see cref="Photo"/> instance.
         /// </summary>
         /// <returns> The string representation. </returns>
         public override string ToString() => $"{this.FolderRelativeId}\n{this.Width}x{this.Height}\n{this.Dpi}Dpi";

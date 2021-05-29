@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ExposurePage : IAdjustmentPage
     {
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ExposurePage : IAdjustmentPage
     {
 
-        //Exposure
+        // Exposure
         private void ConstructExposure1()
         {
             this.ExposurePicker.Unit = "%";

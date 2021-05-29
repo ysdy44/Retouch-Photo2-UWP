@@ -55,7 +55,7 @@ namespace Retouch_Photo2
                 IReadOnlyList<StorageFile> files = await zipFolder.GetFilesAsync();
                 foreach (StorageFile item in files)
                 {
-                    //Move to temporary folder
+                    // Move to temporary folder
                     await item.CopyAsync(ApplicationData.Current.TemporaryFolder);
                 }
                 return true;
@@ -80,7 +80,7 @@ namespace Retouch_Photo2
                 return await ApplicationData.Current.LocalFolder.CreateFolderAsync($"{name}.photo2pk");
             }
 
-            //Delete all in zip folder.
+            // Delete all in zip folder.
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
 
             IReadOnlyList<StorageFile> items = await zipFolder.GetFilesAsync();

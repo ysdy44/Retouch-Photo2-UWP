@@ -21,14 +21,14 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task<bool> Export()
         {
-            //Render
+            // Render
             float width = (float)this.ExportSizePicker.SizeWith;
             float height = (float)this.ExportSizePicker.SizeHeight;
             int dpi = (int)this.DPIComboBox.DPI;
             bool isClearWhite = this.FileFormatComboBox.IsClearWhite;
             CanvasRenderTarget renderTarget = this.ViewModel.Render(width, height, dpi, isClearWhite);
 
-            //Export
+            // Export
             return await FileUtil.SaveCanvasBitmapFile
             (
                 renderTarget: renderTarget,
@@ -53,7 +53,7 @@ namespace Retouch_Photo2
             StorageFolder zipFolder = await FileUtil.DeleteAllInZipFolder(name);
 
 
-            //Save project file.
+            // Save project file.
             Project project = new Project
             {
                 Width = width,
@@ -62,7 +62,7 @@ namespace Retouch_Photo2
             };
             await Retouch_Photo2.XML.SaveProjectFile(zipFolder, project);
 
-            //Save thumbnail file.
+            // Save thumbnail file.
             IProjectViewItem item = this.Items.FirstOrDefault(p => p.Name == name);
             if (item != null)
             {
@@ -70,17 +70,17 @@ namespace Retouch_Photo2
                 item.ImageSource = await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
             }
 
-            //Save layers file.
+            // Save layers file.
             IEnumerable<Layerage> savedLayerages = LayerManager.GetFlatNestingLayerages(LayerManager.RootLayerage);
             IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances.Values where savedLayerages.Any(p => layer.Equals(p)) select layer;
             await XML.SaveLayersFile(zipFolder, savedLayers);
 
-            //Save photos file.
+            // Save photos file.
             IEnumerable<Photocopier> savedPhotocopiers = LayerManager.GetPhotocopiers(savedLayerages);
             IEnumerable<Photo> savedPhotos = from photo in Photo.Instances.Values where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
             await XML.SavePhotosFile(zipFolder, savedPhotos);
 
-            //Move photo file.
+            // Move photo file.
             foreach (Photo photo in savedPhotos)
             {
                 //@Release: case Debug
@@ -89,7 +89,7 @@ namespace Retouch_Photo2
                 }
                 //@Release: case Release
                 {
-                    //Move photo file.
+                    // Move photo file.
                     StorageFile file = await StorageFile.GetFileFromPathAsync(photo.ImageFilePath);
                     await file.CopyAsync(zipFolder);
                 }
@@ -102,20 +102,20 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task Exit()
         {
-            //Clear photos
+            // Clear photos
             Photo.Instances.Clear();
             Photo.InstancesCollection.Clear();
 
-            //Clear layers
+            // Clear layers
             LayerBase.Instances.Clear();
 
-            //Clear historys
+            // Clear historys
             HistoryBase.Instances.Clear();
 
-            //FileUtil
+            // FileUtil
             await FileUtil.DeleteAllInTemporaryFolder();
 
-            //Clear
+            // Clear
             this.SelectionViewModel.SetModeNone();
             LayerManager.RootLayerage.Children.Clear();
             LayerManager.RootStackPanel.Children.Clear();

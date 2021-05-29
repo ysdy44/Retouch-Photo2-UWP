@@ -16,7 +16,7 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //Languages
+        // Languages
         private void ConstructLanguages()
         {
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -29,7 +29,7 @@ namespace Retouch_Photo2
             }
         }
 
-        //FlowDirection
+        // FlowDirection
         private void ConstructFlowDirection()
         {
             bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
@@ -37,7 +37,7 @@ namespace Retouch_Photo2
             base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 
-        //Strings
+        // Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -110,7 +110,7 @@ namespace Retouch_Photo2
                 this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
             }
 
-            //Menus
+            // Menus
             foreach (Expander expander in Expander.Dictionary)
             {
                 MenuType type = expander.Type;
@@ -120,7 +120,7 @@ namespace Retouch_Photo2
         }
 
 
-        //Menus
+        // Menus
         private void ConstructMenus()
         {
             this.MenuListView.ItemClick += (s, e) =>
@@ -135,7 +135,7 @@ namespace Retouch_Photo2
         }
 
 
-        //Export
+        // Export
         private float ExportQuality
         {
             get => this.exportQuality;
@@ -191,7 +191,7 @@ namespace Retouch_Photo2
         }
 
 
-        //Setup
+        // Setup
         private void ConstructSetupDialog()
         {
             this.SetupIndicatorControl.Mode = IndicatorMode.LeftTop;
@@ -238,11 +238,11 @@ namespace Retouch_Photo2
         {
             this.IsWireframe = false;
             this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(); // Invalidate
         }
 
 
-        //Fill
+        // Fill
         private void ShowFillColorFlyout2(FrameworkElement page, FrameworkElement button)
         {
             switch (this.SelectionViewModel.Fill.Type)
@@ -278,7 +278,7 @@ namespace Retouch_Photo2
             this.FilColorPicker.ColorChangedCompleted += (s, value) => this.MethodViewModel.MethodFillColorChangeCompleted(value);
         }
 
-        //Stroke
+        // Stroke
         private void ShowStrokeColorFlyout2(FrameworkElement page, FrameworkElement button)
         {
             switch (this.SelectionViewModel.Stroke.Type)
@@ -315,7 +315,7 @@ namespace Retouch_Photo2
         }
 
 
-        //More
+        // More
         private void ConstructMore()
         {
             this.RatioItem.Tapped += (s, e) => this.RatioItem.IsSelected = !this.RatioItem.IsSelected;

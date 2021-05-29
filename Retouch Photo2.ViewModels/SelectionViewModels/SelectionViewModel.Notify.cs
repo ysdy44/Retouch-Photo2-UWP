@@ -26,7 +26,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.layerType == value) return;
                 this.layerType = value;
-                this.OnPropertyChanged(nameof(LayerType));//Notify 
+                this.OnPropertyChanged(nameof(LayerType)); // Notify 
             }
         }
         private LayerType layerType = LayerType.None;
@@ -40,7 +40,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.layerName == value) return;
                 this.layerName = value;
-                this.OnPropertyChanged(nameof(LayerName));//Notify 
+                this.OnPropertyChanged(nameof(LayerName)); // Notify 
             }
         }
         private string layerName = string.Empty;
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.opacity == value) return;
                 this.opacity = value;
-                this.OnPropertyChanged(nameof(Opacity));//Notify 
+                this.OnPropertyChanged(nameof(Opacity)); // Notify 
             }
         }
         private float opacity = 1.0f;
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.blendMode == value) return;
                 this.blendMode = value;
-                this.OnPropertyChanged(nameof(BlendMode));//Notify 
+                this.OnPropertyChanged(nameof(BlendMode)); // Notify 
             }
         }
         private BlendEffectMode? blendMode = null;
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.visibility == value) return;
                 this.visibility = value;
-                this.OnPropertyChanged(nameof(Visibility));//Notify 
+                this.OnPropertyChanged(nameof(Visibility)); // Notify 
             }
         }
         private Visibility visibility = Visibility.Visible;
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.tagType == value) return;
                 this.tagType = value;
-                this.OnPropertyChanged(nameof(TagType));//Notify 
+                this.OnPropertyChanged(nameof(TagType)); // Notify 
             }
         }
         private TagType tagType = TagType.None;
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.effect = value;
-                this.OnPropertyChanged(nameof(Effect));//Notify 
+                this.OnPropertyChanged(nameof(Effect)); // Notify 
             }
         }
         private Effect effect;
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.adjustmentsCount = value;
-                this.OnPropertyChanged(nameof(AdjustmentsCount));//Notify 
+                this.OnPropertyChanged(nameof(AdjustmentsCount)); // Notify 
             }
         }
         private int adjustmentsCount = -1;
@@ -171,7 +171,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isGroupLayer = value;
-                this.OnPropertyChanged(nameof(IsGroupLayer));//Notify 
+                this.OnPropertyChanged(nameof(IsGroupLayer)); // Notify 
             }
         }
         private bool isGroupLayer;
@@ -190,7 +190,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isImageLayer = value;
-                this.OnPropertyChanged(nameof(IsImageLayer));//Notify 
+                this.OnPropertyChanged(nameof(IsImageLayer)); // Notify 
             }
         }
         private bool isImageLayer;
@@ -202,7 +202,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.photocopier = value;
-                this.OnPropertyChanged(nameof(Photocopier));//Notify 
+                this.OnPropertyChanged(nameof(Photocopier)); // Notify 
             }
         }
         private Photocopier photocopier;

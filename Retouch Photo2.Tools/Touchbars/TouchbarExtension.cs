@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Tools
                     return;
                 }
 
-                //The current tool becomes the active button.
+                // The current tool becomes the active button.
                 if (TouchbarExtension.instance != null)
                 {
                     TouchbarExtension.instance.IsSelected = false;
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Tools
 
                 TouchbarExtension.instance = value;
 
-                //The current tool does not become an active button.
+                // The current tool does not become an active button.
                 if (TouchbarExtension.instance != null)
                 {
                     TouchbarExtension.instance.IsSelected = true;

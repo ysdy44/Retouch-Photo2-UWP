@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Tools.Models
                         Layerage layerage = this.SelectionViewModel.SelectionLayerage;
                         if (layerage == null) return null;
 
-                        //Transformer
+                        // Transformer
                         Transformer transformer = layerage.GetActualTransformer();
                         this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, transformer, matrix, false);
 
@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Tools.Models
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
                     {
-                        //Transformer
+                        // Transformer
                         Transformer transformer = layerage.GetActualTransformer();
                         TransformerMode mode = Transformer.ContainsNodeMode(startingPoint, transformer, matrix, false);
                         if (mode != TransformerMode.None)
@@ -51,10 +51,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             firstLayer.Transform.CropTransformer = firstLayer.Transform.Transformer;
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_IsCrop);
 
-            //History
+            // History
             var previous = firstLayer.Transform.IsCrop;
             history.UndoAction += () =>
             {
@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Tools.Models
                 firstLayer2.Transform.IsCrop = previous;
             };
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
             firstLayer.Transform.IsCrop = true;
@@ -72,28 +72,28 @@ namespace Retouch_Photo2.Tools.Models
         private void CropDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             ILayer layer = this.Layerage.Self;
-            if (this.IsMove == false)//Transformer
+            if (this.IsMove == false)// Transformer
             {
-                //Transformer
+                // Transformer
                 Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, layer.Transform.StartingCropTransformer, this.IsRatio, this.IsCenter, this.IsSnapToTick);
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
                 layer.Transform.CropTransformer = transformer;
 
-                this.SelectionViewModel.Transformer = transformer;//Selection
+                this.SelectionViewModel.Transformer = transformer; // Selection
             }
-            else//Move
+            else// Move
             {
                 Vector2 canvasMove = canvasPoint - canvasStartingPoint;
 
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
                 layer.Transform.CropTransformAdd(canvasMove);
 
-                this.SelectionViewModel.Transformer = layer.Transform.CropTransformer;//Selection
+                this.SelectionViewModel.Transformer = layer.Transform.CropTransformer; // Selection
             }
         }
 
@@ -101,23 +101,23 @@ namespace Retouch_Photo2.Tools.Models
         {
             ILayer layer = this.Layerage.Self;
 
-            //History
+            // History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_CropTransformer);
 
-            //History
+            // History
             var previous = layer.Transform.StartingCropTransformer;
             history.UndoAction += () =>
             {
-                //Refactoring
+                // Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layer.Transform.CropTransformer = previous;
             };
 
-            //History
+            // History
             this.ViewModel.HistoryPush(history);
 
-            //Refactoring
+            // Refactoring
             layer.IsRefactoringRender = true;
             layer.IsRefactoringIconRender = true;
             this.Layerage.RefactoringParentsRender();

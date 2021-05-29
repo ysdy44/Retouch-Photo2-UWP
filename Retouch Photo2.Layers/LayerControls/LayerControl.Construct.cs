@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Layers
     public partial class LayerControl : UserControl
     {
 
-        //Strings
+        // Strings
         readonly static ResourceLoader resource = ResourceLoader.GetForCurrentView();
         private void ConstructStringsCore(LayerType type)
         {
@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Layers
 
         private void ConstructIcon(CanvasDevice customDevice2)
         {
-            //IconCanvasControl
+            // IconCanvasControl
             this.IconCanvasControl.UseSharedDevice = true;
             this.IconCanvasControl.CustomDevice = customDevice2;
             this.IconCanvasControl.Draw += (s, arge) =>
@@ -35,22 +35,22 @@ namespace Retouch_Photo2.Layers
         {
             this.Tapped += (s, e) =>
             {
-                LayerManager.ItemClick?.Invoke(layer);//Delegate
+                LayerManager.ItemClick?.Invoke(layer); // Delegate
                 e.Handled = true;
             };
             this.RightTapped += (s, e) =>
             {
-                LayerManager.RightTapped?.Invoke(layer);//Delegate
+                LayerManager.RightTapped?.Invoke(layer); // Delegate
                 e.Handled = true;
             };
             this.Holding += (s, e) =>
             {
-                LayerManager.RightTapped?.Invoke(layer);//Delegate
+                LayerManager.RightTapped?.Invoke(layer); // Delegate
                 e.Handled = true;
             };
             this.DoubleTapped += (s, e) =>
             {
-                LayerManager.RightTapped?.Invoke(layer);//Delegate
+                LayerManager.RightTapped?.Invoke(layer); // Delegate
                 e.Handled = true;
             };
         }
@@ -59,12 +59,12 @@ namespace Retouch_Photo2.Layers
         {
             this.VisualToggleButton.Tapped += (s, e) =>
             {
-                LayerManager.VisibilityChanged?.Invoke(layer);//Delegate
+                LayerManager.VisibilityChanged?.Invoke(layer); // Delegate
                 e.Handled = true;
             };
             this.VisualToggleButton.RightTapped += (s, e) =>
             {
-                LayerManager.VisibilityChanged?.Invoke(layer);//Delegate
+                LayerManager.VisibilityChanged?.Invoke(layer); // Delegate
                 e.Handled = true;
             };
             this.VisualToggleButton.Holding += (s, e) => e.Handled = true;
@@ -73,12 +73,12 @@ namespace Retouch_Photo2.Layers
 
             this.ExpanedToggleButton.Tapped += (s, e) =>
             {
-                LayerManager.IsExpandChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsExpandChanged?.Invoke(layer); // Delegate   
                 e.Handled = true;
             };
             this.ExpanedToggleButton.RightTapped += (s, e) =>
             {
-                LayerManager.IsExpandChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsExpandChanged?.Invoke(layer); // Delegate   
                 e.Handled = true;
             };
             this.ExpanedToggleButton.Holding += (s, e) => e.Handled = true;
@@ -87,12 +87,12 @@ namespace Retouch_Photo2.Layers
 
             this.SelectedToggleButton.Tapped += (s, e) =>
             {
-                LayerManager.IsSelectedChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsSelectedChanged?.Invoke(layer); // Delegate   
                 e.Handled = true;
             };
             this.SelectedToggleButton.RightTapped += (s, e) =>
             {
-                LayerManager.IsSelectedChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsSelectedChanged?.Invoke(layer); // Delegate   
                 e.Handled = true;
             };
             this.SelectedToggleButton.Holding += (s, e) => e.Handled = true;
@@ -104,13 +104,13 @@ namespace Retouch_Photo2.Layers
             this.ManipulationStarted += (s, e) =>
             {
                 LayerManager.IsOverlay = true;
-                LayerManager.DragItemsStarted?.Invoke(layer, this.ManipulationMode);//Delegate     
+                LayerManager.DragItemsStarted?.Invoke(layer, this.ManipulationMode); // Delegate     
             };
             this.ManipulationCompleted += (s, e) =>
             {
                 if (LayerManager.IsOverlay)
                 {
-                    LayerManager.DragItemsCompleted?.Invoke();//Delegate
+                    LayerManager.DragItemsCompleted?.Invoke(); // Delegate
 
                     LayerManager.IsOverlay = false;
                     this.OverlayMode = OverlayMode.None;
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Layers
                     OverlayMode overlayMode = this.GetOverlay(position.Y);
 
                     this.OverlayMode = overlayMode;
-                    LayerManager.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
+                    LayerManager.DragItemsDelta?.Invoke(layer, overlayMode); // Delegate
                 }
             };
             this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;
