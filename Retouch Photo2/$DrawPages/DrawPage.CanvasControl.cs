@@ -164,25 +164,27 @@ namespace Retouch_Photo2
             };
             canvasOperator.Single_Complete += (point) =>
             {
-                if (this.IsWireframe == true || this.DrawLayout.IsWritable) right_Complete(point);
-                else
+                if (this._isSingleStarted == false)
                 {
                     this._inputDevice = InputDevice.None;
 
-                    if (this._isSingleStarted == false)
-                    {
-                        // Tool
-                        this.ToolTypeComboBox.Tool.Clicke(this._singleStartingPoint); // Complete
-                    }
+                    // Tool
+                    this.ToolTypeComboBox.Tool.Clicke(this._singleStartingPoint); // Complete
+                }
+                else
+                {
+                    if (this.IsWireframe == true || this.DrawLayout.IsWritable) right_Complete(point);
                     else
                     {
+                        this._inputDevice = InputDevice.None;
+
                         // Tool
                         bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
                         this.ToolTypeComboBox.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance); // Complete
                     }
-
-                    this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true; // IsHitTestVisible
                 }
+
+                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true; // IsHitTestVisible
             };
 
 
