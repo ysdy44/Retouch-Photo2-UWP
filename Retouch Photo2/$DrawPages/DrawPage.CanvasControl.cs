@@ -65,7 +65,7 @@ namespace Retouch_Photo2
             this.LayerRenderCanvasControl.Draw += (sender, args) =>
             {
                 //Render & Crad
-                this.ViewModel.DrawCrad(args.DrawingSession, this.ShadowColor);
+                this.ViewModel.DrawCard(args.DrawingSession, this.ShadowColor);
                 if (this.IsWireframe == false) this.ViewModel.DrawRender(args.DrawingSession);
             };
 
@@ -88,7 +88,7 @@ namespace Retouch_Photo2
                 if (this.DrawLayout.IsWritable) return;
                 if (this.IsWireframe == true)
                 {
-                    this.ViewModel.DrawLayerBoundWithChildren(args.DrawingSession);
+                    this.ViewModel.DrawWireframeWithChildren(args.DrawingSession);
                     return;
                 }
 

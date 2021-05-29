@@ -145,12 +145,12 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Draw lines on bound.
+        /// Draw wireframe.
         /// </summary>
         /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
+        void DrawWireframe(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
 
 
         /// <summary>

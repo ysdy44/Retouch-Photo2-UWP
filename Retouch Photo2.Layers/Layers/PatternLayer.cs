@@ -61,7 +61,6 @@ namespace Retouch_Photo2.Layers.Models
         }
         private void PatternRenderCore(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, CanvasGeometry cropGeometry)
         {
-
             switch (base.Style.Transparency.Type)
             {
                 case BrushType.LinearGradient:

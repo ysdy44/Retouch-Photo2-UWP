@@ -302,7 +302,7 @@ namespace Retouch_Photo2.Tools.Models
 
                     if (layer2.Type == LayerType.Curve)
                     {
-                        drawingSession.DrawLayerBound(layer2, matrix, this.ViewModel.AccentColor);
+                        drawingSession.DrawWireframe(layer2, matrix, this.ViewModel.AccentColor);
                         drawingSession.DrawNodeCollection(layer2.Nodes, matrix, this.ViewModel.AccentColor);
                     }
                     break;
@@ -313,7 +313,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         if (layer.Type == LayerType.Curve)
                         {
-                            drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
+                            drawingSession.DrawWireframe(layer, matrix, this.ViewModel.AccentColor);
                             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
                         }
                     }

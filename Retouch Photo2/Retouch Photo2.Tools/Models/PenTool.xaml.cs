@@ -200,7 +200,7 @@ namespace Retouch_Photo2.Tools.Models
 
                             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-                            drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
+                            drawingSession.DrawWireframe(layer, matrix, this.ViewModel.AccentColor);
                             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
                         }
                     }

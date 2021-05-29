@@ -83,15 +83,15 @@ namespace Retouch_Photo2.Layers
         /// <param name="layerage"> The layerage. </param>
         /// <returns> The rendered layer. </returns>
         public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage);
-                
+
 
         /// <summary>
-        /// Draw lines on bound.
+        /// Draw wireframe.
         /// </summary>
         /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        public virtual void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public virtual void DrawWireframe(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
             Transformer transformer = this.Transform.GetActualTransformer();
             drawingSession.DrawBound(transformer, matrix);

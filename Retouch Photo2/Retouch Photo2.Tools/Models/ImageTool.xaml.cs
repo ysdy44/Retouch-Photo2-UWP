@@ -197,13 +197,13 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case ListViewSelectionMode.Single:
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
-                    drawingSession.DrawLayerBound(layer2, matrix, this.ViewModel.AccentColor);
+                    drawingSession.DrawWireframe(layer2, matrix, this.ViewModel.AccentColor);
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
                     {
                         ILayer layer = layerage.Self;
-                        drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
+                        drawingSession.DrawWireframe(layer, matrix, this.ViewModel.AccentColor);
                     }
                     break;
             }

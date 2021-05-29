@@ -199,7 +199,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //Draw
             drawingSession.DrawLine(lastPoint, endPoint, this.ViewModel.AccentColor);
-            drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
+            drawingSession.DrawWireframe(layer, matrix, this.ViewModel.AccentColor);
 
             drawingSession.DrawNode3(endPoint);
             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);

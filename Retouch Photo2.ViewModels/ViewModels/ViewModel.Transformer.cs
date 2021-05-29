@@ -63,9 +63,9 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary>
-        /// Draw crad.
+        /// Draw card.
         /// </summary>
-        public void DrawCrad(CanvasDrawingSession drawingSession, Color shadowColor)
+        public void DrawCard(CanvasDrawingSession drawingSession, Color shadowColor)
         {
             drawingSession.DrawCard(new ColorSourceEffect
             {
@@ -75,14 +75,14 @@ namespace Retouch_Photo2.ViewModels
         }
 
         /// <summary>
-        /// Draw layer-bound with childern.
+        /// Draw wireframe with childern.
         /// </summary>
-        public void DrawLayerBoundWithChildren(CanvasDrawingSession drawingSession)
+        public void DrawWireframeWithChildren(CanvasDrawingSession drawingSession)
         {
             Matrix3x2 matrix = this.CanvasTransformer.GetMatrix();
             foreach (Layerage layerage in LayerManager.RootLayerage.Children)
             {
-                drawingSession.DrawLayerBoundWithChildren(layerage, matrix, Colors.Black);
+                drawingSession.DrawWireframeWithChildren(layerage, matrix, Colors.Black);
             }
         }
 
