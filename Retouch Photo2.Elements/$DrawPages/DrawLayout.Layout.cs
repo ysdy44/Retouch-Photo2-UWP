@@ -10,14 +10,14 @@ namespace Retouch_Photo2.Elements
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets UnFullScreenButton's visibility. </summary>
-        public Visibility UnFullScreenButtonVisibility
+        /// <summary> Gets or sets UnFullScreen's visibility. </summary>
+        public Visibility UnFullScreenVisibility
         {
-            get => (Visibility)base.GetValue(UnFullScreenButtonVisibilityProperty);
-            set => base.SetValue(UnFullScreenButtonVisibilityProperty, value);
+            get => (Visibility)base.GetValue(UnFullScreenVisibilityProperty);
+            set => base.SetValue(UnFullScreenVisibilityProperty, value);
         }
-        /// <summary> Identifies the <see cref = "DrawLayout.UnFullScreenButtonVisibility" /> dependency property. </summary>
-        public static readonly DependencyProperty UnFullScreenButtonVisibilityProperty = DependencyProperty.Register(nameof(UnFullScreenButtonVisibility), typeof(Visibility), typeof(DrawLayout), new PropertyMetadata(Visibility.Visible));
+        /// <summary> Identifies the <see cref = "DrawLayout.UnFullScreenVisibility" /> dependency property. </summary>
+        public static readonly DependencyProperty UnFullScreenVisibilityProperty = DependencyProperty.Register(nameof(UnFullScreenVisibility), typeof(Visibility), typeof(DrawLayout), new PropertyMetadata(Visibility.Visible));
 
 
         /// <summary> Gets or sets MenuOverlayCanvas's visibility. </summary>
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.Elements
                 this._vsIsFullScreen = value;
                 this.VisualState = this.VisualState;//State
 
-                this.UnFullScreenButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
+                this.UnFullScreenVisibility = value ? Visibility.Visible : Visibility.Collapsed;
             }
         }
         /// <summary> Gets or sets the device layout type. </summary>
@@ -130,11 +130,6 @@ namespace Retouch_Photo2.Elements
                 this.VisualState = this.VisualState;//State
             }
         }
-
-        /// <summary>
-        /// Turn full-screen.
-        /// </summary>
-        public void FullScreenChanged() => this.IsFullScreen = !this.IsFullScreen;
 
     }
 }

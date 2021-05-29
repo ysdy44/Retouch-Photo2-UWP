@@ -140,7 +140,7 @@ namespace Retouch_Photo2
             DrawPage.ShowExport -= this.ShowExportDialog;
             DrawPage.ShowSetup -= this.ShowSetupDialog;
             DrawPage.ShowRename -= this.ShowRenameDialog;
-            DrawPage.FullScreen -= this.DrawLayout.FullScreenChanged;
+            DrawPage.FullScreen -= this.FullScreenChanged;
             DrawPage.ShowGallery -= this.ShowGalleryDialog;
 
             //Gallery
@@ -187,7 +187,7 @@ namespace Retouch_Photo2
             DrawPage.ShowExport += this.ShowExportDialog;
             DrawPage.ShowSetup += this.ShowSetupDialog;
             DrawPage.ShowRename += this.ShowRenameDialog;
-            DrawPage.FullScreen += this.DrawLayout.FullScreenChanged;
+            DrawPage.FullScreen += this.FullScreenChanged;
             DrawPage.ShowGallery += this.ShowGalleryDialog;
 
             //Gallery

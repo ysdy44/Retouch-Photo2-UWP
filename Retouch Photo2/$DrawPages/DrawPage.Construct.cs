@@ -228,6 +228,16 @@ namespace Retouch_Photo2
         }
 
 
+        /// <summary>
+        /// Turn full-screen.
+        /// </summary>
+        public void FullScreenChanged()
+        {
+            this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+
         //Fill
         private void ShowFillColorFlyout2(FrameworkElement page, FrameworkElement button)
         {

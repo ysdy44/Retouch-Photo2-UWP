@@ -98,10 +98,7 @@ namespace Retouch_Photo2
                 this.OverflowFlyout.Hide();
             };
 
-            this.OverflowSnapItem.Tapped += (s, e) =>
-            {
-                this.OverflowSnapItem.IsSelected = !this.OverflowSnapItem.IsSelected;
-            };
+            this.OverflowSnapItem.Tapped += (s, e) => this.OverflowSnapItem.IsSelected = !this.OverflowSnapItem.IsSelected;
 
             /*
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
@@ -112,14 +109,14 @@ namespace Retouch_Photo2
             };
              */
 
-            this.FullScreenButton.Click += (s, e) => this.DrawLayout.FullScreenChanged();
+            this.FullScreenButton.Click += (s, e) => this.FullScreenChanged();
             this.OverflowFullScreenItem.Tapped += (s, e) =>
             {
-                this.DrawLayout.FullScreenChanged();
+                this.FullScreenChanged();
                 this.OverflowFlyout.Hide();
             };
 
-            this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.FullScreenChanged();
+            this.UnFullScreenButton.Click += (s, e) => this.FullScreenChanged();
 
             this.ConstructAppBar_TipButton(this.TipButton);
             this.ConstructAppBar_TipButton(this.OverflowTipItem);

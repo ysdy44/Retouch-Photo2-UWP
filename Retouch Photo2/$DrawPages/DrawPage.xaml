@@ -420,10 +420,13 @@
 
 
         <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
-                 Visibility="{x:Bind DrawLayout.UnFullScreenButtonVisibility,Mode=OneWay}">
-            <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+        <StackPanel Orientation="Horizontal" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                Visibility="{x:Bind DrawLayout.UnFullScreenVisibility,Mode=OneWay}">
+            <Button x:Name="UnFullScreenButton" Style="{StaticResource AppCircleButtonStyle}">
+                <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+        </StackPanel>
+
 
 
         <!--Menu-->
