@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Sans titre</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -129,6 +129,8 @@
 <data name='$DrawPage_Snap' xml:space='preserve'><value>Claquer</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Règle</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Conseil</value></data>
+<data name='$DrawPage_UnFullScreen' xml:space='preserve'><value>Quitter le mode plein écran</value></data>
+<data name='$DrawPage_Wireframe' xml:space='preserve'><value>Filaire</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Paramètres du document</value></data>
 <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Ancré à la toile</value></data>
 <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Exporter vers ...</value></data>
@@ -572,7 +574,6 @@
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Dupliquer</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>Exportation</value></data>
 <data name='$DrawPage_FullScreen' xml:space='preserve'><value>Plein écran</value></data>
-<data name='$DrawPage_More' xml:space='preserve'><value>Suite</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Annuler</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>d'accord</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Largeur</value></data>
@@ -585,6 +586,7 @@
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Entrez un nom ici.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Annuler</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Renommer</value></data>
+<data name='$DrawPage_More' xml:space='preserve'><value>Suite</value></data>
 <data name='More_Transform' xml:space='preserve'><value>Transformer</value></data>
 <data name='More_Operate' xml:space='preserve'><value>Fonctionner</value></data>
 <data name='Tools_Fill' xml:space='preserve'><value>Remplir</value></data>
