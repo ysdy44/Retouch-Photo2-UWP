@@ -76,6 +76,22 @@ namespace Retouch_Photo2
 
             this.ToolDrawCanvasControl.Draw += (sender, args) =>
             {
+                /*
+                //Ruler
+                if (this.SettingViewModel.IsRuler)
+                {
+                    args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
+                }
+                */
+
+                //Wireframe
+                if (this.DrawLayout.IsWritable) return;
+                if (this.IsWireframe == true)
+                {
+                    this.ViewModel.DrawLayerBoundWithChildren(args.DrawingSession);
+                    return;
+                }
+
                 switch (this._inputDevice)
                 {
                     case InputDevice.None:
@@ -86,16 +102,6 @@ namespace Retouch_Photo2
                         }
                         break;
                 }
-                /*
-                //Ruler
-                if (this.SettingViewModel.IsRuler)
-                {
-                    args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
-                }
-                 */
-
-                //Wireframe
-                if (this.IsWireframe == true) this.ViewModel.DrawLayerBoundWithChildren(args.DrawingSession);
             };
         }
 
@@ -132,44 +138,57 @@ namespace Retouch_Photo2
                 //Delta
                 if (this._isSingleStarted)
                 {
-                    //Tool
-                    this.ToolTypeComboBox.Tool.Delta(this._singleStartingPoint, point);//Delta
-
+                    if (this.IsWireframe == true || this.DrawLayout.IsWritable) right_Delta(point);
+                    else
+                    {
+                        //Tool
+                        this.ToolTypeComboBox.Tool.Delta(this._singleStartingPoint, point);//Delta
+                    }
                     return;
                 }
 
                 //Started
                 if (FanKit.Math.OutNodeDistance(this._singleStartingPoint, point))
                 {
-                    this._inputDevice = InputDevice.Single;
                     this._isSingleStarted = true;
 
-                    //Tool
-                    this.ToolTypeComboBox.Tool.Started(this._singleStartingPoint, point);//Started
+                    if (this.IsWireframe == true || this.DrawLayout.IsWritable) right_Start(this._singleStartingPoint);
+                    else
+                    {
+                        this._inputDevice = InputDevice.Single;
+
+                        //Tool
+                        this.ToolTypeComboBox.Tool.Started(this._singleStartingPoint, point);//Started
+                    }
                 }
             };
             canvasOperator.Single_Complete += (point) =>
             {
-                this._inputDevice = InputDevice.None;
-
-                if (this._isSingleStarted == false)
-                {
-                    //Tool
-                    this.ToolTypeComboBox.Tool.Clicke(this._singleStartingPoint);//Complete
-                }
+                if (this.IsWireframe == true || this.DrawLayout.IsWritable) right_Complete(point);
                 else
                 {
-                    //Tool
-                    bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
-                    this.ToolTypeComboBox.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
-                }
+                    this._inputDevice = InputDevice.None;
 
-                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true;//IsHitTestVisible
+                    if (this._isSingleStarted == false)
+                    {
+                        //Tool
+                        this.ToolTypeComboBox.Tool.Clicke(this._singleStartingPoint);//Complete
+                    }
+                    else
+                    {
+                        //Tool
+                        bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
+                        this.ToolTypeComboBox.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
+                    }
+
+                    this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true;//IsHitTestVisible
+                }
             };
 
 
             //Right
-            canvasOperator.Right_Start += (point) =>
+            canvasOperator.Right_Start += right_Start;
+            void right_Start(Vector2 point)
             {
                 this._inputDevice = InputDevice.Right;
 
@@ -182,13 +201,15 @@ namespace Retouch_Photo2
                 CoreCursorExtension.IsPointerEntered = true;
                 CoreCursorExtension.IsManipulationStarted = true;
                 CoreCursorExtension.SizeAll();
-            };
-            canvasOperator.Right_Delta += (point) =>
+            }
+            canvasOperator.Right_Delta += right_Delta;
+            void right_Delta(Vector2 point)
             {
                 this.ViewModel.CanvasTransformer.Move(point);
                 this.ViewModel.Invalidate();//Invalidate
-            };
-            canvasOperator.Right_Complete += (point) =>
+            }
+            canvasOperator.Right_Complete += right_Complete;
+            void right_Complete(Vector2 point)
             {
                 this._inputDevice = InputDevice.None;
 
@@ -201,7 +222,7 @@ namespace Retouch_Photo2
                 CoreCursorExtension.IsPointerEntered = false;
                 CoreCursorExtension.IsManipulationStarted = false;
                 CoreCursorExtension.SizeAll();
-            };
+            }
 
 
             //Double
@@ -258,6 +279,5 @@ namespace Retouch_Photo2
             };
 
         }
-
     }
 }
