@@ -78,7 +78,6 @@
                         <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
                         <Setter Target = "WritableTransform.Y" Value="0"/>
                         <Setter Target = "WritableBorder.HorizontalAlignment" Value="Stretch"/>
-                        <Setter Target = "RootGrid.Background" Value="Transparent"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -90,7 +89,6 @@
                         <Setter Target = "WritableBorder.Width" Value="500"/>
                         <Setter Target = "WritableBorder.CornerRadius" Value="6,6,0,0"/>
                         <Setter Target = "WritableBorder.BorderThickness" Value="1,1,1,0"/>
-                        <Setter Target = "RootGrid.Background" Value="Transparent"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -103,7 +101,6 @@
                         <Setter Target = "WritableBorder.CornerRadius" Value="6"/>
                         <Setter Target = "WritableBorder.Margin" Value="0,10"/>
                         <Setter Target = "WritableBorder.BorderThickness" Value="1"/>
-                        <Setter Target = "RootGrid.Background" Value="Transparent"/>
                     </VisualState.Setters>
                 </VisualState>
 

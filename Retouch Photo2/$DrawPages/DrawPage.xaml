@@ -422,7 +422,11 @@
         <!--FullScreen-->
         <StackPanel Orientation="Horizontal" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" 
                 Visibility="{x:Bind DrawLayout.UnFullScreenVisibility,Mode=OneWay}">
+            <ToggleButton x:Name="WireframeButton" Width="Auto" Padding="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"/>
             <Button x:Name="UnFullScreenButton" Style="{StaticResource AppCircleButtonStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Name="UnFullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
                 <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
         </StackPanel>

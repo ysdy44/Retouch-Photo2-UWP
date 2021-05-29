@@ -53,6 +53,9 @@ namespace Retouch_Photo2
                 //this.RulerToolTip.Content = this.OverflowRulerControl.Content = resource.GetString("$DrawPage_Ruler");
                 this.FullScreenToolTip.Content = this.OverflowFullScreenControl.Content = resource.GetString("$DrawPage_FullScreen");
                 this.OverflowTipControl.Content = resource.GetString("$DrawPage_Tip");
+      
+                this.UnFullScreenToolTip.Content = resource.GetString("$DrawPage_UnFullScreen");
+                this.WireframeButton.Content = resource.GetString("$DrawPage_Wireframe");
             }
             this.OverflowToolTip.Content = resource.GetString("$DrawPage_More");
 
@@ -233,6 +236,7 @@ namespace Retouch_Photo2
         /// </summary>
         public void FullScreenChanged()
         {
+            this.IsWireframe = false;
             this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
             this.ViewModel.Invalidate();//Invalidate
         }

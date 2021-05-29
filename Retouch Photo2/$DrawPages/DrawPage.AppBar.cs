@@ -117,6 +117,7 @@ namespace Retouch_Photo2
             };
 
             this.UnFullScreenButton.Click += (s, e) => this.FullScreenChanged();
+            this.WireframeButton.Click += (s, e) => this.ViewModel.Invalidate();//Invalidate
 
             this.ConstructAppBar_TipButton(this.TipButton);
             this.ConstructAppBar_TipButton(this.OverflowTipItem);

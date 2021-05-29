@@ -62,18 +62,35 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-
         /// <summary>
         /// Draw crad.
         /// </summary>
-        public void DrawRenderAndCrad(CanvasDrawingSession drawingSession, Color shadowColor)
+        public void DrawCrad(CanvasDrawingSession drawingSession, Color shadowColor)
         {
             drawingSession.DrawCard(new ColorSourceEffect
             {
                 Color = Colors.White
             },
             this.CanvasTransformer, shadowColor);
+        }
 
+        /// <summary>
+        /// Draw layer-bound with childern.
+        /// </summary>
+        public void DrawLayerBoundWithChildren(CanvasDrawingSession drawingSession)
+        {
+            Matrix3x2 matrix = this.CanvasTransformer.GetMatrix();
+            foreach (Layerage layerage in LayerManager.RootLayerage.Children)
+            {
+                drawingSession.DrawLayerBoundWithChildren(layerage, matrix, Colors.Black);
+            }
+        }
+
+        /// <summary>
+        /// Draw render.
+        /// </summary>
+        public void DrawRender(CanvasDrawingSession drawingSession)
+        {
             ICanvasImage canvasImage = LayerBase.Render(LayerManager.CanvasDevice, LayerManager.RootLayerage);
             if (canvasImage == null) return;
 

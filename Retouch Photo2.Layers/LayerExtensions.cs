@@ -24,9 +24,28 @@ namespace Retouch_Photo2.Layers
         /// <param name="layer"> The layer. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        public static void DrawLayerBound(this CanvasDrawingSession drawingSession,ILayer layer, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public static void DrawLayerBound(this CanvasDrawingSession drawingSession, ILayer layer, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
             layer.DrawBound(drawingSession, matrix, accentColor);
+        }
+
+        /// <summary>
+        /// Draw a layer's lines on bound with children.
+        /// </summary>
+        /// <param name="drawingSession"> The drawing-session. </param>
+        /// <param name="layerage"> The layerage. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <param name="accentColor"> The accent color. </param>
+        public static void DrawLayerBoundWithChildren(this CanvasDrawingSession drawingSession, Layerage layerage, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            ILayer layer = layerage.Self;
+
+            layer.DrawBound(drawingSession, matrix, accentColor);
+
+            foreach (Layerage child in layerage.Children)
+            {
+                LayerExtensions.DrawLayerBoundWithChildren(drawingSession, child, matrix, accentColor);
+            }
         }
 
 

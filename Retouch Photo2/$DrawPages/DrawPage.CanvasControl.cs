@@ -14,7 +14,7 @@ namespace Retouch_Photo2
         //@Content
         private Color AccentColor => this.AccentColorBrush.Color;
         private Color ShadowColor => this.ShadowColorBrush.Color;
-
+        private bool? IsWireframe { get => this.WireframeButton.IsChecked; set => this.WireframeButton.IsChecked = value; }
 
         bool _isSingleStarted;
         Vector2 _singleStartingPoint;
@@ -65,7 +65,8 @@ namespace Retouch_Photo2
             this.LayerRenderCanvasControl.Draw += (sender, args) =>
             {
                 //Render & Crad
-                this.ViewModel.DrawRenderAndCrad(args.DrawingSession, this.ShadowColor);
+                this.ViewModel.DrawCrad(args.DrawingSession, this.ShadowColor);
+                if (this.IsWireframe == false) this.ViewModel.DrawRender(args.DrawingSession);
             };
 
 
@@ -92,6 +93,9 @@ namespace Retouch_Photo2
                     args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
                 }
                  */
+
+                //Wireframe
+                if (this.IsWireframe == true) this.ViewModel.DrawLayerBoundWithChildren(args.DrawingSession);
             };
         }
 
