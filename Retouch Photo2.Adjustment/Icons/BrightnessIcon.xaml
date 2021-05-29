@@ -5,7 +5,7 @@
     <ControlTemplate x:Key="BrightnessIcon" TargetType="ContentControl">
         <Ellipse Width="24" Height="24" StrokeThickness="1" Stroke="{ThemeResource AppStroke}">
             <Ellipse.Fill>
-                <LinearGradientBrush StartPoint=" 0,0.5" EndPoint="1,0.5">
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Black" Offset="0.5"/>
                     <GradientStop Color="White" Offset="0.6"/>
                 </LinearGradientBrush>

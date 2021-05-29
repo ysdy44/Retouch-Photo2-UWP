@@ -3,9 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="GammaTransferIcon" TargetType="ContentControl">
-        <Ellipse Width="24" Height="24">
+        <Ellipse Width="24" Height="24" StrokeThickness="1" Stroke="{ThemeResource AppStroke}">
             <Ellipse.Fill>
-                <LinearGradientBrush StartPoint=" 0,0.5" EndPoint="1,0.5">
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#F8906B" Offset="0.2"/>
                     <GradientStop Color="#5DC8A5" Offset="0.5"/>
                     <GradientStop Color="#1376F7" Offset="0.8"/>
