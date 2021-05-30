@@ -157,6 +157,17 @@
                 </ContentControl>
             </ListViewItem>
 
+            <ListViewItem x:Name="ColorMatch">
+                <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                    <ContentControl.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ColorMatchIcon.xaml"/>
+                    </ContentControl.Resources>
+                    <ContentControl.Tag>
+                        <ContentControl Template="{StaticResource ColorMatchIcon}"/>
+                    </ContentControl.Tag>
+                </ContentControl>
+            </ListViewItem>
+
         </ListView.Items>
     </ListView>
 

@@ -133,6 +133,9 @@
     <Compile Include="Retouch Photo2.Adjustments\BrightnessPage.xaml.cs">
       <DependentUpon>BrightnessPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\ColorMatchPage.xaml.cs">
+      <DependentUpon>ColorMatchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Adjustments\ContrastPage.xaml.cs">
       <DependentUpon>ContrastPage.xaml</DependentUpon>
     </Compile>
@@ -469,6 +472,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Adjustments\BrightnessPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\ColorMatchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

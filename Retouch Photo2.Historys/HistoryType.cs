@@ -172,6 +172,10 @@ namespace Retouch_Photo2.Historys
         LayersProperty_ResetAdjustment_ColorMatrix,
         LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix,
 
+        LayersProperty_ResetAdjustment_ColorMatch,
+        LayersProperty_SetAdjustment_ColorMatch_SourceColor,
+        LayersProperty_SetAdjustment_ColorMatch_DestinationColor,
+
         // Effect
         LayersProperty_ResetEffect_GaussianBlur,
         LayersProperty_SwitchEffect_GaussianBlur,
