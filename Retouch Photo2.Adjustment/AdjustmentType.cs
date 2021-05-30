@@ -36,6 +36,8 @@ namespace Retouch_Photo2.Adjustments
         Vignette,
 
         /// <summary> Color matrix. </summary>
-        ColorMatrix
+        ColorMatrix,
+        /// <summary> Color match. </summary>
+        ColorMatch,
     }
 }

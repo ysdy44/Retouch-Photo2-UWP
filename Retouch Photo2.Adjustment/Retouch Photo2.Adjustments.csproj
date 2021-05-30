@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="AdjustmentCommand.cs" />
     <Compile Include="Models\BrightnessAdjustment.cs" />
+    <Compile Include="Models\ColorMatchAdjustment.cs" />
     <Compile Include="Models\ColorMatrixAdjustment.cs" />
     <Compile Include="Models\ContrastAdjustment.cs" />
     <Compile Include="Models\ExposureAdjustment.cs" />
@@ -131,6 +132,7 @@
       <DependentUpon>GrayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AdjustmentExtensions.cs" />
     <Compile Include="XMLs\XML.AdjustmentPageFactory.cs" />
     <Compile Include="XMLs\XML.AdjustmentFactory.cs" />
     <Compile Include="XMLs\XML.IAdjustment.cs" />
@@ -146,6 +148,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Icons\BrightnessIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\ColorMatchIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
