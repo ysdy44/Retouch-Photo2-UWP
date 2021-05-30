@@ -282,15 +282,9 @@
 <data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Ясность</value></data>
 <data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Величина размытия маски</value></data>
 <data name='Adjustments_GammaTransfer' xml:space='preserve'><value>Гамма-передача</value></data>
-<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Компенсировать</value></data>
-<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Экспонента</value></data>
-<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Амплитуда</value></data>
-<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Альфа</value></data>
-<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>красный</value></data>
-<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Зеленый</value></data>
-<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Синий</value></data>
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Виньетка</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Изгиб</value></data>
+<data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Цветовая матрица</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Размытие по Гауссу</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Направленное размытие</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Резкость</value></data>
@@ -495,6 +489,8 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Установите величину регулировки виньетки</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Установить кривую настройки виньетки</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Установить цвет настройки виньетки</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Сбросить настройку цветовой матрицы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Настроить цветовую матрицу</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Сбросить эффект размытия по Гауссу</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Включить эффект размытия по Гауссу</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Установите количество эффекта размытия по Гауссу</value></data>
@@ -696,8 +692,20 @@
 <data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>Контраст</value></data>
 <data name='Adjustments_Temperature' xml:space='preserve'><value>Температура</value></data>
 <data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>Температура</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Компенсировать</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Экспонента</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Амплитуда</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Альфа</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>красный</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Зеленый</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Синий</value></data>
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Количество</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Цвет</value></data>
+<data name='Adjustments_ColorMatrix_Red' xml:space='preserve'><value>красный</value></data>
+<data name='Adjustments_ColorMatrix_Green' xml:space='preserve'><value>Зеленый</value></data>
+<data name='Adjustments_ColorMatrix_Blue' xml:space='preserve'><value>Синий</value></data>
+<data name='Adjustments_ColorMatrix_Alpha' xml:space='preserve'><value>Альфа</value></data>
+<data name='Adjustments_ColorMatrix_Offset' xml:space='preserve'><value>Компенсировать</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Радиус</value></data>
 <data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Жесткая граница</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Радиус</value></data>

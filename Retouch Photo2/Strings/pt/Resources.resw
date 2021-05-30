@@ -282,15 +282,9 @@
 <data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Clareza</value></data>
 <data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Quantidade de desfoque da máscara</value></data>
 <data name='Adjustments_GammaTransfer' xml:space='preserve'><value>Transferência gama</value></data>
-<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Desvio</value></data>
-<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Expoente</value></data>
-<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Amplitude</value></data>
-<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alfa</value></data>
-<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>vermelho</value></data>
-<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Verde</value></data>
-<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Azul</value></data>
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vinheta</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Curva</value></data>
+<data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Matriz de Cor</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Gaussian Blur</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Desfoque direcional</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Afiado</value></data>
@@ -495,6 +489,8 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Definir quantidade de ajuste de vinheta</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Definir curva de ajuste de vinheta</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Definir a cor do ajuste da vinheta</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Redefinir o ajuste da matriz de cores</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Definir ajuste de matriz de cor</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Redefinir efeito de desfoque gaussiano</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Mudar efeito de desfoque gaussiano</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Definir a quantidade de efeito de desfoque gaussiano</value></data>
@@ -696,8 +692,20 @@
 <data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>Contraste</value></data>
 <data name='Adjustments_Temperature' xml:space='preserve'><value>Temperatura</value></data>
 <data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>Temperatura</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Desvio</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Expoente</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Amplitude</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alfa</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>vermelho</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Verde</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Azul</value></data>
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Quantia</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Cor</value></data>
+<data name='Adjustments_ColorMatrix_Red' xml:space='preserve'><value>vermelho</value></data>
+<data name='Adjustments_ColorMatrix_Green' xml:space='preserve'><value>Verde</value></data>
+<data name='Adjustments_ColorMatrix_Blue' xml:space='preserve'><value>Azul</value></data>
+<data name='Adjustments_ColorMatrix_Alpha' xml:space='preserve'><value>Alfa</value></data>
+<data name='Adjustments_ColorMatrix_Offset' xml:space='preserve'><value>Desvio</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Raio</value></data>
 <data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Borda dura</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Raio</value></data>

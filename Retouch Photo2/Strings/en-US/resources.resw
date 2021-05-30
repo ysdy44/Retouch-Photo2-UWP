@@ -282,15 +282,9 @@
 <data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Clarity</value></data>
 <data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Mask blur amount</value></data>
 <data name='Adjustments_GammaTransfer' xml:space='preserve'><value>Gamma transfer</value></data>
-<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Offset</value></data>
-<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Exponent</value></data>
-<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Amplitude</value></data>
-<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alpha</value></data>
-<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>Red</value></data>
-<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Green</value></data>
-<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Blue</value></data>
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vignette</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Curve</value></data>
+<data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Color Matrix</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Gaussian Blur</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Directional Blur</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Sharpen</value></data>
@@ -495,6 +489,8 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Set amount of vignette adjustment</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Set curve of vignette adjustment</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Set color of vignette adjustment</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Reset color matrix adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Set color matrix adjustment</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Reset gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Switch gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Set amount of gaussian blur effect</value></data>
@@ -696,8 +692,20 @@
 <data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>Contrast</value></data>
 <data name='Adjustments_Temperature' xml:space='preserve'><value>Temperature</value></data>
 <data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>Temperature</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Offset</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Exponent</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Amplitude</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alpha</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>Red</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Green</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Blue</value></data>
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Amount</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Color</value></data>
+<data name='Adjustments_ColorMatrix_Red' xml:space='preserve'><value>Red</value></data>
+<data name='Adjustments_ColorMatrix_Green' xml:space='preserve'><value>Green</value></data>
+<data name='Adjustments_ColorMatrix_Blue' xml:space='preserve'><value>Blue</value></data>
+<data name='Adjustments_ColorMatrix_Alpha' xml:space='preserve'><value>Alpha</value></data>
+<data name='Adjustments_ColorMatrix_Offset' xml:space='preserve'><value>Offset</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Radius</value></data>
 <data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Hard border</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Radius</value></data>
