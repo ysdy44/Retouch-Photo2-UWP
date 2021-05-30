@@ -169,6 +169,8 @@ namespace Retouch_Photo2.Historys
         LayersProperty_SetAdjustment_Vignette_Curve,
         LayersProperty_SetAdjustment_Vignette_Color,
 
+        LayersProperty_ResetAdjustment_ColorMatrix,
+        LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix,
 
         // Effect
         LayersProperty_ResetEffect_GaussianBlur,

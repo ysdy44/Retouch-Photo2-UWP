@@ -1,0 +1,80 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Adjustments.Pages.ColorMatrixPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
+    mc:Ignorable="d"
+    MaxHeight="300"
+    d:DesignHeight="400"
+    d:DesignWidth="200"
+    >
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="1*"/>
+            
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl Visibility="Collapsed" Grid.ColumnSpan="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppIconContentControlStyle}">
+            <ContentControl.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ColorMatrixIcon.xaml"/>
+            </ContentControl.Resources>
+            <ContentControl.Tag>
+                <ContentControl x:Name="IconContentControl" Template="{StaticResource ColorMatrixIcon}"/>
+            </ContentControl.Tag>
+            <ContentControl.Content>
+                <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            </ContentControl.Content>
+        </ContentControl>
+
+        <TextBlock x:Name="RedTextBlock" Grid.Row="0" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M11Picker" Grid.Column="1" Grid.Row="0" Value="100" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M12Picker" Grid.Column="3" Grid.Row="0" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M13Picker" Grid.Column="5" Grid.Row="0" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M14Picker" Grid.Column="7" Grid.Row="0" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+        <TextBlock x:Name="GreenTextBlock" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M21Picker" Grid.Column="1" Grid.Row="1" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M22Picker" Grid.Column="3" Grid.Row="1" Value="100" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M23Picker" Grid.Column="5" Grid.Row="1" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M24Picker" Grid.Column="7" Grid.Row="1" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+        <TextBlock x:Name="BlueTextBlock" Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M31Picker" Grid.Column="1" Grid.Row="2" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M32Picker" Grid.Column="3" Grid.Row="2" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M33Picker" Grid.Column="5" Grid.Row="2" Value="100" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M34Picker" Grid.Column="7" Grid.Row="2" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+        <TextBlock x:Name="AlphaTextBlock" Grid.Row="3" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M41Picker" Grid.Column="1" Grid.Row="3" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M42Picker" Grid.Column="3" Grid.Row="3" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M43Picker" Grid.Column="5" Grid.Row="3" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M44Picker" Grid.Column="7" Grid.Row="3" Value="100" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+        <TextBlock x:Name="OffsetTextBlock" Grid.Row="4" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M51Picker" Grid.Column="1" Grid.Row="4" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M52Picker" Grid.Column="3" Grid.Row="4" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M53Picker" Grid.Column="5" Grid.Row="4" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="M54Picker" Grid.Column="7" Grid.Row="4" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+    </Grid>
+</Page>

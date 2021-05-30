@@ -144,6 +144,19 @@
                 </ContentControl>
             </ListViewItem>
 
+            <ListViewItem Style="{StaticResource AppSeparatorListViewItemStyle}"/>
+
+            <ListViewItem x:Name="ColorMatrix">
+                <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                    <ContentControl.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ColorMatrixIcon.xaml"/>
+                    </ContentControl.Resources>
+                    <ContentControl.Tag>
+                        <ContentControl Template="{StaticResource ColorMatrixIcon}"/>
+                    </ContentControl.Tag>
+                </ContentControl>
+            </ListViewItem>
+
         </ListView.Items>
     </ListView>
 

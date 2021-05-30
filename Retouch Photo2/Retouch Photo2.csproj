@@ -161,6 +161,9 @@
     <Compile Include="Retouch Photo2.Adjustments\TemperaturePage.xaml.cs">
       <DependentUpon>TemperaturePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\ColorMatrixPage.xaml.cs">
+      <DependentUpon>ColorMatrixPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Adjustments\VignettePage.xaml.cs">
       <DependentUpon>VignettePage.xaml</DependentUpon>
     </Compile>
@@ -498,6 +501,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Adjustments\TemperaturePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\ColorMatrixPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
