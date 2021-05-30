@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>المقالة القصيرة</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>منحنى</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>مصفوفة الألوان</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>تطابق اللون</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>مصدر</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>وجهة</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>التمويه الضبابي</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>طمس الاتجاه</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>شحذ</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>اضبط لون ضبط نقوش الصورة النصفية</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>إعادة ضبط مصفوفة اللون</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>ضبط مصفوفة اللون</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>إعادة تعيين ضبط مطابقة اللون</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>اضبط لون المصدر لتعديل مصفوفة الألوان</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>تعيين لون الوجهة لضبط مصفوفة الألوان</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>إعادة تعيين تأثير التمويه gaussian</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>تبديل تأثير التمويه الغاوسي</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>اضبط مقدار تأثير التمويه الغاوسي</value></data>

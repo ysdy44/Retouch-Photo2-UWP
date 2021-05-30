@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>ビネット</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>曲線</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>カラーマトリクス</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>カラーマッチ</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>ソース</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>先</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>ガウスぼかし</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>指向性ブラー</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>研ぐ</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>ビネット調整の色を設定する</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>カラーマトリクス調整をリセット</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>カラーマトリクス調整の設定</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>色合わせ調整をリセット</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>カラーマトリクス調整のソースカラーを設定</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>カラーマトリクス調整の宛先色を設定</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>ガウスぼかし効果をリセットする</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>ガウスぼかし効果を切り替えます</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>ガウスぼかし効果の量を設定します</value></data>

@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vignet</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Kromme</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Kleurenmatrix</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>Kleurenmatch</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>Bron</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>Bestemming</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Gaussiaanse vervaging</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Directionele vervaging</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Verscherpen</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Kleur van vignetaanpassing instellen</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Aanpassing kleurmatrix resetten</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Aanpassing kleurmatrix instellen</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>Aanpassing kleurovereenkomst resetten</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>Bronkleur van kleurmatrixaanpassing instellen</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>Bestemmingskleur van kleurmatrixaanpassing instellen</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect resetten</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect wisselen</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Stel de hoeveelheid Gaussiaans vervagingseffect in</value></data>

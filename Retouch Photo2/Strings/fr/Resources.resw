@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vignette</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Courbe</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Matrice de couleur</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>Correspondance des couleurs</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>La source</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>Destination</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Flou gaussien</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Flou directionnel</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Aiguiser</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Définir la couleur de l'ajustement de la vignette</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Réinitialiser le réglage de la matrice de couleurs</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Définir le réglage de la matrice de couleurs</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>Réinitialiser le réglage de la correspondance des couleurs</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>Définir la couleur source du réglage de la matrice de couleurs</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>Définir la couleur de destination du réglage de la matrice de couleurs</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Réinitialiser l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Changer l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Définir la quantité d'effet de flou gaussien</value></data>

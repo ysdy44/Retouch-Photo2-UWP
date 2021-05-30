@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Виньетка</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Изгиб</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Цветовая матрица</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>Соответствие цветов</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>Источник</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>Назначения</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Размытие по Гауссу</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Направленное размытие</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Резкость</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Установить цвет настройки виньетки</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Сбросить настройку цветовой матрицы</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Настроить цветовую матрицу</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>Сбросить настройку соответствия цветов</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>Установить исходный цвет настройки цветовой матрицы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>Установить целевой цвет настройки цветовой матрицы</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Сбросить эффект размытия по Гауссу</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Включить эффект размытия по Гауссу</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Установите количество эффекта размытия по Гауссу</value></data>

@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>삽화</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>곡선</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>컬러 매트릭스</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>색상 일치</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>출처</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>목적지</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>가우스 흐림</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>방향성 흐림</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>갈다</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>비 네트 조정 색상 설정</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>색상 매트릭스 조정 재설정</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>색상 매트릭스 조정 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>색상 일치 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>색상 매트릭스 조정의 소스 색상 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>색상 매트릭스 조정 대상 색상 설정</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>가우시안 흐림 효과 재설정</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>가우스 흐림 효과 전환</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>가우시안 블러 효과의 양 설정</value></data>

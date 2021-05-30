@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vinheta</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Curva</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Matriz de Cor</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>Combinação de cores</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>Fonte</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>Destino</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Gaussian Blur</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Desfoque direcional</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Afiado</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Definir a cor do ajuste da vinheta</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Redefinir o ajuste da matriz de cores</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Definir ajuste de matriz de cor</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>Redefinir o ajuste de correspondência de cor</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>Definir a cor de origem do ajuste da matriz de cor</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>Defina a cor de destino do ajuste da matriz de cor</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Redefinir efeito de desfoque gaussiano</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Mudar efeito de desfoque gaussiano</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Definir a quantidade de efeito de desfoque gaussiano</value></data>

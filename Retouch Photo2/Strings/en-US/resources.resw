@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vignette</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Curve</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Color Matrix</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>Color Match</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>Source</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>Destination</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Gaussian Blur</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Directional Blur</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Sharpen</value></data>
@@ -490,7 +493,10 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Set curve of vignette adjustment</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Set color of vignette adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Reset color matrix adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Set color matrix adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Set color matrix of color matrix adjustment</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>Reset color match adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>Set source color of color matrix adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>Set destination color of color matrix adjustment</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Reset gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Switch gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Set amount of gaussian blur effect</value></data>

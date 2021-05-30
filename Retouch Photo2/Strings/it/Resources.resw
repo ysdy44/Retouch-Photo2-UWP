@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vignetta</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Curva</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Matrice di colori</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>Corrispondenza colore</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>fonte</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>Destinazione</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Sfocatura gaussiana</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Sfocatura direzionale</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Affilare</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Imposta il colore della regolazione della vignetta</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Ripristina regolazione matrice colore</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Imposta la regolazione della matrice del colore</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>Ripristina la regolazione della corrispondenza dei colori</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>Imposta il colore di origine della regolazione della matrice di colore</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>Imposta il colore di destinazione della regolazione della matrice colore</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Ripristina l'effetto sfocatura gaussiana</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Cambia l'effetto sfocatura gaussiana</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Imposta la quantità di effetto sfocatura gaussiana</value></data>

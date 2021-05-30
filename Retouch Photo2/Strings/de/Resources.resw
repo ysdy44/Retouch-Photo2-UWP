@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>Vignette</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Kurve</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>Farbmatrix</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>Farbübereinstimmung</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>Quelle</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>Ziel</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>Gaußsche Unschärfe</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>Richtungsunschärfe</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>Schärfen</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Stellen Sie die Farbe der Vignetteneinstellung ein</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>Farbmatrixeinstellung zurücksetzen</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>Einstellen der Farbmatrixanpassung</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>Farbanpassungsanpassung zurücksetzen</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>Quellfarbe der Farbmatrixanpassung einstellen</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>Legen Sie die Zielfarbe der Farbmatrixanpassung fest</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Setzen Sie den Gaußschen Unschärfeeffekt zurück</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Schalten Sie den Gaußschen Unschärfeeffekt um</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Stellen Sie den Gaußschen Unschärfeeffekt ein</value></data>

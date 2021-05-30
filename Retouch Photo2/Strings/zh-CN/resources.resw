@@ -285,6 +285,9 @@
 <data name='Adjustments_Vignette' xml:space='preserve'><value>装饰图案</value></data>
 <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>曲线</value></data>
 <data name='Adjustments_ColorMatrix' xml:space='preserve'><value>颜色矩阵</value></data>
+<data name='Adjustments_ColorMatch' xml:space='preserve'><value>色彩匹配</value></data>
+<data name='Adjustments_ColorMatch_Source' xml:space='preserve'><value>来源</value></data>
+<data name='Adjustments_ColorMatch_Destination' xml:space='preserve'><value>目标</value></data>
 <data name='Effects_GaussianBlur' xml:space='preserve'><value>高斯模糊</value></data>
 <data name='Effects_DirectionalBlur' xml:space='preserve'><value>定向模糊</value></data>
 <data name='Effects_Sharpen' xml:space='preserve'><value>锐化</value></data>
@@ -491,6 +494,9 @@
 <data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>设置装饰图案颜色</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_ColorMatrix' xml:space='preserve'><value>重置颜色矩阵调整</value></data>
 <data name='Historys_LayersProperty_SetAdjustment_ColorMatrix_ColorMatrix' xml:space='preserve'><value>设置颜色矩阵调整</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_ColorMatch' xml:space='preserve'><value>重置颜色匹配调整</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_SourceColor' xml:space='preserve'><value>设置颜色矩阵调整的来源颜色</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_ColorMatch_DestinationColor' xml:space='preserve'><value>设置颜色矩阵调整的目标颜色</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>重置高斯模糊特效</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>切换高斯模糊特效</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>设置高斯模糊特效数值</value></data>
