@@ -37,7 +37,7 @@ namespace Retouch_Photo2
             else
             {
                 // Read the file from the package.
-                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:/// XMLs/Styles.xml"));
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///XMLs/Styles.xml"));
 
                 // Copy to the local folder.
                 await file.CopyAsync(ApplicationData.Current.LocalFolder);
