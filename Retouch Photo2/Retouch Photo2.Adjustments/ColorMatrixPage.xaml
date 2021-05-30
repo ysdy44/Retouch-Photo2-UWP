@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     mc:Ignorable="d"
     MaxHeight="300"
     d:DesignHeight="400"
@@ -32,6 +33,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <ContentControl Visibility="Collapsed" Grid.ColumnSpan="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppIconContentControlStyle}">
@@ -44,7 +47,7 @@
             <ContentControl.Content>
                 <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             </ContentControl.Content>
-        </ContentControl>
+        </ContentControl>        
 
         <TextBlock x:Name="RedTextBlock" Grid.Row="0" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:NumberPicker x:Name="M11Picker" Grid.Column="1" Grid.Row="0" Value="100" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
@@ -75,6 +78,13 @@
         <hsvColorPickers:NumberPicker x:Name="M52Picker" Grid.Column="3" Grid.Row="4" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         <hsvColorPickers:NumberPicker x:Name="M53Picker" Grid.Column="5" Grid.Row="4" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         <hsvColorPickers:NumberPicker x:Name="M54Picker" Grid.Column="7" Grid.Row="4" Value="0" Minimum="-100" Maximum="100" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        
+        <Rectangle Grid.ColumnSpan="9" Grid.Row="5" Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+        <TextBlock x:Name="ColorRedTextBlock" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}"/>
+        <TextBlock x:Name="ColorGreenTextBlock" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}"/>
+        <TextBlock x:Name="ColorBlueTextBlock" Grid.Column="5" Grid.Row="6" HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}"/>
+        <TextBlock x:Name="ColorAlphaTextBlock" Grid.Column="7" Grid.Row="6" HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}"/>
 
     </Grid>
 </Page>

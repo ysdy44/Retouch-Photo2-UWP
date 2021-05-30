@@ -42,26 +42,27 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             get => new Matrix5x4
             {
+                // Red
                 M11 = this.M11Picker.Value / 100.0f,
                 M12 = this.M12Picker.Value / 100.0f,
                 M13 = this.M13Picker.Value / 100.0f,
                 M14 = this.M14Picker.Value / 100.0f,
-
+                // Green
                 M21 = this.M21Picker.Value / 100.0f,
                 M22 = this.M22Picker.Value / 100.0f,
                 M23 = this.M23Picker.Value / 100.0f,
                 M24 = this.M24Picker.Value / 100.0f,
-
+                // Blue
                 M31 = this.M31Picker.Value / 100.0f,
                 M32 = this.M32Picker.Value / 100.0f,
                 M33 = this.M33Picker.Value / 100.0f,
                 M34 = this.M34Picker.Value / 100.0f,
-
+                // Alpha
                 M41 = this.M41Picker.Value / 100.0f,
                 M42 = this.M42Picker.Value / 100.0f,
                 M43 = this.M43Picker.Value / 100.0f,
                 M44 = this.M44Picker.Value / 100.0f,
-
+                // Offset
                 M51 = this.M51Picker.Value / 100.0f,
                 M52 = this.M52Picker.Value / 100.0f,
                 M53 = this.M53Picker.Value / 100.0f,
@@ -69,26 +70,27 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
             set
             {
+                // Red
                 this.M11Picker.Value = (int)(value.M11 * 100.0f);
                 this.M12Picker.Value = (int)(value.M12 * 100.0f);
                 this.M13Picker.Value = (int)(value.M13 * 100.0f);
                 this.M14Picker.Value = (int)(value.M14 * 100.0f);
-
+                // Green
                 this.M21Picker.Value = (int)(value.M21 * 100.0f);
                 this.M22Picker.Value = (int)(value.M22 * 100.0f);
                 this.M23Picker.Value = (int)(value.M23 * 100.0f);
                 this.M24Picker.Value = (int)(value.M24 * 100.0f);
-
+                // Blue
                 this.M31Picker.Value = (int)(value.M31 * 100.0f);
                 this.M32Picker.Value = (int)(value.M32 * 100.0f);
                 this.M33Picker.Value = (int)(value.M33 * 100.0f);
                 this.M34Picker.Value = (int)(value.M34 * 100.0f);
-
+                // Alpha
                 this.M41Picker.Value = (int)(value.M41 * 100.0f);
                 this.M42Picker.Value = (int)(value.M42 * 100.0f);
                 this.M43Picker.Value = (int)(value.M43 * 100.0f);
                 this.M44Picker.Value = (int)(value.M44 * 100.0f);
-
+                // Offset
                 this.M51Picker.Value = (int)(value.M51 * 100.0f);
                 this.M52Picker.Value = (int)(value.M52 * 100.0f);
                 this.M53Picker.Value = (int)(value.M53 * 100.0f);
@@ -106,11 +108,11 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructM1();
-            this.ConstructM2();
-            this.ConstructM3();
-            this.ConstructM4();
-            this.ConstructM5();
+            this.ConstructRed();
+            this.ConstructGreen();
+            this.ConstructBlue();
+            this.ConstructAlpha();
+            this.ConstructOffset();
         }
     }
 
@@ -124,10 +126,10 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.TextBlock.Text = resource.GetString("Adjustments_ColorMatrix");
 
-            this.RedTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Red");
-            this.GreenTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Green");
-            this.BlueTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Blue");
-            this.AlphaTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Alpha");
+            this.RedTextBlock.Text = this.ColorRedTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Red");
+            this.GreenTextBlock.Text = this.ColorGreenTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Green");
+            this.BlueTextBlock.Text = this.ColorBlueTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Blue");
+            this.AlphaTextBlock.Text = this.ColorAlphaTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Alpha");
             this.OffsetTextBlock.Text = resource.GetString("Adjustments_ColorMatrix_Offset");
         }
 
@@ -136,26 +138,12 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// </summary>
         public void Reset()
         {
-            this.ColorMatrix =new Matrix5x4
-            {
-                M11 = 1, M12 = 0, M13 = 0, M14 = 0,
-                M21 = 0, M22 = 1, M23 = 0, M24 = 0,
-                M31 = 0, M32 = 0, M33 = 1, M34 = 0,
-                M41 = 0, M42 = 0, M43 = 0, M44 = 1,
-                M51 = 0, M52 = 0, M53 = 0, M54 = 0
-            };
+            this.ColorMatrix = AdjustmentExtensions.One;
 
             this.MethodViewModel.TAdjustmentChanged<Matrix5x4, ColorMatrixAdjustment>
             (
                 index: this.Index,
-                set: (tAdjustment) => tAdjustment.ColorMatrix = new Matrix5x4
-                {
-                    M11 = 1, M12 = 0, M13 = 0, M14 = 0,
-                    M21 = 0, M22 = 1, M23 = 0, M24 = 0,
-                    M31 = 0, M32 = 0, M33 = 1, M34 = 0,
-                    M41 = 0, M42 = 0, M43 = 0, M44 = 1,
-                    M51 = 0, M52 = 0, M53 = 0, M54 = 0
-                },
+                set: (tAdjustment) => tAdjustment.ColorMatrix = AdjustmentExtensions.One,
 
                 type: HistoryType.LayersProperty_ResetAdjustment_ColorMatrix,
                 getUndo: (tAdjustment) => tAdjustment.ColorMatrix,
@@ -183,7 +171,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ColorMatrixPage : IAdjustmentPage
     {
 
-        public void ConstructM1()
+        public void ConstructRed()
         {
             this.M11Picker.Unit = "%";
             this.M11Picker.ValueChanged += (s, value) =>
@@ -215,7 +203,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructM2()
+        public void ConstructGreen()
         {
             this.M21Picker.Unit = "%";
             this.M21Picker.ValueChanged += (s, value) =>
@@ -247,7 +235,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructM3()
+        public void ConstructBlue()
         {
             this.M31Picker.Unit = "%";
             this.M31Picker.ValueChanged += (s, value) =>
@@ -279,7 +267,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructM4()
+        public void ConstructAlpha()
         {
             this.M41Picker.Unit = "%";
             this.M41Picker.ValueChanged += (s, value) =>
@@ -311,7 +299,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        private void ConstructM5()
+        private void ConstructOffset()
         {
             this.M51Picker.Unit = "%";
             this.M51Picker.ValueChanged += (s, value) =>
