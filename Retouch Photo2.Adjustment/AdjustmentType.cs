@@ -33,6 +33,9 @@ namespace Retouch_Photo2.Adjustments
         /// <summary> Gamma transfer. </summary>
         GammaTransfer,
         /// <summary> Vignette. </summary>
-        Vignette
+        Vignette,
+
+        /// <summary> Color matrix. </summary>
+        ColorMatrix
     }
 }

@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="AdjustmentCommand.cs" />
     <Compile Include="Models\BrightnessAdjustment.cs" />
+    <Compile Include="Models\ColorMatrixAdjustment.cs" />
     <Compile Include="Models\ContrastAdjustment.cs" />
     <Compile Include="Models\ExposureAdjustment.cs" />
     <Compile Include="Models\GammaTransferAdjustment.cs" />
@@ -181,6 +182,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Icons\TemperatureIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\ColorMatrixIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
