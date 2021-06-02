@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref="Windows.UI.Color"/>.
     /// </summary>
-    public sealed partial class ColorMenu : Expander
+    public sealed partial class ColorMenu : MenuExpander
     {
 
         //@ViewModel

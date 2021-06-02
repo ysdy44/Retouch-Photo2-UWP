@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Effects"/>.
     /// </summary>
-    public sealed partial class EffectMenu : Expander
+    public sealed partial class EffectMenu : MenuExpander
     {
 
         //@Delegate
@@ -92,7 +92,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class EffectMenu : Expander
+    public sealed partial class EffectMenu : MenuExpander
     {
 
         // Languages

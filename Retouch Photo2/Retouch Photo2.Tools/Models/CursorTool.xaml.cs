@@ -78,7 +78,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.OperateButton.Tapped += (s, e) => Expander.ShowAt(MenuType.Operate, this.OperateButton);
+            this.OperateButton.Tapped += (s, e) => MenuExpander.ShowAt(MenuType.Operate, this.OperateButton);
 
             this.MoreButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }

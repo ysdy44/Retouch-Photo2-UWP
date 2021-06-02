@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Tools.Models
             this.FontSizeFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
 
 
-            this.TextButton.Tapped += (s, e) => Expander.ShowAt(MenuType.Text, this.TextButton);
+            this.TextButton.Tapped += (s, e) => MenuExpander.ShowAt(MenuType.Text, this.TextButton);
 
             //@Focus
             this.TextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();

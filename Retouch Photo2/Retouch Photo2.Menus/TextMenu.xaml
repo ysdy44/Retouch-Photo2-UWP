@@ -1,10 +1,10 @@
-﻿<elements:Expander
+﻿<local:MenuExpander
     x:Class="Retouch_Photo2.Menus.TextMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:local="using:Retouch_Photo2.Menus"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:texts="using:Retouch_Photo2.Texts"
     mc:Ignorable="d"
@@ -13,7 +13,7 @@
     Type="Text"
     >
 
-    <elements:Expander.Resources>
+    <local:MenuExpander.Resources>
         <!--Flyout-->
         <Flyout x:Name="FontSizeFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single"/>
@@ -21,7 +21,7 @@
         <Flyout x:Name="FontFamilyFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"/>
         </Flyout>
-    </elements:Expander.Resources>
+    </local:MenuExpander.Resources>
 
 
     <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
@@ -132,4 +132,4 @@
         </StackPanel>
     </ScrollViewer>
 
-</elements:Expander>
+</local:MenuExpander>

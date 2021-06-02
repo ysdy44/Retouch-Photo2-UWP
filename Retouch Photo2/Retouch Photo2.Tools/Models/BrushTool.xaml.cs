@@ -89,7 +89,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStroke();
             this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
             this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
-            this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt(MenuType.Stroke, this.StrokeShowControl);
+            this.StrokeShowControl.Tapped += (s, e) => MenuExpander.ShowAt(MenuType.Stroke, this.StrokeShowControl);
 
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
             {

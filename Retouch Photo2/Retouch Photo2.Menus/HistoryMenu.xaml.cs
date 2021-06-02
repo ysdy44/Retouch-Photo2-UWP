@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Historys.IHistory"/>.
     /// </summary>
-    public sealed partial class HistoryMenu : Expander
+    public sealed partial class HistoryMenu : MenuExpander
     {
         //@Construct
         /// <summary>

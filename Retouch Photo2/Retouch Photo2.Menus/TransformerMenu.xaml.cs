@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
-    public sealed partial class TransformerMenu : Expander
+    public sealed partial class TransformerMenu : MenuExpander
     {
 
         //@ViewModel
@@ -319,7 +319,7 @@ namespace Retouch_Photo2.Menus
 
     }
 
-    public sealed partial class TransformerMenu : Expander
+    public sealed partial class TransformerMenu : MenuExpander
     {
 
         // Languages

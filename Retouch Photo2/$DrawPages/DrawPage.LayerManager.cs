@@ -1,10 +1,10 @@
 ﻿using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
+using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Elements;
 using Windows.UI.Xaml.Input;
-using Retouch_Photo2.Menus;
 
 namespace Retouch_Photo2
 {
@@ -29,11 +29,11 @@ namespace Retouch_Photo2
 
         private void LayerRightTapped(ILayer layer)
         {
-            Expander.ShowAt(MenuType.Layer, layer.Control);
+            MenuExpander.ShowAt(MenuType.Layer, layer.Control);
         }
         private void LayersRightTapped()
         {
-            Expander.ShowAt(MenuType.Layer, this.LayersScrollViewer);
+            MenuExpander.ShowAt(MenuType.Layer, this.LayersScrollViewer);
         }
         private void LayerVisibilityChanged(ILayer layer2)
         {

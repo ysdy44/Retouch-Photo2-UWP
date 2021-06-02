@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Layers"/>.
     /// </summary>
-    public sealed partial class LayerMenu : Expander
+    public sealed partial class LayerMenu : MenuExpander
     {
 
         //@ViewModel
@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class LayerMenu : Expander
+    public sealed partial class LayerMenu : MenuExpander
     {
 
         // Languages

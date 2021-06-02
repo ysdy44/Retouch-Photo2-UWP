@@ -1,10 +1,10 @@
-﻿<elements:Expander
+﻿<local:MenuExpander
     x:Class="Retouch_Photo2.Menus.TransformerMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:local="using:Retouch_Photo2.Menus"
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     mc:Ignorable="d"
@@ -174,4 +174,4 @@
         </SplitView.Content>
     </SplitView>
 
-</elements:Expander>
+</local:MenuExpander>

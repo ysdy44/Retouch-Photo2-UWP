@@ -1,21 +1,21 @@
-﻿<elements:Expander 
+﻿<local:MenuExpander 
     x:Class="Retouch_Photo2.Menus.LayerMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:blends="using:Retouch_Photo2.Blends"
-    xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:local="using:Retouch_Photo2.Menus"
+    xmlns:local="using:Retouch_Photo2.Menus" 
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     Type="Layer"
     >
 
-    <elements:Expander.Resources>
+    <local:MenuExpander.Resources>
         <!--Converter -->
         <local:AdjustmentTitleConverter x:Key="AdjustmentTitleConverter"/>
         <local:AdjustmentIconConverter x:Key="AdjustmentIconConverter"/>
@@ -47,7 +47,7 @@
 
             </Grid>
         </DataTemplate>
-    </elements:Expander.Resources>
+    </local:MenuExpander.Resources>
 
 
     <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
@@ -180,4 +180,4 @@
         </StackPanel>
     </ScrollViewer>
 
-</elements:Expander>
+</local:MenuExpander>

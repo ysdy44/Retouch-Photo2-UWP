@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
-    public sealed partial class OperateMenu : Expander
+    public sealed partial class OperateMenu : MenuExpander
     {
 
         //@ViewModel
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class OperateMenu : Expander
+    public sealed partial class OperateMenu : MenuExpander
     {
 
         // Languages
@@ -301,7 +301,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class OperateMenu : Expander
+    public sealed partial class OperateMenu : MenuExpander
     {
 
         private void TransformSapce(Orientation orientation)

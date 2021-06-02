@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of Pantone.
     /// </summary>
-    public sealed partial class PantoneMenu : Expander
+    public sealed partial class PantoneMenu : MenuExpander
     {
 
         //@ViewModel

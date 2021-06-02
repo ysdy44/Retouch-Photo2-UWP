@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
     /// </summary>
-    public sealed partial class StrokeMenu : Expander
+    public sealed partial class StrokeMenu : MenuExpander
     {
 
         //@ViewModel
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Menus
         }
     }
 
-    public sealed partial class StrokeMenu : Expander
+    public sealed partial class StrokeMenu : MenuExpander
     {
 
         // Languages

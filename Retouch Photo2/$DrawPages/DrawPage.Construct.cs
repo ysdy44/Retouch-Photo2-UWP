@@ -3,6 +3,8 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Menus;
+using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
@@ -53,7 +55,7 @@ namespace Retouch_Photo2
                 //this.RulerToolTip.Content = this.OverflowRulerControl.Content = resource.GetString("$DrawPage_Ruler");
                 this.FullScreenToolTip.Content = this.OverflowFullScreenControl.Content = resource.GetString("$DrawPage_FullScreen");
                 this.OverflowTipControl.Content = resource.GetString("$DrawPage_Tip");
-      
+
                 this.UnFullScreenToolTip.Content = resource.GetString("$DrawPage_UnFullScreen");
                 this.WireframeButton.Content = resource.GetString("$DrawPage_Wireframe");
             }
@@ -111,9 +113,10 @@ namespace Retouch_Photo2
             }
 
             // Menus
-            foreach (Expander expander in Expander.Dictionary)
+            foreach (KeyValuePair<MenuType, MenuExpander> item in MenuExpander.Dictionary)
             {
-                MenuType type = expander.Type;
+                MenuType type = item.Key;
+                MenuExpander expander = item.Value;
 
                 expander.Title = resource.GetString($"Menus_{type}");
             }
@@ -129,7 +132,8 @@ namespace Retouch_Photo2
                 {
                     MenuType type = value.Type;
                     FrameworkElement placementTarget = value;
-                    Expander.ShowAt(type, placementTarget);
+
+                    MenuExpander.ShowAt(type, placementTarget);
                 }
             };
         }

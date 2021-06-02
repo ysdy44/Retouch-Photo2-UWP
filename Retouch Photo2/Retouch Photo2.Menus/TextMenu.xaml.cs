@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
-    public sealed partial class TextMenu : Expander
+    public sealed partial class TextMenu : MenuExpander
     {
 
         //@ViewModel

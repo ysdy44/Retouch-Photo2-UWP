@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Styles"/>.
     /// </summary>
-    public sealed partial class StyleMenu : Expander
+    public sealed partial class StyleMenu : MenuExpander
     {
 
         //@ViewModel
@@ -234,7 +234,7 @@ namespace Retouch_Photo2.Menus
 
     }
 
-    public sealed partial class StyleMenu : Expander
+    public sealed partial class StyleMenu : MenuExpander
     {
 
         // Languages
@@ -271,7 +271,7 @@ namespace Retouch_Photo2.Menus
 
     }
 
-    public sealed partial class StyleMenu : Expander
+    public sealed partial class StyleMenu : MenuExpander
     {
 
         public void AddControl(IStyle style, Transformer transformer, string rename)

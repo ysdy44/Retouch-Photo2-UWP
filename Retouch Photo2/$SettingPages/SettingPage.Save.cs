@@ -1,11 +1,10 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
-using System.Collections.Generic;
+using Retouch_Photo2.ViewModels;
+using System.Linq;
 using System.Threading.Tasks;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Linq;
-using Windows.Globalization;
 
 namespace Retouch_Photo2
 {

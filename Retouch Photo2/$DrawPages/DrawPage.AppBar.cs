@@ -1,15 +1,13 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2
 {
