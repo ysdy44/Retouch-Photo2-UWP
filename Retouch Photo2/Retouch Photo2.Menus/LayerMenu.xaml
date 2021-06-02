@@ -154,13 +154,6 @@
                     <ItemsControl ItemTemplate="{StaticResource AdjustmentDataTemplate}"
                               ItemsSource="{x:Bind SelectionViewModel.Adjustments}"
                               Visibility="{x:Bind SelectionSingleToVisibilityConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}">
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="ContentControl">
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
                         <ItemsControl.ItemContainerTransitions>
                             <TransitionCollection/>
                         </ItemsControl.ItemContainerTransitions>
