@@ -18,7 +18,7 @@
         <!--Brush-->
         <ImageBrush x:Name="NoneBrush">
             <ImageBrush.ImageSource>
-                ms-appx:/// Icons\GrayAndWhite3.jpg
+                ms-appx:///Icons\GrayAndWhite3.jpg
             </ImageBrush.ImageSource>
         </ImageBrush>
 
@@ -43,7 +43,7 @@
             <ImageBrush.ImageSource>
                 <BitmapImage x:Name="BitmapImage">
                     <BitmapImage.UriSource>
-                        ms-appx:/// Icons\GrayAndWhite2.jpg
+                        ms-appx:///Icons\GrayAndWhite2.jpg
                     </BitmapImage.UriSource>
                 </BitmapImage>
             </ImageBrush.ImageSource>
@@ -57,7 +57,7 @@
             <Rectangle.Fill>
                 <ImageBrush>
                     <ImageBrush.ImageSource>
-                        ms-appx:/// Icons\GrayAndWhite2.jpg
+                        ms-appx:///Icons\GrayAndWhite2.jpg
                     </ImageBrush.ImageSource>
                 </ImageBrush>
             </Rectangle.Fill>

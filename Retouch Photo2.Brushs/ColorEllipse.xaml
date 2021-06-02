@@ -17,7 +17,7 @@
                             <Ellipse.Fill>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
-                                        ms-appx:/// Icons\GrayAndWhite.jpg
+                                        ms-appx:///Icons\GrayAndWhite.jpg
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Ellipse.Fill>
