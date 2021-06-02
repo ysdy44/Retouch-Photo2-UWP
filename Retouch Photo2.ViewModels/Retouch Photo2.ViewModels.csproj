@@ -109,6 +109,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="InvalidateMode.cs" />
+    <Compile Include="MenuType.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Color.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />

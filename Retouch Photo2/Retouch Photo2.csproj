@@ -197,6 +197,7 @@
     <Compile Include="Retouch Photo2.Menus\AdjustmentMenu.xaml.cs">
       <DependentUpon>AdjustmentMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\MenuExpander.cs" />
     <Compile Include="Retouch Photo2.Menus\PantoneIcon.xaml.cs">
       <DependentUpon>PantoneIcon.xaml</DependentUpon>
     </Compile>

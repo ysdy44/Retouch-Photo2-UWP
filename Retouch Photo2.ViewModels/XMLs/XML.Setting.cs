@@ -3,8 +3,6 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;

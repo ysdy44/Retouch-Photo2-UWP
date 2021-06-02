@@ -4,7 +4,6 @@
 // Only:              ★★★★★
 // Complete:      ★
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 

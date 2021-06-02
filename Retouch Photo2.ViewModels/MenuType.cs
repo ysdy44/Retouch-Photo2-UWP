@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Menus
+﻿// Core:              ★★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★
+// Only:              ★★★★★
+// Complete:      ★
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary>
     /// Type of Menu.

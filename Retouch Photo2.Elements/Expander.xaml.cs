@@ -3,9 +3,6 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★★
-using Retouch_Photo2.Menus;
-using System.Collections.Generic;
-using System.Linq;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -37,17 +34,6 @@ namespace Retouch_Photo2.Elements
     [ContentProperty(Name = nameof(Content))]
     public partial class Expander : ContentControl
     {
-
-        //@Static
-        /// <summary>
-        /// Show a flyout with a specific name.
-        /// </summary>
-        public static void ShowAt(MenuType type, FrameworkElement placementTarget) => Expander.Dictionary.First(e => e.Type == type).ShowAt(placementTarget);
-        /// <summary>
-        /// Gets all Expanders.
-        /// </summary>
-        public static IList<Expander> Dictionary { get; } = new List<Expander>();
-
 
         //@VisualState
         bool _vsIsOverlay = false;
@@ -104,9 +90,11 @@ namespace Retouch_Photo2.Elements
         /// <summary> Identifies the <see cref = "Expander.Title" /> dependency property. </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(Expander), new PropertyMetadata(string.Empty));
 
-        public MenuType Type { get; set; }
+        /// <summary> Gets or sets <see cref = "Expander" />'s Flyout. </summary>
         public Flyout Flyout { get; set; }
+        /// <summary> Gets or sets <see cref = "Expander" />'s OverlayCanvas. </summary>
         public Canvas OverlayCanvas { get; set; }
+        /// <summary> Gets or sets <see cref = "Expander" />'s PinStackPanel. </summary>
         public StackPanel PinStackPanel { get; set; }
 
 
@@ -144,10 +132,7 @@ namespace Retouch_Photo2.Elements
         public Expander()
         {
             this.DefaultStyleKey = typeof(Expander);
-
-            Expander.Dictionary.Add(this);
         }
-        ~Expander() => Expander.Dictionary.Remove(this);
 
 
         /// <inheritdoc/>
@@ -272,7 +257,7 @@ namespace Retouch_Photo2.Elements
 
     public partial class Expander : ContentControl
     {
-        private void ShowAt(FrameworkElement placementTarget)
+        protected void ShowAt(FrameworkElement placementTarget)
         {
             this.left = Canvas.GetLeft(this);
             this.top = Canvas.GetTop(this);
