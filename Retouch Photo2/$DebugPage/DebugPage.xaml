@@ -793,6 +793,18 @@
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource VignetteIcon}"/>
                             </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ColorMatrixIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource ColorMatrixIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ColorMatchIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource ColorMatchIcon}"/>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
