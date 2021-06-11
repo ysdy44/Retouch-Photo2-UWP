@@ -16,10 +16,20 @@
     <local:MenuExpander.Resources>
         <!--Flyout-->
         <Flyout x:Name="FontSizeFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single"/>
+            <ListView x:Name="FontSizeListView" 
+                      IsItemClickEnabled="True"
+                      SelectionMode="Single"
+                      ItemsSource="{x:Bind FontSizes}"
+                      SelectedItem="{x:Bind MatchingFontSize(SelectionViewModel.FontSize), Mode=OneWay}"
+                      />
         </Flyout>
         <Flyout x:Name="FontFamilyFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"/>
+            <ListView x:Name="FontFamilyListView" 
+                      IsItemClickEnabled="True"
+                      SelectionMode="Single"
+                      ItemsSource="{x:Bind FontFamilies}"
+                      SelectedItem="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}"
+                      />
         </Flyout>
     </local:MenuExpander.Resources>
 

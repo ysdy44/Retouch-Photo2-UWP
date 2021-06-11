@@ -5,7 +5,6 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -16,7 +15,6 @@ using System;
 using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
-using Windows.Globalization;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,8 +33,11 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
+        public float[] FontSizes => TextsExtensions.FontSizes;
+        private IOrderedEnumerable<string> FontFamilies => TextsExtensions.FontFamilies;
 
         //@Converter
+        private float MatchingFontSize(float fontSize) => TextsExtensions.MatchingFontSize(fontSize);
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
         private bool FontWeightConverter(FontWeight2 fontWeight) => this.MethodViewModel.FontWeightConverter(fontWeight);
         private bool FontStyleConverter(FontStyle fontStyle) => this.MethodViewModel.FontStyleConverter(fontStyle);
@@ -80,7 +81,6 @@ namespace Retouch_Photo2.Tools.Models
             this.UnderlineButton.Tapped += (s, e) => this.MethodViewModel.MethodSetUnderline();
 
             // Get all FontFamilys in your device.
-            this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
             this.FontFamilyButton.Tapped += (s, e) => this.FontFamilyFlyout.ShowAt(this.FontFamilyButton);
             this.FontFamilyListView.ItemClick += (s, e) =>
             {
@@ -93,7 +93,6 @@ namespace Retouch_Photo2.Tools.Models
             this.FontFamilyFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
 
             // Get fontSizes.
-            this.FontSizeListView.ItemsSource = new float[] { 5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f };
             this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
             this.FontSizeListView.ItemClick += (s, e) =>
             {

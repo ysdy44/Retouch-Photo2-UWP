@@ -12,11 +12,21 @@
 
     <UserControl.Resources>
         <!--Flyout-->
-        <Flyout x:Name="FontSizeFlyout" Placement="Top" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single"/>
+        <Flyout x:Name="FontSizeFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontSizeListView" 
+                      IsItemClickEnabled="True"
+                      SelectionMode="Single"
+                      ItemsSource="{x:Bind FontSizes}"
+                      SelectedItem="{x:Bind MatchingFontSize(SelectionViewModel.FontSize), Mode=OneWay}"
+                      />
         </Flyout>
-        <Flyout x:Name="FontFamilyFlyout" Placement="Top" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"/>
+        <Flyout x:Name="FontFamilyFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontFamilyListView" 
+                      IsItemClickEnabled="True"
+                      SelectionMode="Single"
+                      ItemsSource="{x:Bind FontFamilies}"
+                      SelectedItem="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}"
+                      />
         </Flyout>
     </UserControl.Resources>
 

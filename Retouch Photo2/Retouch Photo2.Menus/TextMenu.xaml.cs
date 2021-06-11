@@ -3,9 +3,7 @@
 // Difficult:         ★★★★★
 // Only:              
 // Complete:      ★★★★★
-using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Toolkit.Uwp.UI;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -28,12 +26,14 @@ namespace Retouch_Photo2.Menus
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
+        public float[] FontSizes => TextsExtensions.FontSizes;
+        private IOrderedEnumerable<string> FontFamilies => TextsExtensions.FontFamilies;
 
         //@Converter
+        private float MatchingFontSize(float fontSize) => TextsExtensions.MatchingFontSize(fontSize);
         private bool FontWeightConverter(FontWeight2 fontWeight) => this.MethodViewModel.FontWeightConverter(fontWeight);
         private bool FontStyleConverter(FontStyle fontStyle) => this.MethodViewModel.FontStyleConverter(fontStyle);
         private string Round2Converter(float value) => $"{(float)Math.Round(value, 2)}";
-
 
         #region DependencyProperty
 
@@ -72,7 +72,6 @@ namespace Retouch_Photo2.Menus
             this.FontWeightComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
 
             // Get all FontFamilys in your device.
-            this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
             this.FontFamilyButton.Tapped += (s, e) => this.FontFamilyFlyout.ShowAt(this.FontFamilyButton);
             this.FontFamilyListView.ItemClick += (s, e) =>
             {
@@ -85,13 +84,12 @@ namespace Retouch_Photo2.Menus
             this.FontFamilyFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
 
             // Get fontSizes.
-            this.FontSizeListView.ItemsSource = new float[] { 5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f };
             this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
             this.FontSizeFlyout.Closed += (s, e) => this.SettingViewModel.RegisteKey(); // Setting
             this.FontSizeFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey(); // Setting
 
             //@Focus
-            TextBoxExtensions.SetDefault(this.FontSizeTextBox, $"{22.0f}");
+            TextBoxExtensions.SetDefault(this.FontSizeTextBox, $"{TextsExtensions.DefaultFontSizes}");
             this.FontSizeTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.FontSizeTextBox.LostFocus += (s, e) =>
             {
@@ -146,7 +144,7 @@ namespace Retouch_Photo2.Menus
 
             this.FontFamilyTextBlock.Text = resource.GetString("Texts_FontFamily");
             this.FontFamilySettingButton.Content = resource.GetString("Texts_FontFamilySetting");
-            
+
             this.FontSizeTextBlock.Text = resource.GetString("Texts_FontSize");
 
             this.DirectionTextBlock.Text = resource.GetString("Texts_Direction");
