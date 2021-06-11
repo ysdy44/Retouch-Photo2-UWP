@@ -108,7 +108,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FontWeightExtensions.cs" />
+    <Compile Include="TextsExtensions.cs" />
     <Compile Include="HorizontalAlignmentSegmented.xaml.cs">
       <DependentUpon>HorizontalAlignmentSegmented.xaml</DependentUpon>
     </Compile>
