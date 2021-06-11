@@ -10,8 +10,8 @@
     d:DesignHeight="400"
     Type="Effect"
     >
-    
-    
+
+
     <local:MenuExpander.Resources>
         <!--StaticResource-->
         <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemListLowColor}"/>
@@ -35,7 +35,7 @@
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel x:Name="StackPanel">
 
-                    <ListViewItem x:Name="GaussianBlur" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="GaussianBlur" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -47,7 +47,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/GaussianBlurIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource GaussianBlurIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource GaussianBlurIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
@@ -55,7 +57,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="DirectionalBlur" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="DirectionalBlur" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -67,7 +69,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/DirectionalBlurIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource DirectionalBlurIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource DirectionalBlurIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
@@ -75,7 +79,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="Sharpen" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="Sharpen" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -87,7 +91,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/SharpenIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource SharpenIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource SharpenIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
@@ -95,7 +101,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="OuterShadow" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="OuterShadow" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -107,7 +113,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/OuterShadowIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource OuterShadowIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource OuterShadowIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
@@ -115,7 +123,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="Edge" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="Edge" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -127,7 +135,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/EdgeIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource EdgeIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource EdgeIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
@@ -135,7 +145,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="Morphology" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="Morphology" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -147,7 +157,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/MorphologyIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource MorphologyIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource MorphologyIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
@@ -155,7 +167,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="Emboss" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="Emboss" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -167,7 +179,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/EmbossIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource EmbossIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource EmbossIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
@@ -175,7 +189,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="Straighten" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                    <ListViewItem x:Name="Straighten" Padding="8,0,0,0" Height="46" HorizontalContentAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -187,7 +201,9 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/StraightenIcon.xaml"/>
                                 </ContentControl.Resources>
                                 <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource StraightenIcon}"/>
+                                    <Border CornerRadius="2" Width="31" Height="31" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundDark}">
+                                        <ContentControl Template="{StaticResource StraightenIcon}"/>
+                                    </Border>
                                 </ContentControl.Tag>
                             </ContentControl>
                             <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
