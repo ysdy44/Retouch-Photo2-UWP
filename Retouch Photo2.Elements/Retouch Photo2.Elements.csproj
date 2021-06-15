@@ -137,6 +137,9 @@
     <Compile Include="DPISegmented.xaml.cs">
       <DependentUpon>DPISegmented.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Docker.xaml.cs">
+      <DependentUpon>Docker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Expander.xaml.cs">
       <DependentUpon>Expander.xaml</DependentUpon>
     </Compile>
@@ -251,6 +254,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="DPISegmented.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Docker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

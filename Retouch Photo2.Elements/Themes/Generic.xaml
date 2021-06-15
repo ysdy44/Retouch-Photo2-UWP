@@ -8,6 +8,8 @@
         <!--Dialog-->
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Dialog.xaml"/>
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/DialogWide.xaml"/>
+        <!--Dockers-->
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Docker.xaml" />
         <!--Expanders-->
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Expander.xaml" />
         <!--ExpanedHead-->
