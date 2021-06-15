@@ -28,6 +28,7 @@ namespace Retouch_Photo2.Tools
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
+        LayerType LayerType => this.SelectionViewModel.LayerType;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
@@ -95,8 +96,8 @@ namespace Retouch_Photo2.Tools
             if (this.IsSnap && this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
 
             // Selection
-            /// Scaling <see cref="TextArtisticLayer"/> equally.
-            bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
+            /// Scaling <see cref="ITextLayer"/> equally.
+            bool isRatio = this.IsRatio || (this.Mode == ListViewSelectionMode.Single && this.LayerType.IsText() && this.TransformerMode.IsScaleCorner());
             Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsSnapToTick);
 
             // Method
@@ -126,8 +127,8 @@ namespace Retouch_Photo2.Tools
             }
 
             // Selection
-            /// Scaling <see cref="TextArtisticLayer"/> equally.
-            bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
+            /// Scaling <see cref="ITextLayer"/> equally.
+            bool isRatio = this.IsRatio || (this.Mode == ListViewSelectionMode.Single && this.LayerType.IsText() && this.TransformerMode.IsScaleCorner());
             Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsSnapToTick);
 
             // Method
@@ -163,6 +164,15 @@ namespace Retouch_Photo2.Tools
             // Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor);
+
+            /// Scaling <see cref="ITextLayer"/> equally.
+            if (this.Mode == ListViewSelectionMode.Single && this.LayerType.IsText())
+            {
+                drawingSession.DrawNode(Vector2.Transform(this.Transformer.LeftTop, matrix));
+                drawingSession.DrawNode(Vector2.Transform(this.Transformer.RightTop, matrix));
+                drawingSession.DrawNode(Vector2.Transform(this.Transformer.RightBottom, matrix));
+                drawingSession.DrawNode(Vector2.Transform(this.Transformer.LeftBottom, matrix));
+            }
 
             // Snapping
             if (this.IsSnap)

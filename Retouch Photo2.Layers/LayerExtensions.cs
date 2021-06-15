@@ -129,5 +129,23 @@ namespace Retouch_Photo2.Layers
             }
         }
 
+        /// <summary>
+        /// Is corner-scale mode?
+        /// </summary>
+        /// <param name="transformerMode"> The transformer mode. </param>
+        public static bool IsScaleCorner(this TransformerMode transformerMode)
+        {
+            switch (transformerMode)
+            {
+                case TransformerMode.ScaleLeftTop:
+                case TransformerMode.ScaleRightTop:
+                case TransformerMode.ScaleRightBottom:
+                case TransformerMode.ScaleLeftBottom:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
     }
 }
