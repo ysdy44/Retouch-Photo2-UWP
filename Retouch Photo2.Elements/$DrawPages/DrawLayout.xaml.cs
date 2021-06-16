@@ -14,10 +14,6 @@ namespace Retouch_Photo2.Elements
     /// <summary> 
     /// <see cref = "DrawPage" />'s layout. 
     /// </summary>
-    [TemplateVisualState(Name = nameof(WritableCollapsed), GroupName = nameof(WritableVisualStateGroup))]
-    [TemplateVisualState(Name = nameof(WritablePhone), GroupName = nameof(WritableVisualStateGroup))]
-    [TemplateVisualState(Name = nameof(WritablePad), GroupName = nameof(WritableVisualStateGroup))]
-    [TemplateVisualState(Name = nameof(WritablePC), GroupName = nameof(WritableVisualStateGroup))]
     [TemplateVisualState(Name = nameof(Normal), GroupName = nameof(VisualStateGroup))]
     [TemplateVisualState(Name = nameof(FullScreen), GroupName = nameof(VisualStateGroup))]
     [TemplateVisualState(Name = nameof(Phone), GroupName = nameof(VisualStateGroup))]
@@ -82,8 +78,8 @@ namespace Retouch_Photo2.Elements
         /// <summary> WritableOKButton's click. </summary>
         public event RoutedEventHandler WritableOKButtonClick
         {
-            add => this.WritableOKButton.Click += value;
-            remove => this.WritableOKButton.Click -= value;
+            add => this.WritableDocker.PrimaryButtonClick += value;
+            remove => this.WritableDocker.PrimaryButtonClick -= value;
         }
 
 

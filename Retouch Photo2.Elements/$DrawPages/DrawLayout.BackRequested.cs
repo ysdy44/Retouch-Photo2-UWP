@@ -40,13 +40,11 @@ namespace Retouch_Photo2.Elements
 
             // Writable
             {
-                this.WritableIconContentControl.Template = icon;
-                this.WritableTextBlock.Text = title;
-                this.WritableContentPresenter.Content = content;
+                this.WritableDocker.IconTemplate = icon;
+                this.WritableDocker.Title = title;
+                this.WritableDocker.Content = content;
 
                 this.IsWritable = true;
-                this.WritableVisualState = this.WritableVisualState; // State
-
                 this._vsIsFullScreen = true;
                 this.VisualStateCore = this.VisualState; // State
             }
@@ -69,13 +67,11 @@ namespace Retouch_Photo2.Elements
             // Writable
             if (this.IsWritable)
             {
-                this.WritableIconContentControl.Template = null;
-                this.WritableTextBlock.Text = string.Empty;
-                this.WritableContentPresenter.Content = null;
+                this.WritableDocker.IconTemplate = null;
+                this.WritableDocker.Title = string.Empty;
+                this.WritableDocker.Content = null;
 
                 this.IsWritable = false;
-                this.WritableVisualState = this.WritableVisualState; // State
-
                 this._vsIsFullScreen = false;
                 this.VisualState = this.VisualState; // State
             }

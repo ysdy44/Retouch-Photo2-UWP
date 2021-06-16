@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     >
 
@@ -67,118 +67,6 @@
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WritableVisualStateGroup">
-
-                <!--Collapsed-->
-                <VisualState x:Name="WritableCollapsed"/>
-
-                <!--Phone-->
-                <VisualState x:Name="WritablePhone">
-                    <VisualState.Setters>
-                        <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "WritableTransform.Y" Value="0"/>
-                        <Setter Target = "WritableBorder.HorizontalAlignment" Value="Stretch"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Pad-->
-                <VisualState x:Name="WritablePad">
-                    <VisualState.Setters>
-                        <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "WritableTransform.Y" Value="0"/>
-                        <Setter Target = "WritableBorder.Width" Value="500"/>
-                        <Setter Target = "WritableBorder.CornerRadius" Value="6,6,0,0"/>
-                        <Setter Target = "WritableBorder.BorderThickness" Value="1,1,1,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--PC-->
-                <VisualState x:Name="WritablePC">
-                    <VisualState.Setters>
-                        <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "WritableTransform.Y" Value="0"/>
-                        <Setter Target = "WritableBorder.Width" Value="600"/>
-                        <Setter Target = "WritableBorder.CornerRadius" Value="6"/>
-                        <Setter Target = "WritableBorder.Margin" Value="0,10"/>
-                        <Setter Target = "WritableBorder.BorderThickness" Value="1"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <VisualStateGroup.Transitions>
-
-                    <!--WritableCollapsed>WritablePhone-->
-                    <VisualTransition From="WritableCollapsed" To="WritablePhone" GeneratedDuration="0:0:0.2">
-                        <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
-                        </VisualTransition.GeneratedEasingFunction>
-                        <Storyboard>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Visibility" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                            </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="HorizontalAlignment" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
-                            </ObjectAnimationUsingKeyFrames>
-
-                            <DoubleAnimation Storyboard.TargetName="WritableTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
-                                <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseOut"/>
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </VisualTransition>
-                    <!--WritableCollapsed>WritablePad-->
-                    <VisualTransition From="WritableCollapsed" To="WritablePad" GeneratedDuration="0:0:0.2">
-                        <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
-                        </VisualTransition.GeneratedEasingFunction>
-                        <Storyboard>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Visibility" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                            </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Width" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="500"/>
-                            </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="6,6,0,0"/>
-                            </ObjectAnimationUsingKeyFrames>
-
-                            <DoubleAnimation Storyboard.TargetName="WritableTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
-                                <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseOut"/>
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </VisualTransition>
-                    <!--WritableCollapsed>WritablePC-->
-                    <VisualTransition From="WritableCollapsed" To="WritablePC" GeneratedDuration="0:0:0.2">
-                        <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
-                        </VisualTransition.GeneratedEasingFunction>
-                        <Storyboard>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Visibility" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                            </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Width" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="600"/>
-                            </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="6"/>
-                            </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Margin" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="0,10"/>
-                            </ObjectAnimationUsingKeyFrames>
-
-                            <DoubleAnimation Storyboard.TargetName="WritableTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
-                                <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseOut"/>
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </VisualTransition>
-
-                </VisualStateGroup.Transitions>
-
-            </VisualStateGroup>
             <VisualStateGroup x:Name="VisualStateGroup">
 
 
@@ -1256,45 +1144,11 @@
                          apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicWindowBrush}"/>
 
-
-        <Border x:Name="WritableBorder" Grid.Column="1" Grid.Row="1" MinHeight="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"
-                         BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppStroke}" 
-                         apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
-                         apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
-            <Border.RenderTransformOrigin>1, 0.5</Border.RenderTransformOrigin>
-            <Border.RenderTransform>
-                <TranslateTransform x:Name="WritableTransform" Y="50"/>
-            </Border.RenderTransform>
-            <StackPanel>
-                <Grid Height="Auto" Padding="10,0" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="1*" MaxWidth="100"/>
-                        <!--
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="1*" MaxWidth="100"/>
-                        -->
-                    </Grid.ColumnDefinitions>
-                    <ContentControl Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Tag>
-                            <ContentControl x:Name="WritableIconContentControl"/>
-                        </ContentControl.Tag>
-                        <ContentControl.Content>
-                            <TextBlock x:Name="WritableTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                        </ContentControl.Content>
-                    </ContentControl>
-                    <Button x:Name="WritableOKButton" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource AppAccentOutlineButton}">
-                        <SymbolIcon Symbol="Accept"/>
-                    </Button>
-                    <!--
-                    <Button x:Name="WritableCancelButton" Visibility="Collapsed" Grid.Column="3" HorizontalAlignment="Stretch" Style="{StaticResource AppOutlineButton}">
-                        <SymbolIcon Symbol="Cancel"/>
-                    </Button>
-                    -->
-                </Grid>
-                <ContentPresenter x:Name="WritableContentPresenter" Grid.Column="1" Grid.Row="1" Padding="10,0" VerticalAlignment="Top"/>
-            </StackPanel>
-        </Border>
+        <elements:Docker x:Name="WritableDocker" Grid.Column="1" Grid.Row="1" Padding="4,0">
+            <elements:Docker.PrimaryButtonContent>
+                <SymbolIcon Symbol="Accept"/>
+            </elements:Docker.PrimaryButtonContent>
+        </elements:Docker>
 
 
     </Grid>

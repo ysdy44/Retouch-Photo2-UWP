@@ -68,26 +68,6 @@ namespace Retouch_Photo2.Elements
             set => VisualStateManager.GoToState(this, value.Name, true);
         }
         private VisualState VisualStateCore { set => VisualStateManager.GoToState(this, value.Name, false); }
-        /// <summary> 
-        /// Represents the writable visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState WritableVisualState
-        {
-            get
-            {
-                if (this._vsIsWritable == false) return this.WritableCollapsed;
-
-                switch (this._vsDeviceLayoutType)
-                {
-                    case DeviceLayoutType.PC: return this.WritablePC;
-                    case DeviceLayoutType.Pad: return this.WritablePad;
-                    case DeviceLayoutType.Phone: return this.WritablePhone;
-                }
-
-                return this.WritableCollapsed;
-            }
-            set => VisualStateManager.GoToState(this, value.Name, true);
-        }
 
 
         /// <summary> Gets or sets the page layout is writable. </summary>
@@ -97,8 +77,8 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsIsWritable = value;
-                this.WritableVisualState = this.WritableVisualState; // State
-
+                if (value) this.WritableDocker.Show();
+                else this.WritableDocker.Hide();
                 this.MenuOverlayCanvasVisibility = value ? Visibility.Collapsed : Visibility.Visible;
             }
         }
@@ -126,7 +106,7 @@ namespace Retouch_Photo2.Elements
             {
                 this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsDeviceLayoutType = value;
-                this.WritableVisualState = this.WritableVisualState; // State
+                this.WritableDocker.DeviceLayoutType = value;
                 this.VisualState = this.VisualState; // State
             }
         }
