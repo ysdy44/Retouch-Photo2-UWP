@@ -48,7 +48,7 @@ namespace Retouch_Photo2
         // Gallery
         private void ConstructGalleryDialog()
         {
-            this.GalleryDialog.CloseButtonTapped += (s, e) => this.GalleryDialogTrySetResult(null, null);
+            this.GalleryDialog.SecondaryButtonClick += (s, e) => this.GalleryDialogTrySetResult(null, null);
             this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
             {
                 // Files
@@ -145,7 +145,7 @@ namespace Retouch_Photo2
             this.SelectionViewModel.SetMode(); // Selection
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
-            this.ViewModel.Invalidate(); // Invalidate     
+            this.ViewModel.Invalidate(); // Invalidate
         }
         private async Task CopyMultipleImageFilesAndCreateImageLayersAsync(IReadOnlyList<IStorageItem> items)
         {

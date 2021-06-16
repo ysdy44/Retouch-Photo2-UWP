@@ -486,9 +486,9 @@
 
 
         <!--Gallery-->
-        <elements:DialogWide x:Name="GalleryDialog">
-            <GridView x:Name="GalleryGridView" Padding="14,0" IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
-        </elements:DialogWide>
+        <elements:Docker x:Name="GalleryDialog" DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}">
+            <GridView x:Name="GalleryGridView" Padding="10,6" IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
+        </elements:Docker>
         <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
 
 

@@ -94,7 +94,7 @@ namespace Retouch_Photo2
 
             this.GalleryDialog.Title = resource.GetString("$DrawPage_Gallery");
             {
-                this.GalleryDialog.PrimaryButtonText = resource.GetString("$DrawPage_GalleryDialog_Primary");
+                this.GalleryDialog.PrimaryButtonContent = resource.GetString("$DrawPage_GalleryDialog_Primary");
             }
 
             this.DrawLayout.GalleryToolTipContent = resource.GetString("$DrawPage_Gallery");
