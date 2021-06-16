@@ -7,28 +7,19 @@
 
 
     <Style TargetType="local:Docker">
-        <Setter Property="MaxWidth" Value="NaN"/>
-        <Setter Property="MaxHeight" Value="NaN"/>
-        <Setter Property="MinHeight" Value="100"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="BorderThickness" Value="0,1,0,0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Docker">
-                    <Grid x:Name="RootGrid" Opacity="0"
-                            MaxWidth="{TemplateBinding MaxWidth}"
-                            MaxHeight="{TemplateBinding MaxHeight}"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
-                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}" 
-                            BorderThickness="{TemplateBinding BorderThickness}" 
-                            BorderBrush="{TemplateBinding BorderBrush}" 
-                            apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
-                            apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"
-                            >
+                    <Border x:Name="LayoutBorder" 
+                            Opacity="0"
+                            Visibility="Collapsed"
+                            VerticalAlignment="Stretch"
+                            Background="{ThemeResource AppStroke}">
 
                         <!--VisualState-->
                         <VisualStateManager.VisualStateGroups>
@@ -43,7 +34,8 @@
                                         <Setter Target = "TitleGrid.HorizontalAlignment" Value="Stretch"/>
                                         <Setter Target = "ContentPresenter.HorizontalAlignment" Value="Stretch"/>
 
-                                        <Setter Target = "RootGrid.Opacity" Value="1"/>
+                                        <Setter Target = "LayoutBorder.Visibility" Value="Visible"/>
+                                        <Setter Target = "LayoutBorder.Opacity" Value="1"/>
                                         <Setter Target = "TranslateTransform.Y" Value="0"/>
                                     </VisualState.Setters>
                                 </VisualState>
@@ -51,10 +43,11 @@
                                 <!--Pad-->
                                 <VisualState x:Name="Pad">
                                     <VisualState.Setters>
-                                        <Setter Target = "TitleGrid.Width" Value="500"/>
-                                        <Setter Target = "ContentPresenter.Width" Value="500"/>
+                                        <Setter Target = "TitleGrid.Width" Value="540"/>
+                                        <Setter Target = "ContentPresenter.Width" Value="540"/>
 
-                                        <Setter Target = "RootGrid.Opacity" Value="1"/>
+                                        <Setter Target = "LayoutBorder.Visibility" Value="Visible"/>
+                                        <Setter Target = "LayoutBorder.Opacity" Value="1"/>
                                         <Setter Target = "TranslateTransform.Y" Value="0"/>
                                     </VisualState.Setters>
                                 </VisualState>
@@ -62,10 +55,11 @@
                                 <!--PC-->
                                 <VisualState x:Name="PC">
                                     <VisualState.Setters>
-                                        <Setter Target = "TitleGrid.Width" Value="600"/>
-                                        <Setter Target = "ContentPresenter.Width" Value="600"/>
+                                        <Setter Target = "TitleGrid.Width" Value="668"/>
+                                        <Setter Target = "ContentPresenter.Width" Value="668"/>
 
-                                        <Setter Target = "RootGrid.Opacity" Value="1"/>
+                                        <Setter Target = "LayoutBorder.Visibility" Value="Visible"/>
+                                        <Setter Target = "LayoutBorder.Opacity" Value="1"/>
                                         <Setter Target = "TranslateTransform.Y" Value="0"/>
                                     </VisualState.Setters>
                                 </VisualState>
@@ -85,12 +79,15 @@
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
                                             </ObjectAnimationUsingKeyFrames>
 
-                                            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CircleEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="150" To="0" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CircleEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
@@ -104,18 +101,21 @@
                                         </VisualTransition.GeneratedEasingFunction>
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitleGrid" Storyboard.TargetProperty="Width" Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="500"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="540"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Width" Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="500"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="540"/>
                                             </ObjectAnimationUsingKeyFrames>
 
-                                            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CircleEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="100" To="0" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CircleEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
@@ -129,18 +129,109 @@
                                         </VisualTransition.GeneratedEasingFunction>
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitleGrid" Storyboard.TargetProperty="Width" Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="600"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="668"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Width" Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="600"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="668"/>
                                             </ObjectAnimationUsingKeyFrames>
 
-                                            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CircleEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="100" To="0" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    
+                                    <!--Phone>Normal-->
+                                    <VisualTransition From="Phone" To="Normal" GeneratedDuration="0:0:0.2">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitleGrid" Storyboard.TargetProperty="HorizontalAlignment" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="HorizontalAlignment" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="0" To="100" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <!--Pad>Normal-->
+                                    <VisualTransition From="Pad" To="Normal" GeneratedDuration="0:0:0.2">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitleGrid" Storyboard.TargetProperty="Width" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="540"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Width" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="540"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="0" To="100" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <!--PC>Normal-->
+                                    <VisualTransition From="PC" To="Normal" GeneratedDuration="0:0:0.2">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitleGrid" Storyboard.TargetProperty="Width" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="668"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Width" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="668"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Storyboard.TargetProperty="Y" From="0" To="100" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CircleEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
@@ -152,48 +243,51 @@
 
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
-
-                        <Grid.RenderTransformOrigin>0.5, 0.5</Grid.RenderTransformOrigin>
-                        <Grid.RenderTransform>
-                            <TranslateTransform x:Name="TranslateTransform" Y="50"/>
-                        </Grid.RenderTransform>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
                         
                         
-                        <Grid x:Name="TitleGrid" Height="Auto" Padding="10,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="1*" MaxWidth="100"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
-                                <ContentControl.Tag>
-                                    <ContentControl Template="{TemplateBinding IconTemplate}"/>
-                                </ContentControl.Tag>
-                                <ContentControl.Content>
-                                    <TextBlock x:Name="WritableTextBlock" Text="{TemplateBinding Title}" Style="{StaticResource AppTextBlockStyle}"/>
-                                </ContentControl.Content>
-                            </ContentControl>
-                            <!--
-                            <Button x:Name="SecondaryButton" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource AppOutlineButton}">
-                            <SymbolIcon Symbol="Cancel"/>               
-                            </Button>            
-                            -->
-                            <Button x:Name="PrimaryButton" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource AppAccentOutlineButton}">
-                                <SymbolIcon Symbol="Accept"/>
-                            </Button>
+                        <Grid x:Name="RootGrid" 
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            MaxHeight="660"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="150"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                            VerticalAlignment="Bottom" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
+                            apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
+                            <Grid.RenderTransformOrigin>0.5, 0.5</Grid.RenderTransformOrigin>
+                            <Grid.RenderTransform>
+                                <TranslateTransform x:Name="TranslateTransform" Y="50"/>
+                            </Grid.RenderTransform>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Grid x:Name="TitleGrid" Height="Auto" Padding="10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*" MaxWidth="100"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentControl Template="{TemplateBinding IconTemplate}"/>
+                                <Button x:Name="SecondaryButton" Visibility="Collapsed" Padding="2" MinWidth="32" Width="36" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                                    <FontIcon Glyph="&#xE10A;" FontSize="18" FontFamily="Segoe MDL2 Assets"/>
+                                </Button>
+                                <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" Style="{StaticResource AppTextBlockStyle}"/>
+                                <Button x:Name="PrimaryButton" Grid.Column="2" HorizontalAlignment="Stretch" Content="{TemplateBinding PrimaryButtonContent}" Style="{StaticResource AppAccentOutlineButton}"/>
+                            </Grid>
+
+                            <Rectangle Grid.Row="1" Height="1" Fill="{TemplateBinding BorderBrush}"/>
+
+                            <ContentPresenter x:Name="ContentPresenter" Grid.Row="2" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}"/>
+
                         </Grid>
-
-                        <Rectangle Grid.Row="1" Height="1" Fill="{TemplateBinding BorderBrush}"/>
-
-                        <ContentPresenter x:Name="ContentPresenter" Grid.Row="2" Content="{TemplateBinding Content}"/>
-
-                    </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

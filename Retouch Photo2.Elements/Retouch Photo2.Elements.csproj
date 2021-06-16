@@ -128,6 +128,7 @@
       <DependentUpon>CheckControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CoreCursorExtension.cs" />
+    <Compile Include="Docker.BackRequested.cs" />
     <Compile Include="Dialog.BackRequested.cs" />
     <Compile Include="DialogWide.BackRequested.cs" />
     <Compile Include="DialogWide.xaml.cs">

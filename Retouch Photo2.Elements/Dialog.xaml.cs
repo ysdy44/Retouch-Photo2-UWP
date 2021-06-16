@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Elements
         public static readonly DependencyProperty SecondaryButtonTextProperty = DependencyProperty.Register(nameof(SecondaryButtonText), typeof(string), typeof(Dialog), new PropertyMetadata("Cancel"));
 
 
-        /// <summary> Gets or sets <see cref = "Dialog.PrimaryButton" />'s title. </summary>
+        /// <summary> Gets or sets <see cref = "Dialog.PrimaryButton" />'s text. </summary>
         public string PrimaryButtonText
         {
             get => (string)base.GetValue(PrimaryButtonTextProperty);
