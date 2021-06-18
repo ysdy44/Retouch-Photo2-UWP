@@ -179,6 +179,9 @@
     <Compile Include="RadiusAnimas\RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StarButton.xaml.cs">
+      <DependentUpon>StarButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Toolkit\AlignmentGrid\AlignmentGrid.cs" />
     <Compile Include="Toolkit\Brushes\AlphaMode.cs" />
     <Compile Include="Toolkit\Brushes\CanvasBrushBase.cs" />
@@ -305,6 +308,10 @@
     <Page Include="RadiusAnimas\RadiusAnimaPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StarButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
