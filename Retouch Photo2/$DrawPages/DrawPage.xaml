@@ -487,6 +487,11 @@
 
         <!--Gallery-->
         <elements:Docker x:Name="GalleryDialog" DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}">
+            <elements:Docker.IconTemplate>
+                <ControlTemplate>
+                    <Image Width="36" Height="36" Source="ms-appx:///Icons\AppRender.png"/>
+                </ControlTemplate>
+            </elements:Docker.IconTemplate>
             <GridView x:Name="GalleryGridView" Padding="10,6" IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
         </elements:Docker>
         <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>

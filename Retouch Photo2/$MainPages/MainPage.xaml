@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:viewmodels="using:Retouch_Photo2.ViewModels"
     mc:Ignorable="d"
     NavigationCacheMode="Required"    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -268,6 +269,9 @@
         </elements:MainLayout>
 
 
+        <elements:StarButton x:Name="Star"/>
+        
+        
         <!--Loading-->
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 
@@ -283,6 +287,48 @@
             <elements:SizePicker x:Name="SizePicker"/>
         </elements:Dialog>
 
+        <!--Docker-->
+        <elements:Docker x:Name="PresetDocker" DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}">
+            <elements:Docker.PrimaryButtonContent>
+                <SymbolIcon Symbol="Add"/>
+            </elements:Docker.PrimaryButtonContent>
+            <elements:Docker.IconTemplate>
+                <ControlTemplate>
+                    <Image Width="36" Height="36" Source="ms-appx:///Icons\AppRender.png"/>
+                </ControlTemplate>
+            </elements:Docker.IconTemplate>
+            <GridView x:Name="PresetGridView" Padding="12,4" SelectionMode="None" IsItemClickEnabled="True">
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Height" Value="124"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:Project">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Canvas Width="{x:Bind PresetWidth}" Height="{x:Bind PresetHeight}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Line X1="0" Y1="0" X2="{x:Bind PresetWidth}" Y2="{x:Bind PresetHeight}" StrokeThickness="1" Stroke="{ThemeResource AppForeground}"/>
+                                <Line X1="{x:Bind PresetWidth}" Y1="0" X2="0" Y2="{x:Bind PresetHeight}" StrokeThickness="1" Stroke="{ThemeResource AppForeground}"/>
+                                <Rectangle Width="{x:Bind PresetWidth}" Height="{x:Bind PresetHeight}" StrokeThickness="1" Stroke="{ThemeResource AppForeground}"/>
+                            </Canvas>
+                            <TextBlock Grid.Row="1" Style="{StaticResource AppTabTextBlockStyle}">
+                                <Run Text="{x:Bind Width}" />                              
+                                <Run>:</Run>                               
+                                <Run Text="{x:Bind Height}" />
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <viewmodels:Project Width="1024" Height="1024"/>
+                <viewmodels:Project Width="1920" Height="1080"/>
+                <viewmodels:Project Width="1080" Height="1920"/>
+            </GridView>
+        </elements:Docker>
 
     </Grid>
 </Page>

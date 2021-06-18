@@ -45,6 +45,17 @@ namespace Retouch_Photo2
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
 
+            this.Star.Click += (s, e) => this.PresetDocker.Show();
+            this.PresetDocker.PrimaryButtonClick += (s, e) => this.ShowAddDialog();
+            this.PresetDocker.SecondaryButtonClick += (s, e) => this.PresetDocker.Hide();
+            this.PresetGridView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is Project item)
+                {
+                    this.PresetDocker.Hide();
+                    this.NewFromSize(item.Width, item.Height);
+                }
+            };
 
             // MainLayout
             this.MainLayout.GridView.ItemsSource = this.Items;
