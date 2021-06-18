@@ -98,8 +98,6 @@
                         <!--Right-->
                         <Setter Target = "RightGrid.Visibility" Value="Collapsed"/>
 
-                        <Setter Target = "_PinStackPanel.Visibility" Value="Collapsed"/>
-
                     </VisualState.Setters>
                 </VisualState>
 
@@ -1144,7 +1142,7 @@
                          apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicWindowBrush}"/>
 
-        <elements:Docker x:Name="WritableDocker" Grid.Column="1" Grid.Row="1" Padding="4,0">
+        <elements:Docker x:Name="WritableDocker" Grid.Column="1" Grid.Row="1" Padding="4,0" Background="{x:Null}">
             <elements:Docker.PrimaryButtonContent>
                 <SymbolIcon Symbol="Accept"/>
             </elements:Docker.PrimaryButtonContent>

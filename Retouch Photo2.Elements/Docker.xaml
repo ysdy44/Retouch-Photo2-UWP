@@ -12,6 +12,7 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="BorderThickness" Value="0,1,0,0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
+        <Setter Property="Background" Value="{ThemeResource AppStroke}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Docker">
@@ -19,7 +20,7 @@
                             Opacity="0"
                             Visibility="Collapsed"
                             VerticalAlignment="Stretch"
-                            Background="{ThemeResource AppStroke}">
+                            Background="{TemplateBinding Background}" >
 
                         <!--VisualState-->
                         <VisualStateManager.VisualStateGroups>
