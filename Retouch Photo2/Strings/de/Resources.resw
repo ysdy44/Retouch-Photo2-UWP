@@ -137,6 +137,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Qualität</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Datei Format</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Fotos hinzufügen)</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>Voreinstellung</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Layoutbreite wechseln</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Galerie</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>Proportionalzoom</value></data>

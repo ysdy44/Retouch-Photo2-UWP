@@ -137,6 +137,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Качественный</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Формат файла</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Добавить фотографии)</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>Предустановка</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Переключить ширину макета</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Галерея</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>Пропорциональный зум</value></data>

@@ -137,6 +137,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>质量</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>文件格式</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>添加图片</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>预设</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>切换布局宽度</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>图库</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>等比例缩放</value></data>

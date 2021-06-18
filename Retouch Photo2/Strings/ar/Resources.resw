@@ -137,6 +137,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>جودة</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>تنسيق الملف</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>إضافة الصور)</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>الضبط المسبق</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>عرض تخطيط التبديل</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>صالة عرض</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>التكبير النسبي</value></data>

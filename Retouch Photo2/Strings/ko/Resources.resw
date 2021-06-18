@@ -137,6 +137,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>품질</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>파일 형식</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>사진 추가</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>프리셋</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>레이아웃 너비 전환</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>갤러리</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>비례 줌</value></data>

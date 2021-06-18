@@ -137,6 +137,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>品質</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>ファイル形式</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>写真を追加する</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>プリセット</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>スイッチのレイアウト幅</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>ギャラリー</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>比例ズーム</value></data>
