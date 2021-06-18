@@ -276,9 +276,6 @@
                                     <ColumnDefinition Width="1*" MaxWidth="100"/>
                                 </Grid.ColumnDefinitions>
                                 <ContentControl Template="{TemplateBinding IconTemplate}"/>
-                                <Button x:Name="SecondaryButton" Visibility="Collapsed" Padding="2" MinWidth="32" Width="36" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                                    <FontIcon Glyph="&#xE10A;" FontSize="18" FontFamily="Segoe MDL2 Assets"/>
-                                </Button>
                                 <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" Style="{StaticResource AppTextBlockStyle}"/>
                                 <Button x:Name="PrimaryButton" Grid.Column="2" HorizontalAlignment="Stretch" Content="{TemplateBinding PrimaryButtonContent}" Style="{StaticResource AppAccentOutlineButton}"/>
                             </Grid>

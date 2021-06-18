@@ -17,7 +17,6 @@ namespace Retouch_Photo2.Elements
     [TemplateVisualState(Name = nameof(Phone), GroupName = nameof(VisualStateGroup))]
     [TemplateVisualState(Name = nameof(Pad), GroupName = nameof(VisualStateGroup))]
     [TemplateVisualState(Name = nameof(PC), GroupName = nameof(VisualStateGroup))]
-    [TemplatePart(Name = nameof(SecondaryButton), Type = typeof(Button))]
     [TemplatePart(Name = nameof(PrimaryButton), Type = typeof(Button))]
     [ContentProperty(Name = nameof(Content))]
     public sealed partial class Docker : ContentControl
@@ -73,7 +72,6 @@ namespace Retouch_Photo2.Elements
         VisualState PC;
         Border LayoutBorder;
         Grid RootGrid;
-        Button SecondaryButton;
         Button PrimaryButton;
 
 
@@ -147,14 +145,6 @@ namespace Retouch_Photo2.Elements
             if (this.RootGrid != null) this.RootGrid.Tapped -= this.RootGrid_Tapped;
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Grid;
             if (this.RootGrid != null) this.RootGrid.Tapped += this.RootGrid_Tapped;
-
-            if (this.SecondaryButton != null) this.SecondaryButton.Click -= this.SecondaryButtonClick;
-            this.SecondaryButton = base.GetTemplateChild(nameof(SecondaryButton)) as Button;
-            if (this.SecondaryButton != null)
-            {
-                this.SecondaryButton.Visibility = (this.SecondaryButtonClick is null) ? Visibility.Collapsed : Visibility.Visible;
-                this.SecondaryButton.Click += this.SecondaryButtonClick;
-            }
 
             if (this.PrimaryButton != null) this.PrimaryButton.Click -= this.PrimaryButtonClick;
             this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
