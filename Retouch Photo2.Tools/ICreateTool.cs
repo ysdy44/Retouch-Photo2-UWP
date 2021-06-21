@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Tools
         /// <param name="startingPoint"> The starting pointer. </param>
         /// <param name="point"> The pointer. </param>
         /// <param name="isOutNodeDistance"> Whether the distance'LengthSquared exceeds [NodeDistance].. </param>
-        void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance);
+        bool Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance);
 
         /// <summary>
         /// Occurs when the cursor pointer is moved.

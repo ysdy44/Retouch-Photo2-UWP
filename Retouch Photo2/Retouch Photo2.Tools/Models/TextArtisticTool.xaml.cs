@@ -14,6 +14,7 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Linq;
 using System.Numerics;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
@@ -138,7 +139,17 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point) => this.ViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
         public void Delta(Vector2 startingPoint, Vector2 point) => this.ViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.ViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public async void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
+        {
+            bool result = this.ViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+            if (result)
+            {
+                if (this.TextBox.FocusState == FocusState.Keyboard) return;
+                await Task.Delay(50); //Wait user input then Focus.
+                this.TextBox.Focus(FocusState.Keyboard);
+                this.TextBox.SelectAll();
+            }
+        }
         public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
         public void Cursor(Vector2 point) => this.ViewModel.CreateTool.Cursor(point);

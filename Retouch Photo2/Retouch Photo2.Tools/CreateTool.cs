@@ -114,8 +114,9 @@ namespace Retouch_Photo2.Tools
 
             if (this.ViewModel.TransformerTool.Delta(startingPoint, point)) return;// TransformerTool
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
+        public bool Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
+            bool result = false;
             if (this.Mode == ListViewSelectionMode.Extended)
             {
                 if (isOutNodeDistance)
@@ -147,6 +148,7 @@ namespace Retouch_Photo2.Tools
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayerage);
                     LayerManager.ArrangeLayers();
                     LayerManager.ArrangeLayersBackground();
+                    result = true;
                 }
                 else
                 {
@@ -168,7 +170,8 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate(InvalidateMode.HD); // Invalidate
             }
 
-            if (this.ViewModel.TransformerTool.Complete(startingPoint, point)) return;// TransformerTool
+            if (this.ViewModel.TransformerTool.Complete(startingPoint, point)) return false;// TransformerTool
+            return result;
         }
 
         public void Cursor(Vector2 point)
