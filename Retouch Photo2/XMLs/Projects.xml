@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Root>
+
+  <Project>
+    <Width>1024</Width>
+    <Height>1024</Height>
+  </Project>
+
+  <Project>
+    <Width>1920</Width>
+    <Height>1080</Height>
+  </Project>
+
+  <Project>
+    <Width>1080</Width>
+    <Height>1920</Height>
+  </Project>
+
+</Root>

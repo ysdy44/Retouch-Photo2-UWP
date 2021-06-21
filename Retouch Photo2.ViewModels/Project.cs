@@ -11,7 +11,7 @@ using Windows.Foundation;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary>
-    /// Represents a project class with width and layerages.
+    /// Represents a project class with size and layerages.
     /// </summary>
     public class Project
     {
@@ -26,13 +26,13 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Gets or sets the width for preset, Range 2 to 75. </summary>
-        public double PresetWidth => this.GetPresetSize().Width;
+        public double PresetWidth => this.BitmapSizeConverter().Width;
         /// <summary> Gets or sets the height for preset, Range 2 to 75. </summary>
-        public double PresetHeight => this.GetPresetSize().Height;
-      
-        private Size GetPresetSize()
+        public double PresetHeight => this.BitmapSizeConverter().Height;
+
+        /// <summary> Turn to the UI size from bitmap size, Range (2, 2) to (75, 75). </summary>
+        private Size BitmapSizeConverter()
         {
-            System.Diagnostics.Debug.WriteLine("sssssssssssssssssssssssssssssssssssssss");
             // 65 * 65 = 4225
             if (this.Width == this.Height) return new Size(65, 65);
             if (this.Width <= 0) return new Size(65, 65);
