@@ -37,21 +37,21 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <ProgressRing x:Name="ProgressRing" Width="34" Height="34" Foreground="{ThemeResource AppForeground}"
+                <ProgressRing x:Name="ProgressRing" Width="34" Height="34" 
                            IsActive="{x:Bind ProgressRingBooleanConverter(State), Mode=OneWay}"
                            Visibility="{x:Bind ProgressRingVisibilityConverter(State), Mode=OneWay}"/>
 
                 <ProgressBar x:Name="ProgressBar" Width="100" Minimum="0" Maximum="1"
                            Visibility="{x:Bind ProgressBarVisibilityConverter(State), Mode=OneWay}"/>
 
-                <FontIcon x:Name="CorrectIcon" Glyph="&#xEC61;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppForeground}"
+                <FontIcon x:Name="CorrectIcon" Glyph="&#xEC61;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="#FFC003"
                            Visibility="{x:Bind CorrectVisibilityConverter(State), Mode=OneWay}"/>
                 
-                <FontIcon x:Name="ErrorIcon" Glyph="&#xEB90;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppForeground}"
+                <FontIcon x:Name="ErrorIcon" Glyph="&#xEB90;" FontSize="32" FontFamily="Segoe MDL2 Assets" 
                            Visibility="{x:Bind ErrorVisibilityConverter(State), Mode=OneWay}"/>
                 
                 
-                <TextBlock x:Name="TextBlock" Grid.Row="2" HorizontalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"
+                <TextBlock x:Name="TextBlock" Grid.Row="2" HorizontalAlignment="Center" 
                             Text="{x:Bind StringsConverter(State), Mode=OneWay}"/>
                 
             </Grid>
