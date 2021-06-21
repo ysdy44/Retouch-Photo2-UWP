@@ -269,9 +269,6 @@
         </elements:MainLayout>
 
 
-        <elements:StarButton x:Name="Star"/>
-
-
         <!--Loading-->
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 

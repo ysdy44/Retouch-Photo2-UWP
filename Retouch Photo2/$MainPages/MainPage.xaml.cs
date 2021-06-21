@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.Globalization;
-using Windows.Graphics.Imaging;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -51,6 +50,7 @@ namespace Retouch_Photo2
             
             this.PresetGridView.Loaded += (s, e) => this.ConstructPresetGridView();
             this.ConstructPresetDocker();
+            this.MainLayout.StarButtonClick += (s, e) => this.PresetDocker.Show();
 
             // MainLayout
             this.MainLayout.GridView.ItemsSource = this.Items;

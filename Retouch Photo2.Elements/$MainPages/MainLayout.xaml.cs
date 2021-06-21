@@ -14,6 +14,14 @@ namespace Retouch_Photo2.Elements
     public sealed partial class MainLayout : UserControl
     {
 
+        //@Delegate
+        /// <summary> Occurs when the clicking the s star button. </summary>
+        public event RoutedEventHandler StarButtonClick
+        {
+            add => this.Star.Click += value;
+            remove => this.Star.Click -= value;
+        }
+
         //@Content     
         /// <summary> GridView. </summary>
         public GridView GridView => this._GridView;

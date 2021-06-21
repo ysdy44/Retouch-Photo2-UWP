@@ -59,6 +59,14 @@
 
                         <!--Foot-->
                         <Setter Target = "PicturesBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "Star.Visibility" Value="Collapsed"/>
+
+                        <!--_GridView-->
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.CanReorderItems" Value="False"/>
+                        <Setter Target = "_GridView.CanDragItems" Value="False"/>
+                        <Setter Target = "_GridView.AllowDrop" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -74,9 +82,17 @@
 
                         <!--Head-->
                         <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
-
+                        
                         <!--Foot-->
                         <Setter Target = "RenameBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "Star.Visibility" Value="Collapsed"/>
+
+                        <!--_GridView-->
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.CanReorderItems" Value="False"/>
+                        <Setter Target = "_GridView.CanDragItems" Value="False"/>
+                        <Setter Target = "_GridView.AllowDrop" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -92,6 +108,14 @@
 
                         <!--Foot-->
                         <Setter Target = "SaveBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "Star.Visibility" Value="Collapsed"/>
+
+                        <!--_GridView-->
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.CanReorderItems" Value="False"/>
+                        <Setter Target = "_GridView.CanDragItems" Value="False"/>
+                        <Setter Target = "_GridView.AllowDrop" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -107,6 +131,14 @@
 
                         <!--Foot-->
                         <Setter Target = "ShareBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "Star.Visibility" Value="Collapsed"/>
+
+                        <!--_GridView-->
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.CanReorderItems" Value="False"/>
+                        <Setter Target = "_GridView.CanDragItems" Value="False"/>
+                        <Setter Target = "_GridView.AllowDrop" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -122,6 +154,14 @@
 
                         <!--Foot-->
                         <Setter Target = "DeleteBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "Star.Visibility" Value="Collapsed"/>
+
+                        <!--_GridView-->
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.CanReorderItems" Value="False"/>
+                        <Setter Target = "_GridView.CanDragItems" Value="False"/>
+                        <Setter Target = "_GridView.AllowDrop" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -137,6 +177,14 @@
 
                         <!--Foot-->
                         <Setter Target = "DuplicateBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "Star.Visibility" Value="Collapsed"/>
+
+                        <!--_GridView-->
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.ReorderMode" Value="Disabled"/>
+                        <Setter Target = "_GridView.CanReorderItems" Value="False"/>
+                        <Setter Target = "_GridView.CanDragItems" Value="False"/>
+                        <Setter Target = "_GridView.AllowDrop" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -152,47 +200,47 @@
         </Grid.RowDefinitions>
 
         <!--Body-->
-        <Border Grid.RowSpan="3">
-            <GridView x:Name="_GridView" 
-                      Padding="0,20"
-                      IsItemClickEnabled="True" 
-                      SelectionMode="None" 
-                      ReorderMode="Enabled" 
-                      CanReorderItems="True"
-                      CanDragItems="True" 
-                      AllowDrop="True"
-                      animations:ItemsReorderAnimation.Duration="0:0:0.3"
-                      >
+        <GridView x:Name="_GridView"                  
+                  Grid.RowSpan="3"                
+                  Padding="0,20"                  
+                  IsItemClickEnabled="True"                   
+                  SelectionMode="None" 
+                  ReorderMode="Enabled"                    
+                  CanReorderItems="True"                  
+                  CanDragItems="True"                   
+                  AllowDrop="True"                  
+                  animations:ItemsReorderAnimation.Duration="0:0:0.3"                 
+                  >
 
-                <GridView.Header>
-                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
-                </GridView.Header>
+            <GridView.Header>
+                <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
+            </GridView.Header>
 
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </GridView.ItemContainerStyle>
-                
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid Orientation="Horizontal" ItemWidth="140" ItemHeight="140"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                </Style>
+            </GridView.ItemContainerStyle>
 
-                <GridView.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <AddDeleteThemeTransition />
-                        <ContentThemeTransition />
-                        <ReorderThemeTransition />
-                        <EntranceThemeTransition IsStaggeringEnabled="False" />
-                    </TransitionCollection>
-                </GridView.ItemContainerTransitions>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" ItemWidth="140" ItemHeight="140"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
 
-                <GridView.Template>
-                    <ControlTemplate TargetType="GridView">
-                        <ScrollViewer x:Name="ScrollViewer"
+            <GridView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                    <ContentThemeTransition />
+                    <ReorderThemeTransition />
+                    <EntranceThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </GridView.ItemContainerTransitions>
+
+            <GridView.Template>
+                <ControlTemplate TargetType="GridView">
+                    <ScrollViewer x:Name="ScrollViewer"
                             TabNavigation="{TemplateBinding TabNavigation}"
                             HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -206,7 +254,7 @@
                             IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                             BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
                             AutomationProperties.AccessibilityView="Raw">
-                            <ItemsPresenter HorizontalAlignment="Center"
+                        <ItemsPresenter HorizontalAlignment="Center"
                                 Header="{TemplateBinding Header}"
                                 HeaderTemplate="{TemplateBinding HeaderTemplate}"
                                 HeaderTransitions="{TemplateBinding HeaderTransitions}"
@@ -214,19 +262,21 @@
                                 FooterTemplate="{TemplateBinding FooterTemplate}"
                                 FooterTransitions="{TemplateBinding FooterTransitions}"
                                 Padding="{TemplateBinding Padding}" />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </GridView.Template>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </GridView.Template>
 
-                <GridView.Footer>
-                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
-                </GridView.Footer>
+            <GridView.Footer>
+                <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
+            </GridView.Footer>
 
-            </GridView>
-        </Border>
+        </GridView>
 
         <Border x:Name="InitialBorder" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
         </Border>
+
+
+        <local:StarButton x:Name="Star" Grid.Row="3"/>
 
 
         <!--Foot-->

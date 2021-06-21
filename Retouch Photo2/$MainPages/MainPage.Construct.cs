@@ -167,8 +167,6 @@ namespace Retouch_Photo2
         }
         private void ConstructPresetDocker()
         {
-            this.Star.Click += (s, e) => this.PresetDocker.Show();
-        
             this.PresetDocker.SecondaryButtonClick += (s, e) => this.PresetDocker.Hide();
             this.PresetDocker.PrimaryButtonClick += (s, e) => this.AddPresetDialog.Show();
 
