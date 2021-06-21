@@ -23,9 +23,8 @@ namespace Retouch_Photo2
         /// <summary>
         /// New from size.
         /// </summary>
-        /// <param name="width"> The width for size. </param>
-        /// <param name="height"> The height for size. </param>
-        public void NewFromSize(int width, int height)
+        /// <param name="size"> The size. </param>
+        public void NewFromSize(BitmapSize size)
         {
             this.LoadingControl.State = LoadingState.Loading;
 
@@ -35,8 +34,8 @@ namespace Retouch_Photo2
             // Project
             Project project = new Project
             {
-                Width = width,
-                Height = height,
+                Width = (int)size.Width,
+                Height = (int)size.Height,
             };
 
             // Item

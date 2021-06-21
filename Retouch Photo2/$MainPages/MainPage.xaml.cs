@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Globalization;
+using Windows.Graphics.Imaging;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -38,10 +39,10 @@ namespace Retouch_Photo2
             this.ConstructFlowDirection();
             this.ConstructStrings();
             this.Loaded += (s, e) =>
-            {
-                this.MainLayout.Count = this.Count;
-                this.MainLayout.State = MainPageState.Main;
-            };
+             {
+                 this.MainLayout.Count = this.Count;
+                 this.MainLayout.State = MainPageState.Main;
+             };
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
 
@@ -50,11 +51,15 @@ namespace Retouch_Photo2
             this.PresetDocker.SecondaryButtonClick += (s, e) => this.PresetDocker.Hide();
             this.PresetGridView.ItemClick += (s, e) =>
             {
-                if (e.ClickedItem is Project item)
+                if (e.ClickedItem is BitmapSize item)
                 {
                     this.PresetDocker.Hide();
-                    this.NewFromSize(item.Width, item.Height);
+                    this.NewFromSize(item);
                 }
+            }; 
+            this.PresetGridView.Loaded += async (s, e) =>
+            {
+                if (this.PresetGridView.ItemsSource is null) this.PresetGridView.ItemsSource = await Retouch_Photo2.XML.ConstructProjectsFile();
             };
 
             // MainLayout

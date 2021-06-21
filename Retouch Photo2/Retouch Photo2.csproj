@@ -278,6 +278,7 @@
     <Compile Include="XMLs\XML.Bitmap.cs" />
     <Compile Include="XMLs\XML.FiltersFile.cs" />
     <Compile Include="XMLs\XML.LayersFile.cs" />
+    <Compile Include="XMLs\XML.ProjectsFile.cs" />
     <Compile Include="XMLs\XML.StylesFile.cs" />
     <Compile Include="XMLs\XML.PhotosFile.cs" />
     <Compile Include="XMLs\XML.ProjectFile.cs" />
@@ -371,6 +372,7 @@
     <Content Include="Icons\Lenna.jpg" />
     <Content Include="Icons\LoadFaill.jpg" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="XMLs\Projects.xml" />
     <Content Include="XMLs\Styles.xml" />
     <Content Include="XMLs\Filters.xml" />
     <Content Include="XMLs\FilterOriginal.xml" />
