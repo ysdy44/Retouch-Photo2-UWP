@@ -36,10 +36,11 @@ namespace Retouch_Photo2.Styles
         }
 
         /// <summary>
-        ///  Loads a <see cref="IStyle"/>Categorys from an XElement.
+        ///  Loads a <see cref="IStyle"/>s from an XDocument.
         /// </summary>
         /// <param name="document"> The source XDocument. </param>
         /// <returns> The loaded <see cref="IStyle"/>s. </returns>
+        /// <summary>
         public static IEnumerable<StyleCategory> LoadStyleCategorys(XDocument document)
         {
             if (document.Element("Root") is XElement root)

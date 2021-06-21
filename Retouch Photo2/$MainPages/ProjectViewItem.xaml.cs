@@ -75,7 +75,7 @@ namespace Retouch_Photo2
 
         //@Construct
         /// <summary>
-        /// Initializes a ProjectViewItem from <see cref = "StorageFolder" />.
+        /// Initializes a ProjectViewItem.
         /// </summary>
         public ProjectViewItem()
         {

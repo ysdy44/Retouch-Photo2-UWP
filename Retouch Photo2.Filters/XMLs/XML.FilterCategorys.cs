@@ -37,10 +37,10 @@ namespace Retouch_Photo2.Filters
         }
 
         /// <summary>
-        ///  Loads a <see cref="Filter"/>Categorys from an XElement.
+        ///  Loads a <see cref="FilterCategory"/>s from an XDocument.
         /// </summary>
         /// <param name="document"> The source XDocument. </param>
-        /// <returns> The loaded <see cref="Filter"/>s. </returns>
+        /// <returns> The loaded <see cref="FilterCategory"/>s. </returns>
         public static IEnumerable<FilterCategory> LoadFilterCategorys(XDocument document)
         {
             if (document.Element("Root") is XElement root)
