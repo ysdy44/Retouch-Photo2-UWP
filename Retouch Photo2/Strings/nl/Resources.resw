@@ -58,9 +58,9 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
-<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='$Version' xml:space='preserve'><value>2.1.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Ongetiteld</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
 <data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
@@ -110,6 +110,7 @@
 <data name='$MainPage_Initial_New' xml:space='preserve'><value>Maak een nieuw project</value></data>
 <data name='$MainPage_Initial_Photo' xml:space='preserve'><value>Maak een nieuw project vanuit de galerij</value></data>
 <data name='$MainPage_Initial_Destop' xml:space='preserve'><value>Maak een nieuw project vanaf de desktop</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>Voorinstelling</value></data>
 <data name='$MainPage_New' xml:space='preserve'><value>Nieuw</value></data>
 <data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>Voeg een nieuw project toe</value></data>
 <data name='$MainPage_Pictures' xml:space='preserve'><value>Afbeeldingen</value></data>
@@ -137,7 +138,6 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Kwaliteit</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Bestandsformaat</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Voeg foto's toe)</value></data>
-<data name='$MainPage_Preset' xml:space='preserve'><value>Voorinstelling</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Schakel de layoutbreedte in</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Galerij</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>Proportionele zoom</value></data>

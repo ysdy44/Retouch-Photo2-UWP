@@ -58,9 +58,9 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
-<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='$Version' xml:space='preserve'><value>2.1.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>제목 없음</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
 <data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
@@ -110,6 +110,7 @@
 <data name='$MainPage_Initial_New' xml:space='preserve'><value>새 프로젝트 만들기</value></data>
 <data name='$MainPage_Initial_Photo' xml:space='preserve'><value>갤러리에서 새 프로젝트 만들기</value></data>
 <data name='$MainPage_Initial_Destop' xml:space='preserve'><value>데스크탑에서 새 프로젝트 만들기</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>프리셋</value></data>
 <data name='$MainPage_New' xml:space='preserve'><value>새로운</value></data>
 <data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>새 프로젝트 추가</value></data>
 <data name='$MainPage_Pictures' xml:space='preserve'><value>영화</value></data>
@@ -137,7 +138,6 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>품질</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>파일 형식</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>사진 추가</value></data>
-<data name='$MainPage_Preset' xml:space='preserve'><value>프리셋</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>레이아웃 너비 전환</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>갤러리</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>비례 줌</value></data>

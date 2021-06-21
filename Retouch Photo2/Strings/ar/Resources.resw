@@ -60,7 +60,7 @@
   </resheader>
 
 
-<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='$Version' xml:space='preserve'><value>2.1.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>بدون عنوان</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
 <data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
@@ -110,6 +110,7 @@
 <data name='$MainPage_Initial_New' xml:space='preserve'><value>أنشئ مشروعًا جديدًا</value></data>
 <data name='$MainPage_Initial_Photo' xml:space='preserve'><value>قم بإنشاء مشروع جديد من المعرض</value></data>
 <data name='$MainPage_Initial_Destop' xml:space='preserve'><value>قم بإنشاء مشروع جديد من سطح المكتب</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>الضبط المسبق</value></data>
 <data name='$MainPage_New' xml:space='preserve'><value>جديد</value></data>
 <data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>اضافة مشروع جديد</value></data>
 <data name='$MainPage_Pictures' xml:space='preserve'><value>الصور</value></data>
@@ -137,7 +138,6 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>جودة</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>تنسيق الملف</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>إضافة الصور)</value></data>
-<data name='$MainPage_Preset' xml:space='preserve'><value>الضبط المسبق</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>عرض تخطيط التبديل</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>صالة عرض</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>التكبير النسبي</value></data>

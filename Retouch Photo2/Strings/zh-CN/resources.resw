@@ -58,9 +58,9 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
-<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='$Version' xml:space='preserve'><value>2.1.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>未命名</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://gitee.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-ZH.md</value></data>
 <data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
@@ -110,6 +110,7 @@
 <data name='$MainPage_Initial_New' xml:space='preserve'><value>创建新项目</value></data>
 <data name='$MainPage_Initial_Photo' xml:space='preserve'><value>从图库创建新项目</value></data>
 <data name='$MainPage_Initial_Destop' xml:space='preserve'><value>从桌面创建新项目</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>预设</value></data>
 <data name='$MainPage_New' xml:space='preserve'><value>新建</value></data>
 <data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>添加新项目</value></data>
 <data name='$MainPage_Pictures' xml:space='preserve'><value>图片</value></data>
@@ -137,7 +138,6 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>质量</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>文件格式</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>添加图片</value></data>
-<data name='$MainPage_Preset' xml:space='preserve'><value>预设</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>切换布局宽度</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>图库</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>等比例缩放</value></data>

@@ -58,9 +58,9 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
-<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='$Version' xml:space='preserve'><value>2.1.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>無題</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
 <data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
@@ -110,6 +110,7 @@
 <data name='$MainPage_Initial_New' xml:space='preserve'><value>新しいプロジェクトを作成する</value></data>
 <data name='$MainPage_Initial_Photo' xml:space='preserve'><value>ギャラリーから新しいプロジェクトを作成します</value></data>
 <data name='$MainPage_Initial_Destop' xml:space='preserve'><value>デスクトップから新しいプロジェクトを作成する</value></data>
+<data name='$MainPage_Preset' xml:space='preserve'><value>プリセット</value></data>
 <data name='$MainPage_New' xml:space='preserve'><value>新着</value></data>
 <data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>新しいプロジェクトを追加する</value></data>
 <data name='$MainPage_Pictures' xml:space='preserve'><value>ピクチャー</value></data>
@@ -137,7 +138,6 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>品質</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>ファイル形式</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>写真を追加する</value></data>
-<data name='$MainPage_Preset' xml:space='preserve'><value>プリセット</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>スイッチのレイアウト幅</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>ギャラリー</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>比例ズーム</value></data>
