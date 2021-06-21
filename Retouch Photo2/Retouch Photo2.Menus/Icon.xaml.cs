@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Menus
 
                 case MenuType.Layer: return new Retouch_Photo2.Layers.Icon();
               
-                case MenuType.Pantone: return new PantoneIcon();
+                //case MenuType.Pantone: return new PantoneIcon();
                 case MenuType.Color: return new ColorIcon();
 
                 default: return null;

@@ -29,7 +29,7 @@ namespace Retouch_Photo2.ViewModels
 
         Layer,
 
-        Pantone,
+        //Pantone,
         Color,
     }
 }
