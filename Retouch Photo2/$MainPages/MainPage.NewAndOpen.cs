@@ -21,22 +21,15 @@ namespace Retouch_Photo2
     {
 
         /// <summary>
-        /// New from size.
+        /// New from project.
         /// </summary>
-        /// <param name="size"> The size. </param>
-        public void NewFromSize(BitmapSize size)
+        /// <param name="project"> The project. </param>
+        public void NewFromProject(Project project)
         {
             this.LoadingControl.State = LoadingState.Loading;
 
             string untitled = this.Untitled;
             string name = this.UntitledRenameByRecursive(untitled);
-
-            // Project
-            Project project = new Project
-            {
-                Width = (int)size.Width,
-                Height = (int)size.Height,
-            };
 
             // Item
             IProjectViewItem item = new ProjectViewItem

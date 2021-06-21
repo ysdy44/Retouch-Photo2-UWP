@@ -6,7 +6,9 @@
 using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.Foundation;
+using Windows.Graphics.Imaging;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -24,6 +26,41 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Gets or sets the layerages. </summary>
         public IEnumerable<Layerage> Layerages;
 
+        //@Construct
+        /// <summary>
+        /// Initializes a Project. 
+        /// </summary>
+        public Project() { }
+        /// <summary>
+        /// Initializes a Project. 
+        /// </summary>
+        /// <param name="size"> The size. </param>
+        public Project(BitmapSize size)
+        {
+            this.Width = (int)size.Width;
+            this.Height = (int)size.Height;
+        }
+
+        /// <summary>
+        /// Get own copy.
+        /// </summary>
+        /// <returns> The cloned Project. </returns>
+        public Project Clone()
+        {
+            return new Project
+            {
+                Width = this.Width,
+                Height = this.Height,
+                Layerages =
+                this.Layerages is null ?
+                null :
+                (
+                    from l
+                    in this.Layerages
+                    select l.Clone()
+                )
+            };
+        }
 
         /// <summary> Gets or sets the width for preset, Range 2 to 75. </summary>
         public double PresetWidth => this.BitmapSizeConverter().Width;

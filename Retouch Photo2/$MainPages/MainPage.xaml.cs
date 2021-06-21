@@ -7,6 +7,7 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.Globalization;
 using Windows.Graphics.Imaging;
@@ -28,6 +29,8 @@ namespace Retouch_Photo2
         IEnumerable<IProjectViewItem> SelectedItems => from i in this.Items where i.IsSelected select i;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
+        private ObservableCollection<Project> PresetProjects { get; set; }
+
 
         //@Construct
         /// <summary>
@@ -45,22 +48,9 @@ namespace Retouch_Photo2
              };
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
-
-            this.Star.Click += (s, e) => this.PresetDocker.Show();
-            this.PresetDocker.PrimaryButtonClick += (s, e) => this.ShowAddDialog();
-            this.PresetDocker.SecondaryButtonClick += (s, e) => this.PresetDocker.Hide();
-            this.PresetGridView.ItemClick += (s, e) =>
-            {
-                if (e.ClickedItem is BitmapSize item)
-                {
-                    this.PresetDocker.Hide();
-                    this.NewFromSize(item);
-                }
-            }; 
-            this.PresetGridView.Loaded += async (s, e) =>
-            {
-                if (this.PresetGridView.ItemsSource is null) this.PresetGridView.ItemsSource = await Retouch_Photo2.XML.ConstructProjectsFile();
-            };
+            
+            this.PresetGridView.Loaded += (s, e) => this.ConstructPresetGridView();
+            this.ConstructPresetDocker();
 
             // MainLayout
             this.MainLayout.GridView.ItemsSource = this.Items;

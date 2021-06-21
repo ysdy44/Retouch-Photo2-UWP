@@ -324,11 +324,12 @@
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>
-                <viewmodels:Project Width="1024" Height="1024"/>
-                <viewmodels:Project Width="1920" Height="1080"/>
-                <viewmodels:Project Width="1080" Height="1920"/>
             </GridView>
         </elements:Docker>
 
+        <elements:Dialog x:Name="AddPresetDialog" Grid.Row="1" Grid.RowSpan="2">
+            <elements:SizePicker x:Name="PresetSizePicker"/>
+        </elements:Dialog>
+        
     </Grid>
 </Page>

@@ -1,6 +1,8 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
@@ -44,6 +46,7 @@ namespace Retouch_Photo2
             }
 
             this.PresetDocker.Title = resource.GetString("$MainPage_Preset");
+            this.AddPresetDialog.Title = resource.GetString("$MainPage_NewDialog_Title");
 
             this.ClickTipTextBlock.Text = resource.GetString("$MainPage_Select_ClickTip");
             this.AllButton.Content = resource.GetString("$MainPage_Select_All");
@@ -150,6 +153,50 @@ namespace Retouch_Photo2
         }
 
 
+        // Present
+        private async void ConstructPresetGridView()
+        {
+            if (this.PresetGridView.ItemsSource is null)
+            {
+                IEnumerable<Project> source = await Retouch_Photo2.XML.ConstructProjectsFile();
+                if (source is null) return;
+
+                this.PresetProjects = new ObservableCollection<Project>(source);
+                this.PresetGridView.ItemsSource = this.PresetProjects;
+            }
+        }
+        private void ConstructPresetDocker()
+        {
+            this.Star.Click += (s, e) => this.PresetDocker.Show();
+        
+            this.PresetDocker.SecondaryButtonClick += (s, e) => this.PresetDocker.Hide();
+            this.PresetDocker.PrimaryButtonClick += (s, e) => this.AddPresetDialog.Show();
+
+            this.PresetGridView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is Project item)
+                {
+                    this.PresetDocker.Hide();
+                    this.NewFromProject(item.Clone());
+                }
+            };
+
+            this.AddPresetDialog.SecondaryButtonClick += (s, e) => this.AddPresetDialog.Hide();
+            this.AddPresetDialog.PrimaryButtonClick += (s, e) =>
+            {
+                BitmapSize size = this.PresetSizePicker.Size;
+
+                // Project
+                Project project = new Project
+                {
+                    Width = (int)size.Width,
+                    Height = (int)size.Height,
+                };
+
+                this.PresetProjects.Add(project);
+            };
+        }
+
 
         // AddDialog
         private void ConstructAddDialog()
@@ -160,7 +207,7 @@ namespace Retouch_Photo2
                 this.HideAddDialog();
 
                 BitmapSize size = this.SizePicker.Size;
-                this.NewFromSize(size);
+                this.NewFromProject(new Project(size));
             };
         }
         private void ShowAddDialog() => this.AddDialog.Show();
