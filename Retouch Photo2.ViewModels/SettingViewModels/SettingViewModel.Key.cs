@@ -55,7 +55,7 @@ namespace Retouch_Photo2.ViewModels
             this.KeyUpAndDown();
 
 
-            if (this.KeyboardAccelerators != null)
+            if ((this.KeyboardAccelerators is null) == false)
             {
                 foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
                 {
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.ViewModels
             this.KeyUpAndDown();
 
 
-            if (this.KeyboardAccelerators != null)
+            if ((this.KeyboardAccelerators is null) == false)
             {
                 foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
                 {

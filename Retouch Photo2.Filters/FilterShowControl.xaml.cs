@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Filters
             {
                 control.CanvasControl.Invalidate(); // Invalidate
                 control.TextBlock.Text = Retouch_Photo2.Elements.XML.CreateString(value.Name, value.Strings, control.Language);
-                control.TextBlock.FontWeight = value.Strings == null ? FontWeights.Normal : FontWeights.Bold;
+                control.TextBlock.FontWeight = value.Strings is null ? FontWeights.Normal : FontWeights.Bold;
             }
         }));
 
@@ -76,14 +76,14 @@ namespace Retouch_Photo2.Filters
             this.CanvasControl.CustomDevice = FilterShowControl.CanvasDevice;
             this.CanvasControl.CreateResources += (sender, arges) =>
             {
-                if (FilterShowControl.Bitmap == null)
+                if (FilterShowControl.Bitmap is null)
                 {
                     Task task = FilterShowControl.CreateResourceAsync();
                     IAsyncAction action = task.AsAsyncAction();
                     arges.TrackAsyncAction(action);
                 }
 
-                if (FilterShowControl.Bitmap != null)
+                if ((FilterShowControl.Bitmap is null) == false)
                 {
                     CanvasRenderTarget renderTarget = new CanvasRenderTarget(sender, (float)this.Width, (float)this.Height);
                     using (CanvasDrawingSession ds = renderTarget.CreateDrawingSession())
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Filters
             };
             this.CanvasControl.Draw += (sender, args) =>
             {
-                if (this.BitmapCore != null)
+                if ((this.BitmapCore is null) == false)
                 {
                     args.DrawingSession.DrawImage(this.BitmapCore);
                 }

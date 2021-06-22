@@ -257,7 +257,7 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedTo()
         {
             Layerage layerage = this.SelectionViewModel.GetFirstSelectedLayerage();
-            if (layerage != null)
+            if ((layerage is null) == false)
             {
                 ILayer layer = layerage.Self;
                 this.SelectionViewModel.SetStyle(layer.Style);

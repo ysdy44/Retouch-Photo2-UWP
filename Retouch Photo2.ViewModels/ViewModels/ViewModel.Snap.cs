@@ -42,7 +42,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Initiate the snap. </summary>
         public void VectorBorderSnapInitiate(Layerage firstLayerages)
         {
-            if (firstLayerages != null)
+            if ((firstLayerages is null) == false)
             {
                 this.VectorBorderSnap.Destinations = this.GetSnapDestinations(firstLayerages);
             }
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Initiate the snap. </summary>
         public void BorderBorderSnapInitiate(Layerage firstLayer)
         {
-            if (firstLayer != null)
+            if ((firstLayer is null) == false)
             {
                 this.BorderBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
             }

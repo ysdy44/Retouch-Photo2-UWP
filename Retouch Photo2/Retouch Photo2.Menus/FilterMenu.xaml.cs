@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Menus
 
 
         //@Converter
-        private bool IsEnableConverter(FilterShowControlCategory value) => value != null;
+        private bool IsEnableConverter(FilterShowControlCategory value) => (value is null) == false;
 
         private string Untitled = "Untitled";
 
@@ -87,10 +87,10 @@ namespace Retouch_Photo2.Menus
 
             this.Loaded += async (s, e) =>
             {
-                if (this.SelectedControlCategory == null)
+                if (this.SelectedControlCategory is null)
                 {
                     IEnumerable<FilterCategory> filterCategorys = await Retouch_Photo2.XML.ConstructFiltersFile();
-                    if (filterCategorys == null) return;
+                    if (filterCategorys is null) return;
 
                     foreach (FilterCategory filterCategory in filterCategorys)
                     {

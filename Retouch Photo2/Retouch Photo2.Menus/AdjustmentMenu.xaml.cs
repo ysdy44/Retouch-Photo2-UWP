@@ -139,7 +139,7 @@ namespace Retouch_Photo2.Menus
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
-                if (outermostLayer == null) outermostLayer = layer;
+                if (outermostLayer is null) outermostLayer = layer;
 
                 var previous = layer.Filter.Clone();
                 history.UndoAction += () =>
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Menus
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
-                if (outermostLayer == null) outermostLayer = layer;
+                if (outermostLayer is null) outermostLayer = layer;
 
                 var previous = layer.Filter.Clone();
                 history.UndoAction += () =>

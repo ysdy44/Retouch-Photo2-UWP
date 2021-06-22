@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
             Layerage layerage = this.GetTransformerLayer(startingPoint, matrix);
-            if (layerage == null) return;
+            if (layerage is null) return;
             ILayer layer = layerage.Self;
 
 
@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.Layerage == null) return;
+            if (this.Layerage is null) return;
             if (this.IsMove == false && this.TransformerMode == TransformerMode.None) return;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            if (this.Layerage == null) return;
+            if (this.Layerage is null) return;
             if (this.IsMove == false && this.TransformerMode == TransformerMode.None) return;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();

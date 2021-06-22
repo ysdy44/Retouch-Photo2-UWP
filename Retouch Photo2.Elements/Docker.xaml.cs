@@ -138,17 +138,17 @@ namespace Retouch_Photo2.Elements
             this.Pad = base.GetTemplateChild(nameof(Pad)) as VisualState;
             this.PC = base.GetTemplateChild(nameof(PC)) as VisualState;
 
-            if (this.LayoutBorder != null) this.LayoutBorder.Tapped -= this.LayoutBorder_Tapped;
+            if ((this.LayoutBorder is null) == false) this.LayoutBorder.Tapped -= this.LayoutBorder_Tapped;
             this.LayoutBorder = base.GetTemplateChild(nameof(LayoutBorder)) as Border;
-            if (this.LayoutBorder != null) this.LayoutBorder.Tapped += this.LayoutBorder_Tapped;
+            if ((this.LayoutBorder is null) == false) this.LayoutBorder.Tapped += this.LayoutBorder_Tapped;
 
-            if (this.RootGrid != null) this.RootGrid.Tapped -= this.RootGrid_Tapped;
+            if ((this.RootGrid is null) == false) this.RootGrid.Tapped -= this.RootGrid_Tapped;
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Grid;
-            if (this.RootGrid != null) this.RootGrid.Tapped += this.RootGrid_Tapped;
+            if ((this.RootGrid is null) == false) this.RootGrid.Tapped += this.RootGrid_Tapped;
 
-            if (this.PrimaryButton != null) this.PrimaryButton.Click -= this.PrimaryButtonClick;
+            if ((this.PrimaryButton is null) == false) this.PrimaryButton.Click -= this.PrimaryButtonClick;
             this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
-            if (this.PrimaryButton != null) this.PrimaryButton.Click += this.PrimaryButtonClick;
+            if ((this.PrimaryButton is null) == false) this.PrimaryButton.Click += this.PrimaryButtonClick;
 
             this.VisualState = this.VisualState; // State
         }

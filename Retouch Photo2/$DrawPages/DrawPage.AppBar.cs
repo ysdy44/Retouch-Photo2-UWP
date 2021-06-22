@@ -18,7 +18,7 @@ namespace Retouch_Photo2
         IDictionary<MenuType, Retouch_Photo2.Menus.Icon> MenuIcons;
         private void ConstructMenuTypes(IList<MenuType> menuTypes)
         {
-            if (MenuIcons == null)
+            if (MenuIcons is null)
             {
                 this.MenuIcons = new Dictionary<MenuType, Retouch_Photo2.Menus.Icon>();
                 foreach (MenuType type in (MenuType[])Enum.GetValues(typeof(MenuType)))

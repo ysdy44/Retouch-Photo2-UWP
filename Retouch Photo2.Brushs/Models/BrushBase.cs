@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Brushs
                 this.photocopier = value;
 
                 Photocopier photocopier = this.Photocopier;
-                if (photocopier.Name == null) return;
+                if (photocopier.Name is null) return;
 
                 Photo photo = Photo.FindFirstPhoto(photocopier);
                 CanvasBitmap bitmap = photo.Source;

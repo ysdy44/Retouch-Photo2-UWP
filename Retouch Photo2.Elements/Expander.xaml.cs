@@ -154,20 +154,20 @@ namespace Retouch_Photo2.Elements
 
             this.WidthMenuFlyout = base.GetTemplateChild(nameof(WidthMenuFlyout)) as MenuFlyout;
 
-            if (this.WidthFlyoutItem250 != null) this.WidthFlyoutItem250.Click -= this.WidthFlyoutItem250_Click;
+            if ((this.WidthFlyoutItem250 is null) == false) this.WidthFlyoutItem250.Click -= this.WidthFlyoutItem250_Click;
             this.WidthFlyoutItem250 = base.GetTemplateChild(nameof(WidthFlyoutItem250)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem250 != null) this.WidthFlyoutItem250.Click += this.WidthFlyoutItem250_Click;
+            if ((this.WidthFlyoutItem250 is null) == false) this.WidthFlyoutItem250.Click += this.WidthFlyoutItem250_Click;
 
-            if (this.WidthFlyoutItem300 != null) this.WidthFlyoutItem300.Click -= this.WidthFlyoutItem300_Click;
+            if ((this.WidthFlyoutItem300 is null) == false) this.WidthFlyoutItem300.Click -= this.WidthFlyoutItem300_Click;
             this.WidthFlyoutItem300 = base.GetTemplateChild(nameof(WidthFlyoutItem300)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem300 != null) this.WidthFlyoutItem300.Click += this.WidthFlyoutItem300_Click;
+            if ((this.WidthFlyoutItem300 is null) == false) this.WidthFlyoutItem300.Click += this.WidthFlyoutItem300_Click;
 
-            if (this.WidthFlyoutItem350 != null) this.WidthFlyoutItem350.Click -= this.WidthFlyoutItem350_Click;
+            if ((this.WidthFlyoutItem350 is null) == false) this.WidthFlyoutItem350.Click -= this.WidthFlyoutItem350_Click;
             this.WidthFlyoutItem350 = base.GetTemplateChild(nameof(WidthFlyoutItem350)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem350 != null) this.WidthFlyoutItem350.Click += this.WidthFlyoutItem350_Click;
+            if ((this.WidthFlyoutItem350 is null) == false) this.WidthFlyoutItem350.Click += this.WidthFlyoutItem350_Click;
 
 
-            if (this.TitleGrid != null)
+            if ((this.TitleGrid is null) == false)
             {
                 this.TitleGrid.Holding -= this.TitleGrid_Holding;
                 this.TitleGrid.DoubleTapped -= this.TitleGrid_DoubleTapped;
@@ -177,7 +177,7 @@ namespace Retouch_Photo2.Elements
                 this.TitleGrid.ManipulationCompleted -= this.TitleGrid_ManipulationCompleted;
             }
             this.TitleGrid = base.GetTemplateChild(nameof(TitleGrid)) as Grid;
-            if (this.TitleGrid != null)
+            if ((this.TitleGrid is null) == false)
             {
                 this.TitleGrid.Holding += this.TitleGrid_Holding;
                 this.TitleGrid.DoubleTapped += this.TitleGrid_DoubleTapped;
@@ -187,17 +187,17 @@ namespace Retouch_Photo2.Elements
                 this.TitleGrid.ManipulationCompleted += this.TitleGrid_ManipulationCompleted;
             }
 
-            if (this.OverlayButton != null) this.OverlayButton.Tapped -= this.OverlayButton_Tapped;
+            if ((this.OverlayButton is null) == false) this.OverlayButton.Tapped -= this.OverlayButton_Tapped;
             this.OverlayButton = base.GetTemplateChild(nameof(OverlayButton)) as ListViewItem;
-            if (this.OverlayButton != null) this.OverlayButton.Tapped += this.OverlayButton_Tapped;
+            if ((this.OverlayButton is null) == false) this.OverlayButton.Tapped += this.OverlayButton_Tapped;
 
-            if (this.PinButton != null) this.PinButton.Tapped -= this.PinButton_Tapped;
+            if ((this.PinButton is null) == false) this.PinButton.Tapped -= this.PinButton_Tapped;
             this.PinButton = base.GetTemplateChild(nameof(PinButton)) as ListViewItem;
-            if (this.PinButton != null) this.PinButton.Tapped += this.PinButton_Tapped;
+            if ((this.PinButton is null) == false) this.PinButton.Tapped += this.PinButton_Tapped;
 
-            if (this.CloseButton != null) this.CloseButton.Tapped -= this.CloseButton_Tapped;
+            if ((this.CloseButton is null) == false) this.CloseButton.Tapped -= this.CloseButton_Tapped;
             this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as ListViewItem;
-            if (this.CloseButton != null) this.CloseButton.Tapped += this.CloseButton_Tapped;
+            if ((this.CloseButton is null) == false) this.CloseButton.Tapped += this.CloseButton_Tapped;
         }
 
 
@@ -363,7 +363,7 @@ namespace Retouch_Photo2.Elements
 
         private void MoveToTop()
         {
-            if (base.Parent == null) return;
+            if (base.Parent is null) return;
 
             if (this.OverlayCanvas is Canvas canvas)
             {

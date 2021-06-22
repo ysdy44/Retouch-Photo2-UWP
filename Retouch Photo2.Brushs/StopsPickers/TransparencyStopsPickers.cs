@@ -14,7 +14,7 @@
             get => this.transparency;
             set
             {
-                if (value != null) base.SetArray(value.Stops);
+                if ((value is null) == false) base.SetArray(value.Stops);
                 this.transparency = value;
             }
         }

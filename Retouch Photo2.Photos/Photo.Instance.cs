@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Photos
         {
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\{this.Name}{this.FileType}";
             StorageFile file = await StorageFile.GetFileFromPathAsync(path);
-            if (file == null) return;
+            if (file is null) return;
 
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

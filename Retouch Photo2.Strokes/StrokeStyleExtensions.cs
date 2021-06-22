@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Strokes
         /// <param name="strokeStyle"> The stroke style style. </param>
         public static void SetStrokeStyle(this Shape shape, CanvasStrokeStyle strokeStyle)
         {
-            if (strokeStyle == null) return;
+            if (strokeStyle is null) return;
 
             shape.StrokeDashArray = strokeStyle.DashStyle.ToDoubleCollection();
             shape.StrokeDashCap = strokeStyle.DashCap.ToPenLineCap();
@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Strokes
         /// <returns> The cloned <see cref="CanvasStrokeStyle"/>. </returns>
         public static CanvasStrokeStyle Clone(this CanvasStrokeStyle strokeStyle)
         {
-            if (strokeStyle == null) return new CanvasStrokeStyle();
+            if (strokeStyle is null) return new CanvasStrokeStyle();
             return new CanvasStrokeStyle
             {
                 DashStyle = strokeStyle.DashStyle,
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Strokes
         /// <param name="other"> The other. </param>
         public static void CopyWith(this CanvasStrokeStyle strokeStyle, CanvasStrokeStyle other)
         {
-            if (strokeStyle == null) return;
+            if (strokeStyle is null) return;
 
             strokeStyle.DashStyle = other.DashStyle;
             strokeStyle.DashCap = other.DashCap;

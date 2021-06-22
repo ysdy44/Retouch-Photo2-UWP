@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers
                 if (child.Children.Count != 0)
                 {
                     Layerage find = LayerManager.FindFirstLayerageCore(child, layer);
-                    if (find != null) return find;
+                    if ((find is null) == false) return find;
                 }
             }
 

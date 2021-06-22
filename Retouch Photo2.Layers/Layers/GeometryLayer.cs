@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Layers.Models
                     {
                         ICanvasImage childImage = LayerBase.Render(resourceCreator, layerage);
 
-                        if (childImage != null)
+                        if ((childImage is null) == false)
                         {
                             drawingSession.DrawImage(childImage);
                         }
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.Layers.Models
                     {
                         ICanvasImage childImage = LayerBase.Render(resourceCreator, layerage);
 
-                        if (childImage != null)
+                        if ((childImage is null) == false)
                         {
                             drawingSession.DrawImage(childImage);
                         }
@@ -192,7 +192,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="accentColor"> The accent color. </param>
         public override void DrawWireframe(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            if (this.Geometry2 == null) return;
+            if (this.Geometry2 is null) return;
             drawingSession.DrawGeometry(this.Geometry2.Transform(matrix), accentColor);
         }
 
@@ -206,7 +206,7 @@ namespace Retouch_Photo2.Layers.Models
         public override bool FillContainsPoint(Layerage layerage, Vector2 point)
         {
             if (this.Visibility == Visibility.Collapsed) return false;
-            if (this.Geometry2 == null) return false;
+            if (this.Geometry2 is null) return false;
 
             if (this.Style.Fill.Type != BrushType.None)
             {

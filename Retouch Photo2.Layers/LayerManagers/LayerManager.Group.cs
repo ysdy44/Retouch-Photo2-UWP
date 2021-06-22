@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Layers
             // Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
-            if (outermost == null) return;
+            if (outermost is null) return;
             Layerage parents = LayerManager.GetParentsChildren(outermost);
             int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Layers
             do
             {
                 Layerage groupLayerage = selectedLayerages.FirstOrDefault(l => l.Self.Type == LayerType.Group);
-                if (groupLayerage == null) break;
+                if (groupLayerage is null) break;
                 ILayer groupLayer = groupLayerage.Self;
 
                 // Insert
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Layers
             // Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
-            if (outermost == null) return;
+            if (outermost is null) return;
             Layerage parents = LayerManager.GetParentsChildren(outermost);
             int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;

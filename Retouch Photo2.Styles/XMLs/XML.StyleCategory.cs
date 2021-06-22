@@ -23,8 +23,8 @@ namespace Retouch_Photo2.Styles
         private static XElement SaveStyleCategory(string elementName, StyleCategory styleCategory)
         {
             XElement element = new XElement(elementName);
-            if (styleCategory.Name != null) element.Add(new XAttribute("Name", styleCategory.Name));
-            if (styleCategory.Strings != null) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", styleCategory.Strings));
+            if ((styleCategory.Name is null) == false) element.Add(new XAttribute("Name", styleCategory.Name));
+            if ((styleCategory.Strings is null) == false) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", styleCategory.Strings));
             element.Add
             (
                 from style

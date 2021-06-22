@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Styles
 
                 control.Shape.SetStrokeStyle(value.StrokeStyle);
                 control.TextBlock.Text = Retouch_Photo2.Elements.XML.CreateString(value.Name, value.Strings, control.Language);
-                control.TextBlock.FontWeight = value.Strings == null ? FontWeights.Normal : FontWeights.Bold;
+                control.TextBlock.FontWeight = value.Strings is null ? FontWeights.Normal : FontWeights.Bold;
             }
         }));
 

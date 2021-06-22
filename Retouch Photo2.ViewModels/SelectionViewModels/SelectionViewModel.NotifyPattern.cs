@@ -11,7 +11,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets the PatternLayer. </summary>     
         private void SetPatternLayer(ILayer layer)
         {
-            if (layer == null) return;
+            if (layer is null) return;
 
             switch (layer.Type)
             {

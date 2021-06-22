@@ -76,8 +76,8 @@ namespace Retouch_Photo2.Layers
         /// <returns></returns>
         public static Layerage GetParentsChildren(Layerage layerage)
         {
-            if (layerage == null) return LayerManager.RootLayerage;
-            if (layerage.Parents == null) return LayerManager.RootLayerage;
+            if (layerage is null) return LayerManager.RootLayerage;
+            if (layerage.Parents is null) return LayerManager.RootLayerage;
             return layerage.Parents;
         }
 

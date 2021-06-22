@@ -16,7 +16,7 @@ namespace Retouch_Photo2
         /// <returns> The copied file. </returns>
         public async static Task<StorageFile> CopySingleImageFileAsync(StorageFile file)
         {
-            if (file == null) return null;
+            if (file is null) return null;
 
             StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
             return copyFile;
@@ -85,7 +85,7 @@ namespace Retouch_Photo2
         {
             if (item is StorageFile file)
             {
-                if (file == null) return null;
+                if (file is null) return null;
 
                 string fileType = file.FileType.ToUpper();
                 switch (fileType)

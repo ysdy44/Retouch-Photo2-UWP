@@ -85,7 +85,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="project"> The project. </param>
         public void LoadFromProject(Project project)
         {
-            if (project == null) return;
+            if (project is null) return;
 
             // Width Height
             this.CanvasTransformer.Width = project.Width;
@@ -93,11 +93,11 @@ namespace Retouch_Photo2.ViewModels
             
             // Layers
             LayerManager.RootLayerage.Children.Clear();
-            if (project.Layerages != null)
+            if ((project.Layerages is null) == false)
             {
                 foreach (Layerage layerage in project.Layerages)
                 {
-                    if (layerage != null)
+                    if ((layerage is null) == false)
                     {
                         LayerManager.RootLayerage.Children.Add(layerage);
                     }

@@ -153,11 +153,11 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.LayerType = outermostLayer == null ? LayerType.None : outermostLayer.Type;
-            this.Opacity = outermostLayer == null ? 1.0f : outermostLayer.Opacity;
+            this.LayerType = outermostLayer is null ? LayerType.None : outermostLayer.Type;
+            this.Opacity = outermostLayer is null ? 1.0f : outermostLayer.Opacity;
             this.BlendMode = outermostLayer?.BlendMode;
-            this.Visibility = outermostLayer == null ? Visibility.Visible : outermostLayer.Visibility;
-            this.TagType = outermostLayer == null ? TagType.None : outermostLayer.TagType;
+            this.Visibility = outermostLayer is null ? Visibility.Visible : outermostLayer.Visibility;
+            this.TagType = outermostLayer is null ? TagType.None : outermostLayer.TagType;
 
             //////////////////////////
 

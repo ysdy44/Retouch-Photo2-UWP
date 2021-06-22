@@ -120,7 +120,7 @@ namespace Retouch_Photo2
         public static async Task<bool> IsFileExists(string fileName, StorageFolder folder)
         {
             IStorageItem item = await folder.TryGetItemAsync(fileName);
-            return item != null;
+            return (item is null) == false;
         }
 
 

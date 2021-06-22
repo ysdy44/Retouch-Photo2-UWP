@@ -34,7 +34,7 @@ namespace Retouch_Photo2
                 file = await ApplicationData.Current.LocalFolder.GetFileAsync("Setting.xml");
             }
 
-            if (file == null) return null;
+            if (file is null) return null;
 
             using (Stream stream = await file.OpenStreamForReadAsync())
             {

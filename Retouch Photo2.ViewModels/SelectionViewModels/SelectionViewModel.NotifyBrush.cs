@@ -193,7 +193,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets the style. </summary>  
         public void SetStyle(IStyle style)
         {
-            if (style == null) return;
+            if (style is null) return;
 
 
             this.IsFollowTransform = style.IsFollowTransform;

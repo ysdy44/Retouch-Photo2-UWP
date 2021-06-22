@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Menus
             get => this.effect;
             set
             {
-                if (value == null)
+                if (value is null)
                 {
                     this.MenuIsEnabled = false;
                 }

@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Styles
         {
             this.Title = Retouch_Photo2.Elements.XML.CreateString(this.Name, this.Strings, language);
             this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Title))); // Notify
-            this.Weight = this.Strings == null ? FontWeights.Normal : FontWeights.Bold;
+            this.Weight = this.Strings is null ? FontWeights.Normal : FontWeights.Bold;
             this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Weight))); // Notify
         }
 

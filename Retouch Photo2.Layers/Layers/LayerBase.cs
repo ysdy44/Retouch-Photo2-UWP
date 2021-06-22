@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers
         {
             get
             {
-                if (this.control == null)
+                if (this.control is null)
                 {
                     if (this is ILayer layer)
                     {

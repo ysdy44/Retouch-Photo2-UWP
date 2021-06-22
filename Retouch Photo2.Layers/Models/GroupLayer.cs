@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Layers.Models
             if (layerage.Children.Count == 0) return null;
 
             ICanvasImage childImage = LayerBase.Render(resourceCreator, layerage);
-            if (childImage == null) return null;
+            if (childImage is null) return null;
 
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())

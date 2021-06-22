@@ -55,7 +55,7 @@ namespace Retouch_Photo2
 
             // FileUtil
             string name = item.Name;
-            if (name == null || name == string.Empty)
+            if (name is null || name == string.Empty)
             {
                 this.LoadingControl.State = LoadingState.FileNull;
                 await Task.Delay(800);
@@ -79,7 +79,7 @@ namespace Retouch_Photo2
             Photo.Instances.Clear();
             Photo.InstancesCollection.Clear();
             IEnumerable<Photo> photos = XML.LoadPhotosFile();
-            if (photos != null)
+            if ((photos is null) == false)
             {
                 foreach (Photo photo in photos)
                 {
@@ -93,7 +93,7 @@ namespace Retouch_Photo2
             // Load all layers file. 
             LayerBase.Instances.Clear();
             IEnumerable<ILayer> layers = XML.LoadLayersFile();
-            if (layers != null)
+            if ((layers is null) == false)
             {
                 foreach (ILayer layer in layers)
                 {
@@ -104,7 +104,7 @@ namespace Retouch_Photo2
 
             // Load project file. 
             Project project = XML.LoadProjectFile();
-            if (project == null)
+            if (project is null)
             {
                 this.LoadingControl.State = LoadingState.LoadFailed;
                 await Task.Delay(800);
@@ -147,7 +147,7 @@ namespace Retouch_Photo2
             this.LoadingControl.State = LoadingState.Loading;
 
             // Photo
-            if (copyFile == null)
+            if (copyFile is null)
             {
                 this.LoadingControl.State = LoadingState.None;
                 return;

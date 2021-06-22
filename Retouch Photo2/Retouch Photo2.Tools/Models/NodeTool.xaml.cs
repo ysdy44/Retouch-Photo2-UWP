@@ -93,7 +93,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
             this.Layerage = this.GetNodeCollectionLayer(startingPoint, matrix);
-            if (this.Layerage == null)
+            if (this.Layerage is null)
             {
                 Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
                 Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
@@ -147,7 +147,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            if (this.Layerage == null)
+            if (this.Layerage is null)
             {
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                 this.ViewModel.Invalidate(); // Invalidate
@@ -185,7 +185,7 @@ namespace Retouch_Photo2.Tools.Models
             CoreCursorExtension.IsManipulationStarted = false;
             CoreCursorExtension.Cross();
 
-            if (this.Layerage == null)
+            if (this.Layerage is null)
             {
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                 this.NodeCollectionMode = NodeCollectionMode.None;

@@ -107,21 +107,21 @@ namespace Retouch_Photo2.Elements
             this.DialogHidden = base.GetTemplateChild(nameof(DialogHidden)) as VisualState;
             this.VisualState = this.VisualState; // State
 
-            if (this.LayoutRoot != null) this.LayoutRoot.Tapped -= this.LayoutRoot_Tapped;
+            if ((this.LayoutRoot is null) == false) this.LayoutRoot.Tapped -= this.LayoutRoot_Tapped;
             this.LayoutRoot = base.GetTemplateChild(nameof(LayoutRoot)) as Border;
-            if (this.LayoutRoot != null) this.LayoutRoot.Tapped += this.LayoutRoot_Tapped;
+            if ((this.LayoutRoot is null) == false) this.LayoutRoot.Tapped += this.LayoutRoot_Tapped;
 
-            if (this.RootGrid != null) this.RootGrid.Tapped -= this.RootGrid_Tapped;
+            if ((this.RootGrid is null) == false) this.RootGrid.Tapped -= this.RootGrid_Tapped;
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Border;
-            if (this.RootGrid != null) this.RootGrid.Tapped += this.RootGrid_Tapped;
+            if ((this.RootGrid is null) == false) this.RootGrid.Tapped += this.RootGrid_Tapped;
 
-            if (this.SecondaryButton != null) this.SecondaryButton.Click -= this.SecondaryButtonClick;
+            if ((this.SecondaryButton is null) == false) this.SecondaryButton.Click -= this.SecondaryButtonClick;
             this.SecondaryButton = base.GetTemplateChild(nameof(SecondaryButton)) as Button;
-            if (this.SecondaryButton != null) this.SecondaryButton.Click += this.SecondaryButtonClick;
+            if ((this.SecondaryButton is null) == false) this.SecondaryButton.Click += this.SecondaryButtonClick;
 
-            if (this.PrimaryButton != null) this.PrimaryButton.Click -= this.PrimaryButtonClick;
+            if ((this.PrimaryButton is null) == false) this.PrimaryButton.Click -= this.PrimaryButtonClick;
             this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
-            if (this.PrimaryButton != null) this.PrimaryButton.Click += this.PrimaryButtonClick;
+            if ((this.PrimaryButton is null) == false) this.PrimaryButton.Click += this.PrimaryButtonClick;
         }
 
         private void LayoutRoot_Tapped(object sender, TappedRoutedEventArgs e)

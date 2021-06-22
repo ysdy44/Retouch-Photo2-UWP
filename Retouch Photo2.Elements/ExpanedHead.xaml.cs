@@ -130,13 +130,13 @@ namespace Retouch_Photo2.Elements
             this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
             this.UnExpaned = base.GetTemplateChild(nameof(UnExpaned)) as VisualState;
 
-            if (this.LeftButton != null) this.LeftButton.Tapped -= this.LeftButtonTapped;
+            if ((this.LeftButton is null) == false) this.LeftButton.Tapped -= this.LeftButtonTapped;
             this.LeftButton = base.GetTemplateChild(nameof(LeftButton)) as ListViewItem;
-            if (this.LeftButton != null) this.LeftButton.Tapped += this.LeftButtonTapped;
+            if ((this.LeftButton is null) == false) this.LeftButton.Tapped += this.LeftButtonTapped;
 
-            if (this.RightButton != null) this.RightButton.Tapped -= this.RightButtonTapped;
+            if ((this.RightButton is null) == false) this.RightButton.Tapped -= this.RightButtonTapped;
             this.RightButton = base.GetTemplateChild(nameof(RightButton)) as ListViewItem;
-            if (this.RightButton != null) this.RightButton.Tapped += this.RightButtonTapped;
+            if ((this.RightButton is null) == false) this.RightButton.Tapped += this.RightButtonTapped;
         }
 
 

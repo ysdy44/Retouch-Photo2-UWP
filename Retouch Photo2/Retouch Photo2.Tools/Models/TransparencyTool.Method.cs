@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void TransparencyStarted(Vector2 startingPoint, Vector2 point)
         {
-            if (this.Transparency == null) return;
+            if (this.Transparency is null) return;
 
             // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Tools.Models
         private void TransparencyDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             // Selection
-            if (this.Transparency == null) return;
+            if (this.Transparency is null) return;
 
             switch (this.HandleMode)
             {
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Tools.Models
         private void TransparencyComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             // Selection
-            if (this.Transparency == null) return;
+            if (this.Transparency is null) return;
             this.Transparency.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
 
             this.MethodViewModel.StyleChangeCompleted
@@ -93,7 +93,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void TransparencyCursor(Vector2 point)
         {
-            if (this.Transparency == null) return;
+            if (this.Transparency is null) return;
 
             // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -159,7 +159,7 @@ namespace Retouch_Photo2.Tools.Models
                 setUndo: (style, previous) => style.Transparency = previous.Clone()
             );
 
-            if (brush != null)
+            if ((brush is null) == false)
             {
                 this.Transparency = brush.Clone();
 

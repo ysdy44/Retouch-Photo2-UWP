@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Layers
 
                 removeLayerage = layerage.Children.FirstOrDefault(l => l.Self.IsSelected == true);
             }
-            while (removeLayerage != null);
+            while ((removeLayerage is null) == false);
         }
 
         private static void RemoveAllCore(Layerage layerage)

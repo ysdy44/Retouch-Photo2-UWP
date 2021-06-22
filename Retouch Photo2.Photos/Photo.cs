@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Photos
         {
             if (this.FolderRelativeId != other.FolderRelativeId) return false;
 
-            if (this.Source == null || other.Source == null) return false;
+            if (this.Source is null || other.Source is null) return false;
 
             if (this.Dpi != other.Dpi) return false;
             if (this.Width != other.Width) return false;

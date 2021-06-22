@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Layers
                 IEnumerable<TypeInfo> typeInfos = assembly.DefinedTypes;
 
                 TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.FullName == $"Retouch_Photo2.Layers.Models.{type}Layer");
-                if (typeInfo != null)
+                if ((typeInfo is null) == false)
                 {
                     object obj = Activator.CreateInstance(typeInfo.AsType());
                     if (obj is ILayer layer)

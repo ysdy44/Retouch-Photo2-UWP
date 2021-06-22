@@ -43,7 +43,7 @@ namespace Retouch_Photo2
                 await file.CopyAsync(ApplicationData.Current.LocalFolder);
             }
 
-            if (file == null) return null;
+            if (file is null) return null;
 
             using (Stream stream = await file.OpenStreamForReadAsync())
             {

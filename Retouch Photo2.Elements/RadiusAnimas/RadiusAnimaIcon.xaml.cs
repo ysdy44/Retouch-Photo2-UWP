@@ -41,13 +41,13 @@ namespace Retouch_Photo2.Elements
         {
             base.OnApplyTemplate();
 
-            if (this.RootGrid != null)
+            if ((this.RootGrid is null) == false)
             {
                 this.RootGrid.Tapped -= this.RootGrid_Tapped;
                 this.RootGrid.PointerEntered -= this.RootGrid_PointerEntered;
             }
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Grid;
-            if (this.RootGrid != null)
+            if ((this.RootGrid is null) == false)
             {
                 this.RootGrid.Tapped += this.RootGrid_Tapped;
                 this.RootGrid.PointerEntered += this.RootGrid_PointerEntered;

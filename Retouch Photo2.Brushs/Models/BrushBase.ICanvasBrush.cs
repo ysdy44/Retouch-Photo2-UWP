@@ -69,8 +69,8 @@ namespace Retouch_Photo2.Brushs
                     }
                 case BrushType.Image:
                     {
-                        if (this.bitmap== null) return null;
-                        
+                        if (this.bitmap is null) return null;
+
                         return new CanvasImageBrush(resourceCreator, this.bitmap)
                         {
                             Transform = this.GetimageMatrix(center, xPoint, yPoint, this.transformerRect),

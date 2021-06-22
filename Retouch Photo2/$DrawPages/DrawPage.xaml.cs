@@ -218,7 +218,7 @@ namespace Retouch_Photo2
         /// <param name="adjustment"> The adjustment. </param>
         public void AdjustmentMenuEdit(IAdjustment adjustment)
         {
-            if (adjustment == null)
+            if (adjustment is null)
             {
                 this.DrawLayout.Hide();
                 return;

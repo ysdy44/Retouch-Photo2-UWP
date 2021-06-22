@@ -156,9 +156,9 @@ namespace Retouch_Photo2.Elements
             double padLength = padWidth - phoneWidth;
             double pcLength = pcWidth - padWidth;
 
-            if (this.PhoneGridLength != null) this.PhoneGridLength.Width = new GridLength(phoneLength < 1 ? 1 : phoneLength, GridUnitType.Star);
-            if (this.PadGridLength != null) this.PadGridLength.Width = new GridLength(padLength < 1 ? 1 : padLength, GridUnitType.Star);
-            if (this.PCGridLength != null) this.PCGridLength.Width = new GridLength(pcLength < 1 ? 1 : pcLength, GridUnitType.Star);
+            if ((this.PhoneGridLength is null) == false) this.PhoneGridLength.Width = new GridLength(phoneLength < 1 ? 1 : phoneLength, GridUnitType.Star);
+            if ((this.PadGridLength is null) == false) this.PadGridLength.Width = new GridLength(padLength < 1 ? 1 : padLength, GridUnitType.Star);
+            if ((this.PCGridLength is null) == false) this.PCGridLength.Width = new GridLength(pcLength < 1 ? 1 : pcLength, GridUnitType.Star);
         }
 
 
@@ -229,7 +229,7 @@ namespace Retouch_Photo2.Elements
             this.SetWidth();
 
             // Phone
-            if (this.PhoneThumb != null)
+            if ((this.PhoneThumb is null) == false)
             {
                 this.PhoneThumb.DragStarted -= this.PhoneThumb_DragStarted;
                 this.PhoneThumb.DragDelta -= this.PhoneThumb_DragDelta;
@@ -244,14 +244,14 @@ namespace Retouch_Photo2.Elements
             }
 
             // Pad
-            if (this.PadThumb != null)
+            if ((this.PadThumb is null) == false)
             {
                 this.PadThumb.DragStarted -= this.PadThumb_DragStarted;
                 this.PadThumb.DragDelta -= this.PadThumb_DragDelta;
                 this.PadThumb.DragCompleted -= this.PadThumb_DragCompleted;
             }
             this.PadThumb = base.GetTemplateChild(nameof(PadThumb)) as Thumb;
-            if (this.PadThumb != null)
+            if ((this.PadThumb is null) == false)
             {
                 this.PadThumb.DragStarted += this.PadThumb_DragStarted;
                 this.PadThumb.DragDelta += this.PadThumb_DragDelta;

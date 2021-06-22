@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools.Models
                 case ListViewSelectionMode.Single:
                     {
                         Layerage layerage = this.SelectionViewModel.SelectionLayerage;
-                        if (layerage == null) return null;
+                        if (layerage is null) return null;
 
                         // Transformer
                         Transformer transformer = layerage.GetActualTransformer();

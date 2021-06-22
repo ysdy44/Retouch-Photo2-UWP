@@ -17,8 +17,8 @@
             {
                 switch (value)
                 {
-                    case FillOrStroke.Fill: if (this.Fill != null) base.SetArray(this.Fill.Stops); break;
-                    case FillOrStroke.Stroke: if (this.Stroke != null) base.SetArray(this.Stroke.Stops); break;
+                    case FillOrStroke.Fill: if ((this.Fill is null) == false) base.SetArray(this.Fill.Stops); break;
+                    case FillOrStroke.Stroke: if ((this.Stroke is null) == false) base.SetArray(this.Stroke.Stops); break;
                 }
 
                 this.fillOrStroke = value;
@@ -35,7 +35,7 @@
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        if (value != null) base.SetArray(value.Stops);
+                        if ((value is null) == false) base.SetArray(value.Stops);
                         break;
                 }
                 this.fill = value;
@@ -52,7 +52,7 @@
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Stroke:
-                        if (value != null) base.SetArray(value.Stops);
+                        if ((value is null) == false) base.SetArray(value.Stops);
                         break;
                 }
                 this.stroke = value;

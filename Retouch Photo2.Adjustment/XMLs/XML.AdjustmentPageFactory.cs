@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Adjustments
                 IEnumerable<TypeInfo> typeInfos = assembly.DefinedTypes;
 
                 TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.FullName == $"Retouch_Photo2.Adjustments.Pages.{type}Page");
-                if (typeInfo != null)
+                if ((typeInfo is null) == false)
                 {
                     object obj = Activator.CreateInstance(typeInfo.AsType());
                     if (obj is IAdjustmentPage adjustmentPage)

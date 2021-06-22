@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            if (this.CurveLayer == null)
+            if (this.CurveLayer is null)
                 this.Mode = NodeCollectionMode.Preview;
             else
                 this.Mode = NodeCollectionMode.Add;
@@ -127,7 +127,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.Add:
                     {
-                        if (this.CurveLayer != null)
+                        if ((this.CurveLayer is null) == false)
                         {
                             this.AddDelta(canvasPoint);
                         }
@@ -150,7 +150,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.Add:
                     {
-                        if (this.CurveLayer != null)
+                        if ((this.CurveLayer is null) == false)
                         {
                             this.AddComplete(canvasPoint);
                         }
@@ -162,7 +162,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Clicke(Vector2 point)
         {
-            if (this.CurveLayer == null) return;
+            if (this.CurveLayer is null) return;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
@@ -186,7 +186,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.Add:
                     {
-                        if (this.CurveLayer != null)
+                        if ((this.CurveLayer is null) == false)
                         {
                             this.AddDraw(drawingSession);
                         }
@@ -194,7 +194,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 default:
                     {
-                        if (this.CurveLayer != null)
+                        if ((this.CurveLayer is null) == false)
                         {
                             ILayer layer = this.CurveLayer;
 

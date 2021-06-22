@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Tools
             // SelectedLayerage
             Layerage selectedLayerage = this.SelectionViewModel.GetClickSelectedLayerage(canvasStartingPoint);
 
-            if (selectedLayerage == null)
+            if (selectedLayerage is null)
             {
                 this.MethodViewModel.MethodSelectedNone(); // Method
                 return false;

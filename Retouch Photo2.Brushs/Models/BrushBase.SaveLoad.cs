@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
                 case BrushType.EllipticalGradient:
-                    if (this.Stops == null) this.Type = BrushType.None;
+                    if (this.Stops is null) this.Type = BrushType.None;
                     else
                     {
                         element.Add(new XElement

@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.Image:
                     {
                         // Photo
-                        if (photo == null) return;
+                        if (photo is null) return;
 
                         Photocopier photocopier = photo.ToPhotocopier();
                         float width = photo.Width;
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.Image:
                     {
                         // Photo
-                        if (photo == null) return;
+                        if (photo is null) return;
 
                         Photocopier photocopier = photo.ToPhotocopier();
                         float width = photo.Width;

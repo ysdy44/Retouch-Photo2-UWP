@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="offset"> The source stop offset. </param>
         public bool SetOffset(float offset)
         {
-            if (this.array == null) return false;
+            if (this.array is null) return false;
 
             if (this.Manager.IsLeft) return false;
             if (this.Manager.IsRight) return false;
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Brushs
         {
             this.ColorEllipse.Color = color;
 
-            if (this.array == null) return false;
+            if (this.array is null) return false;
 
             if (this.Manager.IsLeft)
             {

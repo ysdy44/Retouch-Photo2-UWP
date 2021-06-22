@@ -23,8 +23,8 @@ namespace Retouch_Photo2.Filters
         public static XElement SaveFilter(string elementName, Filter filter)
         {
             XElement element = new XElement(elementName);
-            if (filter.Name != null) element.Add(new XAttribute("Name", filter.Name));
-            if (filter.Strings != null) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", filter.Strings));
+            if ((filter.Name is null) == false) element.Add(new XAttribute("Name", filter.Name));
+            if ((filter.Strings is null) == false) element.Add(Retouch_Photo2.Elements.XML.SaveStrings("Strings", filter.Strings));
             element.Add
             (
                 from adjustment

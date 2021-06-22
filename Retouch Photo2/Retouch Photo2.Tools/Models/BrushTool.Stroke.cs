@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void StrokeStarted(Vector2 startingPoint, Vector2 point)
         {
-            if (this.Stroke == null) return;
+            if (this.Stroke is null) return;
 
             // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Tools.Models
         private void StrokeDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             // Selection
-            if (this.Stroke == null) return;
+            if (this.Stroke is null) return;
 
             switch (this.HandleMode)
             {
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Tools.Models
         private void StrokeComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             // Selection
-            if (this.Stroke == null) return;
+            if (this.Stroke is null) return;
             this.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
             this.HandleMode = BrushHandleMode.None;
 
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void StrokeCursor(Vector2 point)
         {
-            if (this.Stroke == null) return;
+            if (this.Stroke is null) return;
 
             // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -184,7 +184,7 @@ namespace Retouch_Photo2.Tools.Models
                 setUndo: (style, previous) => style.Stroke = previous.Clone()
             );
 
-            if (brush != null)
+            if ((brush is null) == false)
             {
                 this.Stroke = brush.Clone();
 

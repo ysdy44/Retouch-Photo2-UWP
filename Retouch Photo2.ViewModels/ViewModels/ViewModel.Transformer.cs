@@ -92,7 +92,7 @@ namespace Retouch_Photo2.ViewModels
         public void DrawRender(CanvasDrawingSession drawingSession)
         {
             ICanvasImage canvasImage = LayerBase.Render(LayerManager.CanvasDevice, LayerManager.RootLayerage);
-            if (canvasImage == null) return;
+            if (canvasImage is null) return;
 
             drawingSession.DrawImage(new Transform2DEffect
             {
@@ -121,8 +121,8 @@ namespace Retouch_Photo2.ViewModels
             using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
             {
                 if (isClearWhite) drawingSession.Clear(Colors.White);
-
-                if (canvasImage != null)
+               
+                if ((canvasImage is null) == false)
                 {
                     float scaleX = fileWidth / canvasWidth;
                     float scaleY = fileHeight / canvasHeight;
@@ -160,7 +160,7 @@ namespace Retouch_Photo2.ViewModels
                 if (isClearWhite) drawingSession.Clear(Colors.White);
 
                 ICanvasImage canvasImage = LayerBase.Render(LayerManager.CanvasDevice, LayerManager.RootLayerage);
-                if (canvasImage != null)
+                if ((canvasImage is null) == false)
                 {
                     int canvasWidth = this.CanvasTransformer.Width;
                     int canvasHeight = this.CanvasTransformer.Height;

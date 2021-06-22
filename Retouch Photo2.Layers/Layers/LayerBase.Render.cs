@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Layers
         /// <returns> The rendered layer. </returns>
         public ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
-            if (this.Render2 == null || this.IsRefactoringRender)
+            if (this.Render2 is null || this.IsRefactoringRender)
             {
                 this.IsRefactoringRender = false;
 
@@ -161,8 +161,8 @@ namespace Retouch_Photo2.Layers
 
                 // Layer
                 ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, currentLayerage);
-                if (currentImage == null) continue;
-                if (previousImage == null)
+                if (currentImage is null) continue;
+                if (previousImage is null)
                 {
                     previousImage = currentImage;
                     continue;

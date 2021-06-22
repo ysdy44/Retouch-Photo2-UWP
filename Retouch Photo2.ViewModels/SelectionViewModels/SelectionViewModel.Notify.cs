@@ -121,7 +121,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets the filter. </summary>  
         public void SetFilter(Filter filter)
         {
-            if (filter == null)
+            if (filter is null)
             {
                 this.AdjustmentsCount = -1;
                 this.Adjustments.Clear();
@@ -209,7 +209,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets the ImageLayer. </summary>     
         private void SetImageLayer(ILayer layer)
         {
-            if (layer == null) this.IsImageLayer = false;
+            if (layer is null) this.IsImageLayer = false;
             else
             {
                 if (layer.Type == LayerType.Image)
@@ -234,7 +234,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private void SetCurveLayer(Layerage layerage, ILayer layer)
         {
-            if (layer == null)
+            if (layer is null)
             {
                 this.SetCurveLayer();
                 return;

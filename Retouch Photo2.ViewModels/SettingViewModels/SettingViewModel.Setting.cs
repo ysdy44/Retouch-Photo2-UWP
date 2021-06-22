@@ -21,7 +21,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void ConstructSetting(Setting setting)
         {
-            if (setting != null)
+            if ((setting is null) == false)
             {
                 this.Setting = setting;
             }

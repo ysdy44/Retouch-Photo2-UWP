@@ -155,7 +155,7 @@ namespace Retouch_Photo2.Blends
                 string title = resource.GetString($"Blends_None");
 
                 item.Title = title;
-                if (this.Mode == null) this.Control.Content = title;
+                if (this.Mode is null) this.Control.Content = title;
             }
 
             foreach (var kv in this.ItemDictionary)

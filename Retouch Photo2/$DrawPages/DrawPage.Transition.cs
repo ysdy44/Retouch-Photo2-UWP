@@ -33,7 +33,7 @@ namespace Retouch_Photo2
 
         private void RenameDialogTrySetResult(FrameworkElement element, string name)
         {
-            if (this.RenameTaskSource != null && this.RenameTaskSource.Task.IsCanceled == false)
+            if ((this.RenameTaskSource is null) == false && this.RenameTaskSource.Task.IsCanceled == false)
             {
                 this.RenameTaskSource.TrySetResult(name);
             }

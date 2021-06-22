@@ -77,7 +77,7 @@ namespace Retouch_Photo2
             {
                 // Delete zip folder.
                 StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
-                if (zipFolder == null) return false;
+                if (zipFolder is null) return false;
 
                 await zipFolder.DeleteAsync();
                 return true;

@@ -300,7 +300,7 @@ namespace Retouch_Photo2.ViewModels
                 // Turn to curve layer
                 ILayer curveLayer = this.MethodConvertToCurves_CreateCurveLayer(layer);
 
-                if (curveLayer != null)
+                if ((curveLayer is null) == false)
                 {
                     Layerage curveLayerage = Layerage.CreateByGuid();
                     curveLayer.Id = curveLayerage.Id;
@@ -326,7 +326,7 @@ namespace Retouch_Photo2.ViewModels
         private ILayer MethodConvertToCurves_CreateCurveLayer(ILayer layer)
         {
             NodeCollection nodes = layer.ConvertToCurves(LayerManager.CanvasDevice);
-            if (nodes == null) return null;
+            if (nodes is null) return null;
 
             if (nodes.Count > 3)
             {

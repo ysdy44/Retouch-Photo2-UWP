@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Brushs
             this.CanvasControl.Draw += (sender, args) =>
             {
                 if (base.IsEnabled == false) return;
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 // Background
                 args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Brushs
         {
             this.CanvasOperator.Single_Start += (point) =>
             {
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 this.Manager.Index = -1;
                 this.Manager.IsLeft = false;
@@ -131,7 +131,7 @@ namespace Retouch_Photo2.Brushs
             };
             this.CanvasOperator.Single_Delta += (point) =>
             {
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 if (this.Manager.IsLeft) return;
                 if (this.Manager.IsRight) return;
@@ -144,7 +144,7 @@ namespace Retouch_Photo2.Brushs
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 if (this.Manager.IsLeft)
                 {
@@ -175,7 +175,7 @@ namespace Retouch_Photo2.Brushs
             // Copy a stop on right
             this.CopyButton.Tapped += (s, e) =>
             {
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 CanvasGradientStop stop = this.Manager.CopyStopOnRight();
                 this.StopChanged(stop.Color, (int)(stop.Position * 100.0f), true);
@@ -189,7 +189,7 @@ namespace Retouch_Photo2.Brushs
             // Reserve all stops. 
             this.ReserveButton.Tapped += (s, e) =>
             {
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 this.Manager.Reserve();
                 this.Manager.Copy(this.array);
@@ -201,7 +201,7 @@ namespace Retouch_Photo2.Brushs
             // Remove current stop.
             this.RemoveButton.Tapped += (s, e) =>
             {
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 if (this.Manager.IsLeft) return;
                 if (this.Manager.IsRight) return;

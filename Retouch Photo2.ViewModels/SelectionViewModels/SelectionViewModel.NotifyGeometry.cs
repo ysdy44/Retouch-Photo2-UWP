@@ -12,7 +12,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets the <see cref="GeometryLayer"/>. </summary>     
         private void SetGeometryLayer(ILayer layer)
         {
-            if (layer == null) return;
+            if (layer is null) return;
 
             switch (layer.Type)
             {

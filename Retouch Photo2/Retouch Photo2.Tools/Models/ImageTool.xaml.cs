@@ -77,14 +77,14 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             Photocopier photocopier = this.SelectionViewModel.Photocopier;
-            if (photocopier.FolderRelativeId == null)
+            if (photocopier.FolderRelativeId is null)
             {
                 this.TipSelect();
                 return;
             }
 
             Photo photo = Photo.FindFirstPhoto(photocopier);
-            if (photo == null)
+            if (photo is null)
             {
                 this.TipSelect();
                 return;
@@ -122,7 +122,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             // ILayer
-            if (this.MezzanineLayerage == null) return;
+            if (this.MezzanineLayerage is null) return;
             ILayer mezzanineLayer = this.MezzanineLayerage.Self;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
@@ -142,11 +142,11 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            if (this.MezzanineLayerage == null) return;
+            if (this.MezzanineLayerage is null) return;
 
             if (isOutNodeDistance)
             {
-                if (this.MezzanineLayerage == null) return;
+                if (this.MezzanineLayerage is null) return;
                 ILayer mezzanineLayer = this.MezzanineLayerage.Self;
 
 
@@ -241,7 +241,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
 
-            if (photo == null) return;
+            if (photo is null) return;
             Photocopier photocopier = photo.ToPhotocopier();
             this.SelectionViewModel.Photocopier = photocopier;
         }
@@ -250,7 +250,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
 
-            if (photo == null) return;
+            if (photo is null) return;
             Photocopier photocopier = photo.ToPhotocopier();
             this.SelectionViewModel.Photocopier = photocopier;
 

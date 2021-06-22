@@ -154,7 +154,7 @@ namespace Retouch_Photo2.Menus
 
                     // Turn to curve layer
                     ILayer curveLayer = this.CreateCurveLayer(strokeGeometry, strokeStyleClone);
-                    if (curveLayer != null)
+                    if ((curveLayer is null) == false)
                     {
                         Layerage curveLayerage = Layerage.CreateByGuid();
                         curveLayer.Id = curveLayerage.Id;
@@ -227,14 +227,14 @@ namespace Retouch_Photo2.Menus
 
                 if (layer.CreateGeometry(LayerManager.CanvasDevice) is CanvasGeometry geometry2)
                 {
-                    if (geometry == null)
+                    if (geometry is null)
                     {
                         geometry = geometry2;
                         style = layer.Style.Clone();
                     }
                     else
                     {
-                        if (other == null)
+                        if (other is null)
                             other = geometry2;
                         else
                             other = other.CombineWith(geometry2, Matrix3x2.CreateTranslation(Vector2.Zero), CanvasGeometryCombine.Union);
@@ -243,13 +243,13 @@ namespace Retouch_Photo2.Menus
             });
 
 
-            if (geometry != null && other != null)
+            if ((geometry is null) == false && (other is null) == false)
             {
                 CanvasGeometry combineGeometry = geometry.CombineWith(other, Matrix3x2.CreateTranslation(Vector2.Zero), combine);
 
                 // Turn to curve layer
                 ILayer curveLayer = this.CreateCurveLayer(combineGeometry, style);
-                if (curveLayer != null)
+                if ((curveLayer is null) == false)
                 {
                     Layerage curveLayerage = Layerage.CreateByGuid();
                     curveLayer.Id = curveLayerage.Id;
@@ -278,7 +278,7 @@ namespace Retouch_Photo2.Menus
         private ILayer CreateCurveLayer(CanvasGeometry geometry, IStyle style)
         {
             NodeCollection nodes = new NodeCollection(geometry);
-            if (nodes == null) return null;
+            if (nodes is null) return null;
 
             if (nodes.Count > 3)
             {

@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="value"> brush </param>
         public void SetArray(CanvasGradientStop[] value)
         {
-            if (value != null)
+            if ((value is null) == false)
             {
                 this.Manager.InitializeDate(value);
                 CanvasGradientStop stop = value.First();
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Brushs
 
             this.ColorButton.Tapped += (s, e) =>
             {
-                if (this.array == null) return;
+                if (this.array is null) return;
 
                 if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
                 {

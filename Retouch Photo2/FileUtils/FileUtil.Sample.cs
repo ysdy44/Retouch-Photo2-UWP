@@ -105,7 +105,7 @@ namespace Retouch_Photo2
 
             // PickSaveFileAsync
             StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file == null) return false;
+            if (file is null) return false;
 
             try
             {

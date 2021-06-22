@@ -33,7 +33,7 @@ namespace Retouch_Photo2
 
         private void GalleryDialogTrySetResult(FrameworkElement element, Photo photo)
         {
-            if (this.GalleryTaskSource != null && this.GalleryTaskSource.Task.IsCanceled == false)
+            if ((this.GalleryTaskSource is null) == false && this.GalleryTaskSource.Task.IsCanceled == false)
             {
                 this.GalleryTaskSource.TrySetResult(photo);
             }
@@ -53,12 +53,12 @@ namespace Retouch_Photo2
             {
                 // Files
                 IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);
-                if (files == null) return;
+                if (files is null) return;
 
                 foreach (StorageFile file in files)
                 {
                     StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(file);
-                    if (copyFile == null) continue;
+                    if (copyFile is null) continue;
                     Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
                     Photo.DuplicateChecking(photo);
                 }
@@ -72,13 +72,13 @@ namespace Retouch_Photo2
                 {
                     IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
 
-                    if (items == null) return;
+                    if (items is null) return;
 
                     foreach (IStorageItem item in items)
                     {
                         // Photo
                         StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
-                        if (copyFile == null) continue;
+                        if (copyFile is null) continue;
                         Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
                         Photo.DuplicateChecking(photo);
                     }
@@ -124,7 +124,7 @@ namespace Retouch_Photo2
         private async void ShowGalleryDialog()
         {
             Photo photo = await this.ShowGalleryDialogTask();
-            if (photo == null) return;
+            if (photo is null) return;
 
             // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
@@ -149,7 +149,7 @@ namespace Retouch_Photo2
         }
         private async Task CopyMultipleImageFilesAndCreateImageLayersAsync(IReadOnlyList<IStorageItem> items)
         {
-            if (items == null) return;
+            if (items is null) return;
 
             // History
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
@@ -160,11 +160,11 @@ namespace Retouch_Photo2
             {
                 // Photo
                 StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
-                if (copyFile == null) continue;
+                if (copyFile is null) continue;
                 Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
                 Photo.DuplicateChecking(photo);
 
-                if (photo == null) continue;
+                if (photo is null) continue;
 
                 // Layer
                 Layerage imageLayerage = Layerage.CreateByGuid();

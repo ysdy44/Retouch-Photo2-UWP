@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Tools
             {
                 if (TouchbarExtension.instance == value)
                 {
-                    if (TouchbarExtension.instance != null)
+                    if ((TouchbarExtension.instance is null) == false)
                     {
                         TouchbarExtension.instance.IsSelected = false;
                         TouchbarExtension.instance = null;
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools
                 }
 
                 // The current tool becomes the active button.
-                if (TouchbarExtension.instance != null)
+                if ((TouchbarExtension.instance is null) == false)
                 {
                     TouchbarExtension.instance.IsSelected = false;
                     TouchbarExtension.PickerBorder.Child = null;
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Tools
                 TouchbarExtension.instance = value;
 
                 // The current tool does not become an active button.
-                if (TouchbarExtension.instance != null)
+                if ((TouchbarExtension.instance is null) == false)
                 {
                     TouchbarExtension.instance.IsSelected = true;
                     TouchbarExtension.PickerBorder.Child = TouchbarExtension.GetPicker(value);

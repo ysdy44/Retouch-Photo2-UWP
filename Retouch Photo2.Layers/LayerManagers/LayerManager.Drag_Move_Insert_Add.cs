@@ -18,8 +18,8 @@ namespace Retouch_Photo2.Layers
         /// <param name="sourceIsSelected"> The source SelectMode. </param>
         public static void DragComplete(Layerage destination, Layerage source, OverlayMode destinationOverlayMode, bool sourceIsSelected)
         {
-            if (source == null) return;
-            if (destination == null) return;
+            if (source is null) return;
+            if (destination is null) return;
             ILayer destinationLayer = destination.Self;
             ILayer sourceLayer = source.Self;
 
@@ -145,7 +145,7 @@ namespace Retouch_Photo2.Layers
             if (index < 0) index = 0;
             if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
 
-            if (source != null)
+            if ((source is null) == false)
             {
                 if (source.Parents != LayerManager.RootLayerage)
                 {
@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Layers
                     destination.Parents.RefactoringParentsIconRender();
                 }
             }
-            else if (sources != null)
+            else if ((sources is null) == false)
             {
                 foreach (Layerage child in sources)
                 {
@@ -238,7 +238,7 @@ namespace Retouch_Photo2.Layers
 
         private static void AddCore(Layerage currentLayerage, Layerage layerage, IEnumerable<Layerage> layerages)
         {
-            if (layerage != null)
+            if ((layerage is null) == false)
             {
                 if (layerage.Parents != LayerManager.RootLayerage)
                 {
@@ -266,7 +266,7 @@ namespace Retouch_Photo2.Layers
                 currentLayerage.RefactoringParentsRender();
                 currentLayerage.RefactoringParentsIconRender();
             }
-            else if (layerages != null)
+            else if ((layerages is null) == false)
             {
                 foreach (Layerage child in layerages)
                 {

@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Layers.Models
                 this.photocopier = value;
 
                 Photocopier photocopier = this.Photocopier;
-                if (photocopier.Name == null) return;
+                if (photocopier.Name is null) return;
 
                 Photo photo = Photo.FindFirstPhoto(photocopier);
                 CanvasBitmap bitmap = photo.Source;
@@ -92,7 +92,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
-            if (this.bitmap == null)
+            if (this.bitmap is null)
             {
                 CanvasCommandList command = new CanvasCommandList(resourceCreator);
                 using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())

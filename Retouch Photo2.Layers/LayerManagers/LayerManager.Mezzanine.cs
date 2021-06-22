@@ -26,17 +26,17 @@ namespace Retouch_Photo2.Layers
             // Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
-            //if (outermost == null) return; // If count = 0, it will be useless.
+            //if (outermost is null) return; // If count = 0, it will be useless.
             Layerage parents = LayerManager.GetParentsChildren(outermost);
             int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
 
-            if (mezzanineLayer != null)
+            if ((mezzanineLayer is null) == false)
             {
                 mezzanineLayer.Self.IsSelected = true;
                 parents.Children.Insert(index, mezzanineLayer); // Insert
             }
-            else if (mezzanineLayers != null)
+            else if ((mezzanineLayers is null) == false)
             {
                 foreach (Layerage child in mezzanineLayers)
                 {
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="mezzanineLayerage"> The mezzanine-layerage. </param>
         public static void RemoveMezzanine(Layerage mezzanineLayerage)
         {
-            if (mezzanineLayerage == null) return;
+            if (mezzanineLayerage is null) return;
 
             Layerage parents = LayerManager.GetParentsChildren(mezzanineLayerage);
             parents.Children.Remove(mezzanineLayerage);

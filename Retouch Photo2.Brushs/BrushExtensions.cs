@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The product brush. </returns>
         public static Brush ToBrush(this IBrush brush)
         {
-            if (brush == null) return null;
+            if (brush is null) return null;
 
             switch (brush.Type)
             {
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The product brush. </returns>
         public static Brush ToWeightBrush(this IBrush brush)
         {
-            if (brush == null) return null;
+            if (brush is null) return null;
 
             switch (brush.Type)
             {

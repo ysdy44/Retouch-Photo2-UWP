@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers
             this.IconCanvasControl.CustomDevice = customDevice2;
             this.IconCanvasControl.Draw += (s, arge) =>
             {
-                if (this.IconRender == null) return;
+                if (this.IconRender is null) return;
 
                 arge.DrawingSession.DrawImage(this.IconRender);
             };

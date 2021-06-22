@@ -137,9 +137,9 @@ namespace Retouch_Photo2
                 if (e.DataView.Contains(StandardDataFormats.StorageItems))
                 {
                     IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
-                    if (items == null) return;
+                    if (items is null) return;
                     IStorageItem item = items.FirstOrDefault();
-                    if (item == null) return;
+                    if (item is null) return;
 
                     await this.NewFromPicture(item);
                 }

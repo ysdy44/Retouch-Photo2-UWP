@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
             Layerage selectedLayerage = this.SelectionViewModel.GetClickSelectedLayerage(canvasPoint);
 
-            if (selectedLayerage == null)
+            if (selectedLayerage is null)
             {
                 this.MethodViewModel.MethodSelectedNone(); // Method
                 return false;

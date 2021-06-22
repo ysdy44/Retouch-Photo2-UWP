@@ -99,21 +99,21 @@ namespace Retouch_Photo2.Elements
             this.DialogHidden = base.GetTemplateChild(nameof(DialogHidden)) as VisualState;
             this.VisualState = this.VisualState; // State
 
-            if (this.LayoutRoot != null) this.LayoutRoot.Tapped -= this.Root_Tapped;
+            if ((this.LayoutRoot is null) == false) this.LayoutRoot.Tapped -= this.Root_Tapped;
             this.LayoutRoot = base.GetTemplateChild(nameof(LayoutRoot)) as Border;
-            if (this.LayoutRoot != null) this.LayoutRoot.Tapped += this.Root_Tapped;
+            if ((this.LayoutRoot is null) == false) this.LayoutRoot.Tapped += this.Root_Tapped;
 
-            if (this.RootGrid != null) this.RootGrid.Tapped -= this.Root_Tapped;
+            if ((this.RootGrid is null) == false) this.RootGrid.Tapped -= this.Root_Tapped;
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Border;
-            if (this.RootGrid != null) this.RootGrid.Tapped += this.Root_Tapped;
+            if ((this.RootGrid is null) == false) this.RootGrid.Tapped += this.Root_Tapped;
 
-            if (this.CloseButton != null) this.CloseButton.Tapped -= this.CloseButtonTapped;
+            if ((this.CloseButton is null) == false) this.CloseButton.Tapped -= this.CloseButtonTapped;
             this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as ListViewItem;
-            if (this.CloseButton != null) this.CloseButton.Tapped += this.CloseButtonTapped;
+            if ((this.CloseButton is null) == false) this.CloseButton.Tapped += this.CloseButtonTapped;
 
-            if (this.PrimaryButton != null) this.PrimaryButton.Click -= this.PrimaryButtonClick;
+            if ((this.PrimaryButton is null) == false) this.PrimaryButton.Click -= this.PrimaryButtonClick;
             this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
-            if (this.PrimaryButton != null) this.PrimaryButton.Click += this.PrimaryButtonClick;
+            if ((this.PrimaryButton is null) == false) this.PrimaryButton.Click += this.PrimaryButtonClick;
         }
 
         private void Root_Tapped(object sender, TappedRoutedEventArgs e)

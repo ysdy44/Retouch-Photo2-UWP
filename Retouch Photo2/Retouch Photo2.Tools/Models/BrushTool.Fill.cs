@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void FillStarted(Vector2 startingPoint, Vector2 point)
         {
-            if (this.Fill == null) return;
+            if (this.Fill is null) return;
 
             // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Tools.Models
         private void FillDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             // Selection
-            if (this.Fill == null) return;
+            if (this.Fill is null) return;
 
             switch (this.HandleMode)
             {
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Tools.Models
         private void FillComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             // Selection
-            if (this.Fill == null) return;
+            if (this.Fill is null) return;
             this.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
             this.HandleMode = BrushHandleMode.None;
 
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void FillCursor(Vector2 point)
         {
-            if (this.Fill == null) return;
+            if (this.Fill is null) return;
 
             // Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -184,7 +184,7 @@ namespace Retouch_Photo2.Tools.Models
                 setUndo: (style, previous) => style.Fill = previous.Clone()
             );
 
-            if (brush != null)
+            if ((brush is null) == false)
             {
                 this.Fill = brush.Clone();
 
