@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Models;
 using System;
 using System.Collections.Generic;
@@ -63,14 +64,32 @@ namespace Retouch_Photo2.Tools.Elements
         public Type AssemblyType { get; set; }
 
 
-        /// <summary> Gets or sets the tool-type. </summary>
-        public ToolType Type
+        /// <summary> Gets or sets the layer-type. </summary>
+        public LayerType LayerType
         {
-            get => (ToolType)base.GetValue(TypeProperty);
-            set => base.SetValue(TypeProperty, value);
+            get => (LayerType)base.GetValue(LayerTypeProperty);
+            set => base.SetValue(LayerTypeProperty, value);
         }
-        /// <summary> Identifies the <see cref = "ToolTypeComboBox.Type" /> dependency property. </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(ToolType), typeof(ToolTypeComboBox), new PropertyMetadata(ToolType.Node, (sender, e) =>
+        /// <summary> Identifies the <see cref = "ToolTypeComboBox.LayerType" /> dependency property. </summary>
+        public static readonly DependencyProperty LayerTypeProperty = DependencyProperty.Register(nameof(LayerType), typeof(LayerType), typeof(ToolTypeComboBox), new PropertyMetadata(LayerType.None, (sender, e) =>
+        {
+            ToolTypeComboBox control = (ToolTypeComboBox)sender;
+
+            if (e.NewValue is LayerType value)
+            {
+                control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, control.GetToolType(control.ToolType, value));
+            }
+        }));
+
+
+        /// <summary> Gets or sets the tool-type. </summary>
+        public ToolType ToolType
+        {
+            get => (ToolType)base.GetValue(ToolTypeProperty);
+            set => base.SetValue(ToolTypeProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ToolTypeComboBox.ToolType" /> dependency property. </summary>
+        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(ToolTypeComboBox), new PropertyMetadata(ToolType.Node, (sender, e) =>
         {
             ToolTypeComboBox control = (ToolTypeComboBox)sender;
 
@@ -87,9 +106,43 @@ namespace Retouch_Photo2.Tools.Elements
                     control.ListView.SelectedIndex = -1;
                 }
 
-                control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, value);
+                control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, control.GetToolType(value, control.LayerType));
             }
         }));
+
+
+        private ToolType GetToolType(ToolType toolType, LayerType layerType)
+        {
+            if (toolType != ToolType.Cursor) return toolType;
+
+            switch (layerType)
+            {
+                case LayerType.None: return toolType;
+                case LayerType.GeometryRectangle: return ToolType.GeometryRectangle;
+                case LayerType.GeometryEllipse: return ToolType.GeometryEllipse;
+                case LayerType.Curve: return ToolType.Pen;
+                case LayerType.TextFrame: return ToolType.TextFrame;
+                case LayerType.TextArtistic: return ToolType.TextArtistic;
+                case LayerType.Image: return ToolType.Image;
+                //case LayerType.Group: return ToolType.Group;
+                case LayerType.PatternGrid: return ToolType.PatternGrid;
+                case LayerType.PatternDiagonal: return ToolType.PatternDiagonal;
+                case LayerType.PatternSpotted: return ToolType.PatternSpotted;
+                case LayerType.GeometryRoundRect: return ToolType.GeometryRoundRect;
+                case LayerType.GeometryTriangle: return ToolType.GeometryTriangle;
+                case LayerType.GeometryDiamond: return ToolType.GeometryDiamond;
+                case LayerType.GeometryPentagon: return ToolType.GeometryPentagon;
+                case LayerType.GeometryStar: return ToolType.GeometryStar;
+                case LayerType.GeometryCog: return ToolType.GeometryCog;
+                case LayerType.GeometryDount: return ToolType.GeometryDount;
+                case LayerType.GeometryPie: return ToolType.GeometryPie;
+                case LayerType.GeometryCookie: return ToolType.GeometryCookie;
+                case LayerType.GeometryArrow: return ToolType.GeometryArrow;
+                case LayerType.GeometryCapsule: return ToolType.GeometryCapsule;
+                case LayerType.GeometryHeart: return ToolType.GeometryHeart;
+                default: return toolType;
+            }
+        }
 
 
         /// <summary> Gets or sets the tool. </summary>
@@ -174,7 +227,7 @@ namespace Retouch_Photo2.Tools.Elements
                     if (control.Parent is ToolTypeListViewItem item)
                     {
                         ToolType type = item.Type;
-                        this.Type = type;
+                        this.ToolType = type;
                     }
                 }
             };
@@ -202,7 +255,7 @@ namespace Retouch_Photo2.Tools.Elements
                     if (control.Parent is ToolTypeListViewItem item)
                     {
                         ToolType type = item.Type;
-                        this.Type = type;
+                        this.ToolType = type;
                     }
                 }
             };
@@ -225,9 +278,9 @@ namespace Retouch_Photo2.Tools.Elements
             };
             this.MoreFlyout.Opened += (s, e) =>
             {
-                if (this.MoreItemDictionary.ContainsKey(this.Type))
+                if (this.MoreItemDictionary.ContainsKey(this.ToolType))
                 {
-                    ToolTypeListViewItem item = this.MoreItemDictionary[this.Type];
+                    ToolTypeListViewItem item = this.MoreItemDictionary[this.ToolType];
                     item.Focus(FocusState.Programmatic);
                     this.MoreListView.SelectedIndex = item.Index;
                 }

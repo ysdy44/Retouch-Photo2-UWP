@@ -220,7 +220,8 @@
             <!--LeftPanel-->
             <elements:DrawLayout.LeftPanel>
                 <toolsElements:ToolTypeComboBox x:Name="ToolTypeComboBox"                                    
-                            Type="{x:Bind ViewModel.ToolType, Mode=TwoWay}"
+                            LayerType="{x:Bind ViewModel.LayerType, Mode=OneWay}"
+                            ToolType="{x:Bind ViewModel.ToolType, Mode=TwoWay}"
                             IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"
                             DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                              />
