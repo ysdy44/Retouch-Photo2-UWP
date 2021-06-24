@@ -84,7 +84,17 @@ namespace Retouch_Photo2.Layers
         /// <param name="layerages"> The layerages. </param>
         public static IEnumerable<Layerage> PasteLayerages(IEnumerable<Layerage> layerages)
         {
-            return from l in layerages select LayerManager.PasteLayerage(l);
+            // When copying and pasting layers,
+            // the order of the layers changes:
+
+            // 1. Layers : ⬆ Positive order
+            // 2. Clipboard : ⬇ Reverse order
+            // 3. Paste : ⬆ Positive order         
+            // 4. Reverse : ⬇ Reverse order
+            // 5. Layers : ⬆ Positive order
+
+            IEnumerable<Layerage> layerages2 = from l in layerages select LayerManager.PasteLayerage(l);
+            return layerages2.Reverse();  // 4. Reverse
         }
 
 
