@@ -77,7 +77,11 @@ namespace Retouch_Photo2.Tools.Elements
 
             if (e.NewValue is LayerType value)
             {
-                control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, control.GetToolType(control.ToolType, value));
+                // UI Tool
+                ToolType uiToolType = control.GetToolType(control.ToolType, value);
+                ITool uiTool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, uiToolType);
+                control.ToolPage = uiTool.Page;
+                control.ToolIcon = uiTool.Icon;
             }
         }));
 
@@ -106,7 +110,13 @@ namespace Retouch_Photo2.Tools.Elements
                     control.ListView.SelectedIndex = -1;
                 }
 
-                control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, control.GetToolType(value, control.LayerType));
+                // Tool
+                control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, value);
+                // UI Tool
+                ToolType uiToolType = control.GetToolType(value, control.LayerType);
+                ITool uiTool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, uiToolType);
+                control.ToolPage = uiTool.Page;
+                control.ToolIcon = uiTool.Icon;
             }
         }));
 
@@ -168,6 +178,26 @@ namespace Retouch_Photo2.Tools.Elements
                 newTool.OnNavigatedTo();
             }
         }));
+
+
+        /// <summary> Gets or sets the tool-page. </summary>
+        public UIElement ToolPage
+        {
+            get => (UIElement)base.GetValue(ToolPageProperty);
+            set => base.SetValue(ToolPageProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ToolTypeComboBox.ToolPage" /> dependency property. </summary>
+        public static readonly DependencyProperty ToolPageProperty = DependencyProperty.Register(nameof(ToolPage), typeof(UIElement), typeof(ToolTypeComboBox), new PropertyMetadata(null));
+
+
+        /// <summary> Gets or sets the tool-icon. </summary>
+        public ControlTemplate ToolIcon
+        {
+            get => (ControlTemplate)base.GetValue(ToolIconProperty);
+            set => base.SetValue(ToolIconProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ToolTypeComboBox.ToolIcon" /> dependency property. </summary>
+        public static readonly DependencyProperty ToolIconProperty = DependencyProperty.Register(nameof(ToolIcon), typeof(ControlTemplate), typeof(ToolTypeComboBox), new PropertyMetadata(null));
 
 
         /// <summary> Gets or sets the tool-type. </summary>

@@ -203,11 +203,11 @@
         <elements:DrawLayout x:Name="DrawLayout" 
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="True"
-               FootPage="{x:Bind ToolTypeComboBox.Tool.Page, Mode=OneWay}"
+               FootPage="{x:Bind ToolTypeComboBox.ToolPage, Mode=OneWay}"
                >
             <!--LeftIcon-->
             <elements:DrawLayout.LeftIcon>
-                <ContentControl Template="{x:Bind ToolTypeComboBox.Tool.Icon, Mode=OneWay}"/>
+                <ContentControl Template="{x:Bind ToolTypeComboBox.ToolIcon, Mode=OneWay}"/>
             </elements:DrawLayout.LeftIcon>
 
             <!--RightPane-->
