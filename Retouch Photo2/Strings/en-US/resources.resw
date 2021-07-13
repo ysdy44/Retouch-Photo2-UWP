@@ -58,8 +58,6 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
 <data name='$Version' xml:space='preserve'><value>2.1.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Untitled</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
