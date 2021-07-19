@@ -31,7 +31,7 @@ Vector Graphics Editing Tool, you can transform, fill graphics, support adjustme
 
 ## Deployment instructions
 
-> Download the whole project, run `Retouch Photo.sln`, start the project `Retouch Photo2`, and try to see if it works.
+> Download the whole project, run `Retouch Photo2.sln`, start the project `Retouch Photo2`, and try to see if it works.
 
 
 <br/>

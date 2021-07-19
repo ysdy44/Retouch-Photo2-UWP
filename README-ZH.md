@@ -31,7 +31,7 @@
 
 ## 部署说明
 
-> 下载整个工程，运行`Retouch Photo.sln`，启动工程`Retouch Photo2`，试试看是否可以工作。
+> 下载整个工程，运行`Retouch Photo2.sln`，启动工程`Retouch Photo2`，试试看是否可以工作。
 
 
 <br/>
