@@ -215,7 +215,7 @@ namespace Retouch_Photo2
 
                 BitmapSize size = this.SetupSizePicker.Size;
 
-                if (this.SetupAnchorCheckControl.IsChecked == true)
+                if (this.SetupAnchorCheckControl.IsChecked == false)
                 {
                     this.MethodViewModel.MethodSetup(size);
                 }
