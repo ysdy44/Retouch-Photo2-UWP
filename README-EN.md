@@ -11,7 +11,7 @@
 
 ## Function description
 
-Vector Graphics Editing Tool, you can transform, fill graphics, support adjustment, effect, blend. brush,geometry, layers. If you think that the AI is too complex might as well try.
+Vector Graphics Editing Tool, you can transform, fill graphics, support adjustment, effect, blend, brush, geometry, layers. If you think that the AI is too complex might as well try.
 
 
 <br/>
