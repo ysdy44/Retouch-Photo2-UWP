@@ -69,7 +69,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.Filters.XML.SaveFilterCategorys(filterCategorys);
 
-            // Save the Setting xml file.      
+            // Save the xml file.      
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Filters.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

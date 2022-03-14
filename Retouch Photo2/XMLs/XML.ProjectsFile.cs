@@ -69,7 +69,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.ViewModels.XML.SaveProjects(projects);
 
-            // Save the Project xml file.      
+            // Save the xml file.      
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Projects.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

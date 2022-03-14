@@ -69,7 +69,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.Styles.XML.SaveStyleCategorys(styleCategorys);
 
-            // Save the Setting xml file.      
+            // Save the xml file.      
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Styles.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {

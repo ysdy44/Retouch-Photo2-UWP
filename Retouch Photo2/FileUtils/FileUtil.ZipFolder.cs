@@ -16,7 +16,7 @@ namespace Retouch_Photo2
         /// <returns> The all zip folders. </returns>
         public static async Task<IEnumerable<StorageFolder>> FIndAllZipFolders()
         {
-            //get all folders.
+            // Get all folders.
             IReadOnlyList<StorageFolder> folders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
 
             // Sort by Time

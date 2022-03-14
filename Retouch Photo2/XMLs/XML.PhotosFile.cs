@@ -51,7 +51,7 @@ namespace Retouch_Photo2
         {
             XDocument document = Retouch_Photo2.Photos.XML.SavePhotos(photos);
 
-            // Save the project xml file.      
+            // Save the xml file.      
             StorageFile file = await zipFolder.CreateFileAsync("Photos.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
