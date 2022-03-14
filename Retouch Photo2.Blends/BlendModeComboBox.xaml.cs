@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Blends
     {
 
         //@Delegate
-        /// <summary> Occurs when mode change. </summary>
+        /// <summary> Occurs when mode changed. </summary>
         public event EventHandler<BlendEffectMode?> ModeChanged;
         /// <summary> Occurs after the flyout is closed. </summary>
         public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }

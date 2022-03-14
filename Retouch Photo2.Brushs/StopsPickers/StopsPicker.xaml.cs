@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Brushs
         public event EventHandler<CanvasGradientStop[]> StopsChanged;
         /// <summary> Occurs when the stops change starts. </summary>
         public event EventHandler<CanvasGradientStop[]> StopsChangeStarted;
-        /// <summary> Occurs when stops change. </summary>
+        /// <summary> Occurs when stops changed. </summary>
         public event EventHandler<CanvasGradientStop[]> StopsChangeDelta;
         /// <summary> Occurs when the stops change is complete. </summary>
         public event EventHandler<CanvasGradientStop[]> StopsChangeCompleted;

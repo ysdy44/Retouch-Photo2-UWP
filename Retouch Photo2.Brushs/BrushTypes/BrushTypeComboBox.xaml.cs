@@ -28,9 +28,9 @@ namespace Retouch_Photo2.Brushs
     {
 
         //@Delegate
-        /// <summary> Occurs when fill type change. </summary>
+        /// <summary> Occurs when fill type changed. </summary>
         public event EventHandler<BrushType> FillTypeChanged;
-        /// <summary> Occurs when stroke type change. </summary>
+        /// <summary> Occurs when stroke type changed. </summary>
         public event EventHandler<BrushType> StrokeTypeChanged;
         /// <summary> Occurs after the flyout is closed. </summary>
         public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }

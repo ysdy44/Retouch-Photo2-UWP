@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Strokes
     {
 
         //@Delegate
-        /// <summary> Occurs when join change. </summary>
+        /// <summary> Occurs when join changed. </summary>
         public event EventHandler<CanvasLineJoin> JoinChanged;
 
         //@VisualState

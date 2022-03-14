@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Texts
     {
 
         //@Delegate
-        /// <summary> Occurs when direction change. </summary>
+        /// <summary> Occurs when direction changed. </summary>
         public event EventHandler<CanvasTextDirection> DirectionChanged;
 
         //@VisualState

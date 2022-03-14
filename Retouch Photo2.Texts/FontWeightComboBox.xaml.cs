@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Texts
     {
 
         //@Delegate
-        /// <summary> Occurs when weight change. </summary>
+        /// <summary> Occurs when weight changed. </summary>
         public event EventHandler<FontWeight2> WeightChanged;
         /// <summary> Occurs after the flyout is closed. </summary>
         public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }

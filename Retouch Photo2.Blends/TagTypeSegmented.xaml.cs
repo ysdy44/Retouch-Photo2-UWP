@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Blends
     {
 
         //@Delegate
-        /// <summary> Occurs when tag-type change. </summary>
+        /// <summary> Occurs when tag-type changed. </summary>
         public event EventHandler<TagType> TypeChanged;
 
         //@VisualState

@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Brushs
     {
 
         //@Delegate
-        /// <summary> Occurs when fill or stroke change. </summary>
+        /// <summary> Occurs when fill or stroke changed. </summary>
         public event EventHandler<FillOrStroke> FillOrStrokeChanged;
         /// <summary> Occurs after the flyout is closed. </summary>
         public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }
