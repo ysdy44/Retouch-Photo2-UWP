@@ -142,7 +142,7 @@ namespace Retouch_Photo2.ViewModels
             Layerage outermost = LayerManager.FindOutermostLayerage(layerages);
             ILayer outermostLayer = outermost.Self;
 
-            this.SelectionMode = ListViewSelectionMode.Multiple;// Transformer
+            this.SelectionMode = ListViewSelectionMode.Multiple;
 
             this.SelectionLayerage = null;
             this.SelectionLayerages = layerages;

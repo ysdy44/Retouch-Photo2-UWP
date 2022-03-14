@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Layers.Models
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                if (this.Transform.IsCrop==false)
+                if (this.Transform.IsCrop == false)
                 {
 
                     switch (base.Style.Transparency.Type)
@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 else
                 {
-                    
+
                     Transformer cropTransformer = base.Transform.CropTransformer;
                     CanvasGeometry geometryCrop = cropTransformer.ToRectangle(resourceCreator);
 

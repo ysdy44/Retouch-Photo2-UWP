@@ -64,7 +64,7 @@ namespace Retouch_Photo2
 
             // Save thumbnail file.
             IProjectViewItem item = this.Items.FirstOrDefault(p => p.Name == name);
-            if ((item is null) == false)
+            if (item != null)
             {
                 CanvasRenderTarget thumbnail = this.ViewModel.Render(width, height);
                 item.ImageSource = await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);

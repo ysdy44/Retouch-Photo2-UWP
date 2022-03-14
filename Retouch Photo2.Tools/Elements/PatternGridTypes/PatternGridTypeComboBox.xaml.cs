@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Tools.Elements
     {
 
         //@Delegate
-        /// <summary> Occurs when type change. </summary>
+        /// <summary> Occurs when type changed. </summary>
         public event EventHandler<PatternGridType> TypeChanged;
         /// <summary> Occurs after the flyout is closed. </summary>
         public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }

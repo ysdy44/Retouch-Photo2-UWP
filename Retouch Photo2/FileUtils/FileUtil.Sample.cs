@@ -99,8 +99,11 @@ namespace Retouch_Photo2
             {
                 SuggestedStartLocation = PickerLocationId.Desktop,
                 SuggestedFileName = suggestedFileName,
+                FileTypeChoices =
+                {
+                    {"DB", new[] { fileChoices } }
+                }
             };
-            savePicker.FileTypeChoices.Add("DB", new[] { fileChoices });
 
 
             // PickSaveFileAsync
