@@ -19,7 +19,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public AlphaMode AlphaMode
         {
             get => (AlphaMode)GetValue(AlphaModeProperty);
-            set => SetValue(AlphaModeProperty, value);
+            set => base.SetValue(AlphaModeProperty, value);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public ColorInterpolationMode ColorInterpolationMode
         {
             get => (ColorInterpolationMode)GetValue(ColorInterpolationModeProperty);
-            set => SetValue(ColorInterpolationModeProperty, value);
+            set => base.SetValue(ColorInterpolationModeProperty, value);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public GradientStopCollection GradientStops
         {
             get => (GradientStopCollection)GetValue(GradientStopsProperty);
-            set => SetValue(GradientStopsProperty, value);
+            set => base.SetValue(GradientStopsProperty, value);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public Point Center
         {
             get => (Point)GetValue(CenterProperty);
-            set => SetValue(CenterProperty, value);
+            set => base.SetValue(CenterProperty, value);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public Point GradientOrigin
         {
             get => (Point)GetValue(GradientOriginProperty);
-            set => SetValue(GradientOriginProperty, value);
+            set => base.SetValue(GradientOriginProperty, value);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public double RadiusX
         {
             get => (double)GetValue(RadiusXProperty);
-            set => SetValue(RadiusXProperty, value);
+            set => base.SetValue(RadiusXProperty, value);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public double RadiusY
         {
             get => (double)GetValue(RadiusYProperty);
-            set => SetValue(RadiusYProperty, value);
+            set => base.SetValue(RadiusYProperty, value);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Media
         public GradientSpreadMethod SpreadMethod
         {
             get => (GradientSpreadMethod)GetValue(SpreadMethodProperty);
-            set => SetValue(SpreadMethodProperty, value);
+            set => base.SetValue(SpreadMethodProperty, value);
         }
 
         /// <summary>

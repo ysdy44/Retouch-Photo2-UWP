@@ -26,7 +26,7 @@
                         <ContentControl Tag="{x:Bind TagConverter(Black.Weight)}" Content="{x:Bind Black.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"/>
                     </texts:FontWeightListViewItem>
                     <texts:FontWeightListViewItem x:Name="Bold" Weight="Bold" Index="1" Key="Number2">
-                        <ContentControl Tag="{x:Bind TagConverter(Bold.Weight)}" Content="{x:Bind Bold.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                        <ContentControl Tag="{x:Bind TagConverter(Bold.Weight)}" Content="{x:Bind Bold.Title, Mode=OneWay}" Style="{StaticResource AppIconContentControlStyle}" />
                     </texts:FontWeightListViewItem>
 
                     <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>

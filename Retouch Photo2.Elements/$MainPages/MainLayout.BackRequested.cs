@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Elements
         public bool IsAccent
         {
             get => (bool)base.GetValue(IsAccentProperty);
-            set => SetValue(IsAccentProperty, value);
+            set => base.SetValue(IsAccentProperty, value);
         }
         /// <summary> Identifies the <see cref = "ApplicationTitleBarExtension.IsAccent" /> dependency property. </summary>
         public static readonly DependencyProperty IsAccentProperty = DependencyProperty.Register(nameof(IsAccent), typeof(bool), typeof(ApplicationTitleBarExtension), new PropertyMetadata(false));
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Elements
         public MainPageState State
         {
             get => (MainPageState)base.GetValue(TitleBarColorProperty);
-            set => SetValue(TitleBarColorProperty, value);
+            set => base.SetValue(TitleBarColorProperty, value);
         }
         /// <summary> Identifies the <see cref = "MainLayout.State" /> dependency property. </summary>
         public static readonly DependencyProperty TitleBarColorProperty = DependencyProperty.Register(nameof(State), typeof(MainPageState), typeof(MainLayout), new PropertyMetadata(MainPageState.None, (sender, e) =>
