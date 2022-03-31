@@ -86,13 +86,13 @@ namespace Retouch_Photo2
         /// Saves the entire bitmap to the specified stream
         /// with the specified file format and quality level.
         /// </summary>
-        /// <param name="renderTarget"> The render target.</param>
+        /// <param name="bitmap"> The bitmap.</param>
         /// <param name="fileChoices"> The file choices. </param>
         /// <param name="suggestedFileName"> The suggested name of file. </param>
         /// <param name="fileFormat"> The file format. </param>
         /// <param name="quality"> The file quality. </param>
         /// <returns> Saved successful? </returns>
-        public static async Task<bool> SaveCanvasBitmapFile(CanvasRenderTarget renderTarget, string fileChoices = ".Jpeg", string suggestedFileName = "Untitled", CanvasBitmapFileFormat fileFormat = CanvasBitmapFileFormat.Jpeg, float quality = 1.0f)
+        public static async Task<bool?> SaveCanvasBitmapFile(CanvasBitmap bitmap, string fileChoices = ".Jpeg", string suggestedFileName = "Untitled", CanvasBitmapFileFormat fileFormat = CanvasBitmapFileFormat.Jpeg, float quality = 1.0f)
         {
             // FileSavePicker
             FileSavePicker savePicker = new FileSavePicker
@@ -108,21 +108,19 @@ namespace Retouch_Photo2
 
             // PickSaveFileAsync
             StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file is null) return false;
+            if (file == null) return null;
 
             try
             {
                 using (IRandomAccessStream accessStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
-                    await renderTarget.SaveAsync(accessStream, fileFormat, quality);
+                    await bitmap.SaveAsync(accessStream, fileFormat, quality);
                 }
 
-                renderTarget.Dispose();
                 return true;
             }
             catch (Exception)
             {
-                renderTarget.Dispose();
                 return false;
             }
         }

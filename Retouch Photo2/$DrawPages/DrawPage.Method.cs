@@ -19,26 +19,28 @@ namespace Retouch_Photo2
         /// <summary>
         /// Export to ...
         /// </summary>
-        private async Task<bool> Export()
+        private async Task<bool?> Export()
         {
             // Render
             float width = (float)this.ExportSizePicker.SizeWith;
             float height = (float)this.ExportSizePicker.SizeHeight;
             int dpi = (int)this.DPIComboBox.DPI;
             bool isClearWhite = this.FileFormatComboBox.IsClearWhite;
-            CanvasRenderTarget renderTarget = this.ViewModel.Render(width, height, dpi, isClearWhite);
 
-            // Export
-            return await FileUtil.SaveCanvasBitmapFile
-            (
-                renderTarget: renderTarget,
+            using (CanvasRenderTarget renderTarget = this.ViewModel.Render(width, height, dpi, isClearWhite))
+            {
+                // Export
+                return await FileUtil.SaveCanvasBitmapFile
+                (
+                    bitmap: renderTarget,
 
-                fileChoices: this.FileFormatComboBox.FileChoices,
-                suggestedFileName: this.ApplicationView.Title,
+                    fileChoices: this.FileFormatComboBox.FileChoices,
+                    suggestedFileName: this.ApplicationView.Title,
 
-                fileFormat: this.FileFormatComboBox.FileFormat,
-                quality: this.ExportQuality
-            );
+                    fileFormat: this.FileFormatComboBox.FileFormat,
+                    quality: this.ExportQuality
+                );
+            }
         }
 
 

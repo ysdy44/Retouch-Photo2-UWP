@@ -178,9 +178,14 @@ namespace Retouch_Photo2
 
                 this.LoadingControl.State = LoadingState.Saving;
 
-                bool isSuccesful = await this.Export();
+                bool? isSuccesful = await this.Export();
+                if (isSuccesful == null)
+                {
+                    this.LoadingControl.State = LoadingState.None;
+                    return;
+                }
 
-                this.LoadingControl.State = isSuccesful ? LoadingState.SaveSuccess : LoadingState.SaveFailed;
+                this.LoadingControl.State = isSuccesful.Value ? LoadingState.SaveSuccess : LoadingState.SaveFailed;
                 await Task.Delay(400);
 
                 this.LoadingControl.State = LoadingState.None;
