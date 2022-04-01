@@ -11,17 +11,13 @@ using Windows.UI.Xaml.Navigation;
 namespace Retouch_Photo2
 {
     internal class UIElementGroupingList : List<UIElementGrouping> { }
-    internal class UIElementGrouping : IGrouping<string, UIElement>
+    internal class UIElementGrouping : List<UIElement>, IGrouping<string, UIElement>
     {
         //@String
         static readonly ResourceLoader resource = ResourceLoader.GetForCurrentView();
         public string Title => string.IsNullOrEmpty(Key) ? string.Empty : UIElementGrouping.resource.GetString($"{Key}");
 
         public string Key { set; get; }
-        public List<UIElement> Items { get; set; } = new List<UIElement>();
-
-        public IEnumerator<UIElement> GetEnumerator() => this.Items.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => this.Items.GetEnumerator();
     }
 
 
