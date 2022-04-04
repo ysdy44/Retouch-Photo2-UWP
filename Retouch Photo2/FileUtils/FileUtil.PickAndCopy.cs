@@ -16,7 +16,7 @@ namespace Retouch_Photo2
         /// <returns> The copied file. </returns>
         public async static Task<StorageFile> CopySingleImageFileAsync(StorageFile file)
         {
-            if (file is null) return null;
+            if (file == null) return null;
 
             StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
             return copyFile;
@@ -36,10 +36,11 @@ namespace Retouch_Photo2
                 SuggestedStartLocation = location,
                 FileTypeFilter =
                 {
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".bmp"
+                     ".jpg", ".jpeg", ".jpe",
+                     ".png",
+                     ".gif",
+                     ".bmp", ".dib",
+                     ".tif", ".tiff",
                 }
             };
 
@@ -62,10 +63,11 @@ namespace Retouch_Photo2
                 SuggestedStartLocation = location,
                 FileTypeFilter =
                 {
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".bmp"
+                     ".jpg", ".jpeg", ".jpe",
+                     ".png",
+                     ".gif",
+                     ".bmp", ".dib",
+                     ".tif", ".tiff",
                 }
             };
 
@@ -83,18 +85,17 @@ namespace Retouch_Photo2
         /// <returns> The product file. </returns>
         public async static Task<StorageFile> CopySingleImageFileAsync(IStorageItem item)
         {
+            if (item == null) return null;
+
             if (item is StorageFile file)
             {
-                if (file is null) return null;
-
-                string fileType = file.FileType.ToUpper();
-                switch (fileType)
+                switch (file.FileType.ToLower())
                 {
-                    case ".JPG":
-                    case ".JPEG":
-                    case ".PNG":
-                    case ".GIF":
-                    case ".BMP":
+                    case ".jpg": case ".jpeg": case ".jpe":
+                    case ".png":
+                    case ".gif":
+                    case ".bmp": case ".dib":
+                    case ".tif": case ".tiff":
                         StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
                         return copyFile;
                 }

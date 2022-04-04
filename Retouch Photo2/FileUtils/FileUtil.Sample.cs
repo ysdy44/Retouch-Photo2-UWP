@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -115,6 +116,52 @@ namespace Retouch_Photo2
                 using (IRandomAccessStream accessStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
                     await bitmap.SaveAsync(accessStream, fileFormat, quality);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Saves the entire image to the specified stream
+        /// with the specified file format and quality level.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="image"> The image. </param>
+        /// <param name="bounds"> The bounds of image. </param>
+        /// <param name="fileChoices"> The file choices. </param>
+        /// <param name="suggestedFileName"> The suggested name of file. </param>
+        /// <param name="fileFormat"> The file format. </param>
+        /// <param name="quality"> The file quality. </param>
+        /// <param name="dpi"> The file dpi. </param>
+        /// <returns> Saved successful? </returns>
+        public static async Task<bool?> SaveCanvasImageFile(ICanvasResourceCreator resourceCreator, ICanvasImage image, Rect bounds, string fileChoices = ".Jpeg", string suggestedFileName = "Untitled", CanvasBitmapFileFormat fileFormat = CanvasBitmapFileFormat.Jpeg, float quality = 1.0f, float dpi = 96)
+        {
+            // FileSavePicker
+            FileSavePicker savePicker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.Desktop,
+                SuggestedFileName = suggestedFileName,
+                FileTypeChoices =
+                {
+                    {"JPG", new[] { fileChoices } }
+                }
+            };
+
+
+            // PickSaveFileAsync
+            StorageFile file = await savePicker.PickSaveFileAsync();
+            if (file == null) return null;
+
+            try
+            {
+                using (IRandomAccessStream accessStream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    await CanvasImage.SaveAsync(image, bounds, dpi, resourceCreator, accessStream, fileFormat, quality);
                 }
 
                 return true;

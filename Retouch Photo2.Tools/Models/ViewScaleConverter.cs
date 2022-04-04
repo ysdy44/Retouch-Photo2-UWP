@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         // Value
-        private const double _defultValue = -9;
+        private const double DefultValue = -9;
         public const double MinValue = -99;
         public const double MaxValue = 0;
 
