@@ -4,7 +4,7 @@
 
  
  Windows 10 app 应用商店地址: 
-[购置 修图2 - 微软商店](https://www.microsoft.com/store/productId/9P76ZF661496)   
+[购置 修图2 - 微软商店](https://apps.microsoft.com/detail/9p76zf661496)   
 
 
 <br/>
